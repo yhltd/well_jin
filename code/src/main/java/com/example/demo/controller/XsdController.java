@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -159,6 +161,28 @@ public class XsdController {
             e.printStackTrace();
             log.error("获取失败：{}", e.getMessage());
             return ResultInfo.error("错误!");
+        }
+    }
+
+    /**
+     * 打印
+     *
+     * @return ResultInfo
+     */
+    @RequestMapping("/print")
+    public ResultInfo print(@RequestBody HashMap map, HttpSession session, HttpServletResponse response) {
+        try {
+            GsonUtil gsonUtil = new GsonUtil(GsonUtil.toJson(map));
+            List<Xsd> nlist = GsonUtil.toList(gsonUtil.get("list"), Xsd.class);
+            List<Xsd> list=new ArrayList<>();
+            if(nlist != null){
+                list= xsdService.getListByShdw(nlist.get(0).getShdw(),nlist.get(0).getDh(),nlist.get(0).getRiqi());
+            }
+            return ResultInfo.success("成功！",list);
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("失败：{}", e.getMessage());
+            return ResultInfo.error("失败！");
         }
     }
 

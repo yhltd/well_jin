@@ -1,7 +1,21 @@
 var idd;
 function getList() {
-    $('#ksrq').val("");
-    $('#jsrq').val("");
+    // $('#ksrq').val("");
+    // $('#jsrq').val("");
+
+    var  date = new Date();
+    date.setMonth(date.getMonth()-3);
+    var year = date.getFullYear();
+    var month = ('0'+(date.getMonth()+1)).slice(-2);
+    var day = ('0'+date.getDate()).slice(-2);
+    var ks = year+'-'+month+'-'+day
+    document.getElementById("ksrq").value = ks;
+    var jsyear = date.getFullYear();
+    var jsmonth = ('0'+(date.getMonth()+4)).slice(-2);
+    var jsday = ('0'+date.getDate()).slice(-2);
+    var js = jsyear+'-'+jsmonth+'-'+jsday
+    document.getElementById("jsrq").value = js;
+
     $ajax({
         type: 'post',
         url: '/ft/getList',
@@ -23,6 +37,19 @@ function getList() {
 
 $(function () {
     getList();
+
+    var  date = new Date();
+    date.setMonth(date.getMonth()-3);
+    var year = date.getFullYear();
+    var month = ('0'+(date.getMonth()+1)).slice(-2);
+    var day = ('0'+date.getDate()).slice(-2);
+    var ks = year+'-'+month+'-'+day
+    document.getElementById("ksrq").value = ks;
+    var jsyear = date.getFullYear();
+    var jsmonth = ('0'+(date.getMonth()+4)).slice(-2);
+    var jsday = ('0'+date.getDate()).slice(-2);
+    var js = jsyear+'-'+jsmonth+'-'+jsday
+    document.getElementById("jsrq").value = js;
 
     $ajax({
         type: 'post',

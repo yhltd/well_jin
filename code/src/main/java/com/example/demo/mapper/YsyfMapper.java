@@ -18,13 +18,13 @@ public interface YsyfMapper extends BaseMapper<Ysyf> {
     @Select("select * from yingshouyingfu where riqi >= convert(date,#{ksrq}) and riqi <= convert(date,#{jsrq})")
     List<Ysyf> queryList(String ksrq,String jsrq);
 
-    @Update("update yingshouyingfu set riqi = #{riqi},shdh = #{shdh},khm = #{khm},ysqk = #{ysqk},yfqk = #{yfqk} where id = #{id}")
-    boolean update(String riqi,String shdh,String khm,String ysqk,String yfqk,int id);
+    @Update("update yingshouyingfu set riqi = #{riqi},gsm = #{gsm},pm = #{pm},zl = #{zl},dj = #{dj},je = #{je},ysyf = #{ysyf} where id = #{id}")
+    boolean update(String riqi,String gsm,String pm,String zl,String dj,String je,String ysyf,int id);
 
     @Delete("delete from yingshouyingfu where id=#{id}")
     boolean delete(int id);
 
-    @Insert("insert into yingshouyingfu(riqi,shdh,khm,ysqk,yfqk) values(#{riqi},#{shdh},#{khm},#{ysqk},#{yfqk})")
-    boolean add(String riqi,String shdh,String khm,String ysqk,String yfqk);
+    @Insert("insert into yingshouyingfu(riqi,gsm,pm,zl,dj,je,ysyf) values(#{riqi},#{gsm},#{pm},#{zl},#{dj},#{je},#{ysyf})")
+    boolean add(String riqi,String gsm,String pm,String zl,String dj,String je,String ysyf);
 
 }

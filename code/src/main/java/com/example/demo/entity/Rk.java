@@ -48,5 +48,5 @@ public class Rk {
     /**
      * 库存均价
      */
-//    private String kcjj;
+    private String kcjj;
 }

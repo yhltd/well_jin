@@ -49,6 +49,9 @@
             查询
         </button>
     </div>
+    <div class="col-md-2 mb-2">
+        <input id="zje" type="text" class="form-control" placeholder="总金额" readonly autocomplete="off">
+    </div>
 </div>
 
 <div id="table-toolbar">
@@ -111,9 +114,11 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="add-shdw">收货单位</label>
-                                <input id="add-shdw" name="shdw" type="text" class="form-control" autocomplete="off" data-required="1">
+                                <select id="add-shdw" name="shdw" class="form-control">
+                                    <option>--请选择--</option>
+                                </select>
                                 <div class="invalid-feedback">
-                                    请输入收货单位！
+                                    请选择收货单位！
                                 </div>
                             </div>
                         </div>

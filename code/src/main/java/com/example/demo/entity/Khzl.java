@@ -38,6 +38,10 @@ public class Khzl {
      */
     private String sfyj;
     /**
+     * 起初余额
+     */
+    private String qcye;
+    /**
      * 铜渣库存
      */
     private String tzkc;

@@ -1,7 +1,21 @@
 var idd;
 function getList() {
-    $('#ksrq').val("");
-    $('#jsrq').val("");
+    // $('#ksrq').val("");
+    // $('#jsrq').val("");
+
+    var date = new Date();
+    date.setMonth(date.getMonth()-3);
+    var year = date.getFullYear();
+    var month = ('0'+(date.getMonth()+1)).slice(-2);
+    var day = ('0'+date.getDate()).slice(-2);
+    var ks = year+'-'+month+'-'+day
+    document.getElementById("ksrq").value = ks;
+    var jsyear = date.getFullYear();
+    var jsmonth = ('0'+(date.getMonth()+4)).slice(-2);
+    var jsday = ('0'+date.getDate()).slice(-2);
+    var js = jsyear+'-'+jsmonth+'-'+jsday
+    document.getElementById("jsrq").value = js;
+
     $ajax({
         type: 'post',
         url: '/ysyf/getList',
@@ -23,6 +37,19 @@ function getList() {
 
 $(function () {
     getList();
+
+    var date = new Date();
+    date.setMonth(date.getMonth()-3);
+    var year = date.getFullYear();
+    var month = ('0'+(date.getMonth()+1)).slice(-2);
+    var day = ('0'+date.getDate()).slice(-2);
+    var ks = year+'-'+month+'-'+day
+    document.getElementById("ksrq").value = ks;
+    var jsyear = date.getFullYear();
+    var jsmonth = ('0'+(date.getMonth()+4)).slice(-2);
+    var jsday = ('0'+date.getDate()).slice(-2);
+    var js = jsyear+'-'+jsmonth+'-'+jsday
+    document.getElementById("jsrq").value = js;
 
     $ajax({
         type: 'post',
@@ -66,6 +93,12 @@ $(function () {
 
     //新增弹窗里点击提交按钮
     $("#add-submit-btn").click(function () {
+
+        var zl = parseFloat(document.getElementById('add-zl').value);
+        var dj = parseFloat(document.getElementById('add-dj').value);
+        var je = zl * dj
+        document.getElementById("add-je").value = je
+
         let params = formToJson("#add-form");
         if (checkForm('#add-form')) {
             $ajax({
@@ -97,10 +130,12 @@ $(function () {
         $('#update-modal').modal('show');
         setForm(rows[0].data, '#update-form');
         $('#update-riqi').val(rows[0].data.riqi);
-        $('#update-shdh').val(rows[0].data.shdh);
-        $('#update-khm').val(rows[0].data.khm);
-        $('#update-ysqk').val(rows[0].data.ysqk);
-        $('#update-yfqk').val(rows[0].data.yfqk);
+        $('#update-gsm').val(rows[0].data.gsm);
+        $('#update-pm').val(rows[0].data.pm);
+        $('#update-zl').val(rows[0].data.zl);
+        $('#update-dj').val(rows[0].data.dj);
+        $('#update-je').val(rows[0].data.je);
+        $('#update-ysyf').val(rows[0].data.ysyf);
     });
 
     //修改弹窗点击关闭按钮
@@ -204,26 +239,38 @@ function setTable(data) {
                 sortable: true,
                 width: 80,
             }, {
-                field: 'shdh',
-                title: '送货单号',
+                field: 'gsm',
+                title: '公司名',
                 align: 'center',
                 sortable: true,
                 width: 150,
             }, {
-                field: 'khm',
-                title: '客户名',
+                field: 'pm',
+                title: '品名',
                 align: 'center',
                 sortable: true,
                 width: 150,
             }, {
-                field: 'ysqk',
-                title: '应收欠款',
+                field: 'zl',
+                title: '重量',
                 align: 'center',
                 sortable: true,
                 width: 150,
             }, {
-                field: 'yfqk',
-                title: '应付欠款',
+                field: 'dj',
+                title: '单价',
+                align: 'center',
+                sortable: true,
+                width: 150,
+            }, {
+                field: 'je',
+                title: '金额',
+                align: 'center',
+                sortable: true,
+                width: 150,
+            }, {
+                field: 'ysyf',
+                title: '应收应付',
                 align: 'center',
                 sortable: true,
                 width: 150,

@@ -236,6 +236,12 @@ function setTable(data) {
                 sortable: true,
                 width: 100,
             }, {
+                field: 'qcye',
+                title: '期初余额',
+                align: 'center',
+                sortable: true,
+                width: 100,
+            }, {
                 field: 'tzkc',
                 title: '铜渣库存',
                 align: 'center',

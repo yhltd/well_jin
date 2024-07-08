@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>账本数据</title>
+    <link rel="shortcut icon" href="#"/>
+
+    <script type="text/javascript" src="../js/Jquery.js"></script>
+    <script type="text/javascript" src="../js/jquerysession.js"></script>
+
+    <link rel="stylesheet" href="../bootstrap-4.5.0-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../bootstrap-4.5.0-dist/icons/bootstrap-icons.css">
+    <script type="text/javascript" src="../bootstrap-4.5.0-dist/js/bootstrap.min.js"></script>
+
+    <!--bootstrap-table-->
+    <link rel="stylesheet" href="../bootstrap-4.5.0-dist/css/bootstrap-table.css">
+    <script type="text/javascript" src="../bootstrap-4.5.0-dist/js/bootstrap-table.js"></script>
+    <script type="text/javascript" src="../bootstrap-4.5.0-dist/js/bootstrap-table-zh-CN.min.js"></script>
+    <script type="text/javascript" src="../bootstrap-4.5.0-dist/js/colResizable-1.6.js"></script>
+    <script type="text/javascript" src="../bootstrap-4.5.0-dist/js/bootstrap-table-resizable.js"></script>
+
+    <link rel="stylesheet" href="../css/sweetalert.css">
+    <script type="text/javascript" src="../js/sweetalert-dev.js"></script>
+
+    <link rel="stylesheet" href="../css/main.css">
+    <script type="text/javascript" src="../js/main.js"></script>
+    <script type="text/javascript" src="../js/zbsj.js"></script>
+</head>
+
+<body class="pt-2">
+<div style="height: 50px;width: auto">
+    <img src="../img/img.png" style="height: 48px;width: 150px;margin-left: 3px">
+    <img src="../img/img_1.png" style="height: 48px;width: 150px;margin-left: 3px">
+    <img src="../img/img_2.png" style="height: 48px;width: 150px;margin-left: 3px">
+    <img src="../img/img_3.png" style="height: 48px;width: 150px;margin-left: 3px">
+    <span style="margin-left: 100px;font-size: 15px"><img src="../img/img_tx.png" style="height: 30px;">  您 好 <b><span id="dlm" style="color: #2b55e0"></span></b> , 欢 迎 您 登 录 !</span>
+</div>
+
+<div class="top-toolbar row">
+    <div class="col-md-3 mb-2">
+        <input id="ksrq" type="date" class="form-control" placeholder="开始日期" autocomplete="off">
+    </div>
+    <div class="col-md-3 mb-2">
+        <input id="jsrq" type="date" class="form-control" placeholder="结束日期" autocomplete="off">
+    </div>
+    <div class="col-md-2 mb-2">
+        <button id="select-btn" class="btn" style="background-color: limegreen;color: white">
+            <i class="bi bi-search icon"></i>
+            查询
+        </button>
+    </div>
+    <div class="col-md-2 mb-2">
+        <input id="sj" type="text" class="form-control" placeholder="税金" autocomplete="off">
+    </div>
+</div>
+
+<div id="table-toolbar">
+    <div class="btn-group" role="group">
+        <button id="refresh-btn" class="btn btn-primary">
+            <i class="bi bi-arrow-clockwise icon"></i>
+            刷新
+        </button>
+        <button id="delete-btn" class="btn btn-primary">
+            <i class="bi bi-trash icon"></i>
+            删除
+        </button>
+        <a class="btn btn-primary" style="color: white;padding-top: 8px">当前页：账本数据</a>
+    </div>
+</div>
+
+<div class="table-div border-top">
+    <table id="zbsjTable"></table>
+</div>
+
+<div id="delete-modal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">提示</div>
+            </div>
+            <div id="delete-modal-body" class="modal-body">
+                确定删除吗？
+            </div>
+            <div class="border-top" style="padding: 15px;">
+                <button id="delete-submit-btn" type="button" class="btn">
+                    <i class="bi bi-arrow-bar-up icon"></i>
+                    确定
+                </button>
+                <button id="delete-close-btn" type="button" class="btn left-margin">
+                    <i class="bi bi-x-circle icon"></i>
+                    取消
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

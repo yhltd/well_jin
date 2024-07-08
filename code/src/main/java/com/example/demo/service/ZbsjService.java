@@ -1,29 +1,23 @@
 package com.example.demo.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.example.demo.entity.Khzl;
-import com.example.demo.entity.UserInfo;
+import com.example.demo.entity.Zbsj;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public interface KhzlService extends IService<Khzl> {
+public interface ZbsjService extends IService<Zbsj> {
 
     /**
      * 查询所有
      */
-    List<Khzl> getList();
+    List<Zbsj> getList();
 
     /**
      * 根据姓名和部门查询
      */
-    List<Khzl> queryList(String gsm);
-
-    /**
-     * 修改
-     */
-    boolean update(Khzl khzl);
+    List<Zbsj> queryList(String ksrq,String jsrq);
 
     /**
      * 删除
@@ -32,12 +26,5 @@ public interface KhzlService extends IService<Khzl> {
      * @return 是否删除成功
      */
     boolean delete(List<Integer> idList);
-
-    /**
-     * 添加
-     */
-    Khzl add(Khzl khzl);
-
-    List<Khzl> hqxlGsm();
 
 }

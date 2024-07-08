@@ -18,16 +18,17 @@ function getList() {
 
     $ajax({
         type: 'post',
-        url: '/lr/getList',
+        url: '/zbsj/getList',
     }, false, '', function (res) {
         if (res.code == 200) {
             setTable(res.data);
-            $("#lrTable").colResizable({
+            $("#zbsjTable").colResizable({
                 liveDrag: true,
                 gripInnerHtml: "<div class='grip'></div>",
                 draggingClass: "dragging",
                 resizeMode: 'fit'
             });
+
             for (i=0;i<=res.data.id;i++){
                 idd=i;
             }
@@ -64,7 +65,7 @@ $(function () {
         var jsrq = $('#jsrq').val();
         $ajax({
             type: 'post',
-            url: '/lr/queryList',
+            url: '/zbsj/queryList',
             data: {
                 ksrq: ksrq,
                 jsrq: jsrq,
@@ -81,92 +82,11 @@ $(function () {
         getList();
     });
 
-    //点击新增按钮显示弹窗
-    $("#add-btn").click(function () {
-        $('#add-modal').modal('show');
-    });
-
-    //新增弹窗里点击关闭按钮
-    $('#add-close-btn').click(function () {
-        $('#add-modal').modal('hide');
-    });
-
-    //新增弹窗里点击提交按钮
-    $("#add-submit-btn").click(function () {
-        let params = formToJson("#add-form");
-        if (checkForm('#add-form')) {
-            $ajax({
-                type: 'post',
-                url: '/lr/add',
-                data: JSON.stringify({
-                    addInfo: params
-                }),
-                dataType: 'json',
-                contentType: 'application/json;charset=utf-8'
-            }, false, '', function (res) {
-                if (res.code == 200) {
-                    swal("", res.msg, "success");
-                    $('#add-form')[0].reset();
-                    getList();
-                    $('#add-close-btn').click();
-                }
-            })
-        }
-    });
-
-    //点击修改按钮显示弹窗
-    $('#update-btn').click(function () {
-        let rows = getTableSelection('#lrTable');
-        if (rows.length > 1 || rows.length == 0) {
-            swal('请选择一条数据修改!');
-            return;
-        }
-        $('#update-modal').modal('show');
-        setForm(rows[0].data, '#update-form');
-        $('#update-xslr').val(rows[0].data.xslr);
-        $('#update-zxlr').val(rows[0].data.zxlr);
-        $('#update-htlr').val(rows[0].data.htlr);
-    });
-
-    //修改弹窗点击关闭按钮
-    $('#update-close-btn').click(function () {
-        $('#update-form')[0].reset();
-        $('#update-modal').modal('hide');
-    });
-
-    //修改弹窗里点击提交按钮
-    $('#update-submit-btn').click(function () {
-        var msg = confirm("确认要修改吗？");
-        if (msg) {
-            if (checkForm('#update-form')) {
-                let params = formToJson('#update-form');
-                $ajax({
-                    type: 'post',
-                    url: '/lr/update',
-                    data: {
-                        updateJson: JSON.stringify(params)
-                    },
-                    dataType: 'json',
-                    contentType: 'application/json;charset=utf-8'
-                }, false, '', function (res) {
-                    if (res.code == 200) {
-                        swal("", res.msg, "success");
-                        $('#update-close-btn').click();
-                        $('#update-modal').modal('hide');
-                        getList();
-                    } else {
-                        swal("", res.msg, "error");
-                    }
-                })
-            }
-        }
-    });
-
     //点击删除按钮
     $('#delete-btn').click(function () {
         var msg = confirm("确认要删除吗？");
         if (msg) {
-            let rows = getTableSelection("#lrTable");
+            let rows = getTableSelection("#zbsjTable");
             if (rows.length == 0) {
                 swal('请选择要删除的数据！');
                 return;
@@ -177,7 +97,7 @@ $(function () {
             });
             $ajax({
                 type: 'post',
-                url: '/lr/delete',
+                url: '/zbsj/delete',
                 data: JSON.stringify({
                     idList: idList
                 }),
@@ -196,11 +116,11 @@ $(function () {
 });
 
 function setTable(data) {
-    if ($('#lrTable').html != '') {
-        $('#lrTable').bootstrapTable('load', data);
+    if ($('#zbsjTable').html != '') {
+        $('#zbsjTable').bootstrapTable('load', data);
     }
 
-    $('#lrTable').bootstrapTable({
+    $('#zbsjTable').bootstrapTable({
         data: data,
         sortStable: true,
         classes: 'table table-hover text-nowrap table table-bordered',
@@ -229,23 +149,77 @@ function setTable(data) {
                 sortable: true,
                 width: 80,
             }, {
-                field: 'xslr',
-                title: '销售利润',
+                field: 'shdw',
+                title: '客户名',
                 align: 'center',
                 sortable: true,
-                width: 150,
+                width: 80,
             }, {
-                field: 'zxlr',
-                title: '杂项利润',
+                field: 'mc',
+                title: '名称',
                 align: 'center',
                 sortable: true,
-                width: 150,
+                width: 130,
             }, {
-                field: 'htlr',
-                title: '换铜利润',
+                field: 'zl',
+                title: '重量',
                 align: 'center',
                 sortable: true,
-                width: 150,
+                width: 80,
+            }, {
+                field: 'dj',
+                title: '单价',
+                align: 'center',
+                sortable: true,
+                width: 80,
+            }, {
+                field: 'je',
+                title: '金额',
+                align: 'center',
+                sortable: true,
+                width: 80,
+            }, {
+                field: 'jgf',
+                title: '锯工费',
+                align: 'center',
+                sortable: true,
+                width: 80,
+            }, {
+                field: 'kdf',
+                title: '快递费',
+                align: 'center',
+                sortable: true,
+                width: 80,
+            }, {
+                field: 'fkfs',
+                title: '付款方式',
+                align: 'center',
+                sortable: true,
+                width: 120,
+            }, {
+                field: 'sfhs',
+                title: '是否含税',
+                align: 'center',
+                sortable: true,
+                width: 120,
+            }, {
+                field: 'sfyj',
+                title: '是否月结',
+                align: 'center',
+                sortable: true,
+                width: 120,
+            }, {
+                id: 'bhsje',
+                field: 'bhsje',
+                title: '不含税金额',
+                align: 'center',
+                sortable: true,
+                width: 120,
+                formatter: function (value, row, index) {
+                    if(row.sfhs == '金额含税'){
+                        return row.je / document.getElementById('sj').value;
+                    }
+                }
             }
         ],
         onClickRow: function (row, el) {

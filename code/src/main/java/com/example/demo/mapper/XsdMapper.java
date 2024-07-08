@@ -29,4 +29,7 @@ public interface XsdMapper extends BaseMapper<Xsd> {
 
     @Select("select DISTINCT dj from xiaoshoudan where riqi = convert(DATE,riqi)")
     List<Xsd> getDj(String dj);
+
+    @Select("select * from xiaoshoudan where shdw=#{shdw} and dh=#{dh} and riqi=#{riqi}")
+    List<Xsd> getListByShdw(String shdw,String dh,String riqi);
 }

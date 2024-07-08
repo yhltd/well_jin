@@ -2,6 +2,7 @@ package com.example.demo.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.demo.entity.Khzl;
+import com.example.demo.entity.UserInfo;
 import com.example.demo.mapper.KhzlMapper;
 import com.example.demo.service.KhzlService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +35,8 @@ public class KhzlImpl extends ServiceImpl<KhzlMapper, Khzl> implements KhzlServi
 
     @Override
     public Khzl add(Khzl khzl) { return save(khzl) ? khzl : null; }
+
+    @Override
+    public List<Khzl> hqxlGsm() {return khzlMapper.hqxlGsm();}
 
 }

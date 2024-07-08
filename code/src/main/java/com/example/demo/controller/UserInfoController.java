@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import com.alibaba.fastjson2.JSONObject;
 import com.example.demo.entity.UserInfo;
 import com.example.demo.service.UserInfoService;
 import com.example.demo.util.*;

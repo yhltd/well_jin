@@ -43,4 +43,6 @@ public interface XsdService extends IService<Xsd> {
      */
     List<Xsd> getDj(String dj);
 
+    List<Xsd> getListByShdw(String shdw,String dh,String riqi);
+
 }

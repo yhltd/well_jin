@@ -41,4 +41,9 @@ public class XsdImpl extends ServiceImpl<XsdMapper, Xsd> implements XsdService {
     @Override
     public List<Xsd> getDj(String dj) {return xsdMapper.getDj(dj);}
 
+    @Override
+    public List<Xsd> getListByShdw(String shdw,String dh,String riqi) {
+        return xsdMapper.getListByShdw(shdw,dh,riqi);
+    }
+
 }

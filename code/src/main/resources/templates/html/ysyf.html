@@ -101,8 +101,8 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="add-shdh">送货单号</label>
-                                <input id="add-shdh" name="shdh" type="text" class="form-control" autocomplete="off" data-required="1">
+                                <label for="add-gsm">公司名</label>
+                                <input id="add-gsm" name="gsm" type="text" class="form-control" autocomplete="off" data-required="1">
                                 <div class="invalid-feedback">
                                     请输入送货单号！
                                 </div>
@@ -110,28 +110,46 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="add-khm">客户名</label>
-                                <input id="add-khm" name="khm" type="text" class="form-control" autocomplete="off" data-required="1">
+                                <label for="add-pm">品名</label>
+                                <input id="add-pm" name="pm" type="text" class="form-control" autocomplete="off" data-required="1">
                                 <div class="invalid-feedback">
-                                    请输入客户名！
+                                    请输入品名！
                                 </div>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="add-ysqk">应收欠款</label>
-                                <input id="add-ysqk" name="ysqk" type="text" class="form-control" autocomplete="off" data-required="1">
+                                <label for="add-zl">重量</label>
+                                <input id="add-zl" name="zl" type="text" class="form-control" autocomplete="off" data-required="1">
                                 <div class="invalid-feedback">
-                                    请输入应收欠款！
+                                    请输入重量！
                                 </div>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="add-yfqk">应付欠款</label>
-                                <input id="add-yfqk" name="yfqk" type="text" class="form-control" autocomplete="off" data-required="1">
+                                <label for="add-dj">单价</label>
+                                <input id="add-dj" name="dj" type="text" class="form-control" autocomplete="off" data-required="1">
                                 <div class="invalid-feedback">
-                                    请输入应付欠款！
+                                    请输入单价！
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="add-je">金额</label>
+                                <input id="add-je" name="je" type="text" class="form-control" autocomplete="off" readonly data-required="1">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="add-ysyf">应收应付</label>
+                                <select id="add-ysyf" name="ysyf" class="form-control" autocomplete="off">
+                                    <option value="应收">应收</option>
+                                    <option value="应付">应付</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    请选择应收应付！
                                 </div>
                             </div>
                         </div>
@@ -179,37 +197,55 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="update-shdh">送货单号</label>
-                                <input id="update-shdh" name="shdh" type="text" class="form-control" autocomplete="off" data-required="1">
+                                <label for="update-gsm">公司名</label>
+                                <input id="update-gsm" name="gsm" type="text" class="form-control" autocomplete="off" data-required="1">
                                 <div class="invalid-feedback">
-                                    请输入送货单号！
+                                    请输入公司名！
                                 </div>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="update-khm">客户名</label>
-                                <input id="update-khm" name="khm" type="text" class="form-control" autocomplete="off" data-required="1">
+                                <label for="update-pm">品名</label>
+                                <input id="update-pm" name="pm" type="text" class="form-control" autocomplete="off" data-required="1">
                                 <div class="invalid-feedback">
-                                    请输入客户名！
+                                    请输入品名！
                                 </div>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="update-ysqk">应收欠款</label>
-                                <input id="update-ysqk" name="ysqk" type="text" class="form-control" autocomplete="off" data-required="1">
+                                <label for="update-zl">重量</label>
+                                <input id="update-zl" name="zl" type="text" class="form-control" autocomplete="off" data-required="1">
                                 <div class="invalid-feedback">
-                                    请输入应收欠款！
+                                    请输入重量！
                                 </div>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="update-yfqk">应付欠款</label>
-                                <input id="update-yfqk" name="yfqk" type="text" class="form-control" autocomplete="off" data-required="1">
+                                <label for="update-dj">单价</label>
+                                <input id="update-dj" name="dj" type="text" class="form-control" autocomplete="off" data-required="1">
                                 <div class="invalid-feedback">
-                                    请输入应付欠款！
+                                    请输入单价！
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="update-je">金额</label>
+                                <input id="update-je" name="je" type="text" class="form-control" autocomplete="off" readonly data-required="1">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="update-ysyf">应收应付</label>
+                                <select id="update-ysyf" name="ysyf" class="form-control" autocomplete="off">
+                                    <option value="应收">应收</option>
+                                    <option value="应付">应付</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    请选择应收应付！
                                 </div>
                             </div>
                         </div>

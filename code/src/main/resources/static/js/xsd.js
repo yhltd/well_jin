@@ -1,7 +1,37 @@
 var idd;
+let count = 1;
+
+function getGsm() {
+    $ajax({
+        type: 'post',
+        url: '/khzl/hqxlGsm',
+    }, false, '', function (res) {
+        if (res.code == 200) {
+            for (var i = 0; i < res.data.length; i++) {
+                $("#add-shdw").append("<option>" + res.data[i].gsm + "</option>");
+                $("#update-shdw").append("<option>" + res.data[i].gsm + "</option>");
+            }
+        }
+    })
+}
+
 function getList() {
-    $('#ksrq').val("");
-    $('#jsrq').val("");
+    // $('#ksrq').val("");
+    // $('#jsrq').val("");
+
+    var  date = new Date();
+    date.setMonth(date.getMonth()-3);
+    var year = date.getFullYear();
+    var month = ('0'+(date.getMonth()+1)).slice(-2);
+    var day = ('0'+date.getDate()).slice(-2);
+    var ks = year+'-'+month+'-'+day
+    document.getElementById("ksrq").value = ks;
+    var jsyear = date.getFullYear();
+    var jsmonth = ('0'+(date.getMonth()+4)).slice(-2);
+    var jsday = ('0'+date.getDate()).slice(-2);
+    var js = jsyear+'-'+jsmonth+'-'+jsday
+    document.getElementById("jsrq").value = js;
+
     $ajax({
         type: 'post',
         url: '/xsd/getList',
@@ -14,6 +44,18 @@ function getList() {
                 draggingClass: "dragging",
                 resizeMode: 'fit'
             });
+            var table = document.getElementById("xsdTable");
+            var rows = table.rows;
+            var cells = table.cells;
+            var colums = table.rows[0].cells.length;
+            for(var x=1;x<colums;x++){
+                var zje = 0;
+                for(var j = 1;j<rows.length-1;j++){
+                    var a = parseInt(rows[j].cells[9].innerHTML);
+                    zje = zje+a
+                }
+                document.getElementById('zje').value = zje
+            }
             for (i=0;i<=res.data.id;i++){
                 idd=i;
             }
@@ -23,6 +65,20 @@ function getList() {
 
 $(function () {
     getList();
+    getGsm();
+
+    var date = new Date();
+    date.setMonth(date.getMonth()-3);
+    var year = date.getFullYear();
+    var month = ('0'+(date.getMonth()+1)).slice(-2);
+    var day = ('0'+date.getDate()).slice(-2);
+    var ks = year+'-'+month+'-'+day
+    document.getElementById("ksrq").value = ks;
+    var jsyear = date.getFullYear();
+    var jsmonth = ('0'+(date.getMonth()+4)).slice(-2);
+    var jsday = ('0'+date.getDate()).slice(-2);
+    var js = jsyear+'-'+jsmonth+'-'+jsday
+    document.getElementById("jsrq").value = js;
 
     $ajax({
         type: 'post',
@@ -57,6 +113,14 @@ $(function () {
     //点击新增按钮显示弹窗
     $("#add-btn").click(function () {
         $('#add-modal').modal('show');
+
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = (now.getMonth() + 1).toString().padStart(2, '0');
+        const day = now.getDate().toString().padStart(2, '0');
+        const serial = (count++).toString().padStart(3, '0');
+        var aa = `${year}${month}${day}${serial}`;
+        document.getElementById('add-dh').value = aa;
 
         $ajax({
             type: 'post',
@@ -307,6 +371,11 @@ function setTable(data) {
                 align: 'center',
                 sortable: true,
                 width: 80,
+                // formatter: function (value, row, index) {
+                //     for(i=0;i<row.index;i++){
+                //         document.getElementById('zje').value = row[i].je++;
+                //     }
+                // }
             }, {
                 field: 'bz',
                 title: '备注',

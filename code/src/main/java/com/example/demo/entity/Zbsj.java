@@ -6,8 +6,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 @Data
-@TableName("yingshouyingfu")
-public class Ysyf {
+@TableName("xiaoshoudan")
+public class Zbsj {
     /**
      * id自增列
      */
@@ -18,13 +18,17 @@ public class Ysyf {
      */
     private String riqi;
     /**
-     * 公司名
+     * 客户名
      */
-    private String gsm;
+    private String shdw;
     /**
-     * 品名
+     * 编号
      */
-    private String pm;
+    private String bh;
+    /**
+     * 名称
+     */
+    private String mc;
     /**
      * 重量
      */
@@ -38,8 +42,28 @@ public class Ysyf {
      */
     private String je;
     /**
-     * 应收应付
+     * 锯工费
      */
-    private String ysyf;
+    private String jgf;
+    /**
+     * 快递费
+     */
+    private String kdf;
+    /**
+     * 付款方式
+     */
+    private String fkfs;
+    /**
+     * 是否含税
+     */
+    private String sfhs;
+    /**
+     * 是否月结
+     */
+    private String sfyj;
+    /**
+     * 不含税金额
+     */
+    private String bhsje;
 
 }
