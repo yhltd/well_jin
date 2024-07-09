@@ -35,4 +35,7 @@ public class DskhImpl extends ServiceImpl<DskhMapper, Dskh> implements DskhServi
     @Override
     public Dskh add(Dskh dskh) { return save(dskh) ? dskh : null; }
 
+//    @Override
+//    public Dskh addCzqx(Dskh dskh) { return save(dskh) ? dskh : null; }
+
 }

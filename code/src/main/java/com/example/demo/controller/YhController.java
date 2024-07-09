@@ -74,7 +74,7 @@ public class YhController {
     public ResultInfo update(@RequestBody String updateJson, HttpSession session) {
         UserInfo userInfo = GsonUtil.toEntity(SessionUtil.getToken(session), UserInfo.class);
         if(!userInfo.getCaozuoquanxian().equals("可修改")){
-            return ResultInfo.error(401, "无权限");
+            return ResultInfo.error(401, "无权限,请联系管理员");
         }
         Yh yh = null;
         try {
@@ -100,7 +100,7 @@ public class YhController {
         UserInfo userInfo = GsonUtil.toEntity(SessionUtil.getToken(session), UserInfo.class);
         GsonUtil gsonUtil = new GsonUtil(GsonUtil.toJson(map));
         if(!userInfo.getCaozuoquanxian().equals("可修改")){
-            return ResultInfo.error(401, "无权限");
+            return ResultInfo.error(401, "无权限,请联系管理员");
         }
         try {
             Yh yh = GsonUtil.toEntity(gsonUtil.get("addInfo"), Yh.class);
@@ -130,7 +130,7 @@ public class YhController {
         GsonUtil gsonUtil = new GsonUtil(GsonUtil.toJson(map));
         List<Integer> idList = GsonUtil.toList(gsonUtil.get("idList"), Integer.class);
         if(!userInfo.getCaozuoquanxian().equals("可修改")){
-            return ResultInfo.error(401, "无权限");
+            return ResultInfo.error(401, "无权限,请联系管理员");
         }
         try {
             for(int i=0; i<idList.size(); i++){

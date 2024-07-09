@@ -38,4 +38,9 @@ public interface DskhService extends IService<Dskh> {
      */
     Dskh add(Dskh dskh);
 
+    /**
+     * 添加操作权限
+     */
+//    Dskh addCzqx(Dskh dskh);
+
 }

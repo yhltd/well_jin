@@ -35,20 +35,20 @@
     <img src="../img/img_3.png" style="height: 48px;width: 150px;margin-left: 3px">
     <span style="margin-left: 100px;font-size: 15px"><img src="../img/img_tx.png" style="height: 30px;">  您 好 <b><span id="dlm" style="color: #2b55e0"></span></b> , 欢 迎 您 登 录 !</span>
 </div>
-<div class="top-toolbar row">
-    <div class="col-md-3 mb-2">
-        <input id="khmc" type="text" class="form-control" placeholder="客户名称" autocomplete="off">
-    </div>
-    <div class="col-md-3 mb-2">
-        <input id="kddh" type="text" class="form-control" placeholder="快递单号" autocomplete="off">
-    </div>
-    <div class="col-md-2 mb-2">
-        <button id="select-btn" class="btn" style="background-color: limegreen;color: white">
-            <i class="bi bi-search icon"></i>
-            查询
-        </button>
-    </div>
-</div>
+<!--<div class="top-toolbar row">-->
+<!--    <div class="col-md-3 mb-2">-->
+<!--        <input id="khmc" type="text" class="form-control" placeholder="客户名称" autocomplete="off">-->
+<!--    </div>-->
+<!--    <div class="col-md-3 mb-2">-->
+<!--        <input id="kddh" type="text" class="form-control" placeholder="快递单号" autocomplete="off">-->
+<!--    </div>-->
+<!--    <div class="col-md-2 mb-2">-->
+<!--        <button id="select-btn" class="btn" style="background-color: limegreen;color: white">-->
+<!--            <i class="bi bi-search icon"></i>-->
+<!--            查询-->
+<!--        </button>-->
+<!--    </div>-->
+<!--</div>-->
 
 <div id="table-toolbar">
     <div class="btn-group" role="group">
@@ -56,14 +56,14 @@
             <i class="bi bi-arrow-clockwise icon"></i>
             刷新
         </button>
-        <button id="add-btn" class="btn btn-primary">
-            <i class="bi bi-plus-square icon"></i>
-            新增
-        </button>
-        <button id="update-btn" class="btn btn-primary">
-            <i class="bi bi-pencil-square icon"></i>
-            修改
-        </button>
+<!--        <button id="add-btn" class="btn btn-primary">-->
+<!--            <i class="bi bi-plus-square icon"></i>-->
+<!--            新增-->
+<!--        </button>-->
+<!--        <button id="update-btn" class="btn btn-primary">-->
+<!--            <i class="bi bi-pencil-square icon"></i>-->
+<!--            修改-->
+<!--        </button>-->
         <button id="delete-btn" class="btn btn-primary">
             <i class="bi bi-trash icon"></i>
             删除
@@ -79,6 +79,7 @@
 
 <div class="table-div border-top">
     <table id="kdgsdzdTable"></table>
+<!--    <table id="yssjTable"></table>-->
 </div>
 
 <div id="add-modal" class="modal fade" tabindex="-1">
@@ -127,6 +128,15 @@
                                 <input id="add-kddh" name="kddh" type="text" class="form-control" autocomplete="off">
                                 <div class="invalid-feedback">
                                     请输入快递单号！
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="add-kdf">快递费</label>
+                                <input id="add-kdf" name="kdf" type="text" class="form-control" autocomplete="off">
+                                <div class="invalid-feedback">
+                                    请输入快递费！
                                 </div>
                             </div>
                         </div>
@@ -196,6 +206,15 @@
                                 <input id="update-kddh" name="kddh" type="text" class="form-control" autocomplete="off">
                                 <div class="invalid-feedback">
                                     请输入快递单号！
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="update-kdf">快递费</label>
+                                <input id="update-kdf" name="kdf" type="text" class="form-control" autocomplete="off">
+                                <div class="invalid-feedback">
+                                    请输入快递费！
                                 </div>
                             </div>
                         </div>

@@ -51,7 +51,7 @@ function getList() {
             for(var x=1;x<colums;x++){
                 var zje = 0;
                 for(var j = 1;j<rows.length-1;j++){
-                    var a = parseInt(rows[j].cells[9].innerHTML);
+                    var a = parseInt(rows[j].cells[10].innerHTML);
                     zje = zje+a
                 }
                 document.getElementById('zje').value = zje
@@ -188,6 +188,7 @@ $(function () {
         $('#update-dh').val(rows[0].data.dh);
         $('#update-shdw').val(rows[0].data.shdw);
         $('#update-mc').val(rows[0].data.mc);
+        $('#update-mh').val(rows[0].data.mh);
         $('#update-gg').val(rows[0].data.gg);
         $('#update-js').val(rows[0].data.js);
         $('#update-zl').val(rows[0].data.zl);
@@ -229,7 +230,8 @@ $(function () {
             var hsdj = parseFloat(document.getElementById('update-hsdj').value);
             var sd = parseFloat(document.getElementById('update-sd').value);
             var whsdj = hsdj / sd
-            document.getElementById("update-whsdj").value = whsdj
+            var aa= whsdj.toFixed(2)
+            document.getElementById("update-whsdj").value = aa
         }
 
         if (msg) {
@@ -338,6 +340,12 @@ function setTable(data) {
             }, {
                 field: 'mc',
                 title: '名称',
+                align: 'center',
+                sortable: true,
+                width: 80,
+            }, {
+                field: 'mh',
+                title: '模号',
                 align: 'center',
                 sortable: true,
                 width: 80,

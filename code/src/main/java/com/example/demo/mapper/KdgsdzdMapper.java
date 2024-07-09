@@ -12,19 +12,22 @@ import java.util.List;
 @Repository
 public interface KdgsdzdMapper extends BaseMapper<Kdgsdzd> {
 
-    @Select("select * from kuaidigongsiduizhangdan")
+    @Select("select kd.drriqi,xsd.riqi,kd.drkhmc,xsd.shdw as khmc,kd.drdsje,xsd.je as dsje,kd.drkddh,xsd.dh as kddh,kd.drkdf,xsd.kdf from xiaoshoudan as xsd,kuaidigongsiduizhangdan as kd")
     List<Kdgsdzd> getList();
 
-    @Select("select * from kuaidigongsiduizhangdan where khmc like '%'+#{khmc}+'%' and kddh like '%''+#{kddh}+%'")
-    List<Kdgsdzd> queryList(String khmc,String kddh);
+//    @Select("select drriqi,drkhmc,drdsje,drkddh,drkdf from kuaidigongsiduizhangdan")
+//    List<Kdgsdzd> getDrList();
 
-    @Update("update kuaidigongsiduizhangdan set riqi = #{riqi},khmc = #{khmc},dsje = #{dsje},kddh = #{kddh} where id = #{id}")
-    boolean update(String riqi,String khmc,String dsje,String kddh,int id);
+    @Select("select * from kuaidigongsiduizhangdan where drkhmc like '%'+#{drkhmc}+'%' and drkddh like '%''+#{drkddh}+%'")
+    List<Kdgsdzd> queryList(String drkhmc,String drkddh);
+
+//    @Update("update kuaidigongsiduizhangdan set riqi = #{riqi},khmc = #{khmc},dsje = #{dsje},kddh = #{kddh},kdf = #{kdf} where id = #{id}")
+//    boolean update(String riqi,String khmc,String dsje,String kddh,String kdf,int id);
 
     @Delete("delete from kuaidigongsiduizhangdan where id=#{id}")
     boolean delete(int id);
 
-    @Insert("insert into kuaidigongsiduizhangdan(riqi,khmc,dsje,kddh) values(#{riqi},#{khmc},#{dsje},#{kddh})")
-    boolean add(String riqi,String khmc,String dsje,String kddh);
+//    @Insert("insert into kuaidigongsiduizhangdan(riqi,khmc,dsje,kddh,ksd) values(#{riqi},#{khmc},#{dsje},#{kddh},#{kdf})")
+//    boolean add(String riqi,String khmc,String dsje,String kddh,String kdf);
 
 }

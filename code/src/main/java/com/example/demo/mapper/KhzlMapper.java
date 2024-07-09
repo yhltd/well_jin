@@ -18,14 +18,14 @@ public interface KhzlMapper extends BaseMapper<Khzl> {
     @Select("select * from kehuziliao where gsm like '%'+#{gsm}+'%'")
     List<Khzl> queryList(String gsm);
 
-    @Update("update kehuziliao set gsm = #{gsm},bh = #{bh},lxdh = #{lxdh},dz = #{dz},sfhs = #{sfhs},sfyj = #{sfyj},qcye = #{qcye},tzkc = #{tzkc},tkkc = #{tkkc},ysje = #{ysje},kddsje = #{kddsje} where id = #{id}")
-    boolean update(String gsm,String bh,String lxdh,String dz,String sfhs,String sfyj,String qcye,String tzkc,String tkkc,String ysje,String kddsje,int id);
+    @Update("update kehuziliao set gsm = #{gsm},bh = #{bh},lxr = #{lxr},lxdh = #{lxdh},dz = #{dz},sfhs = #{sfhs},sfyj = #{sfyj},qcye = #{qcye},tzkc = #{tzkc},tkkc = #{tkkc},ysje = #{ysje},kddsje = #{kddsje} where id = #{id}")
+    boolean update(String gsm,String bh,String lxr,String lxdh,String dz,String sfhs,String sfyj,String qcye,String tzkc,String tkkc,String ysje,String kddsje,int id);
 
     @Delete("delete from kehuziliao where id=#{id}")
     boolean delete(int id);
 
-    @Insert("insert into kehuziliao(gsm,bh,lxdh,dz,sfhs,sfyj,qcye,tzkc,tkkc,ysje,kddsje) values(#{gsm},#{bh},#{lxdh},#{dz},#{sfhs},#{sfyj},#{qcye},#{tzkc},#{tkkc},#{ysje},#{kddsje})")
-    boolean add(String gsm,String bh,String lxdh,String dz,String sfhs,String sfyj,String qcye,String tzkc,String tkkc,String ysje,String kddsje);
+    @Insert("insert into kehuziliao(gsm,bh,lxr,lxdh,dz,sfhs,sfyj,qcye,tzkc,tkkc,ysje,kddsje) values(#{gsm},#{bh},#{lxr},#{lxdh},#{dz},#{sfhs},#{sfyj},#{qcye},#{tzkc},#{tkkc},#{ysje},#{kddsje})")
+    boolean add(String gsm,String bh,String lxr,String lxdh,String dz,String sfhs,String sfyj,String qcye,String tzkc,String tkkc,String ysje,String kddsje);
 
     @Select("select gsm from kehuziliao")
     List<Khzl> hqxlGsm();

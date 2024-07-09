@@ -15,6 +15,8 @@ public interface KdgsdzdService extends IService<Kdgsdzd> {
      */
     List<Kdgsdzd> getList();
 
+//    List<Kdgsdzd> getDrList();
+
     /**
      * 根据姓名和部门查询
      */

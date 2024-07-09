@@ -3,6 +3,7 @@ html,body,#main{
     height: 100%;
     background-color: #f2f2f2;
 }
+/*::-webkit-scrollbar {display: none;}*/
 .alerts{
     position: fixed;
     top: 1rem;

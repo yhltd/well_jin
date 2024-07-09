@@ -95,6 +95,7 @@ $(function () {
         setForm(rows[0].data, '#update-form');
         $('#update-gsm').val(rows[0].data.gsm);
         $('#update-bh').val(rows[0].data.bh);
+        $('#update-lxr').val(rows[0].data.lxr);
         $('#update-lxdh').val(rows[0].data.lxdh);
         $('#update-dz').val(rows[0].data.dz);
         $('#update-sfhs').val(rows[0].data.sfhs);
@@ -208,6 +209,12 @@ function setTable(data) {
             }, {
                 field: 'bh',
                 title: '编号',
+                align: 'center',
+                sortable: true,
+                width: 110,
+            }, {
+                field: 'lxr',
+                title: '联系人',
                 align: 'center',
                 sortable: true,
                 width: 110,

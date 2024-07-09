@@ -22,6 +22,10 @@ public class Rk {
      */
     private String gsm;
     /**
+     * 供应商
+     */
+    private String gys;
+    /**
      * 商品名称
      */
     private String spmc;

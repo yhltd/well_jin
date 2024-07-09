@@ -30,6 +30,10 @@ public class Xsd {
      */
     private String mc;
     /**
+     * 模号
+     */
+    private String mh;
+    /**
      * 规格
      */
     private String gg;

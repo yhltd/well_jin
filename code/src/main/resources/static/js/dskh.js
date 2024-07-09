@@ -94,6 +94,83 @@ $(function () {
             swal('请选择一条数据修改!');
             return;
         }
+        // $ajax({
+        //     type: 'post',
+        //     url: '/user/getName',
+        // }, false, '', function (res) {
+        //     var this_name = res.data
+        //     $ajax({
+        //         type: 'post',
+        //         url: '/czqx/queryList',
+        //         data: JSON.stringify({
+        //             czr: this_name,
+        //             biao: "代收客户",
+        //             czqx: "修改",
+        //         }),
+        //         dataType: 'json',
+        //         contentType: 'application/json;charset=utf-8'
+        //     }, false, '', function (res) {
+        //         var this_czr = res.data[0].czr;
+        //         var this_biao = res.data[0].biao;
+        //         var this_czqx = res.data[0].czqx;
+        //         var this_sfyx = res.data[0].sfyx;
+        //         var this_czid = res.data[0].czid;
+        //         if (this_czr == this_name && this_biao == "代收客户" && this_czqx == "修改" && this_sfyx == "是"){
+        //             $('#update-submit-btn').click(function () {
+        //                 var msg = confirm("确认要修改吗？");
+        //                 if (msg) {
+        //                     if (checkForm('#update-form')) {
+        //                         let params = formToJson('#update-form');
+        //                         $ajax({
+        //                             type: 'post',
+        //                             url: '/dskh/update1',
+        //                             data: {
+        //                                 updateJson: JSON.stringify(params)
+        //                             },
+        //                             dataType: 'json',
+        //                             contentType: 'application/json;charset=utf-8'
+        //                         }, false, '', function (res) {
+        //                             if (res.code == 200) {
+        //                                 swal("", res.msg, "success");
+        //                                 $('#update-close-btn').click();
+        //                                 $('#update-modal').modal('hide');
+        //                                 getList();
+        //                             } else {
+        //                                 swal("", res.msg, "error");
+        //                             }
+        //                         })
+        //                     }
+        //                 }
+        //             });
+        //         }
+        //     })
+        //     $.each(rows, function (index, row) {
+        //         $ajax({
+        //             type: 'post',
+        //             url: '/user/getPower',
+        //         }, false, '', function (res) {
+        //             var this_power = res.data
+        //             if (this_power != "管理员") {
+        //                 var msg = confirm("确认要通知管理员吗？");
+        //                 if (msg) {
+        //                     $ajax({
+        //                         type: 'post',
+        //                         url: '/czqx/add',
+        //                         data: {
+        //                             czr: this_name,
+        //                             biao: "代收客户",
+        //                             czqx: "修改",
+        //                             czid: rows[0].data.id
+        //                         },
+        //                     }, false, '', function (res) {
+        //                         swal(res.msg);
+        //                     })
+        //                 }
+        //             }
+        //         })
+        //     })
+        // });
+
         $('#update-modal').modal('show');
         setForm(rows[0].data, '#update-form');
         $('#update-riqi').val(rows[0].data.riqi);

@@ -1,4 +1,6 @@
 var idd;
+let count = 1;
+
 function getList() {
     // $('#ksrq').val("");
     // $('#jsrq').val("");
@@ -28,6 +30,18 @@ function getList() {
                 draggingClass: "dragging",
                 resizeMode: 'fit'
             });
+            var table = document.getElementById("ysyfTable");
+            var rows = table.rows;
+            var cells = table.cells;
+            var colums = table.rows[0].cells.length;
+            for(var x=1;x<colums;x++){
+                var zje = 0;
+                for(var j = 1;j<rows.length-1;j++){
+                    var a = parseInt(rows[j].cells[10].innerHTML);
+                    zje = zje+a
+                }
+                document.getElementById('zje').value = zje
+            }
             for (i=0;i<=res.data.id;i++){
                 idd=i;
             }
@@ -84,6 +98,24 @@ $(function () {
     //点击新增按钮显示弹窗
     $("#add-btn").click(function () {
         $('#add-modal').modal('show');
+
+        // const now = new Date();
+        // const year = now.getFullYear();
+        // const month = (now.getMonth() + 1).toString().padStart(2, '0');
+        // const day = now.getDate().toString().padStart(2, '0');
+        // const serial = (count++).toString().padStart(3, '0');
+        // var aa = `${year}${month}${day}${serial}`;
+        // document.getElementById('add-dh').value = aa;
+
+        // $ajax({
+        //     type: 'post',
+        //     url: '/user/getName',
+        // }, false, '', function (res) {
+        //     var this_name = res.data
+        //     $("#add-zdr").val = this_name
+        //     document.getElementById("add-zdr").value = this_name
+        // })
+
     });
 
     //新增弹窗里点击关闭按钮
@@ -147,6 +179,12 @@ $(function () {
     //修改弹窗里点击提交按钮
     $('#update-submit-btn').click(function () {
         var msg = confirm("确认要修改吗？");
+
+        var zl = parseFloat(document.getElementById('update-zl').value);
+        var dj = parseFloat(document.getElementById('update-dj').value);
+        var je = zl * dj
+        document.getElementById("update-je").value = je
+
         if (msg) {
             if (checkForm('#update-form')) {
                 let params = formToJson('#update-form');
@@ -240,40 +278,40 @@ function setTable(data) {
                 width: 80,
             }, {
                 field: 'gsm',
-                title: '公司名',
+                title: '单号',
                 align: 'center',
                 sortable: true,
-                width: 150,
+                width: 80,
             }, {
                 field: 'pm',
                 title: '品名',
                 align: 'center',
                 sortable: true,
-                width: 150,
+                width: 130,
             }, {
                 field: 'zl',
                 title: '重量',
                 align: 'center',
                 sortable: true,
-                width: 150,
+                width: 80,
             }, {
                 field: 'dj',
                 title: '单价',
                 align: 'center',
                 sortable: true,
-                width: 150,
+                width: 80,
             }, {
                 field: 'je',
-                title: '金额',
+                title: '规格',
                 align: 'center',
                 sortable: true,
-                width: 150,
+                width: 80,
             }, {
                 field: 'ysyf',
                 title: '应收应付',
                 align: 'center',
                 sortable: true,
-                width: 150,
+                width: 100,
             }
         ],
         onClickRow: function (row, el) {

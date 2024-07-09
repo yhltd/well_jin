@@ -19,6 +19,11 @@ public class KdgsdzdImpl extends ServiceImpl<KdgsdzdMapper, Kdgsdzd> implements 
         return kdgsdzdMapper.getList();
     }
 
+//    @Override
+//    public List<Kdgsdzd> getDrList() {
+//        return kdgsdzdMapper.getDrList();
+//    }
+
     @Override
     public List<Kdgsdzd> queryList(String khmc,String kddh) {
         return kdgsdzdMapper.queryList(khmc,kddh);

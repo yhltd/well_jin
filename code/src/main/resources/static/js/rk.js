@@ -142,6 +142,7 @@ $(function () {
         setForm(rows[0].data, '#update-form');
         $('#update-riqi').val(rows[0].data.riqi);
         $('#update-gsm').val(rows[0].data.gsm);
+        $('#update-gys').val(rows[0].data.gys);
         $('#update-spmc').val(rows[0].data.spmc);
         $('#update-sl').val(rows[0].data.sl);
         $('#update-dj').val(rows[0].data.dj);
@@ -260,6 +261,12 @@ function setTable(data) {
             }, {
                 field: 'gsm',
                 title: '公司名',
+                align: 'center',
+                sortable: true,
+                width: 150,
+            }, {
+                field: 'gys',
+                title: '供应商',
                 align: 'center',
                 sortable: true,
                 width: 150,

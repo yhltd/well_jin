@@ -19,6 +19,15 @@ $(function () {
         // return false;
     });
 
+    $ajax({
+        type: 'post',
+        url: '/user/getName',
+    }, false, '', function (res) {
+        var this_name = res.data
+        // document.getElementById("zdr").append = this_name;
+        $("#zdr").append(this_name);
+    })
+
     //选择数据
     $('#select-btn').click(function () {
         $ajax({
@@ -56,6 +65,7 @@ $(function () {
                         t4 = "<tr name='printData'>" +
                             "<td style='text-align: center'>" + res.data.length + "</td>" +
                             "<td style='text-align: center'>" + res.data[i].mc + "</td>" +
+                            "<td style='text-align: center'>" + res.data[i].mh + "</td>" +
                             "<td style='text-align: center'>" + res.data[i].gg + "</td>" +
                             "<td style='text-align: center'>" + res.data[i].js + "</td>" +
                             "<td style='text-align: center'>" + res.data[i].zl + "</td>" +
@@ -68,10 +78,11 @@ $(function () {
                     }
                     var t11 = res.data[0].jgf;
                     var t12 = res.data[0].kdf;
+                    var t21 = res.data[0].shdz;
                     var t13 = res.data[0].kddh;
                     var t14 = res.data[0].sfyj;
                     var t15 = res.data[0].gd;
-                    var t16 = res.data[0].zdr;
+                    var t16 = res.data[0].sfhs;
                     var t17 = res.data[0].shdwjjsr;
                     var t18 = res.data[0].sd;
                     var t19 = res.data[0].zl;
@@ -82,10 +93,11 @@ $(function () {
                     $("#riqi").append(t3);
                     $("#jgf").append(t11);
                     $("#kdf").append(t12);
+                    $("#shdz").append(t21);
                     $("#kddh").append(t13);
                     $("#sfyj").append(t14);
                     $("#gd").append(t15);
-                    $("#zdr").append(t16);
+                    $("#sfhs").append(t16);
                     $("#shdwjjsr").append(t17);
                     $("#sd").append(t18);
                     $("#hjzl").append(t19);
@@ -94,6 +106,14 @@ $(function () {
                     $('#shdPrint-modal').modal('hide');
                     aa = res.data[0].je;
                     getHjje();
+                    if($("#sfhs" == '含税')){
+                        $('#sdlable').hide();
+                        $('#sd').hide();
+                    }
+                    if($("#sfhs" == '未含税')){
+                        $('#sdlable').hide();
+                        $('#sd').hide();
+                    }
                 }
             })
         }
@@ -299,6 +319,12 @@ function setTable(data) {
                 sortable: true,
                 width: 80,
             }, {
+                field: 'mh',
+                title: '模号',
+                align: 'center',
+                sortable: true,
+                width: 80,
+            }, {
                 field: 'gg',
                 title: '规格',
                 align: 'center',
@@ -333,7 +359,7 @@ function setTable(data) {
                 title: '备注',
                 align: 'center',
                 sortable: true,
-                width: 150,
+                width: 130,
             }, {
                 field: 'shdz',
                 title: '收货地址',

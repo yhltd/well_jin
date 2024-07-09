@@ -43,16 +43,29 @@ public class KdgsdzdController {
         }
     }
 
+//    @RequestMapping("/getDrList")
+//    public ResultInfo getDrList(HttpSession session) {
+//        UserInfo userInfo = GsonUtil.toEntity(SessionUtil.getToken(session), UserInfo.class);
+//        try {
+//            List<Kdgsdzd> getDrList = kdgsdzdService.getDrList();
+//            return ResultInfo.success("获取成功", getDrList);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            log.error("获取失败：{}", e.getMessage());
+//            return ResultInfo.error("错误!");
+//        }
+//    }
+
     /**
      * 根据姓名和部门查询
      *
      * @return ResultInfo
      */
     @RequestMapping("/queryList")
-    public ResultInfo queryList(String khmc,String kddh, HttpSession session) {
+    public ResultInfo queryList(String drkhmc,String drkddh, HttpSession session) {
         UserInfo userInfo = GsonUtil.toEntity(SessionUtil.getToken(session), UserInfo.class);
         try {
-            List<Kdgsdzd> list = kdgsdzdService.queryList(khmc,kddh);
+            List<Kdgsdzd> list = kdgsdzdService.queryList(drkhmc,drkddh);
             return ResultInfo.success("获取成功", list);
         } catch (Exception e) {
             e.printStackTrace();
@@ -68,7 +81,7 @@ public class KdgsdzdController {
     public ResultInfo update(@RequestBody String updateJson, HttpSession session) {
         UserInfo userInfo = GsonUtil.toEntity(SessionUtil.getToken(session), UserInfo.class);
         if(!userInfo.getCaozuoquanxian().equals("可修改")){
-            return ResultInfo.error(401, "无权限");
+            return ResultInfo.error(401, "无权限,请联系管理员");
         }
         Kdgsdzd kdgsdzd = null;
         try {
@@ -94,7 +107,7 @@ public class KdgsdzdController {
         UserInfo userInfo = GsonUtil.toEntity(SessionUtil.getToken(session), UserInfo.class);
         GsonUtil gsonUtil = new GsonUtil(GsonUtil.toJson(map));
         if(!userInfo.getCaozuoquanxian().equals("可修改")){
-            return ResultInfo.error(401, "无权限");
+            return ResultInfo.error(401, "无权限,请联系管理员");
         }
         try {
             Kdgsdzd kdgsdzd = GsonUtil.toEntity(gsonUtil.get("addInfo"), Kdgsdzd.class);
@@ -124,7 +137,7 @@ public class KdgsdzdController {
         GsonUtil gsonUtil = new GsonUtil(GsonUtil.toJson(map));
         List<Integer> idList = GsonUtil.toList(gsonUtil.get("idList"), Integer.class);
         if(!userInfo.getCaozuoquanxian().equals("可修改")){
-            return ResultInfo.error(401, "无权限");
+            return ResultInfo.error(401, "无权限,请联系管理员");
         }
         try {
             for(int i=0; i<idList.size(); i++){
@@ -147,13 +160,13 @@ public class KdgsdzdController {
      * @return ResultInfo
      */
     @PostMapping("/upload")
-    public ResultInfo upload(String excel,@RequestBody HashMap map,HttpSession session) {
-        UserInfo userInfo = GsonUtil.toEntity(SessionUtil.getToken(session), UserInfo.class);
-        GsonUtil gsonUtil = new GsonUtil(GsonUtil.toJson(map));
-        List<Integer> idList = GsonUtil.toList(gsonUtil.get("idList"), Integer.class);
-        if(!userInfo.getCaozuoquanxian().equals("可修改")){
-            return ResultInfo.error(401, "无权限");
-        }
+    public ResultInfo upload(String excel) {
+//        UserInfo userInfo = GsonUtil.toEntity(SessionUtil.getToken(session), UserInfo.class);
+//        GsonUtil gsonUtil = new GsonUtil(GsonUtil.toJson(map));
+//        List<Integer> idList = GsonUtil.toList(gsonUtil.get("idList"), Integer.class);
+//        if(!userInfo.getCaozuoquanxian().equals("可修改")){
+//            return ResultInfo.error(401, "无权限,请联系管理员");
+//        }
         try {
             FileInputStream fis = new FileInputStream(StringUtils.base64ToFile(excel));
             Workbook wb = null;
@@ -167,28 +180,34 @@ public class KdgsdzdController {
                 //获取第i行
                 Row row = sheet.getRow(i);
                 //日期
-                Cell riqi = row.getCell(1);
-                if (riqi != null) {
-                    riqi.setCellType(CellType.STRING);
-                    kdgsdzd.setRiqi(riqi.getStringCellValue());
+                Cell drriqi = row.getCell(0);
+                if (drriqi != null) {
+                    drriqi.setCellType(CellType.STRING);
+                    kdgsdzd.setDrriqi(drriqi.getStringCellValue());
                 }
                 //客户名称
-                Cell khmc = row.getCell(2);
-                if (khmc != null) {
-                    khmc.setCellType(CellType.STRING);
-                    kdgsdzd.setKhmc(khmc.getStringCellValue());
+                Cell drkhmc = row.getCell(1);
+                if (drkhmc != null) {
+                    drkhmc.setCellType(CellType.STRING);
+                    kdgsdzd.setDrkhmc(drkhmc.getStringCellValue());
                 }
                 //代收金额
-                Cell dsje = row.getCell(3);
-                if (dsje != null) {
-                    dsje.setCellType(CellType.STRING);
-                    kdgsdzd.setDsje(dsje.getStringCellValue());
+                Cell drdsje = row.getCell(2);
+                if (drdsje != null) {
+                    drdsje.setCellType(CellType.STRING);
+                    kdgsdzd.setDrdsje(drdsje.getStringCellValue());
                 }
                 //快递单号
-                Cell kddh = row.getCell(4);
-                if (kddh != null) {
-                    kddh.setCellType(CellType.STRING);
-                    kdgsdzd.setKddh(kddh.getStringCellValue());
+                Cell drkddh = row.getCell(3);
+                if (drkddh != null) {
+                    drkddh.setCellType(CellType.STRING);
+                    kdgsdzd.setDrkddh(drkddh.getStringCellValue());
+                }
+                //快递费
+                Cell drkdf = row.getCell(3);
+                if (drkdf != null) {
+                    drkdf.setCellType(CellType.STRING);
+                    kdgsdzd.setDrkdf(drkdf.getStringCellValue());
                 }
 
                 //保存到数据库

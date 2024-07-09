@@ -78,7 +78,7 @@ public class ZbsjController {
         GsonUtil gsonUtil = new GsonUtil(GsonUtil.toJson(map));
         List<Integer> idList = GsonUtil.toList(gsonUtil.get("idList"), Integer.class);
         if(!userInfo.getCaozuoquanxian().equals("可修改")){
-            return ResultInfo.error(401, "无权限");
+            return ResultInfo.error(401, "无权限,请联系管理员");
         }
         try {
             for(int i=0; i<idList.size(); i++){

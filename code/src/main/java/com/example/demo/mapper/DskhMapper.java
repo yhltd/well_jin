@@ -27,4 +27,7 @@ public interface DskhMapper extends BaseMapper<Dskh> {
     @Insert("insert into daishoukehu(riqi,khmc,dsje,kddh) values(#{riqi},#{khmc},#{dsje},#{kddh})")
     boolean add(String riqi,String khmc,String dsje,String kddh);
 
+//    @Insert("insert into caozuoquanxian(czr,biao,czqx,czid) values(#{czr},#{biao},#{czqx},#{czid})")
+//    boolean addCzqx(String czr,String biao,String czqx,String czid);
+
 }

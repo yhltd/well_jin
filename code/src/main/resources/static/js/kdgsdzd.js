@@ -1,7 +1,7 @@
 var idd;
 function getList() {
-    $('#khmc').val("");
-    $('#kddh').val("");
+    // $('#drkhmc').val("");
+    // $('#drkddh').val("");
     $ajax({
         type: 'post',
         url: '/kdgsdzd/getList',
@@ -19,10 +19,50 @@ function getList() {
             }
         }
     })
+    // $ajax({
+    //     type: 'post',
+    //     url: '/kdgsdzd/getDrList',
+    // }, false, '', function (res) {
+    //     if (res.code == 200) {
+    //         setTable(res.data);
+    //         $("#kdgsdzdTable").colResizable({
+    //             liveDrag: true,
+    //             gripInnerHtml: "<div class='grip'></div>",
+    //             draggingClass: "dragging",
+    //             resizeMode: 'fit'
+    //         });
+    //         for (i=0;i<=res.data.id;i++){
+    //             idd=i;
+    //         }
+    //     }
+    // })
 }
+
+// function getDrList() {
+//     $('#drkhmc').val("");
+//     $('#drkddh').val("");
+//     $ajax({
+//         type: 'post',
+//         url: '/kdgsdzd/getDrList',
+//     }, false, '', function (res) {
+//         if (res.code == 200) {
+//             setTable(res.data);
+//             $("#kdgsdzdTable").colResizable({
+//                 liveDrag: true,
+//                 gripInnerHtml: "<div class='grip'></div>",
+//                 draggingClass: "dragging",
+//                 resizeMode: 'fit'
+//             });
+//             for (i=0;i<=res.data.id;i++){
+//                 idd=i;
+//             }
+//         }
+//     })
+// }
 
 $(function () {
     getList();
+    // getDrList();
 
     $ajax({
         type: 'post',
@@ -33,14 +73,14 @@ $(function () {
     })
 
     $('#select-btn').click(function () {
-        var khmc = $('#khmc').val();
-        var kddh = $('#kddh').val();
+        var drkhmc = $('#drkhmc').val();
+        var drkddh = $('#drkddh').val();
         $ajax({
             type: 'post',
             url: '/kdgsdzd/queryList',
             data: {
-                khmc: khmc,
-                kddh: kddh,
+                drkhmc: drkhmc,
+                drkddh: drkddh,
             }
         }, true, '', function (res) {
             if (res.code == 200) {
@@ -100,6 +140,7 @@ $(function () {
         $('#update-khmc').val(rows[0].data.khmc);
         $('#update-dsje').val(rows[0].data.dsje);
         $('#update-kddh').val(rows[0].data.kddh);
+        $('#update-kdf').val(rows[0].data.kdf);
     });
 
     //修改弹窗点击关闭按钮
@@ -193,7 +234,7 @@ $(function () {
                         $('#file').val('');
                         swal(res.msg);
                         if (res.code == 200) {
-                            getList();
+                            getDrList();
                         }
                     })
                 }
@@ -229,10 +270,16 @@ function setTable(data) {
                 field: '',
                 title: '序号',
                 align: 'center',
-                width: 50,
+                width: 80,
                 formatter: function (value, row, index) {
                     return index + 1;
                 }
+            }, {
+                field: 'drriqi',
+                title: '日期(导入)',
+                align: 'center',
+                sortable: true,
+                width: 120,
             }, {
                 field: 'riqi',
                 title: '日期',
@@ -240,8 +287,20 @@ function setTable(data) {
                 sortable: true,
                 width: 80,
             }, {
+                field: 'drkhmc',
+                title: '客户名称(导入)',
+                align: 'center',
+                sortable: true,
+                width: 150,
+            }, {
                 field: 'khmc',
                 title: '客户名称',
+                align: 'center',
+                sortable: true,
+                width: 150,
+            }, {
+                field: 'drdsje',
+                title: '代收金额(导入)',
                 align: 'center',
                 sortable: true,
                 width: 150,
@@ -252,8 +311,26 @@ function setTable(data) {
                 sortable: true,
                 width: 150,
             }, {
+                field: 'drkddh',
+                title: '快递单号(导入)',
+                align: 'center',
+                sortable: true,
+                width: 150,
+            }, {
                 field: 'kddh',
                 title: '快递单号',
+                align: 'center',
+                sortable: true,
+                width: 150,
+            }, {
+                field: 'drkdf',
+                title: '快递费(导入)',
+                align: 'center',
+                sortable: true,
+                width: 150,
+            }, {
+                field: 'kdf',
+                title: '快递费',
                 align: 'center',
                 sortable: true,
                 width: 150,

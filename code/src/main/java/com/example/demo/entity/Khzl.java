@@ -22,6 +22,10 @@ public class Khzl {
      */
     private String bh;
     /**
+     * 联系人
+     */
+    private String lxr;
+    /**
      * 联系电话
      */
     private String lxdh;
