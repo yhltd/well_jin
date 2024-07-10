@@ -199,7 +199,7 @@ $(function () {
         $('#update-kddh').val(rows[0].data.kddh);
         $('#update-sfyj').val(rows[0].data.sfyj);
         $('#update-fkfs').val(rows[0].data.fkfs);
-        $('#update-shhs').val(rows[0].data.sfhs);
+        $('#update-sfhs').val(rows[0].data.sfhs);
         $('#update-gd').val(rows[0].data.gd);
         $('#update-zdr').val(rows[0].data.zdr);
         $('#update-shdwjjsr').val(rows[0].data.shdwjjsr);

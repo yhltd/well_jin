@@ -11,7 +11,7 @@ spring:
     url: jdbc:sqlserver://yhocn.cn;DatabaseName=wellJin
     username: sa
     password: Lyh07910_001
-#    url: jdbc:sqlserver://82.157.194.210;DatabaseName=huaqunjiajucailiao_20221121
+#    url: jdbc:sqlserver://82.157.194.210;DatabaseName=wellJin
 #    username: sa
 #    password: Biii2010_2022
 
