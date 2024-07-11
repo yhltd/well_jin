@@ -3,6 +3,12 @@ html,body,#main{
     height: 100%;
     background-color: #f2f2f2;
 }
+@media (max-width: 1919px) {
+    html {
+        zoom: 90%;
+    }
+}
+
 /*::-webkit-scrollbar {display: none;}*/
 .alerts{
     position: fixed;
@@ -304,4 +310,9 @@ table{
 
 .link-with-image:hover .link-image {
     display: block; /* 悬停时显示图片 */
+}
+
+.image-small{
+    height: 20px;
+    width: 25px;
 }
