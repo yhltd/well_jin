@@ -87,6 +87,22 @@ $(function () {
                     $('#add-close-btn').click();
                 }
             })
+            $ajax({
+                type: 'post',
+                url: '/grxx/add',
+                data: JSON.stringify({
+                    addInfo: params
+                }),
+                dataType: 'json',
+                contentType: 'application/json;charset=utf-8'
+            }, false, '', function (res) {
+                if (res.code == 200) {
+                    swal("", res.msg, "success");
+                    $('#add-form')[0].reset();
+                    getList();
+                    $('#add-close-btn').click();
+                }
+            })
         }
     });
 

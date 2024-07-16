@@ -3,13 +3,14 @@ html,body,#main{
     height: 100%;
     background-color: #f2f2f2;
 }
-@media (max-width: 1919px) {
-    html {
-        zoom: 90%;
-    }
-}
+/*@media (max-width: 1919px) {*/
+/*    html {*/
+/*        zoom: 90%;*/
+/*    }*/
+/*}*/
 
 /*::-webkit-scrollbar {display: none;}*/
+
 .alerts{
     position: fixed;
     top: 1rem;
