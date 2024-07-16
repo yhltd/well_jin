@@ -130,7 +130,15 @@
         <div style="margin-top: 5px;"><b><span>学历</span><span style="margin-left: 297px;">毕业院校</span></b></div>
         <div style="margin-top: 5px;"><input type="text" id="xl" style="width: 300px;height: 30px" autocomplete="off"><input style="margin-left: 30px;width: 300px;height: 30px" type="text" id="byyx" autocomplete="off"></div>
         <div style="margin-top: 5px;"><b><span>性别</span><span style="margin-left: 300px;">生日</span></b></div>
-        <div style="margin-top: 5px;"><input type="text" id="xb" style="width: 300px;height: 30px" autocomplete="off"><input style="margin-left: 30px;width: 300px;height: 30px" type="text" id="sr" autocomplete="off"></div>
+        <div style="margin-top: 5px;">
+<!--            <input type="text" id="xb" style="width: 300px;height: 30px" autocomplete="off">-->
+            <select id="xb" autocomplete="off" data-required="1" style="width: 300px;height: 30px">
+                <option>--请选择性别--</option>
+                <option value="男">男</option>
+                <option value="女">女</option>
+            </select>
+            <input style="margin-left: 30px;width: 300px;height: 30px" type="text" id="sr" autocomplete="off">
+        </div>
         <div style="margin-top: 5px;"><b><span>签名</span></b></div>
         <div style="margin-top: 5px;"><input type="text" id="qm" style="width: 300px;height: 30px" autocomplete="off"></div>
         <div style="margin-top: 5px;"><b><span>密码</span></b></div>

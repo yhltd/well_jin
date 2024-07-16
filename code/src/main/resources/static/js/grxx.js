@@ -29,9 +29,31 @@ function getList() {
                 idd=i;
             }
         }
+        getTx();
     })
 }
 
+function getTx(){
+    var glid = document.getElementById("id").value;
+    console.log(glid)
+    $ajax({
+        type: 'post',
+        url: '/filetable/getFile',
+        data: {
+            glid: glid,
+        },
+        async: false,
+    }, false, '', function (res) {
+        if (res.data[0].filename != '' && res.data[0].filename != null) {
+            downloadFileByBase64(res.data[0].filename, res.data[0].files.split(',')[1])
+        }
+        var filename = res.data[0].filename;
+        var path = "file://C:/Users/Administrator.SC-202303041236/Downloads/" + filename
+        var p = document.getElementById('pic');
+        p.src = res.data[0].files;
+        $('#pid').val(res.data[0].id)
+    })
+}
 $(function () {
     getList();
 
@@ -148,27 +170,27 @@ $(function () {
         };
     });
 
-    $('#download').click(function () {
-        var glid = document.getElementById("id").value;
-        console.log(glid)
-        $ajax({
-            type: 'post',
-            url: '/filetable/getFile',
-            data: {
-                glid: glid,
-            },
-            async: false,
-        }, false, '', function (res) {
-            if (res.data[0].filename != '' && res.data[0].filename != null) {
-                downloadFileByBase64(res.data[0].filename, res.data[0].files.split(',')[1])
-            }
-            var filename = res.data[0].filename;
-            var path = "file://C:/Users/Administrator.SC-202303041236/Downloads/" + filename
-            var p = document.getElementById('pic');
-            p.src = res.data[0].files;
-            $('#pid').val(res.data[0].id)
-        })
-    });
+    // $('#download').click(function () {
+    //     var glid = document.getElementById("id").value;
+    //     console.log(glid)
+    //     $ajax({
+    //         type: 'post',
+    //         url: '/filetable/getFile',
+    //         data: {
+    //             glid: glid,
+    //         },
+    //         async: false,
+    //     }, false, '', function (res) {
+    //         if (res.data[0].filename != '' && res.data[0].filename != null) {
+    //             downloadFileByBase64(res.data[0].filename, res.data[0].files.split(',')[1])
+    //         }
+    //         var filename = res.data[0].filename;
+    //         var path = "file://C:/Users/Administrator.SC-202303041236/Downloads/" + filename
+    //         var p = document.getElementById('pic');
+    //         p.src = res.data[0].files;
+    //         $('#pid').val(res.data[0].id)
+    //     })
+    // });
 
     function getBase64Image(imgElem) {
         return imgElem.replace("/^data:image\/(jpeg|jpg);base64,/", "");
