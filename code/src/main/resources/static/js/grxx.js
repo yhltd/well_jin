@@ -206,7 +206,7 @@ function dataURLtoBlob(dataurl, name) {//name:文件名
     }
     return new Blob([u8arr], {type: mime});
 }
-//
+
 function downloadFile(url, name = '默认文件名') {
     var a = document.createElement("a")//创建a标签触发点击下载
     a.setAttribute("href", url)//附上
@@ -216,12 +216,12 @@ function downloadFile(url, name = '默认文件名') {
     clickEvent.initEvent("click", true, true);
     a.dispatchEvent(clickEvent);
 }
-//
+
 // //主函数
 function downloadFileByBase64(name, base64) {
     var myBlob = dataURLtoBlob(base64, name);
     var myUrl = URL.createObjectURL(myBlob);
-    downloadFile(myUrl, name)
+    // downloadFile(myUrl, name)
 }
 
 function fileShow(id) {
