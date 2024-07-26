@@ -60,9 +60,6 @@
     <div class="col-md-3 mb-2">
         <input id="jsrq" type="date" class="form-control" placeholder="结束日期" autocomplete="off">
     </div>
-    <div class="col-md-3 mb-2">
-        <input id="kcjj" type="text" class="form-control" autocomplete="off" readonly>
-    </div>
     <div class="col-md-2 mb-2">
         <button id="select-btn" class="btn" style="background-color: limegreen;color: white">
             <i class="bi bi-search icon"></i>
@@ -143,8 +140,8 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="add-spmc">商品名称</label>
-                                <input id="add-spmc" name="spmc" type="text" class="form-control" autocomplete="off">
+                                <label for="add-mc">商品名称</label>
+                                <input id="add-mc" name="mc" type="text" class="form-control" autocomplete="off">
                                 <div class="invalid-feedback">
                                     请输入商品名称！
                                 </div>
@@ -152,8 +149,8 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="add-sl">数量</label>
-                                <input id="add-sl" name="sl" type="text" class="form-control" autocomplete="off">
+                                <label for="add-rksl">数量</label>
+                                <input id="add-rksl" name="rksl" type="text" class="form-control" autocomplete="off">
                                 <div class="invalid-feedback">
                                     请输入数量！
                                 </div>
@@ -161,8 +158,8 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="add-dj">单价</label>
-                                <input id="add-dj" name="dj" type="text" class="form-control" autocomplete="off">
+                                <label for="add-rkdj">单价</label>
+                                <input id="add-rkdj" name="rkdj" type="text" class="form-control" autocomplete="off">
                                 <div class="invalid-feedback">
                                     请输入单价！
                                 </div>
@@ -170,8 +167,8 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="add-zl">重量</label>
-                                <input id="add-zl" name="zl" type="text" class="form-control" autocomplete="off">
+                                <label for="add-rkzl">重量</label>
+                                <input id="add-rkzl" name="rkzl" type="text" class="form-control" autocomplete="off">
                                 <div class="invalid-feedback">
                                     请输入重量！
                                 </div>
@@ -197,6 +194,15 @@
                                     请输入付款方式！
                                 </div>
                             </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="add-danhao">单号</label>
+                                <input id="add-danhao" name="danhao" type="text" class="form-control" autocomplete="off" data-required="1">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input id="add-ziduan" name="ziduan" type="hidden" value="入库" class="form-control" autocomplete="off" data-required="1">
                         </div>
                     </div>
                 </form>
@@ -260,8 +266,8 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="update-spmc">商品名称</label>
-                                <input id="update-spmc" name="spmc" type="text" class="form-control" autocomplete="off">
+                                <label for="update-mc">商品名称</label>
+                                <input id="update-mc" name="mc" type="text" class="form-control" autocomplete="off">
                                 <div class="invalid-feedback">
                                     请输入商品名称！
                                 </div>
@@ -269,8 +275,8 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="update-sl">数量</label>
-                                <input id="update-sl" name="sl" type="text" class="form-control" autocomplete="off">
+                                <label for="update-rksl">数量</label>
+                                <input id="update-rksl" name="rksl" type="text" class="form-control" autocomplete="off">
                                 <div class="invalid-feedback">
                                     请输入数量！
                                 </div>
@@ -278,8 +284,8 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="update-dj">单价</label>
-                                <input id="update-dj" name="dj" type="text" class="form-control" autocomplete="off">
+                                <label for="update-rkdj">单价</label>
+                                <input id="update-rkdj" name="rkdj" type="text" class="form-control" autocomplete="off">
                                 <div class="invalid-feedback">
                                     请输入单价！
                                 </div>
@@ -287,8 +293,8 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="update-zl">重量</label>
-                                <input id="update-zl" name="zl" type="text" class="form-control" autocomplete="off">
+                                <label for="update-rkzl">重量</label>
+                                <input id="update-rkzl" name="rkzl" type="text" class="form-control" autocomplete="off">
                                 <div class="invalid-feedback">
                                     请输入重量！
                                 </div>
@@ -313,6 +319,12 @@
                                 <div class="invalid-feedback">
                                     请输入付款方式！
                                 </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="update-danhao">单号</label>
+                                <input id="update-danhao" name="danhao" type="text" class="form-control" autocomplete="off">
                             </div>
                         </div>
                     </div>

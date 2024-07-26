@@ -39,6 +39,11 @@ public class XsdImpl extends ServiceImpl<XsdMapper, Xsd> implements XsdService {
     public Xsd add(Xsd xsd) { return save(xsd) ? xsd : null; }
 
     @Override
+    public Xsd add1(Xsd xsd) {
+        return save(xsd) ? xsd:null ;
+    }
+
+    @Override
     public List<Xsd> getDj(String dj) {return xsdMapper.getDj(dj);}
 
     @Override

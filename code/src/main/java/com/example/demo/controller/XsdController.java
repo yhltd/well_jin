@@ -117,7 +117,31 @@ public class XsdController {
             return ResultInfo.error("添加失败");
         }
     }
-
+    /**
+     * 添加
+     */
+    @RequestMapping("/add1")
+    public ResultInfo add1(@RequestBody HashMap map, HttpSession session) {
+        UserInfo userInfo = GsonUtil.toEntity(SessionUtil.getToken(session), UserInfo.class);
+        GsonUtil gsonUtil = new GsonUtil(GsonUtil.toJson(map));
+        if(!userInfo.getCaozuoquanxian().equals("可修改")){
+            return ResultInfo.error(401, "无权限,请联系管理员");
+        }
+        try {
+            Xsd xsd = GsonUtil.toEntity(gsonUtil.get("addInfo"), Xsd.class);
+            xsd = xsdService.add1(xsd);
+            if (StringUtils.isNotNull(xsd)) {
+                return ResultInfo.success("添加成功", xsd);
+            } else {
+                return ResultInfo.success("添加失败", null);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("添加失败：{}", e.getMessage());
+            log.error("参数：{}", map);
+            return ResultInfo.error("添加失败");
+        }
+    }
     /**
      * 删除
      *

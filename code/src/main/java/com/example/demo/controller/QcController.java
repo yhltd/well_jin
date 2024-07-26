@@ -1,8 +1,10 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.Rk;
+import com.example.demo.entity.Kc;
+import com.example.demo.entity.Qc;
 import com.example.demo.entity.UserInfo;
-import com.example.demo.service.RkService;
+import com.example.demo.service.KcService;
+import com.example.demo.service.QcService;
 import com.example.demo.util.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +20,11 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/rk")
-public class RkController {
-    @Autowired
-    private RkService rkService;
+@RequestMapping("/qc")
+public class QcController {
 
+    @Autowired
+    private QcService qcService;
     /**
      * 查询所有
      *
@@ -32,7 +34,7 @@ public class RkController {
     public ResultInfo getList(HttpSession session) {
         UserInfo userInfo = GsonUtil.toEntity(SessionUtil.getToken(session), UserInfo.class);
         try {
-            List<Rk> getList = rkService.getList();
+            List<Qc> getList = qcService.getList();
             return ResultInfo.success("获取成功", getList);
         } catch (Exception e) {
             e.printStackTrace();
@@ -42,7 +44,7 @@ public class RkController {
     }
 
     /**
-     * 根据姓名和部门查询
+     *
      *
      * @return ResultInfo
      */
@@ -56,7 +58,7 @@ public class RkController {
             jsrq = "2200/1/1";
         }
         try {
-            List<Rk> list = rkService.queryList(ksrq,jsrq);
+            List<Qc> list = qcService.queryList(ksrq,jsrq);
             return ResultInfo.success("获取成功", list);
         } catch (Exception e) {
             e.printStackTrace();
@@ -64,7 +66,22 @@ public class RkController {
             return ResultInfo.error("错误!");
         }
     }
+    //根据商品名称查询
+    @RequestMapping("/mcList")
+    public ResultInfo mcList(String spmc, HttpSession session) {
+        UserInfo userInfo = GsonUtil.toEntity(SessionUtil.getToken(session), UserInfo.class);
+        if (spmc.equals("")) {
 
+        }
+        try {
+            List<Qc> list = qcService.mcList(spmc);
+            return ResultInfo.success("获取成功", list);
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("获取失败：{}", e.getMessage());
+            return ResultInfo.error("错误!");
+        }
+    }
     /**
      * 修改
      */
@@ -74,13 +91,13 @@ public class RkController {
         if(!userInfo.getCaozuoquanxian().equals("可修改")){
             return ResultInfo.error(401, "无权限,请联系管理员");
         }
-        Rk rk = null;
+        Qc qc = null;
         try {
-            rk = DecodeUtil.decodeToJson(updateJson, Rk.class);
-            if (rkService.update(rk)) {
-                return ResultInfo.success("修改成功", rk);
+            qc = DecodeUtil.decodeToJson(updateJson, Qc.class);
+            if (qcService.update(qc)) {
+                return ResultInfo.success("修改成功", qc);
             } else {
-                return ResultInfo.success("修改失败", rk);
+                return ResultInfo.success("修改失败", qc);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -101,10 +118,10 @@ public class RkController {
             return ResultInfo.error(401, "无权限,请联系管理员");
         }
         try {
-            Rk rk = GsonUtil.toEntity(gsonUtil.get("addInfo"), Rk.class);
-            rk = rkService.add(rk);
-            if (StringUtils.isNotNull(rk)) {
-                return ResultInfo.success("添加成功", rk);
+            Qc qc = GsonUtil.toEntity(gsonUtil.get("addInfo"), Qc.class);
+            qc = qcService.add(qc);
+            if (StringUtils.isNotNull(qc)) {
+                return ResultInfo.success("添加成功", qc);
             } else {
                 return ResultInfo.success("添加失败", null);
             }
@@ -115,31 +132,7 @@ public class RkController {
             return ResultInfo.error("添加失败");
         }
     }
-    /**
-     * 添加
-     */
-    @RequestMapping("/add1")
-    public ResultInfo add1(@RequestBody HashMap map, HttpSession session) {
-        UserInfo userInfo = GsonUtil.toEntity(SessionUtil.getToken(session), UserInfo.class);
-        GsonUtil gsonUtil = new GsonUtil(GsonUtil.toJson(map));
-        if(!userInfo.getCaozuoquanxian().equals("可修改")){
-            return ResultInfo.error(401, "无权限,请联系管理员");
-        }
-        try {
-            Rk rk = GsonUtil.toEntity(gsonUtil.get("addInfo"), Rk.class);
-            rk = rkService.add1(rk);
-            if (StringUtils.isNotNull(rk)) {
-                return ResultInfo.success("添加成功", rk);
-            } else {
-                return ResultInfo.success("添加失败", null);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            log.error("添加失败：{}", e.getMessage());
-            log.error("参数：{}", map);
-            return ResultInfo.error("添加失败");
-        }
-    }
+
     /**
      * 删除
      *
@@ -157,7 +150,7 @@ public class RkController {
         try {
             for(int i=0; i<idList.size(); i++){
                 int this_id = idList.get(i);
-                rkService.delete(Collections.singletonList(this_id));
+                qcService.delete(Collections.singletonList(this_id));
             }
             return ResultInfo.success("删除成功", idList);
         } catch (Exception e) {
@@ -168,22 +161,5 @@ public class RkController {
         }
     }
 
-    /**
-     * 查询库存均价
-     *
-     * @return ResultInfo
-     */
-    @RequestMapping("/getKcjj")
-    public ResultInfo getKcjj(HttpSession session) {
-        UserInfo userInfo = GsonUtil.toEntity(SessionUtil.getToken(session), UserInfo.class);
-        try {
-            List<Rk> getKcjj = rkService.getKcjj();
-            return ResultInfo.success("获取成功", getKcjj);
-        } catch (Exception e) {
-            e.printStackTrace();
-            log.error("获取失败：{}", e.getMessage());
-            return ResultInfo.error("错误!");
-        }
-    }
 
 }

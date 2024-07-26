@@ -60,14 +60,14 @@ $(function () {
         document.getElementById("dlm").innerText = this_name;
     })
 
-    $ajax({
-        type: 'post',
-        url: '/rk/getKcjj',
-    }, false, '', function (res) {
-        // var dataArray  = res
-        var kcjj = res.data[0].kcjj
-        document.getElementById("kcjj").value = kcjj;
-    })
+    // $ajax({
+    //     type: 'post',
+    //     url: '/rk/getKcjj',
+    // }, false, '', function (res) {
+    //     // var dataArray  = res
+    //     var kcjj = res.data[0].kcjj
+    //     document.getElementById("kcjj").value = kcjj;
+    // })
 
     $('#select-btn').click(function () {
         var ksrq = $('#ksrq').val();
@@ -104,11 +104,24 @@ $(function () {
     //新增弹窗里点击提交按钮
     $("#add-submit-btn").click(function () {
 
-        var sl = parseFloat(document.getElementById('add-sl').value);
-        var dj = parseFloat(document.getElementById('add-dj').value);
-        var zl = parseFloat(document.getElementById('add-zl').value);
-        var zje = sl * dj * zl
+        var rksl = parseFloat(document.getElementById('add-rksl').value);
+        var rkdj = parseFloat(document.getElementById('add-rkdj').value);
+        var rkzl = parseFloat(document.getElementById('add-rkzl').value);
+        var zje = rksl * rkdj * rkzl
+
         document.getElementById("add-zje").value = zje
+
+        var  date = new Date();
+        date.setMonth(date.getMonth()-3);
+        var year = date.getFullYear();
+        var month = ('0'+(date.getMonth()+1)).slice(-2);
+        var day = ('0'+date.getDate()).slice(-2);
+        const hours = date.getHours().toString().padStart(2, '0');
+        const minutes = date.getMinutes().toString().padStart(2, '0');
+        const seconds = date.getSeconds().toString().padStart(2, '0');
+        var danhao =year+''+month+''+day+''+hours+''+minutes+seconds;
+        console.log(danhao)
+        document.getElementById("add-danhao").value = danhao;
 
         let params = formToJson("#add-form");
         if (checkForm('#add-form')) {
@@ -122,12 +135,29 @@ $(function () {
                 contentType: 'application/json;charset=utf-8'
             }, false, '', function (res) {
                 if (res.code == 200) {
+                    $ajax({
+                        type: 'post',
+                        url: '/mx/add1',
+                        data: JSON.stringify({
+                            addInfo: params
+                        }),
+                        dataType: 'json',
+                        contentType: 'application/json;charset=utf-8'
+                    }, false, '', function (res) {
+                        if (res.code == 200) {
+                            swal("", res.msg, "success");
+                            $('#add-form')[0].reset();
+                            getList();
+                            $('#add-close-btn').click();
+                        }
+                    })
                     swal("", res.msg, "success");
                     $('#add-form')[0].reset();
                     getList();
                     $('#add-close-btn').click();
                 }
             })
+
         }
     });
 
@@ -144,11 +174,12 @@ $(function () {
         $('#update-gsm').val(rows[0].data.gsm);
         $('#update-gys').val(rows[0].data.gys);
         $('#update-spmc').val(rows[0].data.spmc);
-        $('#update-sl').val(rows[0].data.sl);
-        $('#update-dj').val(rows[0].data.dj);
-        $('#update-zl').val(rows[0].data.zl);
+        $('#update-rksl').val(rows[0].data.rksl);
+        $('#update-rkdj').val(rows[0].data.rkdj);
+        $('#update-rkzl').val(rows[0].data.rkzl);
         $('#update-zje').val(rows[0].data.zje);
         $('#update-fkfs').val(rows[0].data.fkfs);
+        $('#update-danhao').val(rows[0].data.danhao);
     });
 
     //修改弹窗点击关闭按钮
@@ -158,31 +189,220 @@ $(function () {
     });
 
     //修改弹窗里点击提交按钮
+    // $('#update-submit-btn').click(function () {
+    //     var msg = confirm("确认要修改吗？");
+    //
+    //     var rksl = parseFloat(document.getElementById('update-rksl').value);
+    //     var rkdj = parseFloat(document.getElementById('update-rkdj').value);
+    //     var rkzl = parseFloat(document.getElementById('update-rkzl').value);
+    //     var zje = rksl * rkdj * rkzl
+    //     document.getElementById("update-zje").value = zje
+    //     // var d1 = document.getElementById('riqi').value;
+    //     // var d2 = document.getElementById('gsm').value;
+    //     var d3 = document.getElementById('update-mc').value;
+    //     var d4 = document.getElementById('update-rksl').value;
+    //     var d5 = document.getElementById('update-rkdj').value;
+    //     var d6 = document.getElementById('update-rkzl').value;
+    //     // var d7 = document.getElementById('zje').value;
+    //     // var d8 = document.getElementById('fkfs').value;
+    //     // var d9 = document.getElementById('gys').value;
+    //     // var  date = new Date();
+    //     // date.setMonth(date.getMonth()-3);
+    //     // var year = date.getFullYear();
+    //     // var month = ('0'+(date.getMonth()+1)).slice(-2);
+    //     // var day = ('0'+date.getDate()).slice(-2);
+    //     // const hours = date.getHours().toString().padStart(2, '0');
+    //     // const minutes = date.getMinutes().toString().padStart(2, '0');
+    //     // const seconds = date.getSeconds().toString().padStart(2, '0');
+    //     // var danhao =year+''+month+''+day+''+hours+''+minutes+seconds;
+    //      var danhao=document.getElementById("update-danhao").value ;
+    //     if (msg) {
+    //         if (checkForm('#update-form')) {
+    //             let params = formToJson('#update-form');
+    //             $ajax({
+    //                 type: 'post',
+    //                 url: '/rk/update',
+    //                 data: {
+    //                     updateJson: JSON.stringify(params)
+    //                 },
+    //                 dataType: 'json',
+    //                 contentType: 'application/json;charset=utf-8'
+    //             }, false, '', function (res) {
+    //                 if (res.code == 200) {
+    //                     // $ajax({
+    //                     //     type: 'post',
+    //                     //     url: '/mx/update',
+    //                     //     data: {
+    //                     //         // riqi:d1,
+    //                     //         // gsm:d2,
+    //                     //         mc:d3,
+    //                     //         js:d4,
+    //                     //         je:d5,
+    //                     //         zl:d6,
+    //                     //         danhao:danhao,
+    //                     //         // zje:d7,
+    //                     //     },
+    //                     //     dataType: 'json',
+    //                     //     contentType: 'application/json;charset=utf-8'
+    //                     // }, false, '', function (res) {
+    //                     //     if (true) {
+    //                     //         swal("", res.msg, "success");
+    //                     //     } else {
+    //                     //         swal("", res.msg, "error");
+    //                     //     }
+    //                     // })
+    //                     swal("", res.msg, "success");
+    //                     // $('#update-close-btn').click();
+    //                     // $('#update-modal').modal('hide');
+    //                     // getList();
+    //                 } else {
+    //                     swal("", res.msg, "error");
+    //                 }
+    //                 // $('#update-close-btn').click();
+    //                 // $('#update-modal').modal('hide');
+    //                 getList();
+    //             })
+    //             $ajax({
+    //                 type: 'post',
+    //                 url: '/mx/update',
+    //                 data: {
+    //                     // riqi:d1,
+    //                     // gsm:d2,
+    //                     mc:d3,
+    //                     js:d4,
+    //                     je:d5,
+    //                     zl:d6,
+    //                     danhao:danhao,
+    //                     // zje:d7,
+    //                 },
+    //                 dataType: 'json',
+    //                 contentType: 'application/json;charset=utf-8'
+    //             }, false, '', function (res) {
+    //                 // if (res.code==200) {
+    //                 //     swal("", res.msg, "success");
+    //                 //     $('#update-close-btn').click();
+    //                 //     $('#update-modal').modal('hide');
+    //                 //     getList();
+    //                 // } else {
+    //                 //     swal("", res.msg, "error");
+    //                 //     $('#update-close-btn').click();
+    //                 //     $('#update-modal').modal('hide');
+    //                 //     getList();
+    //                 // }
+    //                 if (res.code == 200) {
+    //                     swal("", res.msg, "success");
+    //                     getList();
+    //                 } else {
+    //                     swal("", res.msg, "error");
+    //                 }
+    //             })
+    //         }
+    //     }
+    // });
+
     $('#update-submit-btn').click(function () {
         var msg = confirm("确认要修改吗？");
 
-        var sl = parseFloat(document.getElementById('update-sl').value);
-        var dj = parseFloat(document.getElementById('update-dj').value);
-        var zl = parseFloat(document.getElementById('update-zl').value);
-        var zje = sl * dj * zl
+        var rksl = parseFloat(document.getElementById('update-rksl').value);
+        var rkdj = parseFloat(document.getElementById('update-rkdj').value);
+        var rkzl = parseFloat(document.getElementById('update-rkzl').value);
+        var zje = rksl * rkdj * rkzl
         document.getElementById("update-zje").value = zje
-
+        // var d1 = document.getElementById('riqi').value;
+        // var d2 = document.getElementById('gsm').value;
+        var d3 = document.getElementById('update-mc').value;
+        var d4 = document.getElementById('update-rksl').value;
+        var d5 = document.getElementById('update-rkdj').value;
+        var d6 = document.getElementById('update-rkzl').value;
+        // var d7 = document.getElementById('zje').value;
+        // var d8 = document.getElementById('fkfs').value;
+        // var d9 = document.getElementById('gys').value;
+        // var  date = new Date();
+        // date.setMonth(date.getMonth()-3);
+        // var year = date.getFullYear();
+        // var month = ('0'+(date.getMonth()+1)).slice(-2);
+        // var day = ('0'+date.getDate()).slice(-2);
+        // const hours = date.getHours().toString().padStart(2, '0');
+        // const minutes = date.getMinutes().toString().padStart(2, '0');
+        // const seconds = date.getSeconds().toString().padStart(2, '0');
+        // var danhao =year+''+month+''+day+''+hours+''+minutes+seconds;
+        var danhao=document.getElementById("update-danhao").value ;
         if (msg) {
             if (checkForm('#update-form')) {
                 let params = formToJson('#update-form');
+                // $ajax({
+                //     type: 'post',
+                //     url: '/rk/update',
+                //     data: {
+                //         updateJson: JSON.stringify(params)
+                //     },
+                //     dataType: 'json',
+                //     contentType: 'application/json;charset=utf-8'
+                // }, false, '', function (res) {
+                //     if (res.code == 200) {
+                //         // $ajax({
+                //         //     type: 'post',
+                //         //     url: '/mx/update',
+                //         //     data: {
+                //         //         // riqi:d1,
+                //         //         // gsm:d2,
+                //         //         mc:d3,
+                //         //         js:d4,
+                //         //         je:d5,
+                //         //         zl:d6,
+                //         //         danhao:danhao,
+                //         //         // zje:d7,
+                //         //     },
+                //         //     dataType: 'json',
+                //         //     contentType: 'application/json;charset=utf-8'
+                //         // }, false, '', function (res) {
+                //         //     if (true) {
+                //         //         swal("", res.msg, "success");
+                //         //     } else {
+                //         //         swal("", res.msg, "error");
+                //         //     }
+                //         // })
+                //         swal("", res.msg, "success");
+                //         // $('#update-close-btn').click();
+                //         // $('#update-modal').modal('hide');
+                //         // getList();
+                //     } else {
+                //         swal("", res.msg, "error");
+                //     }
+                //     // $('#update-close-btn').click();
+                //     // $('#update-modal').modal('hide');
+                //     getList();
+                // })
                 $ajax({
                     type: 'post',
-                    url: '/rk/update',
+                    url: '/mx/update',
                     data: {
-                        updateJson: JSON.stringify(params)
+                        // riqi:d1,
+                        // gsm:d2,
+                        mc:d3,
+                        js:d4,
+                        je:d5,
+                        zl:d6,
+                        danhao:danhao,
+                        updateJson: JSON.stringify(d3,d4,d5,d6,danhao)
+                        // zje:d7,
                     },
                     dataType: 'json',
                     contentType: 'application/json;charset=utf-8'
                 }, false, '', function (res) {
+                    // if (res.code==200) {
+                    //     swal("", res.msg, "success");
+                    //     $('#update-close-btn').click();
+                    //     $('#update-modal').modal('hide');
+                    //     getList();
+                    // } else {
+                    //     swal("", res.msg, "error");
+                    //     $('#update-close-btn').click();
+                    //     $('#update-modal').modal('hide');
+                    //     getList();
+                    // }
                     if (res.code == 200) {
                         swal("", res.msg, "success");
-                        $('#update-close-btn').click();
-                        $('#update-modal').modal('hide');
                         getList();
                     } else {
                         swal("", res.msg, "error");
@@ -242,7 +462,7 @@ function setTable(data) {
         toolbar: '#table-toolbar',
         toolbarAlign: 'left',
         theadClasses: "thead-light",//这里设置表头样式
-        style:'table-layout:fixed',
+        style: 'table-layout:fixed',
         columns: [
             {
                 field: '',
@@ -252,6 +472,12 @@ function setTable(data) {
                 formatter: function (value, row, index) {
                     return index + 1;
                 }
+            }, {
+                field: 'danhao',
+                title: '单号',
+                align: 'center',
+                sortable: true,
+                width: 150,
             }, {
                 field: 'riqi',
                 title: '日期',
@@ -271,25 +497,25 @@ function setTable(data) {
                 sortable: true,
                 width: 150,
             }, {
-                field: 'spmc',
+                field: 'mc',
                 title: '商品名称',
                 align: 'center',
                 sortable: true,
                 width: 150,
             }, {
-                field: 'sl',
+                field: 'rksl',
                 title: '数量',
                 align: 'center',
                 sortable: true,
                 width: 150,
             }, {
-                field: 'dj',
+                field: 'rkdj',
                 title: '单价',
                 align: 'center',
                 sortable: true,
                 width: 150,
             }, {
-                field: 'zl',
+                field: 'rkzl',
                 title: '重量',
                 align: 'center',
                 sortable: true,
@@ -318,3 +544,4 @@ function setTable(data) {
         }
     })
 }
+

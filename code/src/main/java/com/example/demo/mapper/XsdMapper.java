@@ -27,9 +27,16 @@ public interface XsdMapper extends BaseMapper<Xsd> {
     @Insert("insert into xiaoshoudan(riqi,dh,shdw,mc,mh,gg,js,zl,dj,je,bz,shdz,kddh,sfyj,fkfs,sfhs,gd,zdr,shdwjjsr,jgf,kdf,hsdj,sd,whsdj) values(#{riqi},#{dh},#{shdw},#{mc},#{mh},#{gg},#{js},#{zl},#{dj},#{je},#{bz},#{shdz},#{kddh},#{sfyj},#{fkfs},#{sfhs},#{gd},#{zdr},#{shdwjjsr},#{jgf},#{kdf},#{hsdj},#{sd},#{whsdj})")
     boolean add(String riqi,String dh,String shdw,String mc,String mh,String gg,String js,String zl,String dj,String je,String bz,String shdz,String kddh,String sfyj,String fkfs,String sfhs,String gd,String zdr,String shdwjjsr,String jgf,String kdf,String hsdj,String sd,String whsdj);
 
+    @Insert("insert into mingxi(spmc,cksl,ckje,ziduan) values(#{spmc},#{ckcl},#{ckjg},#{ziduan}")
+    boolean add1(String spmc,String ckcl,String ckjg,String ziduan);
+
+
     @Select("select DISTINCT dj from xiaoshoudan where riqi = convert(DATE,riqi)")
     List<Xsd> getDj(String dj);
 
     @Select("select * from xiaoshoudan where shdw=#{shdw} and dh=#{dh} and riqi=#{riqi}")
     List<Xsd> getListByShdw(String shdw,String dh,String riqi);
+
+
+
 }

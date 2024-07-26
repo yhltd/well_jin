@@ -37,6 +37,7 @@ public interface XsdService extends IService<Xsd> {
      * 添加
      */
     Xsd add(Xsd xsd);
+    Xsd add1(Xsd xsd);
 
     /**
      * 获取当天销售单单价

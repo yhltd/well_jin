@@ -1,6 +1,6 @@
 var idd;
 let count = 1;
-
+var ziduan="出库";
 function getGsm() {
     $ajax({
         type: 'post',
@@ -55,6 +55,15 @@ function getList() {
                     zje = zje+a
                 }
                 document.getElementById('zje').value = zje
+            }
+
+            for(var q=1;q<colums;q++){
+                var jgf = 0;
+                for(var w = 1;w<rows.length-1;w++){
+                    var b = parseInt(rows[w].cells[20].innerHTML);
+                    jgf = jgf+b
+                }
+                document.getElementById('jgf').value = jgf
             }
             for (i=0;i<=res.data.id;i++){
                 idd=i;
@@ -131,6 +140,21 @@ $(function () {
             document.getElementById("add-zdr").value = this_name
         })
 
+        //未含税锁定
+        document.getElementById('add-sfhs').addEventListener('change', function() {
+            var selectedOption = this.value;
+            var textBoxes = document.querySelectorAll('input[type="text"]');
+            // 根据选择的option值锁定对应的文本框
+            if (selectedOption === '未含税') {
+                document.getElementById('add-hsdj').disabled = true;
+                document.getElementById('add-sd').disabled = true;
+                document.getElementById('add-whsdj').disabled = false;
+            }else{
+                document.getElementById('add-whsdj').disabled = true;
+                document.getElementById('add-hsdj').disabled = false;
+                document.getElementById('add-sd').disabled = false;
+            }
+        });
     });
 
     //新增弹窗里点击关闭按钮
@@ -147,6 +171,10 @@ $(function () {
         var je = js * zl * dj
         document.getElementById("add-je").value = je
 
+        var js = parseFloat(document.getElementById('add-js').value);
+        var jgf = js * 0.5
+        document.getElementById("add-jgf").value = jgf
+
         if (parseFloat(document.getElementById('add-sd').value) != 0 ){
             var hsdj = parseFloat(document.getElementById('add-hsdj').value);
             var sd = parseFloat(document.getElementById('add-sd').value);
@@ -154,11 +182,15 @@ $(function () {
             document.getElementById("add-whsdj").value = whsdj
         }
 
+        // var d1 = document.getElementById('mc').value;
+        // var d2 = document.getElementById('dj').value;
+        // var d3 = document.getElementById('je').value;
+
         let params = formToJson("#add-form");
         if (checkForm('#add-form')) {
             $ajax({
                 type: 'post',
-                url: '/xsd/add',
+                url: '/xsd/add1',
                 data: JSON.stringify({
                     addInfo: params
                 }),
@@ -166,13 +198,72 @@ $(function () {
                 contentType: 'application/json;charset=utf-8'
             }, false, '', function (res) {
                 if (res.code == 200) {
+                    $ajax({
+                        type: 'post',
+                        url: '/mx/add1',
+                        data: JSON.stringify({
+                            addInfo: params,
+                            cksl: js,
+                            ziduan:ziduan
+                        }),
+                        dataType: 'json',
+                        contentType: 'application/json;charset=utf-8'
+                    }, false, '', function (res) {
+                        if (res.code == 200) {
+                            swal("", res.msg, "success");
+                            $('#add-form')[0].reset();
+                            getList();
+                            $('#add-close-btn').click();
+                        }
+                    })
                     swal("", res.msg, "success");
                     $('#add-form')[0].reset();
                     getList();
                     $('#add-close-btn').click();
                 }
             })
+            // var d1 = document.getElementById('mc').value;
+            // var d2 = document.getElementById('dj').value;
+            // var d3 = document.getElementById('je').value;
+
         }
+
+        // var d1 = document.getElementById('mc').value;
+        // var d2 = document.getElementById('dj').value;
+        // var d3 = document.getElementById('je').value;
+        // $ajax({
+        //     type: 'post',
+        //     url: '/xsd/add',
+        //     data: JSON.stringify({
+        //         addInfo: params
+        //     }),
+        //     dataType: 'json',
+        //     contentType: 'application/json;charset=utf-8'
+        // }, false, '', function (res) {
+        //     if (res.code == 200) {
+        //         $ajax({
+        //             type: 'post',
+        //             url: '/xsd/add',
+        //             data: JSON.stringify({
+        //                 addInfo: params
+        //             }),
+        //             dataType: 'json',
+        //             contentType: 'application/json;charset=utf-8'
+        //         }, false, '', function (res) {
+        //             if (res.code == 200) {
+        //                 swal("", res.msg, "success");
+        //                 $('#add-form')[0].reset();
+        //                 getList();
+        //                 $('#add-close-btn').click();
+        //             }
+        //         })
+        //         swal("", res.msg, "success");
+        //         $('#add-form')[0].reset();
+        //         getList();
+        //         $('#add-close-btn').click();
+        //     }
+        // })
+
     });
 
     //点击修改按钮显示弹窗
@@ -208,6 +299,22 @@ $(function () {
         $('#update-hsdj').val(rows[0].data.hsdj);
         $('#update-sd').val(rows[0].data.sd);
         $('#update-whsdj').val(rows[0].data.whsdj);
+
+        //未含税锁定
+        document.getElementById('update-sfhs').addEventListener('change', function() {
+            var selectedOption = this.value;
+            var textBoxes = document.querySelectorAll('input[type="text"]');
+            // 根据选择的option值锁定对应的文本框
+            if (selectedOption === '未含税') {
+                document.getElementById('update-hsdj').disabled = true;
+                document.getElementById('update-sd').disabled = true;
+                document.getElementById('update-whsdj').disabled = false;
+            }else{
+                document.getElementById('update-whsdj').disabled = true;
+                document.getElementById('update-hsdj').disabled = false;
+                document.getElementById('update-sd').disabled = false;
+            }
+        });
     });
 
     //修改弹窗点击关闭按钮
@@ -225,6 +332,8 @@ $(function () {
         var dj = parseFloat(document.getElementById('update-dj').value);
         var je = js * zl * dj
         document.getElementById("update-je").value = je
+        var jgf = js * 0.5
+        document.getElementById("update-jgf").value = jgf
 
         if (parseFloat(document.getElementById('update-sd').value) != 0 ){
             var hsdj = parseFloat(document.getElementById('update-hsdj').value);
@@ -319,6 +428,12 @@ function setTable(data) {
                 formatter: function (value, row, index) {
                     return index + 1;
                 }
+            }, {
+                field: 'danhao',
+                title: '单号',
+                align: 'center',
+                sortable: true,
+                width: 150,
             }, {
                 field: 'riqi',
                 title: '日期',

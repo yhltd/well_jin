@@ -66,6 +66,7 @@
             查询
         </button>
     </div>
+    总金额：
     <div class="col-md-2 mb-2">
         <input id="zje" type="text" class="form-control" placeholder="总金额" readonly autocomplete="off">
     </div>
@@ -303,8 +304,14 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group">
+                                <label for="add-jgfdj">锯工费单价</label>
+                                <input id="add-jgfdj" name="jgf" type="text" class="form-control" autocomplete="off" readonly value="0.5">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
                                 <label for="add-jgf">锯工费</label>
-                                <input id="add-jgf" name="jgf" type="text" class="form-control" autocomplete="off" data-required="1">
+                                <input id="add-jgf" name="jgf" type="text" class="form-control" autocomplete="off" data-required="1" readonly="readonly">
                                 <div class="invalid-feedback">
                                     请输入锯工费！
                                 </div>
@@ -346,6 +353,17 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="add-danhao">单号</label>
+                                <input id="add-danhao" name="danhao" type="text" value="0" class="form-control" autocomplete="off" data-required="1">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                        <div class="form-group">
+                            <input id="add-ziduan" name="ziduan" type="hidden" value="出库" class="form-control" autocomplete="off" data-required="1">
+                        </div>
+                    </div>
                     </div>
                 </form>
             </div>
@@ -566,8 +584,14 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group">
+                                <label for="update-jgfdj">锯工费单价</label>
+                                <input id="update-jgfdj" name="jgf" type="text" class="form-control" autocomplete="off" readonly value="0.5">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
                                 <label for="update-jgf">锯工费</label>
-                                <input id="update-jgf" name="jgf" type="text" class="form-control" autocomplete="off" data-required="1">
+                                <input id="update-jgf" name="jgf" type="text" class="form-control" autocomplete="off" data-required="1"readonly="readonly">
                                 <div class="invalid-feedback">
                                     请输入锯工费！
                                 </div>
@@ -603,7 +627,7 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="update-whsdj">未含税单价</label>
-                                <input id="update-whsdj" name="whsdj" type="text" value="0" class="form-control" autocomplete="off" data-required="1" readonly>
+                                <input id="update-whsdj" name="whsdj" type="text" value="0" class="form-control" autocomplete="off" data-required="1">
                                 <div class="invalid-feedback">
                                     请输入未含税单价！
                                 </div>

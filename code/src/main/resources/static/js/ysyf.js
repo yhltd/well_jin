@@ -302,7 +302,7 @@ function setTable(data) {
                 width: 80,
             }, {
                 field: 'je',
-                title: '规格',
+                title: '金额',
                 align: 'center',
                 sortable: true,
                 width: 80,

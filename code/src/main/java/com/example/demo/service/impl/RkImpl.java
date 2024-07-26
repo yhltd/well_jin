@@ -1,6 +1,7 @@
 package com.example.demo.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.example.demo.entity.Mx;
 import com.example.demo.entity.Rk;
 import com.example.demo.mapper.RkMapper;
 import com.example.demo.service.RkService;
@@ -34,6 +35,12 @@ public class RkImpl extends ServiceImpl<RkMapper, Rk> implements RkService {
 
     @Override
     public Rk add(Rk rk) { return save(rk) ? rk : null; }
+
+    @Override
+    public Rk add1(Rk rk) {
+        return save(rk) ? rk:null ;
+    }
+
 
     @Override
     public List<Rk> getKcjj() {return rkMapper.getKcjj();}

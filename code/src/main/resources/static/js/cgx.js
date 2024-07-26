@@ -51,7 +51,7 @@ function getList() {
             for(var x=1;x<colums;x++){
                 var zje = 0;
                 for(var j = 1;j<rows.length-1;j++){
-                    var a = parseInt(rows[j].cells[9].innerHTML);
+                    var a = parseInt(rows[j].cells[10].innerHTML);
                     zje = zje+a
                 }
                 document.getElementById('zje').value = zje
@@ -111,68 +111,87 @@ $(function () {
     });
 
     //点击新增按钮显示弹窗
-    // $("#add-btn").click(function () {
-    //     $('#add-modal').modal('show');
-    //
-    //     const now = new Date();
-    //     const year = now.getFullYear();
-    //     const month = (now.getMonth() + 1).toString().padStart(2, '0');
-    //     const day = now.getDate().toString().padStart(2, '0');
-    //     const serial = (count++).toString().padStart(3, '0');
-    //     var aa = `${year}${month}${day}${serial}`;
-    //     document.getElementById('add-dh').value = aa;
-    //
-    //     $ajax({
-    //         type: 'post',
-    //         url: '/user/getName',
-    //     }, false, '', function (res) {
-    //         var this_name = res.data
-    //         $("#add-zdr").val = this_name
-    //         document.getElementById("add-zdr").value = this_name
-    //     })
-    // });
+    $("#add-btn").click(function () {
+        $('#add-modal').modal('show');
+
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = (now.getMonth() + 1).toString().padStart(2, '0');
+        const day = now.getDate().toString().padStart(2, '0');
+        const serial = (count++).toString().padStart(3, '0');
+        var aa = `${year}${month}${day}${serial}`;
+        document.getElementById('add-dh').value = aa;
+
+        $ajax({
+            type: 'post',
+            url: '/user/getName',
+        }, false, '', function (res) {
+            var this_name = res.data
+            $("#add-zdr").val = this_name
+            document.getElementById("add-zdr").value = this_name
+        })
+
+        //未含税锁定
+        document.getElementById('add-sfhs').addEventListener('change', function() {
+            var selectedOption = this.value;
+            var textBoxes = document.querySelectorAll('input[type="text"]');
+            // 根据选择的option值锁定对应的文本框
+            if (selectedOption === '未含税') {
+                document.getElementById('add-hsdj').disabled = true;
+                document.getElementById('add-sd').disabled = true;
+                document.getElementById('add-whsdj').disabled = false;
+            }else{
+                document.getElementById('add-whsdj').disabled = true;
+                document.getElementById('add-hsdj').disabled = false;
+                document.getElementById('add-sd').disabled = false;
+            }
+        });
+    });
 
     //新增弹窗里点击关闭按钮
-    // // $('#add-close-btn').click(function () {
-    // //     $('#add-modal').modal('hide');
-    // // });
-    //
-    // //新增弹窗里点击提交按钮
-    // $("#add-submit-btn").click(function () {
-    //
-    //     var js = parseFloat(document.getElementById('add-js').value);
-    //     var zl = parseFloat(document.getElementById('add-zl').value);
-    //     var dj = parseFloat(document.getElementById('add-dj').value);
-    //     var je = js * zl * dj
-    //     document.getElementById("add-je").value = je
-    //
-    //     if (parseFloat(document.getElementById('add-sd').value) != 0 ){
-    //         var hsdj = parseFloat(document.getElementById('add-hsdj').value);
-    //         var sd = parseFloat(document.getElementById('add-sd').value);
-    //         var whsdj = hsdj / sd
-    //         document.getElementById("add-whsdj").value = whsdj
-    //     }
-    //
-    //     let params = formToJson("#add-form");
-    //     if (checkForm('#add-form')) {
-    //         $ajax({
-    //             type: 'post',
-    //             url: '/xsd/add',
-    //             data: JSON.stringify({
-    //                 addInfo: params
-    //             }),
-    //             dataType: 'json',
-    //             contentType: 'application/json;charset=utf-8'
-    //         }, false, '', function (res) {
-    //             if (res.code == 200) {
-    //                 swal("", res.msg, "success");
-    //                 $('#add-form')[0].reset();
-    //                 getList();
-    //                 $('#add-close-btn').click();
-    //             }
-    //         })
-    //     }
-    // });
+    $('#add-close-btn').click(function () {
+        $('#add-modal').modal('hide');
+    });
+
+    //新增弹窗里点击提交按钮
+    $("#add-submit-btn").click(function () {
+
+        var js = parseFloat(document.getElementById('add-js').value);
+        var zl = parseFloat(document.getElementById('add-zl').value);
+        var dj = parseFloat(document.getElementById('add-dj').value);
+        var je = js * zl * dj
+        document.getElementById("add-je").value = je
+
+        var js = parseFloat(document.getElementById('add-js').value);
+        var jgf = js * 0.5
+        document.getElementById("add-jgf").value = jgf
+        if (parseFloat(document.getElementById('add-sd').value) != 0 ){
+            var hsdj = parseFloat(document.getElementById('add-hsdj').value);
+            var sd = parseFloat(document.getElementById('add-sd').value);
+            var whsdj = hsdj / sd
+            document.getElementById("add-whsdj").value = whsdj
+        }
+
+        let params = formToJson("#add-form");
+        if (checkForm('#add-form')) {
+            $ajax({
+                type: 'post',
+                url: '/xsd/add',
+                data: JSON.stringify({
+                    addInfo: params
+                }),
+                dataType: 'json',
+                contentType: 'application/json;charset=utf-8'
+            }, false, '', function (res) {
+                if (res.code == 200) {
+                    swal("", res.msg, "success");
+                    $('#add-form')[0].reset();
+                    getList();
+                    $('#add-close-btn').click();
+                }
+            })
+        }
+    });
 
     //新增弹窗里点击暂存按钮
     $("#add-zancun-btn").click(function () {
@@ -182,6 +201,9 @@ $(function () {
         var dj = parseFloat(document.getElementById('add-dj').value);
         var je = js * zl * dj
         document.getElementById("add-je").value = je
+
+        var jgf = js * 0.5
+        document.getElementById("update-jgf").value = jgf
 
         if (parseFloat(document.getElementById('add-sd').value) != 0 ){
             var hsdj = parseFloat(document.getElementById('add-hsdj').value);
@@ -244,6 +266,22 @@ $(function () {
         $('#update-hsdj').val(rows[0].data.hsdj);
         $('#update-sd').val(rows[0].data.sd);
         $('#update-whsdj').val(rows[0].data.whsdj);
+
+        //未含税锁定
+        document.getElementById('update-sfhs').addEventListener('change', function() {
+            var selectedOption = this.value;
+            var textBoxes = document.querySelectorAll('input[type="text"]');
+            // 根据选择的option值锁定对应的文本框
+            if (selectedOption === '未含税') {
+                document.getElementById('update-hsdj').disabled = true;
+                document.getElementById('update-sd').disabled = true;
+                document.getElementById('update-whsdj').disabled = false;
+            }else{
+                document.getElementById('update-whsdj').disabled = true;
+                document.getElementById('update-hsdj').disabled = false;
+                document.getElementById('update-sd').disabled = false;
+            }
+        });
     });
 
     //修改弹窗点击关闭按钮
@@ -298,6 +336,8 @@ $(function () {
         var dj = parseFloat(document.getElementById('update-dj').value);
         var je = js * zl * dj
         document.getElementById("add-je").value = je
+        var jgf = js * 0.5
+        document.getElementById("update-jgf").value = jgf
 
         if (parseFloat(document.getElementById('update-sd').value) != 0 ){
             var hsdj = parseFloat(document.getElementById('update-hsdj').value);
@@ -362,6 +402,8 @@ $(function () {
         var dj = parseFloat(document.getElementById('update-dj').value);
         var je = js * zl * dj
         document.getElementById("update-je").value = je
+        var jgf = js * 0.5
+        document.getElementById("update-jgf").value = jgf
 
         if (parseFloat(document.getElementById('update-sd').value) != 0 ){
             var hsdj = parseFloat(document.getElementById('update-hsdj').value);

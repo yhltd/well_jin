@@ -1,31 +1,34 @@
 package com.example.demo.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.example.demo.entity.Kc;
 import com.example.demo.entity.Mx;
+import com.example.demo.entity.Qc;
 import com.example.demo.entity.Rk;
-import com.example.demo.entity.Yh;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public interface RkService extends IService<Rk> {
-
+public interface MxService extends IService<Mx> {
     /**
      * 查询所有
      */
-    List<Rk> getList();
-
+    List<Mx> getList();
     /**
-     * 根据姓名和部门查询
+     * 根据日期查询
      */
-    List<Rk> queryList(String ksrq,String jsrq);
+    List<Mx> queryList(String ksrq, String jsrq);
 
+    //增加
+    Mx add(Mx mx);
+
+    Mx add1(Mx mx);
     /**
      * 修改
      */
-    boolean update(Rk rk);
-
+//    boolean update(String mc,String js,String zl,String je,String danhao);
+    boolean update(Mx mx);
     /**
      * 删除
      *
@@ -34,13 +37,4 @@ public interface RkService extends IService<Rk> {
      */
     boolean delete(List<Integer> idList);
 
-    /**
-     * 添加
-     */
-    Rk add(Rk rk);
-    Rk add1(Rk rk);
-    /**
-     * 查询库存均价
-     */
-    List<Rk> getKcjj();
 }

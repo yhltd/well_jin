@@ -6,8 +6,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 @Data
-@TableName("ruku")
-public class Rk {
+@TableName("mingxi")
+public class Mx {
     /**
      * id自增列
      */
@@ -18,40 +18,54 @@ public class Rk {
      */
     private String riqi;
     /**
+     * 商品名称
+     */
+    private String mc;
+
+    /**
+     * 进货数量
+     */
+    private String rksl;
+
+    /**
+     * 进货单价
+     */
+    private String rkdj;
+    /**
+     * 进货质量
+     */
+    private String rkzl;
+    /**
+     * 进货总金额
+     */
+    private String zje;
+    /**
+     * 出库数量
+     */
+    private String js;
+    /**
+     * 出库单价
+     */
+    private String je;
+    /**
+     * 出库总金额
+     */
+    private String ckzje;
+    private  String zl;
+    /**
+     * 结存数量
+     */
+    private String kcsl;
+    /**
      * 公司名
      */
     private String gsm;
     /**
-     * 供应商
+     * 库存总金额
      */
-    private String gys;
-    /**
-     * 商品名称
-     */
-    private String mc;
-    /**
-     * 数量
-     */
-    private String rksl;
-    /**
-     * 单价
-     */
-    private String rkdj;
-    /**
-     * 重量
-     */
-    private String rkzl;
-    /**
-     * 总金额
-     */
-    private String zje;
-    /**
-     * 付款方式
-     */
-    private String fkfs;
-    /**
-     * 库存均价
-     */
-    private String kcjj;
+    private String kczje;
+
+    private String ziduan;
     private String danhao;
+
 }
