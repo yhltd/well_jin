@@ -189,6 +189,152 @@ $(function () {
     });
 
     //修改弹窗里点击提交按钮
+    $('#update-submit-btn').click(function () {
+        var msg = confirm("确认要修改吗？");
+
+        // var rksl = parseFloat(document.getElementById('update-rksl').value);
+        // var rkdj = parseFloat(document.getElementById('update-rkdj').value);
+        // var rkzl = parseFloat(document.getElementById('update-rkzl').value);
+        // var zje = rksl * rkdj * rkzl
+        // document.getElementById("update-zje").value = zje
+        // var d1 = document.getElementById('riqi').value;
+        // var d2 = document.getElementById('gsm').value;
+        // var d3 = document.getElementById('update-mc').value;
+        // var d4 = document.getElementById('update-rksl').value;
+        // var d5 = document.getElementById('update-rkdj').value;
+        // var d6 = document.getElementById('update-rkzl').value;
+        // var d7 = document.getElementById('zje').value;
+        // var d8 = document.getElementById('fkfs').value;
+        // var d9 = document.getElementById('gys').value;
+        // var  date = new Date();
+        // date.setMonth(date.getMonth()-3);
+        // var year = date.getFullYear();
+        // var month = ('0'+(date.getMonth()+1)).slice(-2);
+        // var day = ('0'+date.getDate()).slice(-2);
+        // const hours = date.getHours().toString().padStart(2, '0');
+        // const minutes = date.getMinutes().toString().padStart(2, '0');
+        // const seconds = date.getSeconds().toString().padStart(2, '0');
+        // var danhao =year+''+month+''+day+''+hours+''+minutes+seconds;
+        //  var danhao=document.getElementById("update-danhao").value ;
+
+        var rksl = parseFloat(document.getElementById('update-rksl').value);
+        var rkdj = parseFloat(document.getElementById('update-rkdj').value);
+        var rkzl = parseFloat(document.getElementById('update-rkzl').value);
+        // var zje = rksl * rkdj * rkzl
+        var zje = rksl * rkdj
+        document.getElementById("update-zje").value = zje
+
+        var d1 = document.getElementById('update-mc').value;
+        var d2 = document.getElementById('update-rksl').value;
+        var d3 = document.getElementById('update-zje').value;
+        var d4 = document.getElementById('update-rkzl').value;
+        var d5 = document.getElementById('update-danhao').value;
+        var d6 = document.getElementById('id').value;
+
+        if (msg) {
+            if (checkForm('#update-form')) {
+                let params = formToJson('#update-form');
+                $ajax({
+                    type: 'post',
+                    url: '/rk/update',
+                    data: {
+                        updateJson: JSON.stringify(params)
+                    },
+                    dataType: 'json',
+                    contentType: 'application/json;charset=utf-8'
+                }, false, '', function (res) {
+                    if (res.code == 200) {
+                        // $ajax({
+                        //     type: 'post',
+                        //     url: '/mx/update',
+                        //     data: {
+                        //         // riqi:d1,
+                        //         // gsm:d2,
+                        //         mc:d3,
+                        //         js:d4,
+                        //         je:d5,
+                        //         zl:d6,
+                        //         danhao:danhao,
+                        //         // zje:d7,
+                        //     },
+                        //     dataType: 'json',
+                        //     contentType: 'application/json;charset=utf-8'
+                        // }, false, '', function (res) {
+                        //     if (true) {
+                        //         swal("", res.msg, "success");
+                        //     } else {
+                        //         swal("", res.msg, "error");
+                        //     }
+                        // })
+                        swal("", res.msg, "success");
+                        // $('#update-close-btn').click();
+                        // $('#update-modal').modal('hide');
+                        // getList();
+                    } else {
+                        swal("", res.msg, "error");
+                    }
+                    // $('#update-close-btn').click();
+                    // $('#update-modal').modal('hide');
+
+                })
+                // $ajax({
+                //     type: 'post',
+                //     url: '/mx/update',
+                //     data: {
+                //         // riqi:d1,
+                //         // gsm:d2,
+                //         mc:d3,
+                //         js:d4,
+                //         je:d5,
+                //         zl:d6,
+                //         danhao:danhao,
+                //         // zje:d7,
+                //     },
+                //     dataType: 'json',
+                //     contentType: 'application/json;charset=utf-8'
+                // }, false, '', function (res) {
+                    // if (res.code==200) {
+                    //     swal("", res.msg, "success");
+                    //     $('#update-close-btn').click();
+                    //     $('#update-modal').modal('hide');
+                    //     getList();
+                    // } else {
+                    //     swal("", res.msg, "error");
+                    //     $('#update-close-btn').click();
+                    //     $('#update-modal').modal('hide');
+                    //     getList();
+                    // }
+                //     if (res.code == 200) {
+                //         swal("", res.msg, "success");
+                //         getList();
+                //     } else {
+                //         swal("", res.msg, "error");
+                //     }
+                // })
+// -----------
+                $ajax({
+                    type: 'post',
+                    url: '/mx/queryListMingxi',
+                    data: {
+                        danhao: d5,
+                        id: d6,
+                        mc: d1,
+                        rksl: d2,
+                        rkzl:d4,
+                        zje:d3,
+
+                    }
+                }, true, '', function (res) {
+                    if (res.code == 200) {
+                        // setTable(res.data);
+                        console.log(res.data)
+                        getList();
+                    }
+                })
+            }
+        }
+    });
+
     // $('#update-submit-btn').click(function () {
     //     var msg = confirm("确认要修改吗？");
     //
@@ -215,69 +361,70 @@ $(function () {
     //     // const minutes = date.getMinutes().toString().padStart(2, '0');
     //     // const seconds = date.getSeconds().toString().padStart(2, '0');
     //     // var danhao =year+''+month+''+day+''+hours+''+minutes+seconds;
-    //      var danhao=document.getElementById("update-danhao").value ;
+    //     var danhao=document.getElementById("update-danhao").value ;
     //     if (msg) {
     //         if (checkForm('#update-form')) {
     //             let params = formToJson('#update-form');
-    //             $ajax({
-    //                 type: 'post',
-    //                 url: '/rk/update',
-    //                 data: {
-    //                     updateJson: JSON.stringify(params)
-    //                 },
-    //                 dataType: 'json',
-    //                 contentType: 'application/json;charset=utf-8'
-    //             }, false, '', function (res) {
-    //                 if (res.code == 200) {
-    //                     // $ajax({
-    //                     //     type: 'post',
-    //                     //     url: '/mx/update',
-    //                     //     data: {
-    //                     //         // riqi:d1,
-    //                     //         // gsm:d2,
-    //                     //         mc:d3,
-    //                     //         js:d4,
-    //                     //         je:d5,
-    //                     //         zl:d6,
-    //                     //         danhao:danhao,
-    //                     //         // zje:d7,
-    //                     //     },
-    //                     //     dataType: 'json',
-    //                     //     contentType: 'application/json;charset=utf-8'
-    //                     // }, false, '', function (res) {
-    //                     //     if (true) {
-    //                     //         swal("", res.msg, "success");
-    //                     //     } else {
-    //                     //         swal("", res.msg, "error");
-    //                     //     }
-    //                     // })
-    //                     swal("", res.msg, "success");
-    //                     // $('#update-close-btn').click();
-    //                     // $('#update-modal').modal('hide');
-    //                     // getList();
-    //                 } else {
-    //                     swal("", res.msg, "error");
-    //                 }
-    //                 // $('#update-close-btn').click();
-    //                 // $('#update-modal').modal('hide');
-    //                 getList();
-    //             })
-    //             $ajax({
-    //                 type: 'post',
-    //                 url: '/mx/update',
-    //                 data: {
-    //                     // riqi:d1,
-    //                     // gsm:d2,
-    //                     mc:d3,
-    //                     js:d4,
-    //                     je:d5,
-    //                     zl:d6,
-    //                     danhao:danhao,
-    //                     // zje:d7,
-    //                 },
-    //                 dataType: 'json',
-    //                 contentType: 'application/json;charset=utf-8'
-    //             }, false, '', function (res) {
+    //             // $ajax({
+    //             //     type: 'post',
+    //             //     url: '/rk/update',
+    //             //     data: {
+    //             //         updateJson: JSON.stringify(params)
+    //             //     },
+    //             //     dataType: 'json',
+    //             //     contentType: 'application/json;charset=utf-8'
+    //             // }, false, '', function (res) {
+    //             //     if (res.code == 200) {
+    //             //         // $ajax({
+    //             //         //     type: 'post',
+    //             //         //     url: '/mx/update',
+    //             //         //     data: {
+    //             //         //         // riqi:d1,
+    //             //         //         // gsm:d2,
+    //             //         //         mc:d3,
+    //             //         //         js:d4,
+    //             //         //         je:d5,
+    //             //         //         zl:d6,
+    //             //         //         danhao:danhao,
+    //             //         //         // zje:d7,
+    //             //         //     },
+    //             //         //     dataType: 'json',
+    //             //         //     contentType: 'application/json;charset=utf-8'
+    //             //         // }, false, '', function (res) {
+    //             //         //     if (true) {
+    //             //         //         swal("", res.msg, "success");
+    //             //         //     } else {
+    //             //         //         swal("", res.msg, "error");
+    //             //         //     }
+    //             //         // })
+    //             //         swal("", res.msg, "success");
+    //             //         // $('#update-close-btn').click();
+    //             //         // $('#update-modal').modal('hide');
+    //             //         // getList();
+    //             //     } else {
+    //             //         swal("", res.msg, "error");
+    //             //     }
+    //             //     // $('#update-close-btn').click();
+    //             //     // $('#update-modal').modal('hide');
+    //             //     getList();
+    //             // })
+    //             // $ajax({
+    //             //     type: 'post',
+    //             //     url: '/mx/update',
+    //             //     data: {
+    //             //         // riqi:d1,
+    //             //         // gsm:d2,
+    //             //         mc:d3,
+    //             //         js:d4,
+    //             //         je:d5,
+    //             //         zl:d6,
+    //             //         danhao:danhao,
+    //             //         updateJson: JSON.stringify(d3,d4,d5,d6,danhao)
+    //             //         // zje:d7,
+    //             //     },
+    //             //     dataType: 'json',
+    //             //     contentType: 'application/json;charset=utf-8'
+    //             // }, false, '', function (res) {
     //                 // if (res.code==200) {
     //                 //     swal("", res.msg, "success");
     //                 //     $('#update-close-btn').click();
@@ -300,117 +447,43 @@ $(function () {
     //     }
     // });
 
-    $('#update-submit-btn').click(function () {
-        var msg = confirm("确认要修改吗？");
-
-        var rksl = parseFloat(document.getElementById('update-rksl').value);
-        var rkdj = parseFloat(document.getElementById('update-rkdj').value);
-        var rkzl = parseFloat(document.getElementById('update-rkzl').value);
-        var zje = rksl * rkdj * rkzl
-        document.getElementById("update-zje").value = zje
-        // var d1 = document.getElementById('riqi').value;
-        // var d2 = document.getElementById('gsm').value;
-        var d3 = document.getElementById('update-mc').value;
-        var d4 = document.getElementById('update-rksl').value;
-        var d5 = document.getElementById('update-rkdj').value;
-        var d6 = document.getElementById('update-rkzl').value;
-        // var d7 = document.getElementById('zje').value;
-        // var d8 = document.getElementById('fkfs').value;
-        // var d9 = document.getElementById('gys').value;
-        // var  date = new Date();
-        // date.setMonth(date.getMonth()-3);
-        // var year = date.getFullYear();
-        // var month = ('0'+(date.getMonth()+1)).slice(-2);
-        // var day = ('0'+date.getDate()).slice(-2);
-        // const hours = date.getHours().toString().padStart(2, '0');
-        // const minutes = date.getMinutes().toString().padStart(2, '0');
-        // const seconds = date.getSeconds().toString().padStart(2, '0');
-        // var danhao =year+''+month+''+day+''+hours+''+minutes+seconds;
-        var danhao=document.getElementById("update-danhao").value ;
-        if (msg) {
-            if (checkForm('#update-form')) {
-                let params = formToJson('#update-form');
-                // $ajax({
-                //     type: 'post',
-                //     url: '/rk/update',
-                //     data: {
-                //         updateJson: JSON.stringify(params)
-                //     },
-                //     dataType: 'json',
-                //     contentType: 'application/json;charset=utf-8'
-                // }, false, '', function (res) {
-                //     if (res.code == 200) {
-                //         // $ajax({
-                //         //     type: 'post',
-                //         //     url: '/mx/update',
-                //         //     data: {
-                //         //         // riqi:d1,
-                //         //         // gsm:d2,
-                //         //         mc:d3,
-                //         //         js:d4,
-                //         //         je:d5,
-                //         //         zl:d6,
-                //         //         danhao:danhao,
-                //         //         // zje:d7,
-                //         //     },
-                //         //     dataType: 'json',
-                //         //     contentType: 'application/json;charset=utf-8'
-                //         // }, false, '', function (res) {
-                //         //     if (true) {
-                //         //         swal("", res.msg, "success");
-                //         //     } else {
-                //         //         swal("", res.msg, "error");
-                //         //     }
-                //         // })
-                //         swal("", res.msg, "success");
-                //         // $('#update-close-btn').click();
-                //         // $('#update-modal').modal('hide');
-                //         // getList();
-                //     } else {
-                //         swal("", res.msg, "error");
-                //     }
-                //     // $('#update-close-btn').click();
-                //     // $('#update-modal').modal('hide');
-                //     getList();
-                // })
-                $ajax({
-                    type: 'post',
-                    url: '/mx/update',
-                    data: {
-                        // riqi:d1,
-                        // gsm:d2,
-                        mc:d3,
-                        js:d4,
-                        je:d5,
-                        zl:d6,
-                        danhao:danhao,
-                        updateJson: JSON.stringify(d3,d4,d5,d6,danhao)
-                        // zje:d7,
-                    },
-                    dataType: 'json',
-                    contentType: 'application/json;charset=utf-8'
-                }, false, '', function (res) {
-                    // if (res.code==200) {
-                    //     swal("", res.msg, "success");
-                    //     $('#update-close-btn').click();
-                    //     $('#update-modal').modal('hide');
-                    //     getList();
-                    // } else {
-                    //     swal("", res.msg, "error");
-                    //     $('#update-close-btn').click();
-                    //     $('#update-modal').modal('hide');
-                    //     getList();
-                    // }
-                    if (res.code == 200) {
-                        swal("", res.msg, "success");
-                        getList();
-                    } else {
-                        swal("", res.msg, "error");
-                    }
-                })
-            }
-        }
-    });
+    // $('#update-submit-btn').click(function () {
+    //     var rksl = parseFloat(document.getElementById('update-rksl').value);
+    //     var rkdj = parseFloat(document.getElementById('update-rkdj').value);
+    //     var rkzl = parseFloat(document.getElementById('update-rkzl').value);
+    //     // var zje = rksl * rkdj * rkzl
+    //     var zje = rksl * rkdj
+    //     document.getElementById("update-zje").value = zje
+    //
+    //     var d1 = document.getElementById('update-mc').value;
+    //     var d2 = document.getElementById('update-rksl').value;
+    //     var d3 = document.getElementById('update-zje').value;
+    //     var d4 = document.getElementById('update-rkzl').value;
+    //     var d5 = document.getElementById('update-danhao').value;
+    //     var d6 = document.getElementById('id').value;
+    //
+    //     var msg = confirm("确认保存吗？");
+    //     if (msg) {
+    //         $ajax({
+    //             type: 'post',
+    //             url: '/mx/queryListMingxi',
+    //             data: {
+    //                 danhao: d5,
+    //                 id: d6,
+    //                 mc: d1,
+    //                 rksl: d2,
+    //                 rkzl:d4,
+    //                 zje:d3,
+    //
+    //             }
+    //         }, true, '', function (res) {
+    //             if (res.code == 200) {
+    //                 // setTable(res.data);
+    //                 console.log(res.data)
+    //             }
+    //         })
+    //     }
+    // });
 
     //点击删除按钮
     $('#delete-btn').click(function () {

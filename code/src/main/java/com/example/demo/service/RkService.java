@@ -1,9 +1,7 @@
 package com.example.demo.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.example.demo.entity.Mx;
 import com.example.demo.entity.Rk;
-import com.example.demo.entity.Yh;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -43,4 +41,7 @@ public interface RkService extends IService<Rk> {
      * 查询库存均价
      */
     List<Rk> getKcjj();
+
+    boolean update1(Rk rk);
+
 }

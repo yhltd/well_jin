@@ -2,7 +2,6 @@ package com.example.demo.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.demo.entity.Khzl;
-import com.example.demo.entity.UserInfo;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -27,5 +26,7 @@ public interface KhzlMapper extends BaseMapper<Khzl> {
     @Insert("insert into kehuziliao(gsm,bh,lxr,lxdh,dz,sfhs,sfyj,qcye,tzkc,tkkc,ysje,kddsje) values(#{gsm},#{bh},#{lxr},#{lxdh},#{dz},#{sfhs},#{sfyj},#{qcye},#{tzkc},#{tkkc},#{ysje},#{kddsje})")
     boolean add(String gsm,String bh,String lxr,String lxdh,String dz,String sfhs,String sfyj,String qcye,String tzkc,String tkkc,String ysje,String kddsje);
 
+//    List<Khzl> hqxlGsm();
+    @Select("select gsm from kehuziliao")
     List<Khzl> hqxlGsm();
 }

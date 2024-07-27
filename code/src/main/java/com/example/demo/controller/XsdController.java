@@ -127,9 +127,12 @@ public class XsdController {
         if(!userInfo.getCaozuoquanxian().equals("可修改")){
             return ResultInfo.error(401, "无权限,请联系管理员");
         }
+
         try {
             Xsd xsd = GsonUtil.toEntity(gsonUtil.get("addInfo"), Xsd.class);
             xsd = xsdService.add1(xsd);
+            System.out.println(111);
+            System.out.println(xsd.getDh());
             if (StringUtils.isNotNull(xsd)) {
                 return ResultInfo.success("添加成功", xsd);
             } else {

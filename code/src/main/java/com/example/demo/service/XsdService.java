@@ -2,7 +2,6 @@ package com.example.demo.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.demo.entity.Xsd;
-import com.example.demo.entity.Yh;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -45,5 +44,7 @@ public interface XsdService extends IService<Xsd> {
     List<Xsd> getDj(String dj);
 
     List<Xsd> getListByShdw(String shdw,String dh,String riqi);
+
+    boolean update2(Xsd xsd);
 
 }

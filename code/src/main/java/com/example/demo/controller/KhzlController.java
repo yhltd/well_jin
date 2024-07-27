@@ -141,8 +141,8 @@ public class KhzlController {
     @RequestMapping("/hqxlGsm")
     public ResultInfo hqxlGsm() {
         try {
-            List<Khzl> getList = khzlService.hqxlGsm();
-            return ResultInfo.success("获取成功", getList);
+            List<Khzl> hqxlGsm = khzlService.hqxlGsm();
+            return ResultInfo.success("获取成功", hqxlGsm);
         } catch (Exception e) {
             e.printStackTrace();
             log.error("获取失败：{}", e.getMessage());

@@ -1,11 +1,8 @@
 package com.example.demo.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.demo.entity.Kc;
 import com.example.demo.entity.Mx;
-import com.example.demo.mapper.KcMapper;
 import com.example.demo.mapper.MxMapper;
-import com.example.demo.service.KcService;
 import com.example.demo.service.MxService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,11 +38,33 @@ public class MxImpl extends ServiceImpl<MxMapper, Mx> implements MxService {
 //    public boolean update(String mc,String js,String zl,String je,String danhao) {
 //        return mxMapper.update(mc,js,zl,je,danhao);
 //    }
+//    @Override
+//    public boolean update(Mx mx) { return updateById(mx); }
+
     @Override
-    public boolean update(Mx mx) { return updateById(mx); }
+    public boolean update1(Mx mx) { return updateById(mx); }
+
+    @Override
+    public boolean update2(Mx mx) { return updateById(mx); }
 
     @Override
     public boolean delete(List<Integer> idList) {
         return removeByIds(idList);
     }
+
+//    @Override
+//    public boolean deleteMingxi(String danhao) {
+//        return removeByIds(Collections.singleton(danhao));
+//    }
+
+    @Override
+    public List<Mx> queryListMingxi(String danhao) {
+        return mxMapper.queryListMingxi(danhao);
+    }
+
+    @Override
+    public List<Mx> queryListMingxi1(String danhao) {
+        return mxMapper.queryListMingxi1(danhao);
+    }
+
 }

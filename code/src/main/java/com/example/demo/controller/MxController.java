@@ -1,14 +1,16 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.*;
-import com.example.demo.service.KcService;
+import com.example.demo.entity.Mx;
+import com.example.demo.entity.UserInfo;
 import com.example.demo.service.MxService;
-import com.example.demo.util.*;
+import com.example.demo.util.GsonUtil;
+import com.example.demo.util.ResultInfo;
+import com.example.demo.util.SessionUtil;
+import com.example.demo.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
@@ -94,6 +96,8 @@ public class MxController {
         }
         try {
             Mx mx = GsonUtil.toEntity(gsonUtil.get("addInfo"), Mx.class);
+            System.out.println(99);
+            System.out.println(mx);
             mx = mxService.add1(mx);
             if (StringUtils.isNotNull(mx)) {
                 return ResultInfo.success("添加成功", mx);
@@ -126,28 +130,130 @@ public class MxController {
 //            return ResultInfo.error("修改失败");
 //        }
 //    }
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public ResultInfo update(String mc,String js,String zl,String je,String danhao, HttpSession session) {
+//    @RequestMapping(value = "/update", method = RequestMethod.POST)
+//    public ResultInfo update(String mc,String js,String zl,String je,String danhao,HttpSession session) {
+//        UserInfo userInfo = GsonUtil.toEntity(SessionUtil.getToken(session), UserInfo.class);
+//        System.out.println("------------");
+//        Mx mx = new Mx();
+//        mx.setMc(mc);
+//        mx.setJs(js);
+//        mx.setZl(zl);
+//        mx.setJe(je);
+//        mx.setDanhao(danhao);
+//        System.out.println("------------");
+//        System.out.println(mx.getDanhao());
+//        try {
+//            if (mxService.update(mx)) {
+//                return ResultInfo.success("修改成功", mx);
+//            } else {
+//                return ResultInfo.success("修改失败", mx);
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            log.error("修改失败：{}", e.getMessage());
+////            log.error("参数：{}", userInfo);
+//            return ResultInfo.error("修改失败");
+//        }
+//    }
+
+    /**
+     * 修改
+     */
+//    @RequestMapping(value = "/update1", method = RequestMethod.POST)
+//    public ResultInfo update1(int id,String mc,String js,String zl,String je,String danhao, HttpSession session) {
+////        UserInfo userInfo = GsonUtil.toEntity(SessionUtil.getToken(session), UserInfo.class);
+//        System.out.println(111);
+//        Mx mx = new Mx();
+//        mx.setMc(mc);
+//        mx.setJs(js);
+//        mx.setZl(zl);
+//        mx.setJe(je);
+//        mx.setDanhao(danhao);
+//        mx.setId(id);
+//        try {
+//            if (mxService.update1(mx)) {
+//                return ResultInfo.success("修改成功1", mx);
+//            } else {
+//                return ResultInfo.success("修改失败2", mx);
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            log.error("修改失败3：{}", e.getMessage());
+////            log.error("参数：{}", userInfo);
+//            return ResultInfo.error("修改失败4");
+//        }
+//    }
+
+//    @RequestMapping("/deleteMingxi")
+//    public ResultInfo deleteMingxi(@RequestBody String danhao,int id,String mc,String js,String zl,String je,HashMap map,HttpSession session) {
+//        UserInfo userInfo = GsonUtil.toEntity(SessionUtil.getToken(session), UserInfo.class);
+//        GsonUtil gsonUtil = new GsonUtil(GsonUtil.toJson(map));
+//        List<Integer> idList = GsonUtil.toList(gsonUtil.get("idList"), Integer.class);
+////        if(!userInfo.getCaozuoquanxian().equals("可修改")){
+////            return ResultInfo.error(401, "无权限,请联系管理员");
+////        }
+//        try {
+//            for(int i=0; i<idList.size(); i++){
+//                int this_id = idList.get(i);
+//                mxService.deleteMingxi(danhao);
+//            }
+//            return ResultInfo.success("删除成功", idList);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            log.error("删除失败：{}", e.getMessage());
+//            log.error("参数：{}", idList);
+//            return ResultInfo.error("删除失败");
+//        }
+//    }
+
+    @RequestMapping("/queryListMingxi")
+    public ResultInfo queryListMingxi(String danhao,int id,String mc,String rksl,String rkzl,String zje, HttpSession session) {
         UserInfo userInfo = GsonUtil.toEntity(SessionUtil.getToken(session), UserInfo.class);
-
-        Mx mx = new Mx();
-        mx.setMc(mc);
-        mx.setJs(js);
-        mx.setZl(zl);
-        mx.setJe(je);
-        mx.setDanhao(danhao);
-
+        System.out.println(11122);
         try {
-            if (mxService.update(mx)) {
-                return ResultInfo.success("修改成功", mx);
-            } else {
-                return ResultInfo.success("修改失败", mx);
-            }
+            List<Mx> list = mxService.queryListMingxi(danhao);
+            System.out.println(list.get(0).getId());
+            Mx mx = new Mx();
+            mx.setMc(mc);
+            mx.setRksl(rksl);
+            mx.setRkzl(rkzl);
+            mx.setZje(zje);
+            mx.setDanhao(danhao);
+//            mx.setId(list.toArray().id);
+            mx.setId(list.get(0).getId());
+//            System.out.println(list.get(0).getId());
+            mxService.update1(mx);
+            return ResultInfo.success("获取成功", list);
         } catch (Exception e) {
             e.printStackTrace();
-            log.error("修改失败：{}", e.getMessage());
-//            log.error("参数：{}", userInfo);
-            return ResultInfo.error("修改失败");
+            log.error("获取失败：{}", e.getMessage());
+            return ResultInfo.error("错误!");
+        }
+    }
+
+    @RequestMapping("/queryListMingxi1")
+    public ResultInfo queryListMingxi1(String danhao,int id,String mc,String js,String zl,String je,String dj, HttpSession session) {
+        UserInfo userInfo = GsonUtil.toEntity(SessionUtil.getToken(session), UserInfo.class);
+        System.out.println(11122333);
+        try {
+            List<Mx> list = mxService.queryListMingxi1(danhao);
+            System.out.println(list.get(0).getId());
+            Mx mx = new Mx();
+            mx.setMc(mc);
+            mx.setJs(js);
+            mx.setJe(je);
+            mx.setZl(zl);
+            mx.setDj(dj);
+            mx.setDanhao(danhao);
+//            mx.setId(list.toArray().id);
+            mx.setId(list.get(0).getId());
+//            System.out.println(list.get(0).getId());
+            mxService.update2(mx);
+            return ResultInfo.success("获取成功", list);
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("获取失败：{}", e.getMessage());
+            return ResultInfo.error("错误!");
         }
     }
 

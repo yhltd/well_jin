@@ -46,11 +46,11 @@ public class Mx {
     /**
      * 出库单价
      */
-    private String je;
+    private String dj;
     /**
      * 出库总金额
      */
-    private String ckzje;
+    private String je;
     private  String zl;
     /**
      * 结存数量

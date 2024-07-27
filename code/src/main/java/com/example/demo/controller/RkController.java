@@ -186,4 +186,29 @@ public class RkController {
         }
     }
 
+    @RequestMapping(value = "/update1", method = RequestMethod.POST)
+    public ResultInfo update1(int id,String mc,String rksl,String rkzl,String zje,String danhao, HttpSession session) {
+//        UserInfo userInfo = GsonUtil.toEntity(SessionUtil.getToken(session), UserInfo.class);
+        System.out.println(111);
+        Rk rk = new Rk();
+        rk.setMc(mc);
+        rk.setRksl(rksl);
+        rk.setRkzl(rkzl);
+        rk.setZje(zje);
+        rk.setDanhao(danhao);
+        rk.setId(id);
+        try {
+            if (rkService.update1(rk)) {
+                return ResultInfo.success("修改成功1", rk);
+            } else {
+                return ResultInfo.success("修改失败2", rk);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("修改失败3：{}", e.getMessage());
+//            log.error("参数：{}", userInfo);
+            return ResultInfo.error("修改失败4");
+        }
+    }
+
 }

@@ -2,11 +2,8 @@ package com.example.demo.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.demo.entity.Xsd;
-import com.example.demo.entity.Yh;
 import com.example.demo.mapper.XsdMapper;
-import com.example.demo.mapper.YhMapper;
 import com.example.demo.service.XsdService;
-import com.example.demo.service.YhService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,5 +47,8 @@ public class XsdImpl extends ServiceImpl<XsdMapper, Xsd> implements XsdService {
     public List<Xsd> getListByShdw(String shdw,String dh,String riqi) {
         return xsdMapper.getListByShdw(shdw,dh,riqi);
     }
+
+    @Override
+    public boolean update2(Xsd xsd) { return updateById(xsd); }
 
 }

@@ -63,7 +63,7 @@ function getList() {
                     var b = parseInt(rows[w].cells[20].innerHTML);
                     jgf = jgf+b
                 }
-                document.getElementById('jgf').value = jgf
+                document.getElementById('add-jgf').value = jgf
             }
             for (i=0;i<=res.data.id;i++){
                 idd=i;
@@ -182,6 +182,18 @@ $(function () {
             document.getElementById("add-whsdj").value = whsdj
         }
 
+        var  date = new Date();
+        date.setMonth(date.getMonth()-3);
+        var year = date.getFullYear();
+        var month = ('0'+(date.getMonth()+1)).slice(-2);
+        var day = ('0'+date.getDate()).slice(-2);
+        const hours = date.getHours().toString().padStart(2, '0');
+        const minutes = date.getMinutes().toString().padStart(2, '0');
+        const seconds = date.getSeconds().toString().padStart(2, '0');
+        var danhao =year+''+month+''+day+''+hours+''+minutes+seconds;
+        console.log(danhao)
+        document.getElementById("add-danhao").value = danhao;
+
         // var d1 = document.getElementById('mc').value;
         // var d2 = document.getElementById('dj').value;
         // var d3 = document.getElementById('je').value;
@@ -203,8 +215,8 @@ $(function () {
                         url: '/mx/add1',
                         data: JSON.stringify({
                             addInfo: params,
-                            cksl: js,
-                            ziduan:ziduan
+                            // cksl: js,
+                            // ziduan:ziduan
                         }),
                         dataType: 'json',
                         contentType: 'application/json;charset=utf-8'
@@ -327,13 +339,30 @@ $(function () {
     $('#update-submit-btn').click(function () {
         var msg = confirm("确认要修改吗？");
 
-        var js = parseFloat(document.getElementById('update-js').value);
-        var zl = parseFloat(document.getElementById('update-zl').value);
-        var dj = parseFloat(document.getElementById('update-dj').value);
-        var je = js * zl * dj
-        document.getElementById("update-je").value = je
+        // var js = parseFloat(document.getElementById('update-js').value);
+        // var zl = parseFloat(document.getElementById('update-zl').value);
+        // var dj = parseFloat(document.getElementById('update-dj').value);
+        // var je = js * zl * dj
+        // document.getElementById("update-je").value = je
         var jgf = js * 0.5
         document.getElementById("update-jgf").value = jgf
+
+// ---------------
+        var js = parseFloat(document.getElementById('update-js').value);
+        var dj = parseFloat(document.getElementById('update-dj').value);
+        var zl = parseFloat(document.getElementById('update-zl').value);
+        // var zje = rksl * rkdj * rkzl
+        var je = js * dj
+        document.getElementById("update-je").value = je
+
+        var d1 = document.getElementById('update-mc').value;
+        var d2 = document.getElementById('update-js').value;
+        var d3 = document.getElementById('update-je').value;
+        var d4 = document.getElementById('update-zl').value;
+        var d5 = document.getElementById('update-dh').value;
+        var d6 = document.getElementById('id').value;
+        var d7 = document.getElementById('update-dj').value;
+// -------------
 
         if (parseFloat(document.getElementById('update-sd').value) != 0 ){
             var hsdj = parseFloat(document.getElementById('update-hsdj').value);
@@ -357,16 +386,80 @@ $(function () {
                 }, false, '', function (res) {
                     if (res.code == 200) {
                         swal("", res.msg, "success");
-                        $('#update-close-btn').click();
-                        $('#update-modal').modal('hide');
-                        getList();
+                        // $('#update-close-btn').click();
+                        // $('#update-modal').modal('hide');
+                        // getList();
                     } else {
                         swal("", res.msg, "error");
                     }
                 })
+
+// -----------
+                $ajax({
+                    type: 'post',
+                    url: '/mx/queryListMingxi1',
+                    data: {
+                        dh: d5,
+                        id: d6,
+                        mc: d1,
+                        js: d2,
+                        zl:d4,
+                        je:d3,
+                        dj:d7,
+
+                    }
+                }, true, '', function (res) {
+                    if (res.code == 200) {
+                        // setTable(res.data);
+                        console.log(res.data)
+                        getList();
+                    }
+                })
+
             }
         }
     });
+
+    // $('#update-submit-btn').click(function () {
+    //
+    //     var js = parseFloat(document.getElementById('update-js').value);
+    //     var dj = parseFloat(document.getElementById('update-dj').value);
+    //     var zl = parseFloat(document.getElementById('update-zl').value);
+    //     // var zje = rksl * rkdj * rkzl
+    //     var je = js * dj
+    //     document.getElementById("update-je").value = je
+    //
+    //     var d1 = document.getElementById('update-mc').value;
+    //     var d2 = document.getElementById('update-js').value;
+    //     var d3 = document.getElementById('update-je').value;
+    //     var d4 = document.getElementById('update-zl').value;
+    //     var d5 = document.getElementById('update-dh').value;
+    //     var d6 = document.getElementById('id').value;
+    //     var d7 = document.getElementById('update-dj').value;
+    //
+    //     var msg = confirm("确认保存吗？");
+    //     if (msg) {
+    //         $ajax({
+    //             type: 'post',
+    //             url: '/mx/queryListMingxi1',
+    //             data: {
+    //                 dh: d5,
+    //                 id: d6,
+    //                 mc: d1,
+    //                 js: d2,
+    //                 zl:d4,
+    //                 je:d3,
+    //                 dj:d7,
+    //
+    //             }
+    //         }, true, '', function (res) {
+    //             if (res.code == 200) {
+    //                 // setTable(res.data);
+    //                 console.log(res.data)
+    //             }
+    //         })
+    //     }
+    // });
 
     //点击删除按钮
     $('#delete-btn').click(function () {
@@ -428,12 +521,6 @@ function setTable(data) {
                 formatter: function (value, row, index) {
                     return index + 1;
                 }
-            }, {
-                field: 'danhao',
-                title: '单号',
-                align: 'center',
-                sortable: true,
-                width: 150,
             }, {
                 field: 'riqi',
                 title: '日期',
@@ -583,6 +670,12 @@ function setTable(data) {
                 align: 'center',
                 sortable: true,
                 width: 130,
+            }, {
+                field: 'danhao',
+                title: '备注',
+                align: 'center',
+                sortable: true,
+                width: 150,
             }
         ],
         onClickRow: function (row, el) {

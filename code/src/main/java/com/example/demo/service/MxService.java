@@ -1,10 +1,7 @@
 package com.example.demo.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.example.demo.entity.Kc;
 import com.example.demo.entity.Mx;
-import com.example.demo.entity.Qc;
-import com.example.demo.entity.Rk;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,7 +25,11 @@ public interface MxService extends IService<Mx> {
      * 修改
      */
 //    boolean update(String mc,String js,String zl,String je,String danhao);
-    boolean update(Mx mx);
+//    boolean update(Mx mx);
+    boolean update1(Mx mx);
+
+    boolean update2(Mx mx);
+
     /**
      * 删除
      *
@@ -36,5 +37,11 @@ public interface MxService extends IService<Mx> {
      * @return 是否删除成功
      */
     boolean delete(List<Integer> idList);
+
+//    boolean deleteMingxi(String danhao);
+
+    List<Mx> queryListMingxi(String danhao);
+
+    List<Mx> queryListMingxi1(String danhao);
 
 }
