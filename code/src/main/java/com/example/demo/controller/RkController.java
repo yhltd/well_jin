@@ -47,7 +47,7 @@ public class RkController {
      * @return ResultInfo
      */
     @RequestMapping("/queryList")
-    public ResultInfo queryList(String ksrq,String jsrq, HttpSession session) {
+    public ResultInfo queryList(String ksrq,String jsrq,String mc, HttpSession session) {
         UserInfo userInfo = GsonUtil.toEntity(SessionUtil.getToken(session), UserInfo.class);
         if (ksrq.equals("")) {
             ksrq = "1900/1/1";
@@ -56,7 +56,7 @@ public class RkController {
             jsrq = "2200/1/1";
         }
         try {
-            List<Rk> list = rkService.queryList(ksrq,jsrq);
+            List<Rk> list = rkService.queryList(ksrq,jsrq,mc);
             return ResultInfo.success("获取成功", list);
         } catch (Exception e) {
             e.printStackTrace();

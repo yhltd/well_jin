@@ -12,7 +12,10 @@ import java.util.List;
 @Repository
 public interface KdgsdzdMapper extends BaseMapper<Kdgsdzd> {
 
-    @Select("select kd.drriqi,xsd.riqi,kd.drkhmc,xsd.shdw as khmc,kd.drdsje,xsd.je as dsje,kd.drkddh,xsd.dh as kddh,kd.drkdf,xsd.kdf from xiaoshoudan as xsd,kuaidigongsiduizhangdan as kd")
+//    @Select("select kd.drriqi,xsd.riqi,kd.drkhmc,xsd.shdw as khmc,kd.drdsje,xsd.je as dsje,kd.drkddh,xsd.dh as kddh,kd.drkdf,xsd.kdf from xiaoshoudan as xsd,kuaidigongsiduizhangdan as kd")
+//    List<Kdgsdzd> getList();
+
+    @Select("select * from kuaidigongsiduizhangdan ")
     List<Kdgsdzd> getList();
 
 //    @Select("select drriqi,drkhmc,drdsje,drkddh,drkdf from kuaidigongsiduizhangdan")

@@ -47,7 +47,7 @@ public class MxController {
      * @return ResultInfo
      */
     @RequestMapping("/queryList")
-    public ResultInfo queryList(String ksrq,String jsrq, HttpSession session) {
+    public ResultInfo queryList(String ksrq,String jsrq,String gsm, HttpSession session) {
         UserInfo userInfo = GsonUtil.toEntity(SessionUtil.getToken(session), UserInfo.class);
         if (ksrq.equals("")) {
             ksrq = "1900/1/1";
@@ -56,7 +56,7 @@ public class MxController {
             jsrq = "2200/1/1";
         }
         try {
-            List<Mx> list = mxService.queryList(ksrq,jsrq);
+            List<Mx> list = mxService.queryList(ksrq,jsrq,gsm);
             return ResultInfo.success("获取成功", list);
         } catch (Exception e) {
             e.printStackTrace();

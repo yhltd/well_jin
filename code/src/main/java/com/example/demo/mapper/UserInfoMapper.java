@@ -26,4 +26,6 @@ public interface UserInfoMapper extends BaseMapper<UserInfo> {
     @Insert("insert into userinfo(name,username,password,power,caozuoquanxian) values(#{name},#{username},#{password},#{power},#{caozuoquanxian})")
     boolean add(String name,String username,String password,String power,String caozuoquanxian);
 
+
+
 }

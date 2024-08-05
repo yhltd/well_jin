@@ -149,5 +149,17 @@ public class KhzlController {
             return ResultInfo.error("错误!");
         }
     }
+    @RequestMapping("/hqgd")
+    public ResultInfo hqgd(@RequestBody HashMap map,String shdw, HttpSession session) {
+        GsonUtil gsonUtil = new GsonUtil(GsonUtil.toJson(map));
+        try {
+            List<Khzl> hqgd = khzlService.hqgd(shdw);
+            return ResultInfo.success("获取成功", hqgd);
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("获取失败：{}", e.getMessage());
+            return ResultInfo.error("错误!");
+        }
+    }
 
 }

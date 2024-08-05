@@ -13,33 +13,40 @@ public class Ysyf {
      */
     @TableId(value = "id" , type = IdType.AUTO)
     private Integer id;
-    /**
-     * 日期
-     */
-    private String riqi;
+//    /**
+//     * 日期
+//     */
+//    private String riqi;
     /**
      * 公司名
      */
     private String gsm;
-    /**
-     * 品名
-     */
-    private String pm;
-    /**
-     * 重量
-     */
-    private String zl;
-    /**
-     * 单价
-     */
-    private String dj;
-    /**
-     * 金额
-     */
-    private String je;
-    /**
-     * 应收应付
-     */
-    private String ysyf;
+//    /**
+//     * 品名
+//     */
+//    private String pm;
+//    /**
+//     * 重量
+//     */
+//    private String zl;
+//    /**
+//     * 单价
+//     */
+//    private String dj;
+//    /**
+//     * 金额
+//     */
+//    private String je;
+//    /**
+//     * 应收应付
+//     */
+//    private String ysyf;
 
+    private String skje;
+
+    private String zys;
+
+    private String fkrq;
+
+    private String yf;
 }

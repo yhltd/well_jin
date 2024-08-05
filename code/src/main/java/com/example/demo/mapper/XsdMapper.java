@@ -14,8 +14,11 @@ public interface XsdMapper extends BaseMapper<Xsd> {
     @Select("select * from xiaoshoudan")
     List<Xsd> getList();
 
-    @Select("select * from xiaoshoudan where riqi >= convert(date,#{ksrq}) and riqi <= convert(date,#{jsrq})")
-    List<Xsd> queryList(String ksrq,String jsrq);
+
+
+
+    @Select("select * from xiaoshoudan where riqi >= convert(date,#{ksrq}) and riqi <= convert(date,#{jsrq}) and shdw = #{shdw}")
+    List<Xsd> queryList(String ksrq,String jsrq,String shdw);
 
     @Update("update xiaoshoudan set riqi = #{riqi},dh = #{dh},shdw = #{shdw},mc = #{mc},mh = #{mh},gg = #{gg},js = #{js},zl = #{zl},dj = #{dj},je = #{je},bz = #{bz},shdz = #{shdz},kddh = #{kddh},sfyj = #{sfyj},fkfs = #{fkfs},sfhs = #{sfhs},gd = #{gd},zdr = #{zdr},shdwjjsr = #{shdwjjsr},jgf = #{jgf},kdf = #{kdf},hsdj = #{hsdj},sd = #{sd},whsdj = #{whsdj} where id = #{id}")
     boolean update(String riqi,String dh,String shdw,String mc,String mh,String gg,String js,String zl,String dj,String je,String bz,String shdz,String kddh,String sfyj,String fkfs,String sfhs,String gd,String zdr,String shdwjjsr,String jgf,String kdf,String hsdj,String sd,String whsdj,int id);

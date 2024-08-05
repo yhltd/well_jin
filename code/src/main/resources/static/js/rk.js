@@ -1,4 +1,53 @@
 var idd;
+
+
+
+function getMc() {
+    $ajax({
+        type: 'post',
+        url: '/spmc/getList',
+    }, false, '', function (res) {
+        if (res.code == 200) {
+            for (var i = 0; i < res.data.length; i++) {
+                $("#add-mc").append("<option>" + res.data[i].mc + "</option>");
+                $("#update-mc").append("<option>" + res.data[i].mc + "</option>");
+            }
+        }
+    })
+}
+
+
+function getGsm() {
+    $ajax({
+        type: 'post',
+        url: '/khzl/hqxlGsm',
+    }, false, '', function (res) {
+        if (res.code == 200) {
+            for (var i = 0; i < res.data.length; i++) {
+                $("#add-gsm").append("<option>" + res.data[i].gsm + "</option>");
+                $("#update-gsm").append("<option>" + res.data[i].gsm + "</option>");
+            }
+        }
+    })
+}
+
+function getGys() {
+    $ajax({
+        type: 'post',
+        url: '/gyszl/getList',
+    }, false, '', function (res) {
+        if (res.code == 200) {
+            for (var i = 0; i < res.data.length; i++) {
+                $("#add-gys").append("<option>" + res.data[i].gsm + "</option>");
+                $("#update-gys").append("<option>" + res.data[i].gsm + "</option>");
+            }
+        }
+    })
+}
+
+
+
+
 function getList() {
     // $('#ksrq').val("");
     // $('#jsrq').val("");
@@ -37,8 +86,11 @@ function getList() {
 
 
 $(function () {
-    getList();
 
+    getList();
+    getMc();
+    getGsm();
+    getGys()
     var  date = new Date();
     date.setMonth(date.getMonth()-3);
     var year = date.getFullYear();
@@ -72,12 +124,14 @@ $(function () {
     $('#select-btn').click(function () {
         var ksrq = $('#ksrq').val();
         var jsrq = $('#jsrq').val();
+        var mc= $('#mc').val();
         $ajax({
             type: 'post',
             url: '/rk/queryList',
             data: {
                 ksrq: ksrq,
                 jsrq: jsrq,
+                mc:mc
             }
         }, true, '', function (res) {
             if (res.code == 200) {
@@ -93,6 +147,7 @@ $(function () {
 
     //点击新增按钮显示弹窗
     $("#add-btn").click(function () {
+
         $('#add-modal').modal('show');
     });
 
@@ -163,6 +218,7 @@ $(function () {
 
     //点击修改按钮显示弹窗
     $('#update-btn').click(function () {
+
         let rows = getTableSelection('#rkTable');
         if (rows.length > 1 || rows.length == 0) {
             swal('请选择一条数据修改!');
@@ -173,7 +229,7 @@ $(function () {
         $('#update-riqi').val(rows[0].data.riqi);
         $('#update-gsm').val(rows[0].data.gsm);
         $('#update-gys').val(rows[0].data.gys);
-        $('#update-spmc').val(rows[0].data.spmc);
+        $('#update-mc').val(rows[0].data.spmc);
         $('#update-rksl').val(rows[0].data.rksl);
         $('#update-rkdj').val(rows[0].data.rkdj);
         $('#update-rkzl').val(rows[0].data.rkzl);

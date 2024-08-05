@@ -15,6 +15,20 @@ function getGsm() {
     })
 }
 
+
+function getMc() {
+    $ajax({
+        type: 'post',
+        url: '/spmc/getList',
+    }, false, '', function (res) {
+        if (res.code == 200) {
+            for (var i = 0; i < res.data.length; i++) {
+                $("#add-mc").append("<option>" + res.data[i].mc + "</option>");
+                $("#update-mc").append("<option>" + res.data[i].mc + "</option>");
+            }
+        }
+    })
+}
 function getList() {
     // $('#ksrq').val("");
     // $('#jsrq').val("");
@@ -66,7 +80,7 @@ function getList() {
 $(function () {
     getList();
     getGsm();
-
+    getMc();
     var date = new Date();
     date.setMonth(date.getMonth()-3);
     var year = date.getFullYear();
@@ -162,9 +176,9 @@ $(function () {
         var je = js * zl * dj
         document.getElementById("add-je").value = je
 
-        var js = parseFloat(document.getElementById('add-js').value);
-        var jgf = js * 0.5
-        document.getElementById("add-jgf").value = jgf
+        // var js = parseFloat(document.getElementById('add-js').value);
+        // var jgf = js * 0.5
+        // document.getElementById("add-jgf").value = jgf
         if (parseFloat(document.getElementById('add-sd').value) != 0 ){
             var hsdj = parseFloat(document.getElementById('add-hsdj').value);
             var sd = parseFloat(document.getElementById('add-sd').value);

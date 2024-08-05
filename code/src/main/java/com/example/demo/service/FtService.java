@@ -18,7 +18,7 @@ public interface FtService extends IService<Ft> {
     /**
      * 根据姓名和部门查询
      */
-    List<Ft> queryList(String ksrq,String jsrq);
+    List<Ft> queryList(String ksrq,String jsrq,String khmc);
 
     /**
      * 修改

@@ -73,12 +73,14 @@ $(function () {
     $('#select-btn').click(function () {
         var ksrq = $('#ksrq').val();
         var jsrq = $('#jsrq').val();
+        var gsm = $('#gsm').val();
         $ajax({
             type: 'post',
             url: '/mx/queryList',
             data: {
                 ksrq: ksrq,
                 jsrq: jsrq,
+                gsm:gsm
             }
         }, true, '', function (res) {
             if (res.code == 200) {

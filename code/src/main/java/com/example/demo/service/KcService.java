@@ -41,4 +41,7 @@ public interface KcService extends IService<Kc> {
      * 添加
      */
     Kc add(Kc kc);
+
+    List<Kc> hqxlMc();
+
 }

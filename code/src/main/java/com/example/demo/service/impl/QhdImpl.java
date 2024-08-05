@@ -21,8 +21,8 @@ public class QhdImpl extends ServiceImpl<QhdMapper, Qhd> implements QhdService {
     public List<Qhd> getList() {return qhdMapper.getList();}
 
     @Override
-    public List<Qhd> queryList(String ksrq,String jsrq) {
-        return qhdMapper.queryList(ksrq,jsrq);
+    public List<Qhd> queryList(String ksrq,String jsrq,String gsm) {
+        return qhdMapper.queryList(ksrq,jsrq,gsm);
     }
 
     @Override
@@ -33,7 +33,9 @@ public class QhdImpl extends ServiceImpl<QhdMapper, Qhd> implements QhdService {
         return removeByIds(idList);
     }
 
-    @Override
-    public Qhd add(Qhd qhd) { return save(qhd) ? qhd : null; }
+//    @Override
+//    public Qhd add(Qhd qhd) { return save(qhd) ? qhd : null; }
 
+    @Override
+    public boolean add1(String riqi,String gsm,String ysje,String bz,String bh) { return qhdMapper.add1(riqi,gsm,ysje,bz,bh); }
 }

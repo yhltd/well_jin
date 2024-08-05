@@ -20,8 +20,8 @@ public class RkImpl extends ServiceImpl<RkMapper, Rk> implements RkService {
     }
 
     @Override
-    public List<Rk> queryList(String ksrq,String jsrq) {
-        return rkMapper.queryList(ksrq,jsrq);
+    public List<Rk> queryList(String ksrq,String jsrq,String mc) {
+        return rkMapper.queryList(ksrq,jsrq,mc);
     }
 
     @Override

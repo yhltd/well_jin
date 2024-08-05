@@ -79,11 +79,11 @@
             刷新
         </button>
         <span style="border-right: 20px solid white"></span>
-        <button id="add-btn" class="btn btn-primary" style="border-radius:5px;">
-            <i class="bi bi-plus-square icon"></i>
-            新增
-        </button>
-        <span style="border-right: 20px solid white"></span>
+<!--        <button id="add-btn" class="btn btn-primary" style="border-radius:5px;">-->
+<!--            <i class="bi bi-plus-square icon"></i>-->
+<!--            新增-->
+<!--        </button>-->
+<!--        <span style="border-right: 20px solid white"></span>-->
         <button id="update-btn" class="btn btn-primary" style="border-radius:5px;">
             <i class="bi bi-pencil-square icon"></i>
             修改
@@ -147,10 +147,13 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="add-mc">名称</label>
-                                <input id="add-mc" name="mc" type="text" class="form-control" autocomplete="off" data-required="1">
-                                <div class="invalid-feedback">
-                                    请输入名称！
-                                </div>
+                                <select id="add-mc" name="mc" class="form-control">
+                                    <option>--请选择--</option>
+                                </select>
+<!--                                <input id="add-mc" name="mc" type="text" class="form-control" autocomplete="off" data-required="1">-->
+<!--                                <div class="invalid-feedback">-->
+<!--                                    请输入名称！-->
+<!--                                </div>-->
                             </div>
                         </div>
                         <div class="col-6">
@@ -408,19 +411,25 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="update-shdw">收货单位</label>
-                                <input id="update-shdw" name="shdw" type="text" class="form-control" autocomplete="off" data-required="1">
-                                <div class="invalid-feedback">
-                                    请输入收货单位！
-                                </div>
+                                <select id="update-shdw" name="shdw" class="form-control">
+                                    <option>--请选择--</option>
+                                </select>
+<!--                                <input id="update-shdw" name="shdw" type="text" class="form-control" autocomplete="off" data-required="1">-->
+<!--                                <div class="invalid-feedback">-->
+<!--                                    请输入收货单位！-->
+<!--                                </div>-->
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="update-mc">名称</label>
-                                <input id="update-mc" name="mc" type="text" class="form-control" autocomplete="off" data-required="1">
-                                <div class="invalid-feedback">
-                                    请输入名称！
-                                </div>
+                                <select id="update-mc" name="mc" class="form-control">
+                                    <option>--请选择--</option>
+                                </select>
+<!--                                <input id="update-mc" name="mc" type="text" class="form-control" autocomplete="off" data-required="1">-->
+<!--                                <div class="invalid-feedback">-->
+<!--                                    请输入名称！-->
+<!--                                </div>-->
                             </div>
                         </div>
                         <div class="col-6">

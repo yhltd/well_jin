@@ -180,4 +180,16 @@ public class KcController {
     }
 
 
+    @RequestMapping("/hqxlMc")
+    public ResultInfo hqxlMc() {
+        try {
+            List<Kc> hqxlMc = kcService.hqxlMc();
+            return ResultInfo.success("获取成功", hqxlMc);
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("获取失败：{}", e.getMessage());
+            return ResultInfo.error("错误!");
+        }
+    }
+
 }

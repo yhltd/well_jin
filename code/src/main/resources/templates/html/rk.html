@@ -60,6 +60,9 @@
     <div class="col-md-3 mb-2">
         <input id="jsrq" type="date" class="form-control" placeholder="结束日期" autocomplete="off">
     </div>
+    <div class="col-md-3 mb-2">
+        <input id="mc" type="text" class="form-control" placeholder="商品名称" autocomplete="off">
+    </div>
     <div class="col-md-2 mb-2">
         <button id="select-btn" class="btn" style="background-color: limegreen;color: white">
             <i class="bi bi-search icon"></i>
@@ -123,28 +126,38 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="add-gsm">公司名</label>
-                                <input id="add-gsm" name="gsm" type="text" class="form-control" autocomplete="off">
-                                <div class="invalid-feedback">
-                                    请输入公司名！
-                                </div>
+                                <select id="add-gsm" name="gsm" class="form-control">
+                                    <option>--请选择--</option>
+                                </select>
+<!--                                <input id="add-gsm" name="gsm" type="text" class="form-control" autocomplete="off">-->
+<!--                                <div class="invalid-feedback">-->
+<!--                                    请输入公司名！-->
+<!--                                </div>-->
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="add-gys">供应商</label>
-                                <input id="add-gys" name="gys" type="text" class="form-control" autocomplete="off">
-                                <div class="invalid-feedback">
-                                    请输入供应商！
-                                </div>
+                                <select id="add-gys" name="gys" class="form-control">
+                                    <option>--请选择--</option>
+                                </select>
+
+<!--                                <input id="add-gys" name="gys" type="text" class="form-control" autocomplete="off">-->
+<!--                                <div class="invalid-feedback">-->
+<!--                                    请输入供应商！-->
+<!--                                </div>-->
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="add-mc">商品名称</label>
-                                <input id="add-mc" name="mc" type="text" class="form-control" autocomplete="off">
-                                <div class="invalid-feedback">
-                                    请输入商品名称！
-                                </div>
+                                <select id="add-mc" name="mc" class="form-control">
+                                    <option>--请选择--</option>
+                                </select>
+<!--                                <input id="add-mc" name="mc" type="text" class="form-control" autocomplete="off">-->
+<!--                                <div class="invalid-feedback">-->
+<!--                                    请输入商品名称！-->
+<!--                                </div>-->
                             </div>
                         </div>
                         <div class="col-6">
@@ -258,19 +271,27 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="update-gys">供应商</label>
-                                <input id="update-gys" name="gys" type="text" class="form-control" autocomplete="off">
-                                <div class="invalid-feedback">
-                                    请输入供应商！
-                                </div>
+                                <select id="update-gys" name="gys" class="form-control">
+                                    <option>--请选择--</option>
+                                </select>
+
+
+<!--                                <input id="update-gys" name="gys" type="text" class="form-control" autocomplete="off">-->
+<!--                                <div class="invalid-feedback">-->
+<!--                                    请输入供应商！-->
+<!--                                </div>-->
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="update-mc">商品名称</label>
-                                <input id="update-mc" name="mc" type="text" class="form-control" autocomplete="off">
-                                <div class="invalid-feedback">
-                                    请输入商品名称！
-                                </div>
+                                <select id="update-mc" name="mc" class="form-control">
+                                    <option>--请选择--</option>
+                                </select>
+<!--                                <input id="update-mc" name="mc" type="text" class="form-control" autocomplete="off">-->
+<!--                                <div class="invalid-feedback">-->
+<!--                                    请输入商品名称！-->
+<!--                                </div>-->
                             </div>
                         </div>
                         <div class="col-6">

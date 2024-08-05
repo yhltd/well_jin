@@ -3,39 +3,32 @@ package com.example.demo.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.demo.entity.Yh;
 import com.example.demo.entity.Ysyf;
+import com.example.demo.entity.Yszkmxb;
 import com.example.demo.mapper.YhMapper;
 import com.example.demo.mapper.YsyfMapper;
+import com.example.demo.mapper.YszkmxbMapper;
 import com.example.demo.service.YhService;
 import com.example.demo.service.YsyfService;
+import com.example.demo.service.YszkmxbService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class YsyfImpl extends ServiceImpl<YsyfMapper, Ysyf> implements YsyfService {
+public class YszkmxbImpl extends ServiceImpl<YszkmxbMapper, Yszkmxb> implements YszkmxbService {
     @Autowired
-    YsyfMapper ysyfMapper;
+   YszkmxbMapper yszkmxbMapper;
 
     @Override
-    public List<Ysyf> getList() {
-        return ysyfMapper.getList();
+    public List<Yszkmxb> getList() {
+        return yszkmxbMapper.getList();
+    }
+    @Override
+    public List<Yszkmxb> getList1() {
+        return yszkmxbMapper.getList1();
     }
 
     @Override
-    public List<Ysyf> queryList(String ksrq,String jsrq,String gsm) {
-        return ysyfMapper.queryList(ksrq,jsrq,gsm);
-    }
-
-    @Override
-    public boolean update(Ysyf ysyf) { return updateById(ysyf); }
-
-    @Override
-    public boolean delete(List<Integer> idList) {
-        return removeByIds(idList);
-    }
-
-    @Override
-    public Ysyf add(Ysyf ysyf) { return save(ysyf) ? ysyf : null; }
-
+    public Yszkmxb add(Yszkmxb yszkmxb) { return save(yszkmxb) ? yszkmxb : null; }
 }

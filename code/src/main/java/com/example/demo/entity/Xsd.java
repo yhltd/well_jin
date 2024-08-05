@@ -109,4 +109,8 @@ public class Xsd {
      * 未含税单价
      */
     private String whsdj;
+
+    private String hjje;
+
+    private String bzld;
 }

@@ -1,7 +1,12 @@
 package com.example.demo.controller;
 
+import com.example.demo.entity.Cgx;
+import com.example.demo.entity.Khzl;
 import com.example.demo.entity.UserInfo;
 import com.example.demo.entity.Xsd;
+import com.example.demo.service.CgxService;
+import com.example.demo.service.KhzlService;
+import com.example.demo.service.QhdService;
 import com.example.demo.service.XsdService;
 import com.example.demo.util.*;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +29,12 @@ import java.util.List;
 public class XsdController {
     @Autowired
     private XsdService xsdService;
-
+    @Autowired
+    private CgxService cgxService;
+    @Autowired
+    private KhzlService khzlService;
+    @Autowired
+    private QhdService qhdService;
     /**
      * 查询所有
      *
@@ -49,7 +59,7 @@ public class XsdController {
      * @return ResultInfo
      */
     @RequestMapping("/queryList")
-    public ResultInfo queryList(String ksrq,String jsrq, HttpSession session) {
+    public ResultInfo queryList(String ksrq, String jsrq, String shdw,HttpSession session) {
         UserInfo userInfo = GsonUtil.toEntity(SessionUtil.getToken(session), UserInfo.class);
         if (ksrq.equals("")) {
             ksrq = "1900/1/1";
@@ -58,7 +68,7 @@ public class XsdController {
             jsrq = "2200/1/1";
         }
         try {
-            List<Xsd> list = xsdService.queryList(ksrq,jsrq);
+            List<Xsd> list = xsdService.queryList(ksrq, jsrq,shdw);
             return ResultInfo.success("获取成功", list);
         } catch (Exception e) {
             e.printStackTrace();
@@ -73,16 +83,25 @@ public class XsdController {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public ResultInfo update(@RequestBody String updateJson, HttpSession session) {
         UserInfo userInfo = GsonUtil.toEntity(SessionUtil.getToken(session), UserInfo.class);
-        if(!userInfo.getCaozuoquanxian().equals("可修改")){
+        if (!userInfo.getCaozuoquanxian().equals("可修改")) {
             return ResultInfo.error(401, "无权限,请联系管理员");
         }
         Xsd xsd = null;
         try {
             xsd = DecodeUtil.decodeToJson(updateJson, Xsd.class);
-            if (xsdService.update(xsd)) {
-                return ResultInfo.success("修改成功", xsd);
-            } else {
-                return ResultInfo.success("修改失败", xsd);
+            if(xsd.getFkfs().equals("签回单")){
+                qhdService.add1(xsd.getRiqi(),xsd.getShdw(),xsd.getHjje(),xsd.getBz(),xsd.getDh());
+                if (xsdService.update(xsd)) {
+                    return ResultInfo.success("修改成功", xsd);
+                } else {
+                    return ResultInfo.success("修改失败", xsd);
+                }
+            }else {
+                if (xsdService.update(xsd)) {
+                    return ResultInfo.success("修改成功", xsd);
+                } else {
+                    return ResultInfo.success("修改失败", xsd);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -99,17 +118,106 @@ public class XsdController {
     public ResultInfo add(@RequestBody HashMap map, HttpSession session) {
         UserInfo userInfo = GsonUtil.toEntity(SessionUtil.getToken(session), UserInfo.class);
         GsonUtil gsonUtil = new GsonUtil(GsonUtil.toJson(map));
-        if(!userInfo.getCaozuoquanxian().equals("可修改")){
-            return ResultInfo.error(401, "无权限,请联系管理员");
-        }
+//        if(!userInfo.getCaozuoquanxian().equals("可修改")){
+//            return ResultInfo.error(401, "无权限,请联系管理员");
+//        }
+
         try {
             Xsd xsd = GsonUtil.toEntity(gsonUtil.get("addInfo"), Xsd.class);
-            xsd = xsdService.add(xsd);
-            if (StringUtils.isNotNull(xsd)) {
-                return ResultInfo.success("添加成功", xsd);
+            if (userInfo.getPower().equals("管理员")) {
+                if (xsd.getMc().equals("换铜块")) {
+                    int jzl = Integer.parseInt(xsd.getZl());
+                    int yzl = Integer.parseInt(khzlService.gettkkc(xsd.getShdw()));
+                    int xzl = yzl - jzl;
+                    String tkkc = Integer.toString(xzl);
+                    khzlService.tkkc(tkkc, xsd.getShdw());
+                    if(xsd.getFkfs().equals("签回单")){
+                    qhdService.add1(xsd.getRiqi(),xsd.getShdw(),xsd.getHjje(),xsd.getBz(),xsd.getDh());
+                        xsd = xsdService.add(xsd);
+                    }
+
+                    if (StringUtils.isNotNull(xsd)) {
+                        return ResultInfo.success("添加成功", xsd);
+                    } else {
+                        return ResultInfo.success("添加失败", null);
+                    }
+                } else if (xsd.getMc().equals("换铜渣")) {
+
+                    int jzl = Integer.parseInt(xsd.getZl());
+                    int yzl = Integer.parseInt(khzlService.gettzkc(xsd.getShdw()));
+                    int xzl = yzl - jzl;
+                    String tzkc = Integer.toString(xzl);
+                    khzlService.tzkc(tzkc, xsd.getShdw());
+                    if(xsd.getFkfs().equals("签回单")){
+                        qhdService.add1(xsd.getRiqi(),xsd.getShdw(),xsd.getHjje(),xsd.getBz(),xsd.getDh());
+                        xsd = xsdService.add(xsd);
+                    }
+
+                    if (StringUtils.isNotNull(xsd)) {
+                        return ResultInfo.success("添加成功", xsd);
+                    } else {
+                        return ResultInfo.success("添加失败", null);
+                    }
+
+                } else if (xsd.getDj().equals("")) {
+                    if (xsd.getMc().equals("回收铜块")) {
+                        int jzl = Integer.parseInt(xsd.getZl());
+                        int yzl = Integer.parseInt(khzlService.gettkkc(xsd.getShdw()));
+                        int xzl = yzl + jzl;
+                        String tkkc = Integer.toString(xzl);
+                        khzlService.tkkc(tkkc, xsd.getShdw());
+                        if(xsd.getFkfs().equals("签回单")){
+                            qhdService.add1(xsd.getRiqi(),xsd.getShdw(),xsd.getHjje(),xsd.getBz(),xsd.getDh());
+                            xsd = xsdService.add(xsd);
+                        }
+                        if (StringUtils.isNotNull(xsd)) {
+                            return ResultInfo.success("添加成功", xsd);
+                        } else {
+                            return ResultInfo.success("添加失败", null);
+                        }
+
+                    } else if (xsd.getMc().equals("回收铜渣")) {
+                        int jzl = Integer.parseInt(xsd.getZl());
+                        int yzl = Integer.parseInt(khzlService.gettzkc(xsd.getShdw()));
+                        int xzl = yzl + jzl;
+                        String tzkc = Integer.toString(xzl);
+                        khzlService.tzkc(tzkc, xsd.getShdw());
+                        if(xsd.getFkfs().equals("签回单")){
+                            qhdService.add1(xsd.getRiqi(),xsd.getShdw(),xsd.getHjje(),xsd.getBz(),xsd.getDh());
+                            xsd = xsdService.add(xsd);
+                        }
+
+                        if (StringUtils.isNotNull(xsd)) {
+                            return ResultInfo.success("添加成功", xsd);
+                        } else {
+                            return ResultInfo.success("添加失败", null);
+                        }
+
+                    }
+                } else {
+                    if(xsd.getFkfs().equals("签回单")){
+                        qhdService.add1(xsd.getRiqi(),xsd.getShdw(),xsd.getHjje(),xsd.getBz(),xsd.getDh());
+                        xsd = xsdService.add(xsd);
+                    }
+
+                    if (StringUtils.isNotNull(xsd)) {
+                        return ResultInfo.success("添加成功", xsd);
+                    } else {
+                        return ResultInfo.success("添加失败", null);
+                    }
+
+                }
             } else {
-                return ResultInfo.success("添加失败", null);
+                Cgx cgx = GsonUtil.toEntity(gsonUtil.get("addInfo"), Cgx.class);
+                cgx = cgxService.add(cgx);
+                if (StringUtils.isNotNull(cgx)) {
+                    return ResultInfo.success("权限不足，已添加至草稿箱", cgx);
+                } else {
+                    return ResultInfo.success("添加失败", null);
+                }
             }
+            return ResultInfo.success(xsd);
+
         } catch (Exception e) {
             e.printStackTrace();
             log.error("添加失败：{}", e.getMessage());
@@ -117,6 +225,7 @@ public class XsdController {
             return ResultInfo.error("添加失败");
         }
     }
+
     /**
      * 添加
      */
@@ -124,7 +233,7 @@ public class XsdController {
     public ResultInfo add1(@RequestBody HashMap map, HttpSession session) {
         UserInfo userInfo = GsonUtil.toEntity(SessionUtil.getToken(session), UserInfo.class);
         GsonUtil gsonUtil = new GsonUtil(GsonUtil.toJson(map));
-        if(!userInfo.getCaozuoquanxian().equals("可修改")){
+        if (!userInfo.getCaozuoquanxian().equals("可修改")) {
             return ResultInfo.error(401, "无权限,请联系管理员");
         }
 
@@ -145,6 +254,7 @@ public class XsdController {
             return ResultInfo.error("添加失败");
         }
     }
+
     /**
      * 删除
      *
@@ -152,15 +262,15 @@ public class XsdController {
      * @return ResultInfo
      */
     @RequestMapping("/delete")
-    public ResultInfo delete(@RequestBody HashMap map,HttpSession session) {
+    public ResultInfo delete(@RequestBody HashMap map, HttpSession session) {
         UserInfo userInfo = GsonUtil.toEntity(SessionUtil.getToken(session), UserInfo.class);
         GsonUtil gsonUtil = new GsonUtil(GsonUtil.toJson(map));
         List<Integer> idList = GsonUtil.toList(gsonUtil.get("idList"), Integer.class);
-        if(!userInfo.getCaozuoquanxian().equals("可修改")){
+        if (!userInfo.getCaozuoquanxian().equals("可修改")) {
             return ResultInfo.error(401, "无权限,请联系管理员");
         }
         try {
-            for(int i=0; i<idList.size(); i++){
+            for (int i = 0; i < idList.size(); i++) {
                 int this_id = idList.get(i);
                 xsdService.delete(Collections.singletonList(this_id));
             }
@@ -201,11 +311,11 @@ public class XsdController {
         try {
             GsonUtil gsonUtil = new GsonUtil(GsonUtil.toJson(map));
             List<Xsd> nlist = GsonUtil.toList(gsonUtil.get("list"), Xsd.class);
-            List<Xsd> list=new ArrayList<>();
-            if(nlist != null){
-                list= xsdService.getListByShdw(nlist.get(0).getShdw(),nlist.get(0).getDh(),nlist.get(0).getRiqi());
+            List<Xsd> list = new ArrayList<>();
+            if (nlist != null) {
+                list = xsdService.getListByShdw(nlist.get(0).getShdw(), nlist.get(0).getDh(), nlist.get(0).getRiqi());
             }
-            return ResultInfo.success("成功！",list);
+            return ResultInfo.success("成功！", list);
         } catch (Exception e) {
             e.printStackTrace();
             log.error("失败：{}", e.getMessage());

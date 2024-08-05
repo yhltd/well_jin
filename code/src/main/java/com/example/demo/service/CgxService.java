@@ -38,6 +38,8 @@ public interface CgxService extends IService<Cgx> {
      */
     Cgx add(Cgx cgx);
 
+    List<Cgx> getListByShdw(String shdw,String dh,String riqi);
+
     /**
      * 获取当天销售单单价
      */

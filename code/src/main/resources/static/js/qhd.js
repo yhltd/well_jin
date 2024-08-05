@@ -62,12 +62,14 @@ $(function () {
     $('#select-btn').click(function () {
         var ksrq = $('#ksrq').val();
         var jsrq = $('#jsrq').val();
+        var gsm = $('#gsm').val();
         $ajax({
             type: 'post',
             url: '/qhd/queryList',
             data: {
                 ksrq: ksrq,
                 jsrq: jsrq,
+                gsm:gsm,
             }
         }, true, '', function (res) {
             if (res.code == 200) {
@@ -232,11 +234,17 @@ function setTable(data) {
                     return index + 1;
                 }
             }, {
-                field: 'riqi',
-                title: '日期',
+                field: 'bh',
+                title: '编号',
                 align: 'center',
                 sortable: true,
                 width: 80,
+            }, {
+                field: 'ysje',
+                title: '应收金额',
+                align: 'center',
+                sortable: true,
+                width: 150,
             }, {
                 field: 'gsm',
                 title: '公司名',
@@ -244,26 +252,14 @@ function setTable(data) {
                 sortable: true,
                 width: 150,
             }, {
-                field: 'pm',
-                title: '品名',
+                field: 'zys',
+                title: '总应收',
                 align: 'center',
                 sortable: true,
                 width: 150,
             }, {
-                field: 'zl',
-                title: '重量',
-                align: 'center',
-                sortable: true,
-                width: 150,
-            }, {
-                field: 'dj',
-                title: '单价',
-                align: 'center',
-                sortable: true,
-                width: 150,
-            }, {
-                field: 'je',
-                title: '金额',
+                field: 'bz',
+                title: '备注',
                 align: 'center',
                 sortable: true,
                 width: 150,

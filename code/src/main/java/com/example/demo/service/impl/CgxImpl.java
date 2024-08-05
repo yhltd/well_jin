@@ -36,6 +36,11 @@ public class CgxImpl extends ServiceImpl<CgxMapper, Cgx> implements CgxService {
     }
 
     @Override
+    public List<Cgx> getListByShdw(String shdw,String dh,String riqi) {
+        return cgxMapper.getListByShdw(shdw,dh,riqi);
+    }
+
+    @Override
     public Cgx add(Cgx cgx) { return save(cgx) ? cgx : null; }
 
 //    @Override

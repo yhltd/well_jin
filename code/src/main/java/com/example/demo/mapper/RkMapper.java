@@ -14,8 +14,8 @@ public interface RkMapper extends BaseMapper<Rk> {
     @Select("select * from ruku")
     List<Rk> getList();
 
-    @Select("select * from ruku where riqi >= convert(date,#{ksrq}) and riqi <= convert(date,#{jsrq})")
-    List<Rk> queryList(String ksrq, String jsrq);
+    @Select("select * from ruku where riqi >= convert(date,#{ksrq}) and riqi <= convert(date,#{jsrq}) and mc like '%'+#{mc}+'%'")
+    List<Rk> queryList(String ksrq, String jsrq,String mc);
 
     @Update("update ruku set riqi=#{riqi},gsm=#{gsm},gys=#{gys},mc=#{mc},rksl=#{sl},rkdj=#{rkdj},rkzl=#{rkzl},zje=#{zje},fkfs=#{fkfs} where id = #{id}")
     boolean update(String riqi, String gsm,String gys, String mc, String rksl, String rkdj, String rkzl, String zje, String fkfs, int id);

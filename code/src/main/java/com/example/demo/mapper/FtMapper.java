@@ -15,8 +15,8 @@ public interface FtMapper extends BaseMapper<Ft> {
     @Select("select * from feitong")
     List<Ft> getList();
 
-    @Select("select * from feitong where riqi >= convert(date,#{ksrq}) and riqi <= convert(date,#{jsrq})")
-    List<Ft> queryList(String ksrq,String jsrq);
+    @Select("select * from feitong where riqi >= convert(date,#{ksrq}) and riqi <= convert(date,#{jsrq}) and khmc like '%'+#{khmc}+'%'")
+    List<Ft> queryList(String ksrq,String jsrq,String khmc);
 
     @Update("update feitong set riqi = #{riqi},fths = #{fths},ftcl = #{ftcl},khmc = #{khmc},khct = #{khct},khqt = #{khqt},zjkc = #{zjkc},ftlr = #{ftlr} where id = #{id}")
     boolean update(String riqi,String fths,String ftcl,String khmc,String khct,String khqt,String zjkc,String ftlr,int id);

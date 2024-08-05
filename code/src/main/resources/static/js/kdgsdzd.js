@@ -275,66 +275,73 @@ function setTable(data) {
                     return index + 1;
                 }
             }, {
-                field: 'drriqi',
-                title: '日期(导入)',
+                field: 'jjrq',
+                title: '寄件日期',
                 align: 'center',
                 sortable: true,
                 width: 120,
-            }, {
-                field: 'riqi',
-                title: '日期',
-                align: 'center',
-                sortable: true,
-                width: 80,
-            }, {
-                field: 'drkhmc',
-                title: '客户名称(导入)',
-                align: 'center',
-                sortable: true,
-                width: 150,
-            }, {
-                field: 'khmc',
-                title: '客户名称',
-                align: 'center',
-                sortable: true,
-                width: 150,
-            }, {
-                field: 'drdsje',
-                title: '代收金额(导入)',
-                align: 'center',
-                sortable: true,
-                width: 150,
-            }, {
-                field: 'dsje',
-                title: '代收金额',
+            }
+            // , {
+            //     field: 'riqi',
+            //     title: '日期',
+            //     align: 'center',
+            //     sortable: true,
+            //     width: 80,
+            // }
+            // , {
+            //     field: 'drkhmc',
+            //     title: '客户名称(导入)',
+            //     align: 'center',
+            //     sortable: true,
+            //     width: 150,
+            // }, {
+            //     field: 'khmc',
+            //     title: '客户名称',
+            //     align: 'center',
+            //     sortable: true,
+            //     width: 150,
+            // }
+            , {
+                field: 'dh',
+                title: '单号',
                 align: 'center',
                 sortable: true,
                 width: 150,
-            }, {
-                field: 'drkddh',
-                title: '快递单号(导入)',
-                align: 'center',
-                sortable: true,
-                width: 150,
-            }, {
-                field: 'kddh',
-                title: '快递单号',
-                align: 'center',
-                sortable: true,
-                width: 150,
-            }, {
-                field: 'drkdf',
-                title: '快递费(导入)',
-                align: 'center',
-                sortable: true,
-                width: 150,
-            }, {
-                field: 'kdf',
-                title: '快递费',
+            },
+            // , {
+            //     field: 'dsje',
+            //     title: '代收金额',
+            //     align: 'center',
+            //     sortable: true,
+            //     width: 150,
+            // },
+        {
+                field: 'jshk',
+                title: '结算货款',
                 align: 'center',
                 sortable: true,
                 width: 150,
             }
+            , {
+                field: 'fkrq',
+                title: '返款日期',
+                align: 'center',
+                sortable: true,
+                width: 150,
+            }
+            // , {
+            //     field: 'drkdf',
+            //     title: '快递费(导入)',
+            //     align: 'center',
+            //     sortable: true,
+            //     width: 150,
+            // }, {
+            //     field: 'kdf',
+            //     title: '快递费',
+            //     align: 'center',
+            //     sortable: true,
+            //     width: 150,
+            // }
         ],
         onClickRow: function (row, el) {
             let isSelect = $(el).hasClass('selected')

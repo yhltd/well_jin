@@ -30,27 +30,27 @@ function getList() {
                 draggingClass: "dragging",
                 resizeMode: 'fit'
             });
-            var table = document.getElementById("ysyfTable");
-            var rows = table.rows;
-            var cells = table.cells;
-            var colums = table.rows[0].cells.length;
-            for(var x=1;x<colums;x++){
-                var zje = 0;
-                for(var j = 1;j<rows.length-1;j++){
-                    var a = parseInt(rows[j].cells[10].innerHTML);
-                    zje = zje+a
-                }
-                document.getElementById('zje').value = zje
-            }
-            for (i=0;i<=res.data.id;i++){
-                idd=i;
-            }
+            // var table = document.getElementById("ysyfTable");
+            // var rows = table.rows;
+            // var cells = table.cells;
+            // var colums = table.rows[0].cells.length;
+            // for(var x=1;x<colums;x++){
+            //     var zje = 0;
+            //     for(var j = 1;j<rows.length-1;j++){
+            //         var a = parseInt(rows[j].cells[10].innerHTML);
+            //         zje = zje+a
+            //     }
+            //     document.getElementById('zje').value = zje
+            // }
+            // for (i=0;i<=res.data.id;i++){
+            //     idd=i;
+            // }
         }
     })
 }
 
 $(function () {
-    getList();
+getList();
 
     var date = new Date();
     date.setMonth(date.getMonth()-3);
@@ -76,12 +76,14 @@ $(function () {
     $('#select-btn').click(function () {
         var ksrq = $('#ksrq').val();
         var jsrq = $('#jsrq').val();
+        var gsm = $('#gsm').val();
         $ajax({
             type: 'post',
             url: '/ysyf/queryList',
             data: {
                 ksrq: ksrq,
                 jsrq: jsrq,
+                gsm:gsm
             }
         }, true, '', function (res) {
             if (res.code == 200) {
@@ -90,49 +92,42 @@ $(function () {
         })
     });
 
-    //刷新
-    $("#refresh-btn").click(function () {
-        getList();
+//点击新增按钮
+    $('#add-btn').click(function () {
+        $ajax({
+            type: 'post',
+            url: '/qhd/getList',
+        }, false, '', function (res) {
+            if (res.code == 200) {
+                setTable1(res.data);
+                $('#qhd-modal').modal('show');
+            }
+        })
+    });
+    //点击关闭按钮
+    $('#add-t-close-btn').click(function () {
+        $('#qhd-modal').modal('hide');
     });
 
-    //点击新增按钮显示弹窗
-    $("#add-btn").click(function () {
-        $('#add-modal').modal('show');
-
-        // const now = new Date();
-        // const year = now.getFullYear();
-        // const month = (now.getMonth() + 1).toString().padStart(2, '0');
-        // const day = now.getDate().toString().padStart(2, '0');
-        // const serial = (count++).toString().padStart(3, '0');
-        // var aa = `${year}${month}${day}${serial}`;
-        // document.getElementById('add-dh').value = aa;
-
-        // $ajax({
-        //     type: 'post',
-        //     url: '/user/getName',
-        // }, false, '', function (res) {
-        //     var this_name = res.data
-        //     $("#add-zdr").val = this_name
-        //     document.getElementById("add-zdr").value = this_name
-        // })
+    $('#add-t-submit-btn').click(function () {
+        let rows = getTableSelection('#show-qhd-table');
+        if (rows.length > 1 || rows.length == 0) {
+            swal('请选择一条数据修改!');
+            return;
+        }
+        $('#updateje-modal').modal('show');
+        setForm(rows[0].data, '#updateje-modal');
+        $('#update-skje').val(rows[0].data.skje);
 
     });
-
-    //新增弹窗里点击关闭按钮
-    $('#add-close-btn').click(function () {
-        $('#add-modal').modal('hide');
+//点击关闭按钮
+    $('#close-skje-btn').click(function () {
+        $('#updateje-modal').modal('hide');
     });
-
-    //新增弹窗里点击提交按钮
-    $("#add-submit-btn").click(function () {
-
-        var zl = parseFloat(document.getElementById('add-zl').value);
-        var dj = parseFloat(document.getElementById('add-dj').value);
-        var je = zl * dj
-        document.getElementById("add-je").value = je
-
-        let params = formToJson("#add-form");
-        if (checkForm('#add-form')) {
+    //新增提交
+    $("#update-skje-btn").click(function () {
+        let params = formToJson("#updateje-form");
+        if (checkForm('#updateje-form')) {
             $ajax({
                 type: 'post',
                 url: '/ysyf/add',
@@ -144,13 +139,29 @@ $(function () {
             }, false, '', function (res) {
                 if (res.code == 200) {
                     swal("", res.msg, "success");
-                    $('#add-form')[0].reset();
+                    $('#updateje-form')[0].reset();
                     getList();
-                    $('#add-close-btn').click();
+                    $('#close-skje-btn').click();
                 }
             })
         }
     });
+
+
+
+
+
+
+
+
+
+
+    //刷新
+    $("#refresh-btn").click(function () {
+        getList();
+    });
+
+
 
     //点击修改按钮显示弹窗
     $('#update-btn').click(function () {
@@ -176,37 +187,38 @@ $(function () {
         $('#update-modal').modal('hide');
     });
 
-    //修改弹窗里点击提交按钮
-    $('#update-submit-btn').click(function () {
-        var msg = confirm("确认要修改吗？");
 
-        var zl = parseFloat(document.getElementById('update-zl').value);
-        var dj = parseFloat(document.getElementById('update-dj').value);
-        var je = zl * dj
-        document.getElementById("update-je").value = je
+    //新增弹窗里点击关闭按钮
+    $('#add-close-btn').click(function () {
+        $('#add-modal').modal('hide');
+    });
 
-        if (msg) {
-            if (checkForm('#update-form')) {
-                let params = formToJson('#update-form');
-                $ajax({
-                    type: 'post',
-                    url: '/ysyf/update',
-                    data: {
-                        updateJson: JSON.stringify(params)
-                    },
-                    dataType: 'json',
-                    contentType: 'application/json;charset=utf-8'
-                }, false, '', function (res) {
-                    if (res.code == 200) {
-                        swal("", res.msg, "success");
-                        $('#update-close-btn').click();
-                        $('#update-modal').modal('hide');
-                        getList();
-                    } else {
-                        swal("", res.msg, "error");
-                    }
-                })
-            }
+    //新增弹窗里点击提交按钮
+    $("#update-skje-btn").click(function () {
+
+        // var zl = parseFloat(document.getElementById('add-zl').value);
+        // var dj = parseFloat(document.getElementById('add-dj').value);
+        // var je = zl * dj
+        // document.getElementById("add-je").value = je
+
+        let params = formToJson("#add-form");
+        if (checkForm('#add-form')) {
+            $ajax({
+                type: 'post',
+                url: '/ysyf/add',
+                data: JSON.stringify({
+                    addInfo: params
+                }),
+                dataType: 'json',
+                contentType: 'application/json;charset=utf-8'
+            }, false, '', function (res) {
+                if (res.code == 200) {
+                    swal("", res.msg, "success");
+                    $('#add-form')[0].reset();
+                    getList();
+                    $('#add-close-btn').click();
+                }
+            })
         }
     });
 
@@ -271,47 +283,41 @@ function setTable(data) {
                     return index + 1;
                 }
             }, {
-                field: 'riqi',
-                title: '日期',
+                field: 'bh',
+                title: '编号',
                 align: 'center',
                 sortable: true,
                 width: 80,
             }, {
-                field: 'gsm',
-                title: '单号',
+                field: 'fkriqi',
+                title: '付款日期',
                 align: 'center',
                 sortable: true,
                 width: 80,
             }, {
-                field: 'pm',
-                title: '品名',
+                field: 'skje',
+                title: '收款金额',
                 align: 'center',
                 sortable: true,
                 width: 130,
             }, {
-                field: 'zl',
-                title: '重量',
+                field: 'zys',
+                title: '总应收',
                 align: 'center',
                 sortable: true,
                 width: 80,
             }, {
-                field: 'dj',
-                title: '单价',
+                field: 'yf',
+                title: '月份',
                 align: 'center',
                 sortable: true,
                 width: 80,
             }, {
-                field: 'je',
-                title: '金额',
+                field: 'bz',
+                title: '备注',
                 align: 'center',
                 sortable: true,
                 width: 80,
-            }, {
-                field: 'ysyf',
-                title: '应收应付',
-                align: 'center',
-                sortable: true,
-                width: 100,
             }
         ],
         onClickRow: function (row, el) {
@@ -324,3 +330,78 @@ function setTable(data) {
         }
     })
 }
+
+
+
+
+
+function setTable1(data) {
+    if ($('#show-qhd-table').html != '') {
+        $('#show-qhd-table').bootstrapTable('load', data);
+    }
+
+    $('#show-qhd-table').bootstrapTable({
+        data: data,
+        sortStable: true,
+        classes: 'table table-hover',
+        idField: 'id',
+        pagination: true,
+        search: true,
+        searchAlign: 'left',
+        clickToSelect: false,
+        locale: 'zh-CN',
+        singleSelect: true,
+        columns: [
+            {
+                checkbox: true
+            }, {
+                field: '',
+                title: '序号',
+                align: 'center',
+                width: 50,
+                formatter: function (value, row, index) {
+                    return index + 1;
+                }
+            }, {
+                field: 'riqi',
+                title: '日期',
+                align: 'center',
+                sortable: true,
+                width: 80,
+            }, {
+                field: 'gsm',
+                title: '公司名',
+                align: 'center',
+                sortable: true,
+                width: 80,
+            }, {
+                field: 'ysje',
+                title: '应收金额',
+                align: 'center',
+                sortable: true,
+                width: 130,
+            }, {
+                field: 'zys',
+                title: '总应收',
+                align: 'center',
+                sortable: true,
+                width: 80,
+            }, {
+                field: 'bz',
+                title: '备注',
+                align: 'center',
+                sortable: true,
+                width: 80,
+            }
+        ],
+        // onClickRow: function (row, el) {
+        //     let isSelect = $(el).hasClass('selected')
+        //     if (isSelect) {
+        //         $(el).removeClass('selected')
+        //     } else {
+        //         $(el).addClass('selected')
+        //     }
+        // }
+    })
+}
+

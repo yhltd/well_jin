@@ -60,16 +60,19 @@
     <div class="col-md-3 mb-2">
         <input id="jsrq" type="date" class="form-control" placeholder="结束日期" autocomplete="off">
     </div>
+    <div class="col-md-3 mb-2">
+        <input id="shdw" type="text" class="form-control" placeholder="公司名" autocomplete="off">
+    </div>
     <div class="col-md-2 mb-2">
         <button id="select-btn" class="btn" style="background-color: limegreen;color: white">
             <i class="bi bi-search icon"></i>
             查询
         </button>
     </div>
-    总金额：
-    <div class="col-md-2 mb-2">
-        <input id="zje" type="text" class="form-control" placeholder="总金额" readonly autocomplete="off">
-    </div>
+<!--    总金额：-->
+<!--    <div class="col-md-2 mb-2">-->
+<!--        <input id="zje" type="text" class="form-control" placeholder="总金额" readonly autocomplete="off">-->
+<!--    </div>-->
 </div>
 
 <div id="table-toolbar">
@@ -79,11 +82,11 @@
             刷新
         </button>
         <span style="border-right: 20px solid white"></span>
-        <button id="add-btn" class="btn btn-primary" style="border-radius:5px;">
-            <i class="bi bi-plus-square icon"></i>
-            新增
-        </button>
-        <span style="border-right: 20px solid white"></span>
+<!--        <button id="add-btn" class="btn btn-primary" style="border-radius:5px;">-->
+<!--            <i class="bi bi-plus-square icon"></i>-->
+<!--            新增-->
+<!--        </button>-->
+<!--        <span style="border-right: 20px solid white"></span>-->
         <button id="update-btn" class="btn btn-primary" style="border-radius:5px;">
             <i class="bi bi-pencil-square icon"></i>
             修改
@@ -397,25 +400,25 @@
                     </div>
 
                     <div class="row justify-content-evenly">
-                        <div class="col-6">
+                        <div class="col-6" hidden>
                             <div class="form-group">
                                 <label for="update-riqi">日期</label>
-                                <input id="update-riqi" name="riqi" type="date" class="form-control" autocomplete="off">
+                                <input id="update-riqi" name="riqi" type="date" class="form-control" autocomplete="off" hidden>
                                 <div class="invalid-feedback">
                                     请输入日期！
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-6" hidden>
                             <div class="form-group">
                                 <label for="update-dh">单号</label>
-                                <input id="update-dh" name="dh" type="text" class="form-control" autocomplete="off" data-required="1">
+                                <input id="update-dh" name="dh" type="text" class="form-control"  autocomplete="off" data-required="1">
                                 <div class="invalid-feedback">
                                     请输入单号！
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-6" hidden>
                             <div class="form-group">
                                 <label for="update-shdw">收货单位</label>
                                 <input id="update-shdw" name="shdw" type="text" class="form-control" autocomplete="off" data-required="1">
@@ -424,7 +427,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-6" hidden>
                             <div class="form-group">
                                 <label for="update-mc">名称</label>
                                 <input id="update-mc" name="mc" type="text" class="form-control" autocomplete="off" data-required="1">
@@ -433,7 +436,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-6" hidden>
                             <div class="form-group">
                                 <label for="update-mh">模号</label>
                                 <input id="update-mh" name="mh" type="text" class="form-control" autocomplete="off" data-required="1">
@@ -442,7 +445,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-6" hidden>
                             <div class="form-group">
                                 <label for="update-gg">规格</label>
                                 <input id="update-gg" name="gg" type="text" class="form-control" autocomplete="off" data-required="1">
@@ -451,7 +454,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-6" hidden>
                             <div class="form-group">
                                 <label for="update-js">件数</label>
                                 <input id="update-js" name="js" type="text" class="form-control" autocomplete="off" data-required="1">
@@ -460,7 +463,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-6" hidden>
                             <div class="form-group">
                                 <label for="update-zl">重量</label>
                                 <input id="update-zl" name="zl" type="text" class="form-control" autocomplete="off" data-required="1">
@@ -469,7 +472,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-6" hidden>
                             <div class="form-group">
                                 <label for="update-dj">单价</label>
                                 <input id="update-dj" name="dj" type="text" class="form-control" autocomplete="off" data-required="1">
@@ -478,7 +481,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-6" hidden>
                             <div class="form-group">
                                 <label for="update-je">金额</label>
                                 <input id="update-je" name="je" type="text" class="form-control" autocomplete="off" data-required="1">
@@ -487,7 +490,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-6" hidden>
                             <div class="form-group">
                                 <label for="update-bz">备注</label>
                                 <input id="update-bz" name="bz" type="text" class="form-control" autocomplete="off" data-required="1">
@@ -496,7 +499,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-6" hidden>
                             <div class="form-group">
                                 <label for="update-shdz">收货地址</label>
                                 <input id="update-shdz" name="shdz" type="text" class="form-control" autocomplete="off" data-required="1">
@@ -505,7 +508,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-6" hidden>
                             <div class="form-group">
                                 <label for="update-kddh">快递单号</label>
                                 <input id="update-kddh" name="kddh" type="text" class="form-control" autocomplete="off" data-required="1">
@@ -514,7 +517,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-6" hidden>
                             <div class="form-group">
                                 <label for="update-sfyj">是否月结</label>
                                 <select id="update-sfyj" name="sfyj" class="form-control" autocomplete="off">
@@ -527,7 +530,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-6" >
                             <div class="form-group">
                                 <label for="update-fkfs">付款方式</label>
                                 <select id="update-fkfs" name="fkfs" class="form-control" autocomplete="off">
@@ -542,7 +545,7 @@
                             </div>
                         </div>
                         <div class="col-6">
-                            <div class="form-group">
+                            <div class="form-group" hidden>
                                 <label for="update-sfhs">是否含税</label>
                                 <select id="update-sfhs" name="sfhs" class="form-control" autocomplete="off">
                                     <option value="--请选择--">--请选择--</option>
@@ -555,7 +558,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-6" hidden>
                             <div class="form-group">
                                 <label for="update-gd">跟单</label>
                                 <input id="update-gd" name="gd" type="text" class="form-control" autocomplete="off" data-required="1">
@@ -564,7 +567,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-6" hidden>
                             <div class="form-group">
                                 <label for="update-zdr">制单人</label>
                                 <input id="update-zdr" name="zdr" type="text" class="form-control" autocomplete="off" data-required="1">
@@ -573,7 +576,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-6" hidden>
                             <div class="form-group">
                                 <label for="update-shdwjjsr">收货单位及经手人</label>
                                 <input id="update-shdwjjsr" name="shdwjjsr" type="text" class="form-control" autocomplete="off" data-required="1">
@@ -582,14 +585,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-6" hidden>
                             <div class="form-group">
                                 <label for="update-jgfdj">锯工费单价</label>
                                 <input id="update-jgfdj" name="jgf" type="text" class="form-control" autocomplete="off" readonly value="0.5">
                             </div>
                         </div>
-                        <div class="col-6">
-                            <div class="form-group">
+                        <div class="col-6" hidden>
+                            <div class="form-group" >
                                 <label for="update-jgf">锯工费</label>
                                 <input id="update-jgf" name="jgf" type="text" class="form-control" autocomplete="off" data-required="1"readonly="readonly">
                                 <div class="invalid-feedback">
@@ -597,7 +600,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-6" hidden>
                             <div class="form-group">
                                 <label for="update-kdf">快递费</label>
                                 <input id="update-kdf" name="kdf" type="text" class="form-control" autocomplete="off" data-required="1">
@@ -606,7 +609,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-6" hidden>
                             <div class="form-group">
                                 <label for="update-hsdj">含税单价</label>
                                 <input id="update-hsdj" name="hsdj" type="text" value="0" class="form-control" autocomplete="off" data-required="1">
@@ -615,7 +618,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-6" hidden>
                             <div class="form-group">
                                 <label for="update-sd">税点</label>
                                 <input id="update-sd" name="sd" type="text" value="0" class="form-control" autocomplete="off" data-required="1">
@@ -624,7 +627,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-6 " hidden>
                             <div class="form-group">
                                 <label for="update-whsdj">未含税单价</label>
                                 <input id="update-whsdj" name="whsdj" type="text" value="0" class="form-control" autocomplete="off" data-required="1">

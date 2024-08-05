@@ -100,12 +100,14 @@ $(function () {
     $('#select-btn').click(function () {
         var ksrq = $('#ksrq').val();
         var jsrq = $('#jsrq').val();
+        var shdw = $('#shdw').val();
         $ajax({
             type: 'post',
             url: '/xsd/queryList',
             data: {
                 ksrq: ksrq,
                 jsrq: jsrq,
+                shdw:shdw
             }
         }, true, '', function (res) {
             if (res.code == 200) {
@@ -313,20 +315,20 @@ $(function () {
         $('#update-whsdj').val(rows[0].data.whsdj);
 
         //未含税锁定
-        document.getElementById('update-sfhs').addEventListener('change', function() {
-            var selectedOption = this.value;
-            var textBoxes = document.querySelectorAll('input[type="text"]');
-            // 根据选择的option值锁定对应的文本框
-            if (selectedOption === '未含税') {
-                document.getElementById('update-hsdj').disabled = true;
-                document.getElementById('update-sd').disabled = true;
-                document.getElementById('update-whsdj').disabled = false;
-            }else{
-                document.getElementById('update-whsdj').disabled = true;
-                document.getElementById('update-hsdj').disabled = false;
-                document.getElementById('update-sd').disabled = false;
-            }
-        });
+        // document.getElementById('update-sfhs').addEventListener('change', function() {
+        //     var selectedOption = this.value;
+        //     var textBoxes = document.querySelectorAll('input[type="text"]');
+        //     // 根据选择的option值锁定对应的文本框
+        //     if (selectedOption === '未含税') {
+        //         document.getElementById('update-hsdj').disabled = true;
+        //         document.getElementById('update-sd').disabled = true;
+        //         document.getElementById('update-whsdj').disabled = false;
+        //     }else{
+        //         document.getElementById('update-whsdj').disabled = true;
+        //         document.getElementById('update-hsdj').disabled = false;
+        //         document.getElementById('update-sd').disabled = false;
+        //     }
+        // });
     });
 
     //修改弹窗点击关闭按钮
@@ -344,33 +346,33 @@ $(function () {
         // var dj = parseFloat(document.getElementById('update-dj').value);
         // var je = js * zl * dj
         // document.getElementById("update-je").value = je
-        var jgf = js * 0.5
-        document.getElementById("update-jgf").value = jgf
-
-// ---------------
-        var js = parseFloat(document.getElementById('update-js').value);
-        var dj = parseFloat(document.getElementById('update-dj').value);
-        var zl = parseFloat(document.getElementById('update-zl').value);
-        // var zje = rksl * rkdj * rkzl
-        var je = js * dj
-        document.getElementById("update-je").value = je
-
-        var d1 = document.getElementById('update-mc').value;
-        var d2 = document.getElementById('update-js').value;
-        var d3 = document.getElementById('update-je').value;
-        var d4 = document.getElementById('update-zl').value;
-        var d5 = document.getElementById('update-dh').value;
-        var d6 = document.getElementById('id').value;
-        var d7 = document.getElementById('update-dj').value;
-// -------------
-
-        if (parseFloat(document.getElementById('update-sd').value) != 0 ){
-            var hsdj = parseFloat(document.getElementById('update-hsdj').value);
-            var sd = parseFloat(document.getElementById('update-sd').value);
-            var whsdj = hsdj / sd
-            var aa= whsdj.toFixed(2)
-            document.getElementById("update-whsdj").value = aa
-        }
+//         var jgf = js * 0.5
+//         document.getElementById("update-jgf").value = jgf
+//
+// // ---------------
+//         var js = parseFloat(document.getElementById('update-js').value);
+//         var dj = parseFloat(document.getElementById('update-dj').value);
+//         var zl = parseFloat(document.getElementById('update-zl').value);
+//         // var zje = rksl * rkdj * rkzl
+//         var je = js * dj
+//         document.getElementById("update-je").value = je
+//
+//         var d1 = document.getElementById('update-mc').value;
+//         var d2 = document.getElementById('update-js').value;
+//         var d3 = document.getElementById('update-je').value;
+//         var d4 = document.getElementById('update-zl').value;
+//         var d5 = document.getElementById('update-dh').value;
+//         var d6 = document.getElementById('id').value;
+//         var d7 = document.getElementById('update-dj').value;
+// // -------------
+//
+//         if (parseFloat(document.getElementById('update-sd').value) != 0 ){
+//             var hsdj = parseFloat(document.getElementById('update-hsdj').value);
+//             var sd = parseFloat(document.getElementById('update-sd').value);
+//             var whsdj = hsdj / sd
+//             var aa= whsdj.toFixed(2)
+//             document.getElementById("update-whsdj").value = aa
+//         }
 
         if (msg) {
             if (checkForm('#update-form')) {
@@ -671,7 +673,7 @@ function setTable(data) {
                 sortable: true,
                 width: 130,
             }, {
-                field: 'danhao',
+                field: 'bz',
                 title: '备注',
                 align: 'center',
                 sortable: true,

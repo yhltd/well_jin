@@ -17,7 +17,7 @@ public interface RkService extends IService<Rk> {
     /**
      * 根据姓名和部门查询
      */
-    List<Rk> queryList(String ksrq,String jsrq);
+    List<Rk> queryList(String ksrq,String jsrq,String mc);
 
     /**
      * 修改

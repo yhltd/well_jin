@@ -62,12 +62,14 @@ $(function () {
     $('#select-btn').click(function () {
         var ksrq = $('#ksrq').val();
         var jsrq = $('#jsrq').val();
+        var khmc = $('#khmc').val();
         $ajax({
             type: 'post',
             url: '/ft/queryList',
             data: {
                 ksrq: ksrq,
                 jsrq: jsrq,
+                khmc:khmc
             }
         }, true, '', function (res) {
             if (res.code == 200) {

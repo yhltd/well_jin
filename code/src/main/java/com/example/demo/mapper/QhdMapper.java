@@ -15,8 +15,8 @@ public interface QhdMapper extends BaseMapper<Qhd> {
     @Select("select * from qianhuidan")
     List<Qhd> getList();
 
-    @Select("select * from qianhuidan where riqi >= convert(date,#{ksrq}) and riqi <= convert(date,#{jsrq})")
-    List<Qhd> queryList(String ksrq,String jsrq);
+    @Select("select * from qianhuidan where riqi >= convert(date,#{ksrq}) and riqi <= convert(date,#{jsrq}) and gsm = #{gsm}")
+    List<Qhd> queryList(String ksrq,String jsrq,String gsm);
 
     @Update("update qianhuidan set riqi = #{riqi},gsm = #{gsm},pm = #{pm},zl = #{zl},dj = #{dj},je = #{je} where id = #{id}")
     boolean update(String riqi,String gsm,String pm,String zl,String dj,String je,int id);
@@ -24,7 +24,10 @@ public interface QhdMapper extends BaseMapper<Qhd> {
     @Delete("delete from qianhuidan where id=#{id}")
     boolean delete(int id);
 
-    @Insert("insert into qianhuidan(riqi,gsm,pm,zl,dj,je,ysyf) values(#{riqi},#{gsm},#{pm},#{zl},#{dj},#{je})")
-    boolean add(String riqi,String gsm,String pm,String zl,String dj,String je);
+//    @Insert("insert into qianhuidan(riqi,gsm,pm,zl,dj,je,ysyf) values(#{riqi},#{gsm},#{pm},#{zl},#{dj},#{je})")
+//    boolean add(String riqi,String gsm,String pm,String zl,String dj,String je);
+
+    @Insert("insert into qianhuidan(riqi,gsm,ysje,bz,bh) values(#{riqi},#{gsm},#{ysje},#{bz},#{bh})")
+    boolean add1(String riqi,String gsm,String ysje,String bz,String bh);
 
 }

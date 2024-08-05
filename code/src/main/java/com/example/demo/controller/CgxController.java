@@ -153,6 +153,25 @@ public class CgxController {
         }
     }
 
+
+    @RequestMapping("/print")
+    public ResultInfo print(@RequestBody HashMap map, HttpSession session, HttpServletResponse response) {
+        try {
+            GsonUtil gsonUtil = new GsonUtil(GsonUtil.toJson(map));
+            List<Cgx> nlist = GsonUtil.toList(gsonUtil.get("list"), Cgx.class);
+            List<Cgx> list=new ArrayList<>();
+            if(nlist != null){
+                list= cgxService.getListByShdw(nlist.get(0).getShdw(),nlist.get(0).getDh(),nlist.get(0).getRiqi());
+            }
+            return ResultInfo.success("成功！",list);
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("失败：{}", e.getMessage());
+            return ResultInfo.error("失败！");
+        }
+    }
+
+
     /**
      * 获取当天单价
      *

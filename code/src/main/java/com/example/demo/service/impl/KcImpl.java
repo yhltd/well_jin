@@ -54,4 +54,9 @@ public class KcImpl extends ServiceImpl<KcMapper, Kc> implements KcService {
         return save(kc) ? kc : null;
     }
 
+
+    public List<Kc> hqxlMc() {
+        return kcMapper.hqxlMc();
+    }
+
 }

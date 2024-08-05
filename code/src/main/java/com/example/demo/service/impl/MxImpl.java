@@ -20,8 +20,8 @@ public class MxImpl extends ServiceImpl<MxMapper, Mx> implements MxService {
     }
 
     @Override
-    public List<Mx> queryList(String ksrq, String jsrq) {
-        return mxMapper.queryList(ksrq, jsrq);
+    public List<Mx> queryList(String ksrq, String jsrq,String gsm) {
+        return mxMapper.queryList(ksrq, jsrq,gsm);
     }
 
     @Override

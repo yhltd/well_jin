@@ -18,7 +18,7 @@ public interface YsyfService extends IService<Ysyf> {
     /**
      * 根据姓名和部门查询
      */
-    List<Ysyf> queryList(String ksrq,String jsrq);
+    List<Ysyf> queryList(String ksrq,String jsrq,String gsm);
 
     /**
      * 修改

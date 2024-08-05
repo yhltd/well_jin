@@ -18,7 +18,7 @@ public interface QhdService extends IService<Qhd> {
     /**
      * 根据姓名和部门查询
      */
-    List<Qhd> queryList(String ksrq,String jsrq);
+    List<Qhd> queryList(String ksrq,String jsrq,String gsm);
 
     /**
      * 修改
@@ -36,6 +36,9 @@ public interface QhdService extends IService<Qhd> {
     /**
      * 添加
      */
-    Qhd add(Qhd qhd);
+//    Qhd add(Qhd qhd);
+
+
+    boolean add1(String riqi,String gsm,String ysj,String bz,String bh);
 
 }

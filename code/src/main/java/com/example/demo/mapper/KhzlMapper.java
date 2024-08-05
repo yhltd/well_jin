@@ -2,6 +2,7 @@ package com.example.demo.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.demo.entity.Khzl;
+import com.example.demo.entity.Xsd;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -29,4 +30,29 @@ public interface KhzlMapper extends BaseMapper<Khzl> {
 //    List<Khzl> hqxlGsm();
     @Select("select gsm from kehuziliao")
     List<Khzl> hqxlGsm();
+
+
+    @Select("select gd from kehuziliao where gsm=#{shdw}")
+    List<Khzl> hqgd(String gsm);
+
+    @Select("select * from kehuziliao where gsm=#{gsm}")
+    List<Khzl> getListByGsm(String gsm);
+
+    @Update("update kehuziliao set tkkc = #{tkkc} where gsm=#{gsm}")
+    boolean tkkc(String tkkc,String gsm);
+
+    @Update("update kehuziliao set tzkc = #{tzkc} where gsm=#{gsm}")
+    boolean tzkc(String tzkc,String gsm);
+
+
+    @Select("select tkkc from kehuziliao where gsm=#{gsm}")
+    String gettkkc(String gsm);
+
+
+    @Select("select tzkc from kehuziliao where gsm=#{gsm}")
+    String gettzkc(String gsm);
+
+
+
+
 }

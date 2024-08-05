@@ -27,6 +27,9 @@ public interface CgxMapper extends BaseMapper<Cgx> {
     @Insert("insert into caogaoxiang(riqi,dh,shdw,mc,mh,gg,js,zl,dj,je,bz,shdz,kddh,sfyj,fkfs,sfhs,gd,zdr,shdwjjsr,jgf,kdf,hsdj,sd,whsdj) values(#{riqi},#{dh},#{shdw},#{mc},#{mh},#{gg},#{js},#{zl},#{dj},#{je},#{bz},#{shdz},#{kddh},#{sfyj},#{fkfs},#{sfhs},#{gd},#{zdr},#{shdwjjsr},#{jgf},#{kdf},#{hsdj},#{sd},#{whsdj})")
     boolean add(String riqi,String dh,String shdw,String mc,String mh,String gg,String js,String zl,String dj,String je,String bz,String shdz,String kddh,String sfyj,String fkfs,String sfhs,String gd,String zdr,String shdwjjsr,String jgf,String kdf,String hsdj,String sd,String whsdj);
 
+    @Select("select * from caogaoxiang where shdw=#{shdw} and dh=#{dh} and riqi=#{riqi}")
+    List<Cgx> getListByShdw(String shdw,String dh,String riqi);
+
 //    @Select("select DISTINCT dj from xiaoshoudan where riqi = convert(DATE,riqi)")
 //    List<Cgx> getDj(String dj);
 

@@ -38,4 +38,13 @@ public class Qhd {
      */
     private String je;
 
+
+    private String ysje;
+
+    private String zys;
+
+    private String bz;
+
+    private String bh;
+
 }

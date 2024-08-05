@@ -17,7 +17,7 @@ public interface XsdService extends IService<Xsd> {
     /**
      * 根据姓名和部门查询
      */
-    List<Xsd> queryList(String ksrq,String jsrq);
+    List<Xsd> queryList(String ksrq,String jsrq,String shdw);
 
     /**
      * 修改

@@ -15,7 +15,7 @@ public interface MxService extends IService<Mx> {
     /**
      * 根据日期查询
      */
-    List<Mx> queryList(String ksrq, String jsrq);
+    List<Mx> queryList(String ksrq, String jsrq,String gsm);
 
     //增加
     Mx add(Mx mx);

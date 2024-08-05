@@ -38,4 +38,9 @@ public interface KcMapper extends BaseMapper<Kc> {
  List<Kc> getList1();
     @Select("select mx.riqi,qc.qcsl,qc.qcdj,qc.qczje,mx.mc,mx.rksl,mx.rkdj,mx.zje,mx.dj,mx.js,mx.je,sum(cast(qc.qcsl as DECIMAL(10)))+(sum(cast(mx.rksl as DECIMAL(10)))) as jcsl,sum(cast(qc.qczje as DECIMAL(10)))+sum(cast(mx.zje as DECIMAL(10)))-sum(cast(mx.je as DECIMAL(10))) as jczje,cast((sum(cast(qc.qczje as DECIMAL(10)))+sum(cast(mx.zje as DECIMAL(10)))-sum(cast(mx.je as DECIMAL(10))))/(sum(cast(qc.qcsl as DECIMAL(10)))+(sum(cast(mx.rksl as DECIMAL(10)))))as DECIMAL(10,2)) as jcdj from mingxi as mx,qichu as qc where mx.mc=qc.spmc group by mx.riqi,qc.qcsl,qc.qcdj,qc.qczje,mx.mc,mx.rksl,mx.rkdj,mx.zje,mx.dj,mx.js,mx.je")
     List<Kc> getList2();
+
+
+    @Select("select * from kucun")
+    List<Kc> hqxlMc();
+
 }

@@ -23,8 +23,8 @@ public class FtImpl extends ServiceImpl<FtMapper, Ft> implements FtService {
     }
 
     @Override
-    public List<Ft> queryList(String ksrq,String jsrq) {
-        return ftMapper.queryList(ksrq,jsrq);
+    public List<Ft> queryList(String ksrq,String jsrq,String khmc) {
+        return ftMapper.queryList(ksrq,jsrq,khmc);
     }
 
     @Override

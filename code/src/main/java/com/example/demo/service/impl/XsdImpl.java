@@ -20,8 +20,8 @@ public class XsdImpl extends ServiceImpl<XsdMapper, Xsd> implements XsdService {
     }
 
     @Override
-    public List<Xsd> queryList(String ksrq,String jsrq) {
-        return xsdMapper.queryList(ksrq,jsrq);
+    public List<Xsd> queryList(String ksrq,String jsrq,String shdw) {
+        return xsdMapper.queryList(ksrq,jsrq,shdw);
     }
 
     @Override

@@ -6,28 +6,16 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 @Data
-@TableName("kuaidigongsiduizhangdan")
-public class Kdgsdzd {
+@TableName("shangpinmingcheng")
+public class Spmc {
     /**
      * id自增列
      */
     @TableId(value = "id" , type = IdType.AUTO)
     private Integer id;
+    /**
+     * 商品名称
+     */
+    private String mc;
 
-    private String dh;
-
-    private String sjgs;
-
-
-    private String jshk;
-
-    private String fkrq;
-
-    private String fkfs;
-
-    private String khmc;
-
-    private String qjy;
-
-    private String jjrq;
 }

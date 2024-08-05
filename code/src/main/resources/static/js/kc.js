@@ -1,4 +1,40 @@
 var idd;
+
+function getMc() {
+    $ajax({
+        type: 'post',
+        url: '/spmc/getList',
+    }, false, '', function (res) {
+        if (res.code == 200) {
+            for (var i = 0; i < res.data.length; i++) {
+                $("#add-spmc").append("<option>" + res.data[i].mc + "</option>");
+                $("#update-spmc").append("<option>" + res.data[i].mc + "</option>");
+            }
+        }
+    })
+}
+
+
+function getGsm() {
+    $ajax({
+        type: 'post',
+        url: '/khzl/hqxlGsm',
+    }, false, '', function (res) {
+        if (res.code == 200) {
+            for (var i = 0; i < res.data.length; i++) {
+                $("#add-shdw").append("<option>" + res.data[i].gsm + "</option>");
+                $("#update-shdw").append("<option>" + res.data[i].gsm + "</option>");
+            }
+        }
+    })
+}
+
+
+
+
+
+
+
 function getList1() {
     // $('#ksrq').val("");
     // $('#jsrq').val("");
@@ -18,7 +54,7 @@ function getList1() {
 
     $ajax({
         type: 'post',
-        url: '/kc/getList1',
+        url: '/kc/getList',
     }, false, '', function (res) {
         if (res.code == 200) {
             setTable(res.data);
@@ -74,7 +110,8 @@ function getList2() {
 
 $(function () {
     getList1();
-
+    getMc();
+    getGsm();
     var  date = new Date();
     date.setMonth(date.getMonth()-3);
     var year = date.getFullYear();
@@ -195,6 +232,7 @@ $("#add-submit-btn").click(function () {
 });
 //点击修改按钮显示弹窗
 $('#update-btn').click(function () {
+
     let rows = getTableSelection('#kcTable');
     if (rows.length > 1 || rows.length == 0) {
         swal('请选择一条数据修改!');

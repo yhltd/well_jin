@@ -39,4 +39,26 @@ public class KhzlImpl extends ServiceImpl<KhzlMapper, Khzl> implements KhzlServi
     @Override
     public List<Khzl> hqxlGsm() {return khzlMapper.hqxlGsm();}
 
+    @Override
+    public List<Khzl> hqgd(String shdw) {return khzlMapper.hqgd(shdw);}
+
+    @Override
+    public List<Khzl> getListByGsm(String gsm) {return khzlMapper.getListByGsm(gsm);}
+
+    @Override
+    public boolean tkkc(String tkkc,String gsm) { return khzlMapper.tkkc(tkkc,gsm); }
+
+    @Override
+    public boolean tzkc(String tzkc,String gsm) { return khzlMapper.tzkc(tzkc,gsm); }
+
+    @Override
+    public String gettkkc(String gsm) {
+        return khzlMapper.gettkkc(gsm);
+    }
+
+    @Override
+    public String gettzkc(String gsm) {
+        return khzlMapper.gettzkc(gsm);
+    }
+
 }

@@ -49,7 +49,7 @@ public class QhdController {
      * @return ResultInfo
      */
     @RequestMapping("/queryList")
-    public ResultInfo queryList(String ksrq,String jsrq, HttpSession session) {
+    public ResultInfo queryList(String ksrq,String jsrq,String gsm,HttpSession session) {
         UserInfo userInfo = GsonUtil.toEntity(SessionUtil.getToken(session), UserInfo.class);
         if (ksrq.equals("")) {
             ksrq = "1900/1/1";
@@ -58,7 +58,7 @@ public class QhdController {
             jsrq = "2200/1/1";
         }
         try {
-            List<Qhd> list = qhdService.queryList(ksrq,jsrq);
+            List<Qhd> list = qhdService.queryList(ksrq,jsrq,gsm);
             return ResultInfo.success("获取成功", list);
         } catch (Exception e) {
             e.printStackTrace();
@@ -95,28 +95,55 @@ public class QhdController {
     /**
      * 添加
      */
-    @RequestMapping("/add")
-    public ResultInfo add(@RequestBody HashMap map, HttpSession session) {
-        UserInfo userInfo = GsonUtil.toEntity(SessionUtil.getToken(session), UserInfo.class);
-        GsonUtil gsonUtil = new GsonUtil(GsonUtil.toJson(map));
-        if(!userInfo.getCaozuoquanxian().equals("可修改")){
-            return ResultInfo.error(401, "无权限,请联系管理员");
-        }
-        try {
-            Qhd qhd = GsonUtil.toEntity(gsonUtil.get("addInfo"), Qhd.class);
-            qhd = qhdService.add(qhd);
-            if (StringUtils.isNotNull(qhd)) {
-                return ResultInfo.success("添加成功", qhd);
-            } else {
-                return ResultInfo.success("添加失败", null);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            log.error("添加失败：{}", e.getMessage());
-            log.error("参数：{}", map);
-            return ResultInfo.error("添加失败");
-        }
-    }
+//    @RequestMapping("/add")
+//    public ResultInfo add(@RequestBody HashMap map, HttpSession session) {
+//        UserInfo userInfo = GsonUtil.toEntity(SessionUtil.getToken(session), UserInfo.class);
+//        GsonUtil gsonUtil = new GsonUtil(GsonUtil.toJson(map));
+//        if(!userInfo.getCaozuoquanxian().equals("可修改")){
+//            return ResultInfo.error(401, "无权限,请联系管理员");
+//        }
+//        try {
+//            Qhd qhd = GsonUtil.toEntity(gsonUtil.get("addInfo"), Qhd.class);
+//            qhd = qhdService.add(qhd);
+//            if (StringUtils.isNotNull(qhd)) {
+//                return ResultInfo.success("添加成功", qhd);
+//            } else {
+//                return ResultInfo.success("添加失败", null);
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            log.error("添加失败：{}", e.getMessage());
+//            log.error("参数：{}", map);
+//            return ResultInfo.error("添加失败");
+//        }
+//    }
+
+    /**
+     * 添加
+     */
+//    @RequestMapping("/add1")
+//    public ResultInfo add1(@RequestBody HashMap map, HttpSession session) {
+//        UserInfo userInfo = GsonUtil.toEntity(SessionUtil.getToken(session), UserInfo.class);
+//        GsonUtil gsonUtil = new GsonUtil(GsonUtil.toJson(map));
+//        if(!userInfo.getCaozuoquanxian().equals("可修改")){
+//            return ResultInfo.error(401, "无权限,请联系管理员");
+//        }
+//        try {
+//            Qhd qhd = GsonUtil.toEntity(gsonUtil.get("addInfo"), Qhd.class);
+//            qhd = qhdService.add1(qhd);
+//            if (StringUtils.isNotNull(qhd)) {
+//                return ResultInfo.success("添加成功", qhd);
+//            } else {
+//                return ResultInfo.success("添加失败", null);
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            log.error("添加失败：{}", e.getMessage());
+//            log.error("参数：{}", map);
+//            return ResultInfo.error("添加失败");
+//        }
+//    }
+
 
     /**
      * 删除

@@ -12,8 +12,8 @@ import java.util.List;
 public interface MxMapper extends BaseMapper<Mx> {
     @Select("select * from mingxi")
     List<Mx> getList();
-    @Select("select * from mingxi where riqi >= convert(date,#{ksrq}) and riqi <= convert(date,#{jsrq})")
-    List<Mx> queryList(String ksrq, String jsrq);
+    @Select("select * from mingxi where riqi >= convert(date,#{ksrq}) and riqi <= convert(date,#{jsrq}) and gsm like '%'+#{gsm}+'%'")
+    List<Mx> queryList(String ksrq, String jsrq,String gsm);
 
     @Insert({"insert into mingxi(riqi,mc,rkzl,rksl,rkdj,zje,gsm,ziduan,danhao) " +
             "values(#{riqi},#{mc},#{rkzl},#{rksl},#{gsm},#{ziduan},#{danhao}"})

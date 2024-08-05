@@ -173,41 +173,56 @@ public class KdgsdzdController {
             //创建2007版本Excel工作簿对象
             wb = new XSSFWorkbook(fis);
             //获取基本信息工作表
-            Sheet sheet = wb.getSheet("快递公司对账单");
+            Sheet sheet = wb.getSheet("返款");
             //循环Excel文件的i=1行开始
             for (int i = 1; i <= sheet.getLastRowNum(); i++) {
                 Kdgsdzd kdgsdzd = new Kdgsdzd();
                 //获取第i行
                 Row row = sheet.getRow(i);
                 //日期
-                Cell drriqi = row.getCell(0);
-                if (drriqi != null) {
-                    drriqi.setCellType(CellType.STRING);
-                    kdgsdzd.setDrriqi(drriqi.getStringCellValue());
+                Cell jjrq = row.getCell(0);
+                if (jjrq != null) {
+                    jjrq.setCellType(CellType.STRING);
+                    kdgsdzd.setJjrq(jjrq.getStringCellValue());
                 }
                 //客户名称
-                Cell drkhmc = row.getCell(1);
-                if (drkhmc != null) {
-                    drkhmc.setCellType(CellType.STRING);
-                    kdgsdzd.setDrkhmc(drkhmc.getStringCellValue());
+                Cell dh = row.getCell(1);
+                if (dh != null) {
+                    dh.setCellType(CellType.STRING);
+                    kdgsdzd.setDh(dh.getStringCellValue());
                 }
                 //代收金额
-                Cell drdsje = row.getCell(2);
-                if (drdsje != null) {
-                    drdsje.setCellType(CellType.STRING);
-                    kdgsdzd.setDrdsje(drdsje.getStringCellValue());
+                Cell sjgs = row.getCell(2);
+                if (sjgs != null) {
+                    sjgs.setCellType(CellType.STRING);
+                    kdgsdzd.setSjgs(sjgs.getStringCellValue());
                 }
                 //快递单号
-                Cell drkddh = row.getCell(3);
-                if (drkddh != null) {
-                    drkddh.setCellType(CellType.STRING);
-                    kdgsdzd.setDrkddh(drkddh.getStringCellValue());
+                Cell jshk = row.getCell(3);
+                if (jshk != null) {
+                    jshk.setCellType(CellType.STRING);
+                    kdgsdzd.setJshk(jshk.getStringCellValue());
                 }
                 //快递费
-                Cell drkdf = row.getCell(3);
-                if (drkdf != null) {
-                    drkdf.setCellType(CellType.STRING);
-                    kdgsdzd.setDrkdf(drkdf.getStringCellValue());
+                Cell fkrq = row.getCell(4);
+                if (fkrq != null) {
+                    fkrq.setCellType(CellType.STRING);
+                    kdgsdzd.setFkrq(fkrq.getStringCellValue());
+                }
+                Cell fkfs = row.getCell(5);
+                if (fkfs != null) {
+                    fkfs.setCellType(CellType.STRING);
+                    kdgsdzd.setFkrq(fkfs.getStringCellValue());
+                }
+                Cell khmc = row.getCell(6);
+                if (khmc != null) {
+                    khmc.setCellType(CellType.STRING);
+                    kdgsdzd.setKhmc(khmc.getStringCellValue());
+                }
+                Cell qjy = row.getCell(7);
+                if (qjy != null) {
+                    qjy.setCellType(CellType.STRING);
+                    kdgsdzd.setQjy(qjy.getStringCellValue());
                 }
 
                 //保存到数据库

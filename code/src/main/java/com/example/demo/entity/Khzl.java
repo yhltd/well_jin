@@ -61,4 +61,6 @@ public class Khzl {
      * 快递代收金额
      */
     private String kddsje;
+
+    private String gd;
 }
