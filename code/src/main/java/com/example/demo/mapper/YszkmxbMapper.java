@@ -118,4 +118,7 @@ public interface YszkmxbMapper extends BaseMapper<Yszkmxb> {
                 String skje,
                 String ysje);
 
+    @Delete("delete from yingshouzhangkuanmingxi ")
+    void delete();
+
 }

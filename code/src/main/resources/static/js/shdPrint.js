@@ -14,6 +14,17 @@ function getGsm() {
         }
     })
 }
+// function hqgd() {
+//     var shdw =document.getElementById("add-shdw").value
+//     $ajax({
+//         type: 'post',
+//         url: '/khzl/hqgd',
+//         data: JSON.stringify({
+//             shdw: shdw
+//         })
+//     })
+//
+// }
 
 
 function getMc() {
@@ -28,11 +39,32 @@ function getMc() {
             }
         }
     })
+// }
+// function hqgd() {
+//     var shdw = document.getElementById("add-shdw").value;
+//     $ajax({
+//         type: 'post',
+//         url: '/khzl/hqgd',
+//         data: JSON.stringify ({
+//             shdw: shdw,
+//         })
+//     }, true, '', function (res) {
+//         var gd = res.data[0].gd
+//         document.getElementById("add-gd").value=gd;
+//
+//     })
+}
+function getriqi(){
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = (now.getMonth() + 1).toString().padStart(2, '0');
+    const day = now.getDate().toString().padStart(2, '0');
+    const hours = now.getHours().toString().padStart(2, '0');
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    const seconds = now.getSeconds().toString().padStart(2, '0');
 }
 
-
 $(function () {
-
     getMc();
     getGsm();
     // this_kuan = $('table').width();
@@ -108,8 +140,10 @@ $(function () {
         const year = now.getFullYear();
         const month = (now.getMonth() + 1).toString().padStart(2, '0');
         const day = now.getDate().toString().padStart(2, '0');
-        const serial = (count++).toString().padStart(3, '0');
-        var aa = `${year}${month}${day}${serial}`;
+        const hours = now.getHours().toString().padStart(2, '0');
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        const seconds = now.getSeconds().toString().padStart(2, '0');
+        var aa = `${year}${month}${day}${hours}${minutes}${seconds}`;
         document.getElementById('add-dh').value = aa;
 
         $ajax({
@@ -146,26 +180,13 @@ $(function () {
     });
 //新增弹窗里点击提交按钮
     $("#add-submit-btn").click(function () {
-
-        var shdw = document.getElementById("add-shdw").value;
-        $ajax({
-            type: 'post',
-            url: '/khzl/hqgd',
-            data:{
-                shdw:shdw,
-            }
-        }, true, '', function (res) {
-            var gd = res.data
-            $("#gd").append(gd)
-        })
-
-
+        // hqgd();
         var js = parseFloat(document.getElementById('add-js').value);
         var zl = parseFloat(document.getElementById('add-zl').value);
         var dj = parseFloat(document.getElementById('add-dj').value);
         var kdf = parseFloat(document.getElementById("add-kdf").value);
         var je = js * zl * dj;
-        if(je="NaN"){
+        if(isNaN(je)){
             document.getElementById("add-je").value ="";
         }else {
             document.getElementById("add-je").value = je
@@ -174,7 +195,7 @@ $(function () {
         var jgf = js * 0.5
         document.getElementById("add-jgf").value = jgf
         var hjje = je +jgf+ kdf
-        if(hjje="NaN"){
+        if(isNaN(hjje)){
             document.getElementById("add-hjje").value="";
         }else {
             document.getElementById("add-hjje").value = hjje
@@ -261,8 +282,11 @@ $(function () {
         var t33=document.getElementById("add-hsdj").value;
         var t34=document.getElementById("add-whsdj").value;
         var t35=document.getElementById("add-bz").value;
-        aa = t20;
-        getHjje();
+        if(isNaN(aa)){
+            $("#zjedx").append("");
+        }else {
+            getHjje();
+        }
         if ($("#sfhs" == '含税')) {
             $('#sdlable').hide();
             $('#sd').hide();
@@ -368,7 +392,11 @@ $(function () {
                     $("#fkfs").append(t22);
                     $('#shdPrint-modal').modal('hide');
                     aa =t20;
-                    getHjje();
+                    if(isNaN(aa)){
+                        $("#zjedx").append("");
+                    }else {
+                        getHjje();
+                    }
                     if ($("#sfhs" == '含税')) {
                         $('#sdlable').hide();
                         $('#sd').hide();
@@ -391,25 +419,14 @@ $(function () {
     //暂存
     $("#add-zancun-btn").click(function () {
 
-        var shdw = document.getElementById("add-shdw").value;
-        $ajax({
-            type: 'post',
-            url: '/khzl/hqgd',
-            data:{
-                shdw:shdw,
-            }
-        }, true, '', function (res) {
-            var gd = res.data
 
-            $("#gd").append(gd)
-        })
 
         var js = parseFloat(document.getElementById('add-js').value);
         var zl = parseFloat(document.getElementById('add-zl').value);
         var dj = parseFloat(document.getElementById('add-dj').value);
         var kdf =parseFloat(document.getElementById('add-kdf').value);
         var je = js * zl * dj
-        if(je="NaN"){
+        if(isNaN(je)){
                 document.getElementById("add-je").value ="";
             }else {
                 document.getElementById("add-je").value = je
@@ -418,7 +435,7 @@ $(function () {
 
         document.getElementById("update-jgf").value = jgf
         var hjje = je +jgf+ kdf
-        if(hjje="NaN"){
+        if(isNaN(hjje)){
             document.getElementById("add-hjje").value="";
         }else {
             document.getElementById("add-hjje").value = hjje
@@ -427,7 +444,7 @@ $(function () {
             var hsdj = parseFloat(document.getElementById('add-hsdj').value);
             var sd = parseFloat(document.getElementById('add-sd').value);
             var whsdj = hsdj / sd
-            if(whsdj="NaN"){
+            if(isNaN(whsdj)){
                 document.getElementById("add-whsdj").value="";
             }else {
                 document.getElementById("add-whsdj").value = whsdj
@@ -756,11 +773,7 @@ function menoyToUppercase(money) {
 }
 
 function getHjje() {
-    if(menoyToUppercase(aa).value=="undefined角undefined分"){
-        $("#zjedx").append("");
-    }else {
         $("#zjedx").append(menoyToUppercase(aa));
-    }
 }
 
 function setTable(data) {

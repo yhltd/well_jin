@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @RestController
@@ -150,12 +151,11 @@ public class KhzlController {
         }
     }
     @RequestMapping("/hqgd")
-    public ResultInfo hqgd(@RequestBody HashMap map,String shdw, HttpSession session) {
-        GsonUtil gsonUtil = new GsonUtil(GsonUtil.toJson(map));
+    public ResultInfo hqgd(@RequestBody Map<String, Object> map, String shdw, HttpSession session) {
         try {
-            List<Khzl> hqgd = khzlService.hqgd(shdw);
+           String hqgd = khzlService.hqgd(shdw);
             return ResultInfo.success("获取成功", hqgd);
-        } catch (Exception e) {
+        } catch (Exception e) { // 替换为具体的异常类型
             e.printStackTrace();
             log.error("获取失败：{}", e.getMessage());
             return ResultInfo.error("错误!");

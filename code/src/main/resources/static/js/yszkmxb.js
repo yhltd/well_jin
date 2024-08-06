@@ -1,5 +1,5 @@
 var idd;
-var i=0;
+var c=0;
 var n=0;
 function getList() {
 
@@ -9,72 +9,6 @@ function getList() {
         url: '/yszkmxb/getList',
     }, false, '', function (res) {
         if (res.code == 200) {
-            // if(res.data.yf=="1"){
-            //     yyys=res.data.ysje
-            //     document.getElementById("yyys").value=res.data.ysje,
-            //         document.getElementById("yyyf").value=res.data.skje
-            //     i=i+ysje;
-            //     n=n+skje;
-            // }if(res.data.yf=="2"){
-            //     document.getElementById("eyys").value=res.data.ysje,
-            //         document.getElementById("eyyf").value=res.data.skje,
-            //     i=i+ysje;
-            //     n=n+skje;
-            // }if(res.data.yf=="3"){
-            //     document.getElementById("syys").value=res.data.ysje,
-            //         document.getElementById("syyf").value=res.data.skje
-            //     i=i+ysje;
-            //     n=n+skje;
-            // } if(res.data.yf=="4"){
-            //     document.getElementById("siyys").value=res.data.ysje,
-            //         document.getElementById("siyyf").value=res.data.skje
-            //     i=i+ysje;
-            //     n=n+skje;
-            // } if(res.data.yf=="5"){
-            //     document.getElementById("wyys").value=res.data.ysje,
-            //         document.getElementById("wyyf").value=res.data.skje
-            //     i=i+ysje;
-            //     n=n+skje;
-            // } if(res.data.yf=="6"){
-            //     document.getElementById("lyys").value=res.data.ysje,
-            //         document.getElementById("lyyf").value=res.data.skje
-            //     i=i+ysje;
-            //     n=n+skje;
-            // } if(res.data.yf=="7"){
-            //     document.getElementById("qyys").value=res.data.ysje,
-            //         document.getElementById("qyyf").value=res.data.skje
-            //     i=i+ysje;
-            //     n=n+skje;
-            // } if(res.data.yf=="8"){
-            //     document.getElementById("byys").value=res.data.ysje,
-            //         document.getElementById("byyf").value=res.data.skje
-            //     i=i+ysje;
-            //     n=n+skje;
-            // } if(res.data.yf=="9"){
-            //     document.getElementById("jyys").value=res.data.ysje,
-            //         document.getElementById("jyyf").value=res.data.skje
-            //     i=i+ysje;
-            //     n=n+skje;
-            // } if(res.data.yf=="10"){
-            //     document.getElementById("shiyys").value=res.data.ysje,
-            //         document.getElementById("shiyyf").value=res.data.skje
-            //     i=i+ysje;
-            //     n=n+skje;
-            // } if(res.data.yf=="11"){
-            //     document.getElementById("syyys").value=res.data.ysje,
-            //         document.getElementById("syyyf").value=res.data.skje
-            //     i=i+ysje;
-            //     n=n+skje;
-            // }if(res.data.yf=="12"){
-            //     document.getElementById("seyys").value=res.data.ysje,
-            //         document.getElementById("seyyf").value=res.data.skje
-            //     i=i+ysje;
-            //     n=n+skje;
-            // }
-            // // var m=i+res.data.qcye-n;
-            // // document.getElementById("ljysje").value=i;
-            // // document.getElementById("bnysje").value=n;
-            // // document.getElementById("ysyehj").value=m;
             setTable(res.data);
             $("#ysmxbTable").colResizable({
                 liveDrag: true,
@@ -88,111 +22,126 @@ function getList() {
         }
     })
 }
-function getList1() {
+function deleteq1(){
+    $ajax({
+        type: 'post',
+        url: '/yszkmxb/delete',
+    })
+}
 
+
+function getList1() {
+   deleteq1();
 
     $ajax({
         type: 'post',
         url: '/yszkmxb/getList1',
     }, false, '', function (res) {
         if (res.code == 200) {
-            document.getElementById("add-yf").value = res.data.yf;
-            if (res.data.yf == 1) {
+            for (var i = 0; i < res.data.length; i++) {
+                document.getElementById("add-yf").value = res.data[i].yf;
+                if (res.data[i].yf == "1") {
+                    document.getElementById("add-yyys").value = res.data[i].ysje,
+                        document.getElementById("add-yyyf").value = res.data[i].skje,
+                        c = c +  parseFloat(document.getElementById("add-yyys").value),
+                        n = n +  parseFloat(document.getElementById("add-yyyf").value)
+                }
+                if (res.data[i].yf == "2") {
+                    document.getElementById("add-eyys").value = res.data[i].ysje,
+                        document.getElementById("add-eyyf").value = res.data[i].skje,
+                        c = c +  parseFloat(document.getElementById("add-eyys").value),
+                        n = n +  parseFloat(document.getElementById("add-eyyf").value)
+                }
+                if (res.data[i].yf == "3") {
+                    document.getElementById("add-syys").value = res.data[i].ysje,
+                        document.getElementById("add-syyf").value = res.data[i].skje,
+                        c = c +  parseFloat(document.getElementById("add-syys").value),
+                        n = n +  parseFloat(document.getElementById("add-syyf").value)
+                }
+                if (res.data[i].yf == "4") {
+                    document.getElementById("add-siyys").value = res.data[i].ysje,
+                        document.getElementById("add-siyyf").value = res.data[i].skje,
+                        c = c +  parseFloat(document.getElementById("add-siyys").value),
+                        n = n +  parseFloat(document.getElementById("add-siyyf").value)
+                }
+                if (res.data[i].yf == "5") {
+                    document.getElementById("add-wyys").value = res.data[i].ysje,
+                        document.getElementById("add-wyyf").value = res.data[i].skje,
+                        c = c +  parseFloat(document.getElementById("add-wyys").value),
+                        n = n +  parseFloat(document.getElementById("add-wyyf").value)
+                }
+                if (res.data[i].yf == "6") {
+                    document.getElementById("add-lyys").value = res.data[i].ysje,
+                        document.getElementById("add-lyyf").value = res.data[i].skje,
+                        c = c +  parseFloat(document.getElementById("add-lyys").value),
+                        n = n +  parseFloat(document.getElementById("add-lyyf").value)
+                }
+                if (res.data[i].yf == "7") {
+                    document.getElementById("add-qyys").value = res.data[i].ysje,
+                        document.getElementById("add-qyyf").value = res.data[i].skje,
+                        c = c +  parseFloat(document.getElementById("add-qyys").value),
+                    n = n +  parseFloat(document.getElementById("add-qyyf").value)
+                }
+                if (res.data[i].yf == "8") {
+                    document.getElementById("add-byys").value = res.data[i].ysje,
+                        document.getElementById("add-byyf").value = res.data[i].skje,
+                        c = c + parseFloat(document.getElementById("add-byys").value),
+                    n = n +  parseFloat(document.getElementById("add-byyf").value)
+                }
+                if (res.data[i].yf == "9") {
+                    document.getElementById("add-jyys").value = res.data[i].ysje,
+                        document.getElementById("add-jyyf").value = res.data[i].skje,
+                        c = c +  parseFloat(document.getElementById("add-jyys").value),
+                        n = n +  parseFloat(document.getElementById("add-jyyf").value);
+                }
+                if (res.data[i].yf == "10") {
+                    document.getElementById("add-shiyys").value = res.data[i].ysje,
+                        document.getElementById("add-shiyyf").value = res.data[i].skje,
+                        c = c +  parseFloat(document.getElementById("add-shiyys").value),
+                        n = n +  parseFloat(document.getElementById("add-shiyyf").value)
+                }
+                if (res.data[i].yf == "11") {
+                    document.getElementById("add-syyys").value = res.data[i].ysje,
+                        document.getElementById("add-syyyf").value = res.data[i].skje,
+                        c = c +  parseFloat(document.getElementById("add-syyys").value),
+                        n = n +  parseFloat(document.getElementById("add-syyyf").value)
+                }
+                if (res.data[i].yf == "12") {
+                    document.getElementById("add-seyys").value = res.data[i].ysje,
+                        document.getElementById("add-seyyf").value = res.data[i].skje,
+                        c = c +  parseFloat(document.getElementById("add-seyys").value),
+                        n = n +  parseFloat(document.getElementById("add-seyyf").value)
+                }
+                // var m = i + res.data.qcye - n;
+                // document.getElementById("add-ljysje").value = i;
+                // document.getElementById("add-bnysje").value = n;
+                // document.getElementById("add-ysyehj").value = m;
+                document.getElementById("add-gsm").value = res.data[i].gsm,
+                    document.getElementById("add-qcye").value = res.data[i].qcye;
+                document.getElementById("add-sfyj").value = res.data[i].sfyj;
+                document.getElementById("add-sfhs").value = res.data[i].sfhs;
+            }
+            var m = c + parseFloat(document.getElementById("add-qcye").value) - n;
+            document.getElementById("add-ljysje").value = c;
+            document.getElementById("add-bnysje").value = n;
+            document.getElementById("add-ysyehj").value = m;
+            let params = formToJson('#add-form');
+            $ajax({
+                type: 'post',
+                url: '/yszkmxb/add',
+                data: JSON.stringify ({
+                    addInfo: params
+                }),
+                dataType: 'json',
+                contentType: 'application/json;charset=utf-8'
 
-                document.getElementById("add-yyys").value = res.data.ysje,
-                    document.getElementById("add-yyyf").value = res.data.skje
-                i = i + ysje;
-                n = n + skje;
-            }
-            if (res.data.yf == "2") {
-                document.getElementById("add-eyys").value = res.data.ysje,
-                    document.getElementById("add-eyyf").value = res.data.skje,
-                    i = i + ysje;
-                n = n + skje;
-            }
-            if (res.data.yf == "3") {
-                document.getElementById("add-syys").value = res.data.ysje,
-                    document.getElementById("add-syyf").value = res.data.skje
-                i = i + ysje;
-                n = n + skje;
-            }
-            if (res.data.yf == "4") {
-                document.getElementById("add-siyys").value = res.data.ysje,
-                    document.getElementById("add-siyyf").value = res.data.skje
-                i = i + ysje;
-                n = n + skje;
-            }
-            if (res.data.yf == "5") {
-                document.getElementById("add-wyys").value = res.data.ysje,
-                    document.getElementById("add-wyyf").value = res.data.skje
-                i = i + ysje;
-                n = n + skje;
-            }
-            if (res.data.yf == "6") {
-                document.getElementById("add-lyys").value = res.data.ysje,
-                    document.getElementById("add-lyyf").value = res.data.skje
-                i = i + ysje;
-                n = n + skje;
-            }
-            if (res.data.yf == 7) {
-                document.getElementById("add-qyys").value = res.data.ysje,
-                    document.getElementById("add-qyyf").value = res.data.skje
-                i = i + ysje;
-                n = n + skje;
-            }
-            if (res.data.yf == 8) {
-                document.getElementById("add-byys").value = res.data.ysje,
-                    document.getElementById("add-byyf").value = res.data.skje
-                i = i + ysje;
-                n = n + skje;
-            }
-            if (res.data.yf == "9") {
-                document.getElementById("add-jyys").value = res.data.ysje,
-                    document.getElementById("add-jyyf").value = res.data.skje
-                i = i + ysje;
-                n = n + skje;
-            }
-            if (res.data.yf == "10") {
-                document.getElementById("add-shiyys").value = res.data.ysje,
-                    document.getElementById("add-shiyyf").value = res.data.skje
-                i = i + ysje;
-                n = n + skje;
-            }
-            if (res.data.yf == "11") {
-                document.getElementById("add-syyys").value = res.data.ysje,
-                    document.getElementById("add-syyyf").value = res.data.skje
-                i = i + ysje;
-                n = n + skje;
-            }
-            if (res.data.yf == "12") {
-                document.getElementById("add-seyys").value = res.data.ysje,
-                    document.getElementById("add-seyyf").value = res.data.skje
-                i = i + ysje;
-                n = n + skje;
-            }
-            // var m = i + res.data.qcye - n;
-            // document.getElementById("add-ljysje").value = i;
-            // document.getElementById("add-bnysje").value = n;
-            // document.getElementById("add-ysyehj").value = m;
-            document.getElementById("add-gsm").value = res.data.gsm;
-            document.getElementById("add-qcye").value = res.data.qcye;
-            // document.getElementById("add-sfyj").value = res.data.sfyj;
-            // document.getElementById("add-sfhs").value = res.data.sfhs;
-            if (checkForm('#add-form')) {
-                let params = formToJson('#add-form');
-                $ajax({
-                    type: 'post',
-                    url: '/yszkmxb/add',
-                    data: JSON.stringify ({
-                        addInfo: params
-                    }),
-                    dataType: 'json',
-                    contentType: 'application/json;charset=utf-8'
+            })
 
-                })
-            }
+
         }
+
     })
+    getList();
 }
 $(function () {
     getList1();

@@ -92,6 +92,73 @@ getList();
         })
     });
 
+
+    //点击修改按钮显示弹窗
+    $('#upn-btn').click(function () {
+        let rows = getTableSelection('#ysyfTable');
+        if (rows.length > 1 || rows.length == 0) {
+            swal('请选择一条数据修改!');
+            return;
+        }
+        $('#upn-modal').modal('show');
+        setForm(rows[0].data, '#update-form');
+        $('#upn-skje').val(rows[0].data.skje);
+        $('#upn-riqi').val(rows[0].data.riqi);
+        $('#upn-gsm').val(rows[0].data.gsm);
+        $('#upn-zys').val(rows[0].data.zys);
+        $('#upn-fkriqi').val(rows[0].data.fkriqi);
+        $('#upn-bh').val(rows[0].data.bh);
+        $('#upn-ysje').val(rows[0].data.ysje);
+        $('#id').val(rows[0].data.id);
+    });
+
+    //修改弹窗点击关闭按钮
+    $('#cupn-btn').click(function () {
+        $('#upn-form')[0].reset();
+        $('#upn-modal').modal('hide');
+    });
+
+    //修改弹窗里点击提交按钮
+    $('#uupn-btn').click(function () {
+        var msg = confirm("确认要修改吗？");
+        if (msg) {
+                var zys = parseFloat(document.getElementById("upn-ysje").value)-parseFloat(document.getElementById("upn-skje").value)
+                document.getElementById("upn-zys").value=zys;
+                let params = formToJson('#upn-form');
+                $ajax({
+                    type: 'post',
+                    url: '/ysyf/update',
+                    data: {
+                        updateJson: JSON.stringify(params)
+                    },
+                    dataType: 'json',
+                    contentType: 'application/json;charset=utf-8'
+                }, false, '', function (res) {
+                    if (res.code == 200) {
+                        swal("", res.msg, "success");
+                        $('#cupn-btn').click();
+                        $('#upn-modal').modal('hide');
+                        getList();
+                    } else {
+                        swal("", res.msg, "error");
+                    }
+                })
+
+        }
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
 //点击新增按钮
     $('#add-btn').click(function () {
         $ajax({
@@ -109,6 +176,13 @@ getList();
         $('#qhd-modal').modal('hide');
     });
 
+
+
+
+
+
+
+
     $('#add-t-submit-btn').click(function () {
         let rows = getTableSelection('#show-qhd-table');
         if (rows.length > 1 || rows.length == 0) {
@@ -118,7 +192,12 @@ getList();
         $('#updateje-modal').modal('show');
         setForm(rows[0].data, '#updateje-modal');
         $('#update-skje').val(rows[0].data.skje);
-
+        $('#update-riqi').val(rows[0].data.riqi);
+        $('#update-gsm').val(rows[0].data.gsm);
+        $('#update-zys').val(rows[0].data.zys);
+        $('#update-fkriqi').val(rows[0].data.fkriqi);
+        $('#update-ysje').val(rows[0].data.ysje);
+        $('#update-bh').val(rows[0].data.bh)
     });
 //点击关闭按钮
     $('#close-skje-btn').click(function () {
@@ -126,6 +205,8 @@ getList();
     });
     //新增提交
     $("#update-skje-btn").click(function () {
+        var zys = parseFloat(document.getElementById("update-ysje").value)-parseFloat(document.getElementById("update-skje").value)
+        document.getElementById("update-zys").value=zys;
         let params = formToJson("#updateje-form");
         if (checkForm('#updateje-form')) {
             $ajax({
@@ -179,6 +260,7 @@ getList();
         $('#update-dj').val(rows[0].data.dj);
         $('#update-je').val(rows[0].data.je);
         $('#update-ysyf').val(rows[0].data.ysyf);
+
     });
 
     //修改弹窗点击关闭按钮
@@ -295,6 +377,12 @@ function setTable(data) {
                 sortable: true,
                 width: 80,
             }, {
+                field: 'gsm',
+                title: '公司名',
+                align: 'center',
+                sortable: true,
+                width: 80,
+            }, {
                 field: 'skje',
                 title: '收款金额',
                 align: 'center',
@@ -318,6 +406,12 @@ function setTable(data) {
                 align: 'center',
                 sortable: true,
                 width: 80,
+            }, {
+                field: 'id',
+                title: 'id',
+                align: 'center',
+                sortable: true,
+                width: 0,
             }
         ],
         onClickRow: function (row, el) {
@@ -392,7 +486,20 @@ function setTable1(data) {
                 align: 'center',
                 sortable: true,
                 width: 80,
+            }, {
+                field: 'bh',
+                title: '编号',
+                align: 'center',
+                sortable: true,
+                width: 0,
             }
+            // }, {
+            //     field: 'bh',
+            //     title: '编号',
+            //     align: 'center',
+            //     sortable: true,
+            //     width: 0,
+            // }
         ],
         // onClickRow: function (row, el) {
         //     let isSelect = $(el).hasClass('selected')

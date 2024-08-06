@@ -68,27 +68,27 @@ public class YsyfController {
     /**
      * 修改
      */
-//    @RequestMapping(value = "/update", method = RequestMethod.POST)
-//    public ResultInfo update(@RequestBody String updateJson, HttpSession session) {
-//        UserInfo userInfo = GsonUtil.toEntity(SessionUtil.getToken(session), UserInfo.class);
-//        if(!userInfo.getCaozuoquanxian().equals("可修改")){
-//            return ResultInfo.error(401, "无权限,请联系管理员");
-//        }
-//        Ysyf ysyf = null;
-//        try {
-//            ysyf = DecodeUtil.decodeToJson(updateJson, Ysyf.class);
-//            if (ysyfService.update(ysyf)) {
-//                return ResultInfo.success("修改成功", ysyf);
-//            } else {
-//                return ResultInfo.success("修改失败", ysyf);
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            log.error("修改失败：{}", e.getMessage());
-////            log.error("参数：{}", userInfo);
-//            return ResultInfo.error("修改失败");
-//        }
-//    }
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public ResultInfo update(@RequestBody String updateJson, HttpSession session) {
+        UserInfo userInfo = GsonUtil.toEntity(SessionUtil.getToken(session), UserInfo.class);
+        if(!userInfo.getCaozuoquanxian().equals("可修改")){
+            return ResultInfo.error(401, "无权限,请联系管理员");
+        }
+        Ysyf ysyf = null;
+        try {
+            ysyf = DecodeUtil.decodeToJson(updateJson, Ysyf.class);
+            if (ysyfService.update(ysyf)) {
+                return ResultInfo.success("修改成功", ysyf);
+            } else {
+                return ResultInfo.success("修改失败", ysyf);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("修改失败：{}", e.getMessage());
+//            log.error("参数：{}", userInfo);
+            return ResultInfo.error("修改失败");
+        }
+    }
 
     /**
      * 添加

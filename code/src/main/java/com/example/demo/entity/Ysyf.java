@@ -13,10 +13,10 @@ public class Ysyf {
      */
     @TableId(value = "id" , type = IdType.AUTO)
     private Integer id;
-//    /**
-//     * 日期
-//     */
-//    private String riqi;
+    /**
+     * 日期
+     */
+    private String riqi;
     /**
      * 公司名
      */
@@ -46,7 +46,10 @@ public class Ysyf {
 
     private String zys;
 
-    private String fkrq;
+    private String fkriqi;
 
     private String yf;
+
+    private String ysje;
+    private String bh;
 }

@@ -92,7 +92,7 @@
             新增
         </button>
         <span style="border-right: 20px solid white"></span>
-        <button id="update-btn" class="btn btn-primary" style="border-radius:5px;">
+        <button id="upn-btn" class="btn btn-primary" style="border-radius:5px;">
             <i class="bi bi-pencil-square icon"></i>
             修改
         </button>
@@ -109,6 +109,107 @@
 <div class="table-div border-top">
     <table id="ysyfTable"></table>
 </div>
+
+
+<div id="upn-modal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">录入</div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form id="upn-form" class="needs-validation">
+                    <div class="row justify-content-evenly">
+                        <div class="form-group">
+                            <input id="id" name="id" type="hidden">
+                        </div>
+                        <div class="col-6" hidden>
+                            <div class="form-group">
+                                <label for="upn-bh">编号</label>
+                                <input id="upn-bh" name="bh" type="text" class="form-control" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group" >
+                                <label for="upn-fkrq">付款日期</label>
+                                <input id="upn-fkrq" name="fkrq" type="date" class="form-control" autocomplete="off"
+                                       data-required="1">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="upn-skje">收款金额</label>
+                                <input id="upn-skje" name="skje" type="text" class="form-control" autocomplete="off"
+                                       data-required="1">
+                                <div class="invalid-feedback">
+                                    请输入收款金额！
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group" hidden>
+                                <label for="upn-ysje">应收金额</label>
+                                <input id="upn-ysje" name="ysje" type="text" class="form-control" autocomplete="off"
+                                       readonly data-required="1">
+                            </div>
+                        </div>
+                        <div class="col-6" hidden>
+                            <div class="form-group">
+                                <label for="upn-zys">总应收</label>
+                                <input id="upn-zys" name="zys" type="text" class="form-control" autocomplete="off"
+                                       data-required="1">
+                                <div class="invalid-feedback">
+                                    请输入总应收！
+                                </div>
+                            </div>
+                        </div>
+<!--                        <div class="col-6">-->
+<!--                            <div class="form-group">-->
+<!--                                <label for="upn-yuefen">月份</label>-->
+<!--                                <input id="upn-yuefen" name="yuefen" type="text" class="form-control" autocomplete="off"-->
+<!--                                       data-required="1">-->
+<!--                                <div class="invalid-feedback">-->
+<!--                                    请输入月份！-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                        <div class="col-6">
+                            <div class="form-group" hidden>
+                                <label for="upn-bz">备注</label>
+                                <input id="upn-bz" name="bz" type="text" class="form-control" autocomplete="off"
+                                       readonly data-required="1">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="border-top" style="padding: 15px;">
+                <button id="uupn-btn" type="button" class="btn" style="background-color: limegreen;color: white">
+                    <i class="bi bi-arrow-bar-up icon"></i>
+                    提交
+                </button>
+                <button id="cupn-btn" type="button" class="btn left-margin"
+                        style="background-color: red;color: white">
+                    <i class="bi bi-x-circle icon"></i>
+                    关闭
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
 
 <div id="add-modal" class="modal fade" tabindex="-1">
     <div class="modal-dialog modal-lg">
@@ -208,9 +309,9 @@
             </div>
             <div class="modal-body">
                 <form id="update-form" class="needs-validation">
-                    <div class="form-group">
-                        <input id="id" name="id" type="hidden">
-                    </div>
+<!--                    <div class="form-group">-->
+<!--                        <input id="id" name="id" type="hidden">-->
+<!--                    </div>-->
 
                     <!--                    <div class="row justify-content-evenly">-->
                     <!--                        <div class="col-6">-->

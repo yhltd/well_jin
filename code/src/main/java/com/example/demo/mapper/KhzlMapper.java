@@ -32,8 +32,8 @@ public interface KhzlMapper extends BaseMapper<Khzl> {
     List<Khzl> hqxlGsm();
 
 
-    @Select("select gd from kehuziliao where gsm=#{shdw}")
-    List<Khzl> hqgd(String gsm);
+    @Select("select gd from kehuziliao where shdw=#{shdw}")
+    String hqgd(String shdw);
 
     @Select("select * from kehuziliao where gsm=#{gsm}")
     List<Khzl> getListByGsm(String gsm);

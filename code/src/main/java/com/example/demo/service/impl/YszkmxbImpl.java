@@ -31,4 +31,8 @@ public class YszkmxbImpl extends ServiceImpl<YszkmxbMapper, Yszkmxb> implements 
 
     @Override
     public Yszkmxb add(Yszkmxb yszkmxb) { return save(yszkmxb) ? yszkmxb : null; }
+    @Override
+    public void delete() {
+        yszkmxbMapper.delete();
+    }
 }

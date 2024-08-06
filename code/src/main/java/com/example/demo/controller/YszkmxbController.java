@@ -75,5 +75,10 @@ public class YszkmxbController {
         }
     }
 
+    @RequestMapping("/delete")
+    public void delete() {
+               yszkmxbService.delete();
+    }
+
 }
 

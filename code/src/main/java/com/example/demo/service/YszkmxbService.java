@@ -18,4 +18,5 @@ public interface YszkmxbService extends IService<Yszkmxb> {
     List<Yszkmxb> getList1();
 
     Yszkmxb add(Yszkmxb yszkmxb);
+    void delete();
 }
