@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>打印</title>
+    <link rel="shortcut icon" href="#"/>
+
+    <script type="text/javascript" src="../js/Jquery.js"></script>
+    <script type="text/javascript" src="../js/jquerysession.js"></script>
+
+    <link rel="stylesheet" href="../bootstrap-4.5.0-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../bootstrap-4.5.0-dist/icons/bootstrap-icons.css">
+    <script type="text/javascript" src="../bootstrap-4.5.0-dist/js/bootstrap.min.js"></script>
+
+    <!--bootstrap-table-->
+    <link rel="stylesheet" href="../bootstrap-4.5.0-dist/css/bootstrap-table.css">
+    <script type="text/javascript" src="../bootstrap-4.5.0-dist/js/bootstrap-table.js"></script>
+    <script type="text/javascript" src="../bootstrap-4.5.0-dist/js/bootstrap-table-zh-CN.min.js"></script>
+    <script type="text/javascript" src="../bootstrap-4.5.0-dist/js/colResizable-1.6.js"></script>
+    <script type="text/javascript" src="../bootstrap-4.5.0-dist/js/bootstrap-table-resizable.js"></script>
+
+    <link rel="stylesheet" href="../css/sweetalert.css">
+    <script type="text/javascript" src="../js/sweetalert-dev.js"></script>
+
+    <link rel="stylesheet" href="../css/main.css">
+    <script type="text/javascript" src="../js/main.js"></script>
+    <script type="text/javascript" src="../js/zhdy.js"></script>
+    <script type="text/javascript" src="../js/table.js"></script>
+    <style>
+        td {
+            vertical-align: middle !important;
+            text-align: center;
+            /*border-color: #9fcdff !important;*/
+            font-size: 16px;
+        @media print
+        }
+
+        tr {
+            vertical-align: middle;
+            /*border-color: #9fcdff !important;*/
+        @media print
+        }
+
+        th {
+            font-size: 12px;
+            text-align: center;
+        @media print
+        }
+
+        table {
+            width: 100% !important;
+            margin: auto;
+            /*border-color: #9fcdff !important;*/
+        @media print
+        }
+
+        .table-div{
+            background-color: transparent;
+            box-shadow: 0 0 0px rgb(0 0 0 / 50%);
+        @media print
+        }
+
+
+        @page  {
+            size: auto;
+        }
+    </style>
+</head>
+
+<body class="pt-2">
+<!--<div class="background-image">-->
+<!--    <img src="../img/时间.png" class="img1">-->
+<!--    &lt;!&ndash;    <span style="color: black; font-size: 20px;margin-left: 20px" id="now_time" ></span>&ndash;&gt;-->
+<!--    <span style="color: black; font-size: 20px;margin-left: 20px" id="now_time" ></span>-->
+<!--    <span style="margin-left: 50px;font-size: 20px"><img src="../img/个人.png" style="height: 30px;">  您 好 <b><span id="dlm" style="color: black"></span></b> , 欢 迎 您 登 录 !</span>-->
+<!--    <img src="../img/重金属.png" class="img1" style="margin-left: 30px">-->
+<!--    <img src="../img/金属.png" class="img1"style="margin-left: 30px">-->
+<!--    <img src="../img/钻石.png" class="img1"style="margin-left: 30px">-->
+<!--    <div class="menu">-->
+<!--        <button class="btn2"><img src="../img/个人信息.png" class="img1"></button>-->
+<!--        <div class="content">-->
+<!--            <div>-->
+<!--                <img src="../img/img_1.png">-->
+<!--            </div>-->
+<!--            <div style="margin-left: 60px">-->
+<!--                <a href="grxx.html" class="link-dark rounded">个人信息</a>-->
+<!--            </div>-->
+<!--            <div style="margin-left: 60px">-->
+<!--                <a href="http://localhost:9093/index.html" target="_top">退出登录</a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <a href="main.html" target="_top"><img src="../img/首页.png" class="img1"></a>-->
+<!--    <img src="../img/地球仪.png" class="img1" style="margin-left: 20px;">-->
+<!--</div>-->
+<div id="table-toolbar">
+<!--    <div class="btn-group" role="group">-->
+<!--        <button id="refresh-btn" class="btn btn-primary" style="border-radius:5px;">-->
+<!--            <i class="bi bi-arrow-clockwise icon"></i>-->
+<!--            刷新-->
+<!--        </button>-->
+        <button id="print-btn" class="btn btn-primary" style="border-radius:5px;">
+            <i class="bi bi-arrow-clockwise icon"></i>
+            打印
+        </button>
+
+<!--        <a class="btn btn-primary" style="color: white;padding-top: 8px;border-radius:5px;">当前页：应收账款明细表</a>-->
+    </div>
+</div>
+
+<div class="table-div border-top">
+    <table id="ysmxbTable"></table>
+</div>
+<div class="table-div border-top" style="width: auto" id="div">
+    <div class="col-xs-16">
+        <div class="col-xs-16">
+                        <table class="table" style="text-align: center;font-size: 25px;border:none;width: 100%;margin-left: 12%">
+                            <div style="font-size: 20px;text-align: center;font-weight: bold">深圳市坤鑫金属有限公司</div>
+                            <div style="font-size: 18px;text-align: center">联系地址: 深圳市光明区凤凰街道甲子塘社区甲子塘路洋天二巷18号1楼</div>
+                            <div style="font-size: 18px;text-align: center">电话: 0755-29199568 传真: 0755-29199318 29199328</div>
+<!--                            <div>-->
+<!--                                <span style="font-size: 18px;font-weight: bold;margin-left: 500px">送货单</span>-->
+<!--                                <span id="dh" style="font-size: 16px;margin-left: 260px">NO:</span>-->
+<!--                            </div>-->
+<!--                            <div>-->
+<!--                                <span id="shdw">收货单位:</span>-->
+<!--                                <span id="riqi" style="margin-left: 800px"></span>-->
+<!--                            </div>-->
+                        </table>
+                    <table class="table table-bordered">
+                                <thead>
+                                <tr>
+<!--                                    <th colspan="1">序号</th>-->
+                                    <th colspan="1">运单号</th>
+                                    <th colspan="1">日期</th>
+                                    <th colspan="1">收货单位</th>
+                                    <th colspan="1">名称</th>
+                                    <th colspan="1">模号</th>
+                                    <th colspan="1">规格</th>
+                                    <th colspan="1">件数</th>
+                                    <th colspan="1">重量</th>
+                                    <th colspan="1">单价</th>
+                                    <th colspan="1">金额</th>
+                                    <th colspan="1">锯工费</th>
+                                    <th colspan="1">快递费</th>
+
+                                </tr>
+                                <thead>
+                                <tbody id="data"></tbody>
+                            </table>
+                            <table class="table table-bordered">
+                                <thead>
+                            <tr>
+                                <th colspan="1">收货地址</th>
+                                <th colspan="1">快递单号</th>
+                                <th colspan="1">备注</th>
+                                <th colspan="1">是否月结</th>
+                                <th colspan="1">付款方式</th>
+                                <th colspan="1">含税/未含税/金额含税</th>
+                                <th colspan="1">税点</th>
+                                <th colspan="1">跟单</th>
+                                <th colspan="1">制单人</th>
+                                <th colspan="1">收货单位及经手人</th>
+                                <th colspan="1">合计重量</th>
+                                <th colspan="1">合计金额</th>
+                            </tr>
+                                <thead>
+                                <tbody id="data1"></tbody>
+<!--                                <tr style="text-align: center">-->
+<!--                                    <th colspan="1">合计重量</th>-->
+<!--                                    <th colspan="3" id="hjzl"></th>-->
+<!--                                    <th colspan="1">合计金额</th>-->
+<!--                                    <th colspan="3" id="hjje"></th>-->
+<!--                                </tr>-->
+<!--                                <tr style="text-align: center">-->
+<!--                                    <th style="width: 200px">总金额(大写):</th>-->
+<!--                                    <th id="zjedx"></th>-->
+<!--                                </tr>-->
+                               </tbody>
+                            </table>
+<!--                            <span id="gd" style="margin-left: 100px">跟单:</span>-->
+<!--                            <span id="zdr" style="margin-left: 230px">制单人:</span>-->
+<!--                            <span id="shdwjjsr" style="margin-left: 230px">收货单位及经手人:</span>-->
+<!--                            <p id="bzld" style="margin-left: 40px">备注:</p>-->
+                            <table class="table table-bordered">
+                                <p style="margin-left: 40px">以上货品已经收妥，重量核对无误，材质如有异常，七天内提出，按重量退换，</p>
+                                <p style="margin-left: 40px">如客户未按照以上约定付款方式付款的，我公司将每天收取货款3%的违约金。</p>
+                                <p style="margin-left: 40px">上列货物未收清款前，其货物所有权归属本公司所有。</p>
+                            </table>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<!--<div class="background-image2 flex-container" style="margin-top: 600px">-->
+<!--    <div class="info-box" style="width: 500px;margin-left: 10px">-->
+<!--        <span>主办单位：坤鑫金属有限公司</span><br>-->
+<!--        &lt;!&ndash;        <span>技术专线：123456</span><br>&ndash;&gt;-->
+<!--        <span>备案/许可证编号为：xxxxxx</span>-->
+<!--    </div>-->
+<!--    <div class="info-box" style="width: 600px;">-->
+<!--        <span>最佳使用效果：谷歌浏览器</span><br>-->
+<!--        <span>联系地址：xxxxxx</span><br>-->
+
+<!--    </div>-->
+<!--    <div class="info-box" style="width: 300px;">-->
+<!--        <img src="../img/电话.png" class="img2">12720988902<br>-->
+<!--        <span>关于我们</span><img src="../img/关于我们.png" style="margin-left: 20px" class="img2">-->
+<!--    </div>-->
+<!--</div>-->
+
+</body>
+</html>

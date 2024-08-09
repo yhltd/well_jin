@@ -114,4 +114,5 @@ public class Cgx {
     private String hjje;
 
     private String bzld;
+    private String hjzl;
 }

@@ -1,17 +1,31 @@
 var aa;
+var idd = 0;
 let count = 1;
 var arr = {};
+var n = 0;
+var h ="";
+let select=[];
+let select_mc=[];
 function getGsm() {
     $ajax({
         type: 'post',
         url: '/khzl/hqxlGsm',
     }, false, '', function (res) {
         if (res.code == 200) {
+            var item="";
+            select = res.data;
             for (var i = 0; i < res.data.length; i++) {
                 $("#add-shdw").append("<option>" + res.data[i].gsm + "</option>");
+                item="<option value=\"" + res.data[i].gsm + "\">" + res.data[i].gsm + "</option>"
                 // $("#update-shdw").append("<option>" + res.data[i].gsm + "</option>");
             }
         }
+    })
+}
+function deleteq1(){
+    $ajax({
+        type: 'post',
+        url: '/shdp/delete',
     })
 }
 // function hqgd() {
@@ -33,8 +47,11 @@ function getMc() {
         url: '/spmc/getList',
     }, false, '', function (res) {
         if (res.code == 200) {
+            var item=""
+            select_mc=res.data;
             for (var i = 0; i < res.data.length; i++) {
                 $("#add-mc").append("<option>" + res.data[i].mc + "</option>");
+                item="<option value=\"" + res.data[i].mc + "\">" + res.data[i].mc + "</option>"
                 // $("#update-mc").append("<option>" + res.data[i].mc + "</option>");
             }
         }
@@ -54,7 +71,8 @@ function getMc() {
 //
 //     })
 }
-function getriqi(){
+
+function getriqi() {
     const now = new Date();
     const year = now.getFullYear();
     const month = (now.getMonth() + 1).toString().padStart(2, '0');
@@ -64,9 +82,34 @@ function getriqi(){
     const seconds = now.getSeconds().toString().padStart(2, '0');
 }
 
+function getList() {
+
+    $ajax({
+        type: 'post',
+        url: '/shdp/getList',
+    }, false, '', function (res) {
+        if (res.code == 200) {
+            setTable1(res.data);
+            $("#shdptable").colResizable({
+                liveDrag: true,
+                gripInnerHtml: "<div class='grip'></div>",
+                draggingClass: "dragging",
+                resizeMode: 'fit'
+            });
+            for (i = 0; i <= res.data.id; i++) {
+                idd = i;
+            }
+        }
+    })
+}
+
 $(function () {
+    deleteq1();
+    getList();
     getMc();
     getGsm();
+
+
     // this_kuan = $('table').width();
     //打印
     $('#print-btn').click(function () {
@@ -96,8 +139,7 @@ $(function () {
             // document.body.innerHTML = oldstr;
             // window.location.reload();
             // return false;
-        }
-    else {
+        } else {
             $ajax({
                 type: 'post',
                 url: '/cgx/add',
@@ -133,6 +175,256 @@ $(function () {
             }
         })
     });
+
+    function columnUpd(id, column) {
+
+        var this_value = $('#' + column + id).val();
+        $ajax({
+            type: 'post',
+            url: '/shdp/update',
+            data: {
+                column: column,
+                id: id,
+                value: this_value,
+            }
+        }, false, '', function (res) {
+            if (res.code == 200) {
+                getList();
+            }
+        })
+    }
+
+    $('#add-btn2').click(function () {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = (now.getMonth() + 1).toString().padStart(2, '0');
+        const day = now.getDate().toString().padStart(2, '0');
+        const hours = now.getHours().toString().padStart(2, '0');
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        const seconds = now.getSeconds().toString().padStart(2, '0');
+        var aa = `${year}${month}${day}${hours}${minutes}${seconds}`;
+        document.getElementById('add-dh').value = aa;
+        for (i = 0; i < n; i = i + 1) {
+            let c=parseFloat($('#id1').val())+i
+            var q =c.toString();
+            var riqi = $('#riqi' + q).val();
+            var dh = $('#dh' + q).val();
+            var shdw = $('#shdw' + q).val();
+            var mc = $('#mc' + q).val();
+            var mh = $('#mh' + q).val();
+            var gg = $('#gg' + q).val();
+            var js = $('#js' + q).val();
+            var zl = $('#zl' + q).val();
+            var dj = $('#dj' + q).val();
+            var je = $('#je' + q).val();
+            var bz = $('#bz' + q).val();
+            var shdz = $('#shdz' + q).val();
+            var kddh = $('#kddh' + q).val();
+            var sfyj = $('#sfyj' + q).val();
+            var fkfs = $('#fkfs' + q).val();
+            var sfhs = $('#sfhs' + q).val();
+            var gd = $('#gd' + q).val();
+            var zdr = $('#zdr' + q).val();
+            var shdwjjsr = $('#shdwjjsr' + q).val();
+            var jgf = $('#jgf' + q).val();
+            var kdf = $('#kdf' + q).val();
+            var hsdj = $('#hsdj' + q).val();
+            var sd = $('#sd' + q).val();
+            var whsdj = $('#whsdj' + q).val();
+            var Je = parseFloat(je);
+            var Jgf = parseFloat(jgf);
+            var Kdf = parseFloat(kdf);
+            var Hjje = Je + Jgf +Kdf;
+            var hjje= Hjje.toString();
+            var Zl = parseFloat(zl);
+            var Js = parseFloat(js);
+            var Hjzl=Zl*Js;
+            var hjzl=Hjzl.toString();
+            if (isNaN(je)) {
+                je = "";
+            }
+            if (isNaN(hjje)) {
+                hjje = "";
+            }
+            $ajax({
+                type: 'post',
+                url: '/shdp/update',
+                data: {
+                    riqi:riqi,
+                    dh:aa,
+                    shdw:shdw,
+                    mc:mc,
+                    mh:mh,
+                    gg:gg,
+                    js:js,
+                    zl:zl,
+                    dj:dj,
+                    je:je,
+                    bz:bz,
+                    shdz:shdz,
+                    kddh:kddh,
+                    sfyj:sfyj,
+                    fkfs:fkfs,
+                    sfhs:sfhs,
+                    gd:gd,
+                    zdr:zdr,
+                    shdwjjsr:shdwjjsr,
+                    jgf:jgf,
+                    kdf:kdf,
+                    hsdj:hsdj,
+                    sd:sd,
+                    whsdj:whsdj,
+                    hjje:hjje,
+                    hjzl:hjzl,
+                    id:q,
+                },
+
+            }, false, '', function (res) {
+                swal("", res.msg, "success");
+
+                getList();
+            })
+
+                }
+    })
+
+
+    $('#add-cgx').click(function() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = (now.getMonth() + 1).toString().padStart(2, '0');
+        const day = now.getDate().toString().padStart(2, '0');
+        const hours = now.getHours().toString().padStart(2, '0');
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        const seconds = now.getSeconds().toString().padStart(2, '0');
+        var aa = `${year}${month}${day}${hours}${minutes}${seconds}`;
+
+        document.getElementById('add-dh').value = aa;
+        for (i = 0; i < n; i = i + 1) {
+
+            let c=parseFloat($('#id1').val())+i
+            var q =c.toString();
+            var riqi = $('#riqi' + q).val();
+            var dh = $('#dh' + q).val();
+            var shdw = $('#shdw' + q).val();
+            var mc = $('#mc' + q).val();
+            var mh = $('#mh' + q).val();
+            var gg = $('#gg' + q).val();
+            var js = $('#js' + q).val();
+            var zl = $('#zl' + q).val();
+            var dj = $('#dj' + q).val();
+            var je = $('#je' + q).val();
+            var bz = $('#bz' + q).val();
+            var shdz = $('#shdz' + q).val();
+            var kddh = $('#kddh' + q).val();
+            var sfyj = $('#sfyj' + q).val();
+            var fkfs = $('#fkfs' + q).val();
+            var sfhs = $('#sfhs' + q).val();
+            var gd = $('#gd' + q).val();
+            var zdr = $('#zdr' + q).val();
+            var shdwjjsr = $('#shdwjjsr' + q).val();
+            var jgf = $('#jgf' + q).val();
+            var kdf = $('#kdf' + q).val();
+            var hsdj = $('#hsdj' + q).val();
+            var sd = $('#sd' + q).val();
+            var whsdj = $('#whsdj' + q).val();
+            var Je = parseFloat(je);
+            var Jgf = parseFloat(jgf);
+            var Kdf = parseFloat(kdf);
+            var Hjje = Je + Jgf +Kdf;
+            var hjje= Hjje.toString();
+            var Hsdj = parseFloat(hsdj);
+        var Sd = parseFloat(sd);
+        var Whsdj = Hsdj / Sd
+            if (isNaN(je)) {
+                je = "";
+            }
+            if (isNaN(hjje)) {
+               hjje = "";
+            }
+            arr={
+                riqi:riqi,
+                dh:aa,
+                shdw:shdw,
+                mc:mc,
+                mh:mh,
+                gg:gg,
+                js:js,
+                zl:zl,
+                dj:dj,
+                je:je,
+                bz:bz,
+                shdz:shdz,
+                kddh:kddh,
+                sfyj:sfyj,
+                fkfs:fkfs,
+                sfhs:sfhs,
+                gd:gd,
+                zdr:zdr,
+                shdwjjsr:shdwjjsr,
+                jgf:jgf,
+                kdf:kdf,
+                hsdj:hsdj,
+                sd:sd,
+                whsdj:Whsdj,
+                hjje:hjje,
+            }
+
+            $ajax({
+                type: 'post',
+                url: '/cgx/add',
+                data: JSON.stringify({
+                    addInfo: arr
+                }),
+                dataType: 'json',
+                contentType: 'application/json;charset=utf-8'
+            }, false, '', function (res) {
+                swal("", res.msg, "success");
+
+                getList();}
+            )
+        }
+    })
+
+
+    $('#add-btn1').click(function () {
+        n++;
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = (now.getMonth() + 1).toString().padStart(2, '0');
+        const day = now.getDate().toString().padStart(2, '0');
+        const hours = now.getHours().toString().padStart(2, '0');
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        const seconds = now.getSeconds().toString().padStart(2, '0');
+        var aa = `${year}${month}${day}${hours}${minutes}${seconds}`;
+        document.getElementById('add-dh').value = aa;
+        $ajax({
+            type: 'post',
+            url: '/shdp/add',
+        }, false, '', function (res) {
+            getList();
+
+        })
+        $ajax({
+            type: 'post',
+            url: '/khzl/hqxlGsm',
+        }, false, '', function (res) {
+            if (res.code == 200) {
+                for (var i = 0; i < res.data.length; i++) {
+                    for (z = 0; z < n; z = z + 1) {
+                        let c=parseFloat($('#id1').val())+z
+                        var q =c.toString();
+                        $('#shdw'+q ).append("<option>" + res.data[i].gsm + "</option>");
+                    }
+                    $("#add-shdw").append("<option>" + res.data[i].gsm + "</option>");
+                    // $("#update-shdw").append("<option>" + res.data[i].gsm + "</option>");
+
+                }
+            }
+        })
+    })
+
+
     $("#add-btn").click(function () {
         $('#add-modal').modal('show');
 
@@ -186,18 +478,18 @@ $(function () {
         var dj = parseFloat(document.getElementById('add-dj').value);
         var kdf = parseFloat(document.getElementById("add-kdf").value);
         var je = js * zl * dj;
-        if(isNaN(je)){
-            document.getElementById("add-je").value ="";
-        }else {
+        if (isNaN(je)) {
+            document.getElementById("add-je").value = "";
+        } else {
             document.getElementById("add-je").value = je
         }
         var js = parseFloat(document.getElementById('add-js').value);
         var jgf = js * 0.5
         document.getElementById("add-jgf").value = jgf
-        var hjje = je +jgf+ kdf
-        if(isNaN(hjje)){
-            document.getElementById("add-hjje").value="";
-        }else {
+        var hjje = je + jgf + kdf
+        if (isNaN(hjje)) {
+            document.getElementById("add-hjje").value = "";
+        } else {
             document.getElementById("add-hjje").value = hjje
         }
         if (parseFloat(document.getElementById('add-sd').value) != 0) {
@@ -270,21 +562,21 @@ $(function () {
         $("#fkfs").append(t21);
         $("#bzld").append(t23);
         $('#add-modal').modal('hide');
-        var t24=document.getElementById("add-mc").value;
-        var t25=document.getElementById("add-mh").value;
-        var t26=document.getElementById("add-gg").value;
-        var t27=document.getElementById("add-js").value;
-        var t28=document.getElementById("add-dj").value;
-        var t29=document.getElementById("add-je").value;
-        var t30=document.getElementById("add-bz").value;
-        var t31=document.getElementById("add-zl").value;
-        var t32=document.getElementById("add-zdr").value;
-        var t33=document.getElementById("add-hsdj").value;
-        var t34=document.getElementById("add-whsdj").value;
-        var t35=document.getElementById("add-bz").value;
-        if(isNaN(aa)){
+        var t24 = document.getElementById("add-mc").value;
+        var t25 = document.getElementById("add-mh").value;
+        var t26 = document.getElementById("add-gg").value;
+        var t27 = document.getElementById("add-js").value;
+        var t28 = document.getElementById("add-dj").value;
+        var t29 = document.getElementById("add-je").value;
+        var t30 = document.getElementById("add-bz").value;
+        var t31 = document.getElementById("add-zl").value;
+        var t32 = document.getElementById("add-zdr").value;
+        var t33 = document.getElementById("add-hsdj").value;
+        var t34 = document.getElementById("add-whsdj").value;
+        var t35 = document.getElementById("add-bz").value;
+        if (isNaN(aa)) {
             $("#zjedx").append("");
-        }else {
+        } else {
             getHjje();
         }
         if ($("#sfhs" == '含税')) {
@@ -295,19 +587,19 @@ $(function () {
             $('#sdlable').hide();
             $('#sd').hide();
         }
-        arr={
-            mc:t24,
-            mh:t25,
-            gg:t26,
-            js:t27,
-            dj:t28,
-            je:t29,
-            bz:t30,
-            zl:t31,
-            zdr:t32,
-            hsdj:t33,
-            whsdj:t34,
-            bz:t35,
+        arr = {
+            mc: t24,
+            mh: t25,
+            gg: t26,
+            js: t27,
+            dj: t28,
+            je: t29,
+            bz: t30,
+            zl: t31,
+            zdr: t32,
+            hsdj: t33,
+            whsdj: t34,
+            bz: t35,
             shdw: t1,
             dh: t2,
             riqi: t3,
@@ -391,10 +683,10 @@ $(function () {
                     $("#bzld").append(t23);
                     $("#fkfs").append(t22);
                     $('#shdPrint-modal').modal('hide');
-                    aa =t20;
-                    if(isNaN(aa)){
+                    aa = t20;
+                    if (isNaN(aa)) {
                         $("#zjedx").append("");
-                    }else {
+                    } else {
                         getHjje();
                     }
                     if ($("#sfhs" == '含税')) {
@@ -420,33 +712,32 @@ $(function () {
     $("#add-zancun-btn").click(function () {
 
 
-
         var js = parseFloat(document.getElementById('add-js').value);
         var zl = parseFloat(document.getElementById('add-zl').value);
         var dj = parseFloat(document.getElementById('add-dj').value);
-        var kdf =parseFloat(document.getElementById('add-kdf').value);
+        var kdf = parseFloat(document.getElementById('add-kdf').value);
         var je = js * zl * dj
-        if(isNaN(je)){
-                document.getElementById("add-je").value ="";
-            }else {
-                document.getElementById("add-je").value = je
+        if (isNaN(je)) {
+            document.getElementById("add-je").value = "";
+        } else {
+            document.getElementById("add-je").value = je
         }
         var jgf = js * 0.5
 
         document.getElementById("update-jgf").value = jgf
-        var hjje = je +jgf+ kdf
-        if(isNaN(hjje)){
-            document.getElementById("add-hjje").value="";
-        }else {
+        var hjje = je + jgf + kdf
+        if (isNaN(hjje)) {
+            document.getElementById("add-hjje").value = "";
+        } else {
             document.getElementById("add-hjje").value = hjje
         }
         if (parseFloat(document.getElementById('add-sd').value) != 0) {
             var hsdj = parseFloat(document.getElementById('add-hsdj').value);
             var sd = parseFloat(document.getElementById('add-sd').value);
             var whsdj = hsdj / sd
-            if(isNaN(whsdj)){
-                document.getElementById("add-whsdj").value="";
-            }else {
+            if (isNaN(whsdj)) {
+                document.getElementById("add-whsdj").value = "";
+            } else {
                 document.getElementById("add-whsdj").value = whsdj
             }
         }
@@ -773,7 +1064,7 @@ function menoyToUppercase(money) {
 }
 
 function getHjje() {
-        $("#zjedx").append(menoyToUppercase(aa));
+    $("#zjedx").append(menoyToUppercase(aa));
 }
 
 function setTable(data) {
@@ -808,139 +1099,161 @@ function setTable(data) {
                 title: '日期',
                 align: 'center',
                 sortable: true,
-                width: 80,
+                width: 250,
             }, {
                 field: 'dh',
                 title: '单号',
                 align: 'center',
                 sortable: true,
                 width: 80,
+
             }, {
                 field: 'shdw',
                 title: '收货单位',
                 align: 'center',
                 sortable: true,
                 width: 130,
+
             }, {
                 field: 'mc',
                 title: '名称',
                 align: 'center',
                 sortable: true,
                 width: 80,
+
             }, {
                 field: 'mh',
                 title: '模号',
                 align: 'center',
                 sortable: true,
                 width: 80,
+
             }, {
                 field: 'gg',
                 title: '规格',
                 align: 'center',
                 sortable: true,
                 width: 80,
+
             }, {
                 field: 'js',
                 title: '件数',
                 align: 'center',
                 sortable: true,
                 width: 80,
+
             }, {
                 field: 'zl',
                 title: '重量',
                 align: 'center',
                 sortable: true,
                 width: 80,
+
             }, {
                 field: 'dj',
                 title: '单价',
                 align: 'center',
                 sortable: true,
                 width: 80,
+
             }, {
                 field: 'je',
                 title: '金额',
                 align: 'center',
                 sortable: true,
                 width: 80,
+
             }, {
                 field: 'bz',
                 title: '备注',
                 align: 'center',
                 sortable: true,
                 width: 130,
+
             }, {
                 field: 'shdz',
                 title: '收货地址',
                 align: 'center',
                 sortable: true,
                 width: 150,
+
             }, {
                 field: 'kddh',
                 title: '快递单号',
                 align: 'center',
                 sortable: true,
                 width: 100,
+
             }, {
                 field: 'sfyj',
                 title: '是否月结',
                 align: 'center',
                 sortable: true,
                 width: 100,
+
             }, {
                 field: 'fkfs',
                 title: '付款方式',
                 align: 'center',
                 sortable: true,
                 width: 100,
+
             }, {
                 field: 'sfhs',
                 title: '是否含税',
                 align: 'center',
                 sortable: true,
                 width: 100,
+
             }, {
                 field: 'gd',
                 title: '跟单',
                 align: 'center',
                 sortable: true,
                 width: 80,
+
             }, {
                 field: 'zdr',
                 title: '制单人',
                 align: 'center',
                 sortable: true,
                 width: 80,
+
             }, {
                 field: 'shdwjjsr',
                 title: '收货单位及经手人',
                 align: 'center',
                 sortable: true,
                 width: 150,
+
             }, {
                 field: 'jgf',
                 title: '锯工费',
                 align: 'center',
                 sortable: true,
                 width: 80,
+
             }, {
                 field: 'kdf',
                 title: '快递费',
                 align: 'center',
                 sortable: true,
                 width: 80,
+
             }, {
                 field: 'hsdj',
                 title: '含税单价',
                 align: 'center',
                 sortable: true,
                 width: 100,
+
             }, {
                 field: 'sd',
                 title: '税点',
                 align: 'center',
                 sortable: true,
                 width: 80,
+
             }, {
                 field: 'whsdj',
                 title: '未含税单价',
@@ -949,14 +1262,15 @@ function setTable(data) {
                 width: 130,
             }
         ],
-        // onClickRow: function (row, el) {
-        //     let isSelect = $(el).hasClass('selected')
-        //     if (isSelect) {
-        //         $(el).removeClass('selected')
-        //     } else {
-        //         $(el).addClass('selected')
-        //     }
-        // }
+
+        onClickRow: function (row, el) {
+            let isSelect = $(el).hasClass('selected')
+            if (isSelect) {
+                $(el).removeClass('selected')
+            } else {
+                $(el).addClass('selected')
+            }
+        }
     })
 }
 
@@ -976,4 +1290,379 @@ function getData(tableEl) {
         }
     });
     return result;
+}
+
+
+function setTable1(data) {
+    if ($('#shdptable').html != '') {
+        $('#shdptable').bootstrapTable('load', data);
+    }
+
+    $('#shdptable').bootstrapTable({
+        data: data,
+        sortStable: true,
+        classes: 'table table-striped table-hover',
+        idField: 'id',
+        pagination: true,
+        pageSize: 15,//单页记录数
+        clickToSelect: true,
+        locale: 'zh-CN',
+        toolbar: '#table-toolbar',
+        toolbarAlign: 'left',
+        theadClasses: "thead-light",//这里设置表头样式
+        style: 'table-layout:fixed',
+        height: document.body.clientHeight * 0.85,
+        columns: [
+             {
+                field: '',
+                title: '序号',
+                align: 'center',
+                width: 50,
+                formatter: function (value, row, index) {
+                    return index + 1;
+                }
+            }, {
+                field: 'riqi',
+                title: '日期',
+                align: 'center',
+                sortable: true,
+                width: 150,
+                formatter: function (value, row, index) {
+                    if (value == null) {
+                        value = '';
+                    }
+                    return '<input id="riqi' + row.id + '" oninput="javascript:columnUpd(' + row.id + '," + "\"riqi\"" + ")" placeholder="日期" type="date" class="form-control" value="' + value + '">'
+                }
+            }, {
+                field: 'dh',
+                title: '单号',
+                align: 'center',
+                sortable: true,
+                width: 80,
+                formatter: function (value, row, index) {
+                    if (value == null) {
+                        value = '';
+                    }
+
+                    return "<input id='dh" + row.id + "' oninput='javascript:columnUpd(" + row.id + "," + "\"dh\" " + ")' placeholder='单号' type='text' class='form-control'  value='" + value + "'>"
+                }
+            }, {
+                field: 'shdw',
+                title: '收货单位',
+                align: 'center',
+                sortable: true,
+                width: 130,
+                formatter: function (value, row, index) {
+                    if (value == null) {
+                        value = '';
+                    }
+                    var this_shdw=""
+                    var select1=""
+                    for(var i=0; i<select.length; i++) {
+                        this_shdw = this_shdw + "<option value=\"" + select[i].gsm+"\" selected=\"selected\">"+select[i].gsm+"</option>"
+                        select1= "<select id='shdw" + row.id + "' oninput='javascript:columnUpd(" + row.id + "," + "\"shdw\"" + ")' placeholder='收货单位' type='text' class='form-control'  value='" + value + "'>"
+                        select1 = select1+this_shdw;
+                        select1=select1+"<select/>"
+
+                    }
+                    return select1;
+                    }
+            }, {
+                field: 'mc',
+                title: '名称',
+                align: 'center',
+                sortable: true,
+                width: 80,
+                formatter: function (value, row, index) {
+                    if (value == null) {
+                        value = '';
+                    }
+                    var this_mc=""
+                    var select1=""
+                    for(var i=0; i<select_mc.length; i++) {
+                        this_mc = this_mc + "<option value=\"" + select_mc[i].mc+"\" selected=\"selected\">"+select_mc[i].mc+"</option>"
+                        select1= "<select id='mc" + row.id + "' oninput='javascript:columnUpd(" + row.id + "," + "\"mc\"" + ")' placeholder='名称' type='text' class='form-control'  value='" + value + "'>"
+                        select1 = select1+this_mc;
+                        select1=select1+"<select/>"
+
+                    }
+                    return select1;
+                }
+            }, {
+                field: 'mh',
+                title: '模号',
+                align: 'center',
+                sortable: true,
+                width: 80,
+                formatter: function (value, row, index) {
+                    if (value == null) {
+                        value = '';
+                    }
+                    return "<input id='mh" + row.id + "' oninput='javascript:columnUpd(" + row.id + "," + "\"mh\"" + ")' placeholder='模号' type='text' class='form-control'  value='" + value + "'>"
+                }
+            }, {
+                field: 'gg',
+                title: '规格',
+                align: 'center',
+                sortable: true,
+                width: 80,
+                formatter: function (value, row, index) {
+                    if (value == null) {
+                        value = '';
+                    }
+                    return "<input id='gg" + row.id + "' oninput='javascript:columnUpd(" + row.id + "," + "\"gg\"" + ")' placeholder='规格' type='text' class='form-control'  value='" + value + "'>"
+                }
+            }, {
+                field: 'js',
+                title: '件数',
+                align: 'center',
+                sortable: true,
+                width: 80,
+                formatter: function (value, row, index) {
+                    if (value == null) {
+                        value = '';
+                    }
+                    return "<input id='js" + row.id + "' oninput='javascript:columnUpd(" + row.id + "," + "\"js\"" + ")' placeholder='件数' type='text' class='form-control' value='" + value + "'>"
+                }
+            }, {
+                field: 'zl',
+                title: '重量',
+                align: 'center',
+                sortable: true,
+                width: 80,
+                formatter: function (value, row, index) {
+                    if (value == null) {
+                        value = '';
+                    }
+                    return "<input id='zl" + row.id + "' oninput='javascript:columnUpd(" + row.id + "," + "\"zl\"" + ")' placeholder='重量' type='text' class='form-control'  value='" + value + "'>"
+                }
+            }, {
+                field: 'dj',
+                title: '单价',
+                align: 'center',
+                sortable: true,
+                width: 80,
+                formatter: function (value, row, index) {
+                    if (value == null) {
+                        value = '';
+                    }
+                    return "<input id='dj" + row.id + "' oninput='javascript:columnUpd(" + row.id + "," + "\"dj\"" + ")' placeholder='单价' type='text' class='form-control' value='" + value + "'>"
+                }
+            }, {
+                field: 'je',
+                title: '金额',
+                align: 'center',
+                sortable: true,
+                width: 80,
+                formatter: function (value, row, index) {
+                    if (value == null) {
+                        value = '';
+                    }
+                    return "<input id='je" + row.id + "' oninput='javascript:columnUpd(" + row.id + "," + "\"je\"" + ")'  placeholder='金额' type='text' class='form-control' value='" + value + "'>"
+                }
+            }, {
+                field: 'bz',
+                title: '备注',
+                align: 'center',
+                sortable: true,
+                width: 130,
+                formatter: function (value, row, index) {
+                    if (value == null) {
+                        value = '';
+                    }
+                    return "<input id='bz" + row.id + "' oninput='javascript:columnUpd(" + row.id + "," + "\"bz\"" + ")' placeholder='备注' type='text' class='form-control'  value='" + value + "'>"
+                }
+            }, {
+                field: 'shdz',
+                title: '收货地址',
+                align: 'center',
+                sortable: true,
+                width: 150,
+                formatter: function (value, row, index) {
+                    if (value == null) {
+                        value = '';
+                    }
+                    return "<input id='shdz" + row.id + "' oninput='javascript:columnUpd(" + row.id + "," + "\"shdz\"" + ")' placeholder='送货地址' type='text' class='form-control' value='" + value + "'>"
+                }
+            }, {
+                field: 'kddh',
+                title: '快递单号',
+                align: 'center',
+                sortable: true,
+                width: 100,
+                formatter: function (value, row, index) {
+                    if (value == null) {
+                        value = '';
+                    }
+                    return "<input id='kddh" + row.id + "' oninput='javascript:columnUpd(" + row.id + "," + "\"kddh\"" + ")' placeholder='快递单号' type='text' class='form-control'  value='" + value + "'>"
+                }
+            }, {
+                field: 'sfyj',
+                title: '是否月结',
+                align: 'center',
+                sortable: true,
+                width: 100,
+                formatter: function (value, row, index) {
+                    if (value == null) {
+                        value = '';
+                    }
+                    return "<select id='sfyj" + row.id + "' oninput='javascript:columnUpd(" + row.id + "," + "\"sfyj\"" + ")' placeholder='是否月结' type='text' class='form-control'  value='" + value + "'>"+
+                    "<option value=''>请选择是否月结</option>"+
+                    "<option value='是'>是</option>"+
+                    "<option value='否'>否</option>"+
+                    "</select>"
+                }
+            }, {
+                field: 'fkfs',
+                title: '付款方式',
+                align: 'center',
+                sortable: true,
+                width: 100,
+                formatter: function (value, row, index) {
+                    if (value == null) {
+                        value = '';
+                    }
+                    return "<select id='fkfs" + row.id + "' oninput='javascript:columnUpd(" + row.id + "," + "\"fkfs\"" + ")'  placeholder='付款方式' type='text' class='form-control'  value='" + value + "'>" +
+                        "<option value=''>请选择付款方式</option>"+
+                    "<option value='签回单'>签回单</option>"+
+                    "<option value='现金'>现金</option>"+
+                    "<option value='快递代收'>快递代收</option>"+
+                        "</select>"
+                }
+            }, {
+                field: 'sfhs',
+                title: '是否含税',
+                align: 'center',
+                sortable: true,
+                width: 100,
+                formatter: function (value, row, index) {
+                    if (value == null) {
+                        value = '';
+                    }
+                    return "<select id='sfhs" + row.id + "' oninput='javascript:columnUpd(" + row.id + "," + "\"sfhs\"" + ")' placeholder='是否含税' type='text' class='form-control'  value='" + value + "'>"+
+                        "<option value=''>请选择是否含税</option>"+
+                        "<option value='是'>是</option>"+
+                        "<option value='否'>否</option>"+
+                        "</select>"
+                }
+            }, {
+                field: 'gd',
+                title: '跟单',
+                align: 'center',
+                sortable: true,
+                width: 80,
+                formatter: function (value, row, index) {
+                    if (value == null) {
+                        value = '';
+                    }
+                    return "<input id='gd" + row.id + "' oninput='javascript:columnUpd(" + row.id + "," + "\"gd\"" + ")' placeholder='跟单' type='text' class='form-control' value='" + value + "'>"
+                }
+            }, {
+                field: 'zdr',
+                title: '制单人',
+                align: 'center',
+                sortable: true,
+                width: 80,
+                formatter: function (value, row, index) {
+                    if (value == null) {
+                        value = '';
+                    }
+                    return "<input id='zdr" + row.id + "' oninput='javascript:columnUpd(" + row.id + "," + "\"zdr\"" + ")' placeholder='制单人' type='text' class='form-control' value='" + value + "'>"
+                }
+            }, {
+                field: 'shdwjjsr',
+                title: '收货单位及经手人',
+                align: 'center',
+                sortable: true,
+                width: 150,
+                formatter: function (value, row, index) {
+                    if (value == null) {
+                        value = '';
+                    }
+                    return "<input id='shdwjjsr" + row.id + "' oninput='javascript:columnUpd(" + row.id + "," + "\"shdwjjsr\"" + ")' placeholder='收货单位及经手人' type='text' class='form-control' value='" + value + "'>"
+                }
+            }, {
+                field: 'jgf',
+                title: '锯工费',
+                align: 'center',
+                sortable: true,
+                width: 80,
+                formatter: function (value, row, index) {
+                    if (value == null) {
+                        value = '';
+                    }
+                    return "<input id='jgf" + row.id + "' oninput='javascript:columnUpd(" + row.id + "," + "\"jgf\"" + ")' placeholder='锯工费' type='text' class='form-control'  value='" + value + "'>"
+                }
+            }, {
+                field: 'kdf',
+                title: '快递费',
+                align: 'center',
+                sortable: true,
+                width: 80,
+                formatter: function (value, row, index) {
+                    if (value == null) {
+                        value = '';
+                    }
+                    return "<input id='kdf" + row.id + "' oninput='javascript:columnUpd(" + row.id + "," + "\"kdf\"" + ")' placeholder='快递费' type='text' class='form-control'  value='" + value + "'>"
+                }
+            }, {
+                field: 'hsdj',
+                title: '含税单价',
+                align: 'center',
+                sortable: true,
+                width: 100,
+                formatter: function (value, row, index) {
+                    if (value == null) {
+                        value = '';
+                    }
+                    return "<input id='hsdj" + row.id + "' oninput='javascript:columnUpd(" + row.id + "," + "\"hsdj\"" + ")' placeholder='含税单价' type='text' class='form-control'  value='" + value + "'>"
+                }
+            }, {
+                field: 'sd',
+                title: '税点',
+                align: 'center',
+                sortable: true,
+                width: 80,
+                formatter: function (value, row, index) {
+                    if (value == null) {
+                        value = '';
+                    }
+                    return "<input id='sd" + row.id + "' oninput='javascript:columnUpd(" + row.id + "," + "\"sd\"" + ")' placeholder='税点' type='text' class='form-control'  value='" + value + "'>"
+                }
+            }, {
+                field: 'whsdj',
+                title: '未含税单价',
+                align: 'center',
+                sortable: true,
+                width: 130,
+                formatter: function (value, row, index) {
+                    if (value == null) {
+                        value = '';
+                    }
+                    return "<input id='whsdj" + row.id + "' oninput='javascript:columnUpd(" + row.id + "," + "\"whsdj\"" + ")' placeholder='未含税单价' type='text' class='form-control'  value='" + value + "'>"
+                }
+            }, {
+                field: 'id',
+                title: 'id',
+                align: 'center',
+                sortable: true,
+                width: 0,
+                formatter: function (value, row, index) {
+                    if (value == null) {
+                        value = '';
+                    }
+                    var c= row.id
+                    return "<input id='id1' name='id' value='"+c+"' oninput='javascript:columnUpd(" + row.id + "," + "\"id\"" + ")' placeholder='id' type='text' class='form-control'  value='" + value + "'>"
+                }
+            }
+        ],
+        // onClickRow: function (row, el) {
+        //     let isSelect = $(el).hasClass('selected')
+        //     if (isSelect) {
+        //         $(el).removeClass('selected')
+        //     } else {
+        //         $(el).addClass('selected')
+        //     }
+        // }
+    })
 }

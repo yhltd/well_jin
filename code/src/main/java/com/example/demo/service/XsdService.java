@@ -37,7 +37,9 @@ public interface XsdService extends IService<Xsd> {
      */
     Xsd add(Xsd xsd);
     Xsd add1(Xsd xsd);
-
+    boolean add2(String riqi,String dh,String shdw,String mc,String mh,String gg,String js,String zl,String dj,String je,String bz,String shdz,String kddh,String sfyj,String fkfs,String sfhs,String gd,
+                 String zdr,String shdwjjsr ,String jgf,String kdf,String hsdj,String sd,String whsdj,String hjje,String bzld,
+                 String hjzl);
     /**
      * 获取当天销售单单价
      */
