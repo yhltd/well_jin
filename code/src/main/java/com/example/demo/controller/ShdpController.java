@@ -52,136 +52,175 @@ public class ShdpController {
         }
     }
 
-    //    @RequestMapping("/add")
-//    public ResultInfo add(@RequestBody HashMap map, HttpSession session) {
-//        UserInfo userInfo = GsonUtil.toEntity(SessionUtil.getToken(session), UserInfo.class);
-//        GsonUtil gsonUtil = new GsonUtil(GsonUtil.toJson(map));
-//        try {
-////            Shdp shdp = GsonUtil.toEntity(gsonUtil.get("dh"), Shdp.class);
-//             shdpService.add();
-//                return ResultInfo.success("添加成功", null);
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            log.error("添加失败：{}", e.getMessage());
-//            log.error("参数：{}", map);
-//            return ResultInfo.error("添加失败");
-//        }
-//    }
+
     @RequestMapping("/add")
-    public void add() {
-        shdpService.add();
+    public void add(HttpSession session, String riqi, String dh, String kddh, String shdwjjsr, String shdw, String sfyj, String fkfs, String sfhs, String sd, String zdr, String kdf,String bzld) {
+        UserInfo userInfo = GsonUtil.toEntity(SessionUtil.getToken(session), UserInfo.class);
+        zdr = userInfo.getName();
+        shdpService.add(riqi, dh, kddh, shdwjjsr, shdw, sfyj, fkfs, sfhs, sd, zdr, kdf,bzld);
+
     }
+
 
     //修改数据
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public ResultInfo update(HttpSession session,  String riqi, String dh, String shdw, String mc, String mh, String gg, String js
+    public ResultInfo update(HttpSession session, String riqi, String dh, String shdw, String mc, String mh, String gg, String js
             , String zl, String dj, String je, String bz, String shdz, String kddh, String sfyj, String fkfs, String sfhs, String gd,
                              String zdr, String shdwjjsr, String jgf, String kdf, String hsdj, String sd, String whsdj, String hjje,
                              String bzld, String hjzl, int id) {
-
         UserInfo userInfo = GsonUtil.toEntity(SessionUtil.getToken(session), UserInfo.class);
-        try {
-            if (userInfo.getPower().equals("管理员")) {
-                if (mc.equals("换铜块")) {
+        shdw = shdpService.getshdw(id);
+        sd = shdpService.getsd(id);
+        kdf = shdpService.getkdf(id);
+        sfhs = shdpService.getsfhs(id);
+        fkfs = shdpService.getfkfs(id);
+        riqi = shdpService.getriqi(id);
+        dh = shdpService.getdh(id);
+        gd = khzlService.hqgd(shdw);
+        shdz = khzlService.hqdz(shdw);
+        kddh = shdpService.getkddh(id);
+        shdwjjsr = shdpService.getshdwjjsr(id);
+        sfyj = shdpService.getsfyj(id);
+        zdr = userInfo.getName();
+        bzld = shdpService.getbzld(id);
+        hjzl = zl;
+        System.out.println(bzld);
+        if (sfhs.equals("含税") || sfhs.equals("金额含税")) {
+            if (dj.equals("")) {
+                je = "0";
+                hsdj = "0";
+                whsdj = "0";
+                jgf = String.valueOf(Float.parseFloat(js) * 0.5);
+                hjje = String.valueOf((Float.parseFloat(je) + Float.parseFloat(jgf) + Float.parseFloat(kdf)) * Float.parseFloat(sd));
+            } else { hsdj = String.valueOf(Float.parseFloat(dj) * Float.parseFloat(sd));
+                whsdj = String.valueOf(Float.parseFloat(hsdj) / Float.parseFloat(sd));
+                je = String.valueOf(Float.parseFloat(zl) * Float.parseFloat(dj));
+                jgf = String.valueOf(Float.parseFloat(js) * 0.5);
+                hjje = String.valueOf(Float.parseFloat(je) + Float.parseFloat(jgf) + Float.parseFloat(kdf));
+            }
+        } else {
+            if (dj.equals("")) {
+                je = "0";
+                hsdj = "0";
+                whsdj = "0";
+            } else {
+                hsdj = "0";
+                whsdj = "0";
+                je = String.valueOf(Float.parseFloat(zl) * Float.parseFloat(dj));
+                jgf = String.valueOf(Float.parseFloat(js) * 0.5);
+                hjje = String.valueOf((Float.parseFloat(je) + Float.parseFloat(jgf) + Float.parseFloat(kdf)) * Float.parseFloat(sd));
+            }
+        }
+
+
+
+
+    Shdp shdp = new Shdp();
+
+        shdp.setWhsdj(whsdj);
+        shdp.setHjje(hjje);
+        shdp.setJe(je);
+        shdp.setJgf(jgf);
+        shdp.setHsdj(hsdj);
+
+
+        try
+
+    {
+        if (userInfo.getPower().equals("管理员")) {
+            if (mc.equals("换铜块")) {
+                int jzl = Integer.parseInt(zl);
+                int yzl = Integer.parseInt(khzlService.gettkkc(shdw));
+                int xzl = yzl - jzl;
+                String tkkc = Integer.toString(xzl);
+                khzlService.tkkc(tkkc, shdw);
+                shdpService.update(mc, mh, gg, js, zl, dj, je, bz, shdz, gd, jgf, hsdj, whsdj, hjje, hjzl, id);
+
+
+                if (fkfs.equals("签回单")) {
+                    boolean list = qhdService.add1(riqi, shdw, hjje, bz, dh);
+                    shdpService.update(mc, mh, gg, js, zl, dj, je, bz, shdz, gd, jgf, hsdj, whsdj, hjje, hjzl, id);
+
+                    return ResultInfo.success("添加成功", null);
+                }
+                xsdService.add(riqi, dh, shdw, mc, mh, gg, js, zl, dj, je, bz, shdz, kddh, sfyj, fkfs, sfhs, gd, zdr, shdwjjsr, jgf, kdf,
+                        hsdj, sd, whsdj, hjje, bzld, hjzl);
+            } else if (mc.equals("换铜渣")) {
+
+                int jzl = Integer.parseInt(zl);
+                int yzl = Integer.parseInt(khzlService.gettzkc(shdw));
+                int xzl = yzl - jzl;
+                String tzkc = Integer.toString(xzl);
+                khzlService.tzkc(tzkc, shdw);
+
+                shdpService.update(mc, mh, gg, js, zl, dj, je, bz, shdz, gd, jgf, hsdj, whsdj, hjje, hjzl, id);
+                if (fkfs.equals("签回单")) {
+                    qhdService.add1(riqi, shdw, hjje, bz, dh);
+                    shdpService.update(mc, mh, gg, js, zl, dj, je, bz, shdz, gd, jgf, hsdj, whsdj, hjje, hjzl, id);
+
+                }
+                xsdService.add(riqi, dh, shdw, mc, mh, gg, js, zl, dj, je, bz, shdz, kddh, sfyj, fkfs, sfhs, gd, zdr, shdwjjsr, jgf, kdf,
+                        hsdj, sd, whsdj, hjje, bzld, hjzl);
+                return ResultInfo.success("添加成功", null);
+            } else if (dj.equals("")) {
+                if (mc.equals("回收铜块")) {
                     int jzl = Integer.parseInt(zl);
                     int yzl = Integer.parseInt(khzlService.gettkkc(shdw));
-                    int xzl = yzl - jzl;
+                    int xzl = yzl + jzl;
                     String tkkc = Integer.toString(xzl);
                     khzlService.tkkc(tkkc, shdw);
-                    shdpService.update(riqi, dh, shdw, mc, mh, gg, js, zl, dj, je, bz, shdz, kddh, sfyj, fkfs, sfhs, gd, zdr, shdwjjsr, jgf, kdf,
-                            hsdj, sd, whsdj, hjje, bzld, hjzl, id);
-//                    xsdService.add2(riqi, dh, shdw, mc, mh, gg, js, zl, dj, je, bz, shdz, kddh, sfyj, fkfs, sfhs, gd, zdr, shdwjjsr, jgf, kdf,
-//                            hsdj, sd, whsdj, hjje, bzld, hjzl);
+
+                    shdpService.update(mc, mh, gg, js, zl, dj, je, bz, shdz, gd, jgf, hsdj, whsdj, hjje, hjzl, id);
                     if (fkfs.equals("签回单")) {
-                        boolean list = qhdService.add1(riqi, shdw, hjje, bz, dh);
-                        shdpService.update(riqi, dh, shdw, mc, mh, gg, js, zl, dj, je, bz, shdz, kddh, sfyj, fkfs, sfhs, gd, zdr, shdwjjsr, jgf, kdf,
-                                hsdj, sd, whsdj, hjje, bzld, hjzl, id);
-//                        xsdService.add2(riqi, dh, shdw, mc, mh, gg, js, zl, dj, je, bz, shdz, kddh, sfyj, fkfs, sfhs, gd, zdr, shdwjjsr, jgf, kdf,
-//                                hsdj, sd, whsdj, hjje, bzld, hjzl);
+                        qhdService.add1(riqi, shdw, hjje, bz, dh);
+                        shdpService.update(mc, mh, gg, js, zl, dj, je, bz, shdz, gd, jgf, hsdj, whsdj, hjje, hjzl, id);
+
                         return ResultInfo.success("添加成功", null);
                     }
-                } else if (mc.equals("换铜渣")) {
-
+                    xsdService.add(riqi, dh, shdw, mc, mh, gg, js, zl, dj, je, bz, shdz, kddh, sfyj, fkfs, sfhs, gd, zdr, shdwjjsr, jgf, kdf,
+                            hsdj, sd, whsdj, hjje, bzld, hjzl);
+                } else if (mc.equals("回收铜渣")) {
                     int jzl = Integer.parseInt(zl);
                     int yzl = Integer.parseInt(khzlService.gettzkc(shdw));
-                    int xzl = yzl - jzl;
+                    int xzl = yzl + jzl;
                     String tzkc = Integer.toString(xzl);
                     khzlService.tzkc(tzkc, shdw);
-//                    xsdService.add2(riqi, dh, shdw, mc, mh, gg, js, zl, dj, je, bz, shdz, kddh, sfyj, fkfs, sfhs, gd, zdr, shdwjjsr, jgf, kdf,
-//                            hsdj, sd, whsdj, hjje, bzld, hjzl);
-                    shdpService.update(riqi, dh, shdw, mc, mh, gg, js, zl, dj, je, bz, shdz, kddh, sfyj, fkfs, sfhs, gd, zdr, shdwjjsr, jgf, kdf,
-                            hsdj, sd, whsdj, hjje, bzld, hjzl, id);
-                    if (fkfs.equals("签回单")) {
-                        qhdService.add1(riqi, shdw, hjje, bz, dh);
-                        shdpService.update(riqi, dh, shdw, mc, mh, gg, js, zl, dj, je, bz, shdz, kddh, sfyj, fkfs, sfhs, gd, zdr, shdwjjsr, jgf, kdf,
-                                hsdj, sd, whsdj, hjje, bzld, hjzl, id);
-//                        xsdService.add2(riqi, dh, shdw, mc, mh, gg, js, zl, dj, je, bz, shdz, kddh, sfyj, fkfs, sfhs, gd, zdr, shdwjjsr, jgf, kdf,
-//                                hsdj, sd, whsdj, hjje, bzld, hjzl);
-                    }
-                    return ResultInfo.success("添加成功", null);
-                } else if (dj.equals("")) {
-                    if (mc.equals("回收铜块")) {
-                        int jzl = Integer.parseInt(zl);
-                        int yzl = Integer.parseInt(khzlService.gettkkc(shdw));
-                        int xzl = yzl + jzl;
-                        String tkkc = Integer.toString(xzl);
-                        khzlService.tkkc(tkkc, shdw);
-//                        xsdService.add2(riqi, dh, shdw, mc, mh, gg, js, zl, dj, je, bz, shdz, kddh, sfyj, fkfs, sfhs, gd, zdr, shdwjjsr, jgf, kdf,
-//                                hsdj, sd, whsdj, hjje, bzld, hjzl);
-                        shdpService.update(riqi, dh, shdw, mc, mh, gg, js, zl, dj, je, bz, shdz, kddh, sfyj, fkfs, sfhs, gd, zdr, shdwjjsr, jgf, kdf,
-                                hsdj, sd, whsdj, hjje, bzld, hjzl, id);
-                        if (fkfs.equals("签回单")) {
-                            qhdService.add1(riqi, shdw, hjje, bz, dh);
-                            shdpService.update(riqi, dh, shdw, mc, mh, gg, js, zl, dj, je, bz, shdz, kddh, sfyj, fkfs, sfhs, gd, zdr, shdwjjsr, jgf, kdf,
-                                    hsdj, sd, whsdj, hjje, bzld, hjzl, id);
-//                            xsdService.add2(riqi, dh, shdw, mc, mh, gg, js, zl, dj, je, bz, shdz, kddh, sfyj, fkfs, sfhs, gd, zdr, shdwjjsr, jgf, kdf,
-//                                    hsdj, sd, whsdj, hjje, bzld, hjzl);
-                            return ResultInfo.success("添加成功", null);
-                        }
 
-                    } else if (mc.equals("回收铜渣")) {
-                        int jzl = Integer.parseInt(zl);
-                        int yzl = Integer.parseInt(khzlService.gettzkc(shdw));
-                        int xzl = yzl + jzl;
-                        String tzkc = Integer.toString(xzl);
-                        khzlService.tzkc(tzkc, shdw);
-//                        xsdService.add2(riqi, dh, shdw, mc, mh, gg, js, zl, dj, je, bz, shdz, kddh, sfyj, fkfs, sfhs, gd, zdr, shdwjjsr, jgf, kdf,
-//                                hsdj, sd, whsdj, hjje, bzld, hjzl);
-                        shdpService.update(riqi, dh, shdw, mc, mh, gg, js, zl, dj, je, bz, shdz, kddh, sfyj, fkfs, sfhs, gd, zdr, shdwjjsr, jgf, kdf,
-                                hsdj, sd, whsdj, hjje, bzld, hjzl, id);
-                        if (fkfs.equals("签回单")) {
-                            qhdService.add1(riqi, shdw, hjje, bz, dh);
-//                            xsdService.add2(riqi, dh, shdw, mc, mh, gg, js, zl, dj, je, bz, shdz, kddh, sfyj, fkfs, sfhs, gd, zdr, shdwjjsr, jgf, kdf,
-//                                    hsdj, sd, whsdj, hjje, bzld, hjzl);
-                            shdpService.update(riqi, dh, shdw, mc, mh, gg, js, zl, dj, je, bz, shdz, kddh, sfyj, fkfs, sfhs, gd, zdr, shdwjjsr, jgf, kdf,
-                                    hsdj, sd, whsdj, hjje, bzld, hjzl, id);
-                            return ResultInfo.success("添加成功", null);
-                        }
-                    }
-                } else {
+                    shdpService.update(mc, mh, gg, js, zl, dj, je, bz, shdz, gd, jgf, hsdj, whsdj, hjje, hjzl, id);
                     if (fkfs.equals("签回单")) {
                         qhdService.add1(riqi, shdw, hjje, bz, dh);
-//                        xsdService.add2(riqi, dh, shdw, mc, mh, gg, js, zl, dj, je, bz, shdz, kddh, sfyj, fkfs, sfhs, gd, zdr, shdwjjsr, jgf, kdf,
-//                                hsdj, sd, whsdj, hjje, bzld, hjzl);
-                        shdpService.update(riqi, dh, shdw, mc, mh, gg, js, zl, dj, je, bz, shdz, kddh, sfyj, fkfs, sfhs, gd, zdr, shdwjjsr, jgf, kdf,
-                                hsdj, sd, whsdj, hjje, bzld, hjzl, id);
+
+                        shdpService.update(mc, mh, gg, js, zl, dj, je, bz, shdz, gd, jgf, hsdj, whsdj, hjje, hjzl, id);
                         return ResultInfo.success("添加成功", null);
                     }
+                    xsdService.add(riqi, dh, shdw, mc, mh, gg, js, zl, dj, je, bz, shdz, kddh, sfyj, fkfs, sfhs, gd, zdr, shdwjjsr, jgf, kdf,
+                            hsdj, sd, whsdj, hjje, bzld, hjzl);
+                }
+            } else {
+                if (fkfs.equals("签回单")) {
+                    qhdService.add1(riqi, shdw, hjje, bz, dh);
+                    xsdService.add(riqi, dh, shdw, mc, mh, gg, js, zl, dj, je, bz, shdz, kddh, sfyj, fkfs, sfhs, gd, zdr, shdwjjsr, jgf, kdf,
+                            hsdj, sd, whsdj, hjje, bzld, hjzl);
+                    shdpService.update(mc, mh, gg, js, zl, dj, je, bz, shdz, gd, jgf, hsdj, whsdj, hjje, hjzl, id);
+                    return ResultInfo.success("添加成功", null);
                 }
             }
-            if (shdpService.update(riqi, dh, shdw, mc, mh, gg, js, zl, dj, je, bz, shdz, kddh, sfyj, fkfs, sfhs, gd, zdr, shdwjjsr, jgf, kdf,
-                    hsdj, sd, whsdj, hjje, bzld, hjzl, id)) {
-                return ResultInfo.success("修改成功", riqi);
-            } else {
-                return ResultInfo.success("修改失败", riqi);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            log.error("修改失败：{}", e.getMessage());
-            return ResultInfo.error("修改失败");
         }
+        if (shdpService.update(mc, mh, gg, js, zl, dj, je, bz, shdz, gd, jgf, hsdj, whsdj, hjje, hjzl, id)) {
+            return ResultInfo.success("修改成功", riqi);
+        } else {
+            return ResultInfo.success("修改失败", riqi);
+        }
+    } catch(
+    Exception e)
+
+    {
+        e.printStackTrace();
+        log.error("修改失败：{}", e.getMessage());
+        return ResultInfo.error("修改失败");
     }
+
+}
 
     @RequestMapping("/delete")
     public void delete() {

@@ -1,6 +1,7 @@
 package com.example.demo.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.example.demo.entity.UserInfo;
 import com.example.demo.entity.Xsd;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
@@ -11,15 +12,14 @@ import java.util.List;
 @Repository
 public interface XsdMapper extends BaseMapper<Xsd> {
 
-    @Select("select * from xiaoshoudan")
+    @Select("select distinct dh,riqi, shdw, shdz, kddh, sfyj, fkfs, sfhs, gd, zdr, shdwjjsr, jgf, kdf,hsdj, sd, whsdj, hjje, bzld, hjzl from xiaoshoudan order by riqi desc,dh desc")
     List<Xsd> getList();
-    @Insert("insert into shdprint(riqi,dh,shdw,mc,mh,gg,js,zl,dj,je,bz,shdz,kddh,sfyj,fkfs,sfhs,gd,zdr,shdwjjsr,jgf,kdf,hsdj,sd,whsdj)" +
-            " values(#{riqi},#{dh},#{shdw},#{mc},#{mh},#{gg},#{js}, #{zl},#{dj},#{je},#{bz},#{shdz},#{kddh},#{sfyj},#{fkfs},#{sfhs},#{gd},#{zdr},#{shdwjjsr},#{jgf},#{kdf},#{hsdj},#{sd},#{whsdj},#{hjje},#{bzld},#{hjzl})")
-    boolean add2(String riqi, String dh, String shdw, String mc, String mh, String gg, String js
-            , String zl, String dj, String je, String bz, String shdz, String kddh, String sfyj, String fkfs, String sfhs, String gd,
-                 String zdr, String shdwjjsr, String jgf, String kdf, String hsdj, String sd, String whsdj, String hjje, String bzld,
-                 String hjzl);
 
+    @Insert("insert into xiaoshoudan(riqi, dh, shdw, mc, mh, gg, js, zl, dj, je, bz, shdz, kddh, sfyj, fkfs, sfhs, gd, zdr, shdwjjsr, jgf, kdf,hsdj, sd, whsdj, hjje, bzld, hjzl) values(#{riqi},#{dh},#{shdw},#{mc},#{mh},#{gg},#{js},#{zl},#{dj},#{je},#{bz},#{shdz},#{kddh},#{sfyj},#{fkfs},#{sfhs},#{gd},#{zdr},#{shdwjjsr},#{jgf},#{kdf},#{hsdj},#{sd},#{whsdj},#{hjje},#{bzld},#{hjzl})")
+    boolean add(String riqi, String dh, String shdw, String mc, String mh, String gg, String js
+            , String zl, String dj, String je, String bz, String shdz, String kddh, String sfyj, String fkfs, String sfhs, String gd,
+                String zdr, String shdwjjsr, String jgf, String kdf, String hsdj, String sd, String whsdj, String hjje,
+                String bzld, String hjzl);
 
 
     @Select("select * from xiaoshoudan where riqi >= convert(date,#{ksrq}) and riqi <= convert(date,#{jsrq}) and shdw = #{shdw}")
@@ -31,8 +31,8 @@ public interface XsdMapper extends BaseMapper<Xsd> {
     @Delete("delete from xiaoshoudan where id=#{id}")
     boolean delete(int id);
 
-    @Insert("insert into xiaoshoudan(riqi,dh,shdw,mc,mh,gg,js,zl,dj,je,bz,shdz,kddh,sfyj,fkfs,sfhs,gd,zdr,shdwjjsr,jgf,kdf,hsdj,sd,whsdj) values(#{riqi},#{dh},#{shdw},#{mc},#{mh},#{gg},#{js},#{zl},#{dj},#{je},#{bz},#{shdz},#{kddh},#{sfyj},#{fkfs},#{sfhs},#{gd},#{zdr},#{shdwjjsr},#{jgf},#{kdf},#{hsdj},#{sd},#{whsdj})")
-    boolean add(String riqi,String dh,String shdw,String mc,String mh,String gg,String js,String zl,String dj,String je,String bz,String shdz,String kddh,String sfyj,String fkfs,String sfhs,String gd,String zdr,String shdwjjsr,String jgf,String kdf,String hsdj,String sd,String whsdj);
+//    @Insert("insert into xiaoshoudan(riqi,dh,shdw,mc,mh,gg,js,zl,dj,je,bz,shdz,kddh,sfyj,fkfs,sfhs,gd,zdr,shdwjjsr,jgf,kdf,hsdj,sd,whsdj) values(#{riqi},#{dh},#{shdw},#{mc},#{mh},#{gg},#{js},#{zl},#{dj},#{je},#{bz},#{shdz},#{kddh},#{sfyj},#{fkfs},#{sfhs},#{gd},#{zdr},#{shdwjjsr},#{jgf},#{kdf},#{hsdj},#{sd},#{whsdj})")
+//    boolean add(String riqi,String dh,String shdw,String mc,String mh,String gg,String js,String zl,String dj,String je,String bz,String shdz,String kddh,String sfyj,String fkfs,String sfhs,String gd,String zdr,String shdwjjsr,String jgf,String kdf,String hsdj,String sd,String whsdj);
 
     @Insert("insert into mingxi(dh,mc,js,je,zl,dj,ziduan) values(#{dh},#{mc},#{js},#{je},#{zl},#{dj},#{ziduan}")
     boolean add1(String dh,String mc,String js,String je,String zl,String dj,String ziduan);
@@ -46,5 +46,12 @@ public interface XsdMapper extends BaseMapper<Xsd> {
 
     @Update("update mingxi set mc = #{mc},js = #{js},zl = #{zl},je = #{je},dj = #{dj} where danhao = #{danhao}")
     boolean update2(String mc,String js,String zl,String je,String dj,String danhao);
+
+
+
+
+    @Select("select * from xiaoshoudan where dh=#{dh}")
+    List<Xsd> getList2(String dh);
+
 
 }

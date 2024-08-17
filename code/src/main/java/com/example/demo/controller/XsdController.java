@@ -53,6 +53,26 @@ public class XsdController {
         }
     }
 
+
+    @RequestMapping("/getList2")
+    public ResultInfo getList2(HttpSession session,String dh) {
+        UserInfo userInfo = GsonUtil.toEntity(SessionUtil.getToken(session), UserInfo.class);
+        try {
+            List<Xsd> getList = xsdService.getList2(dh);
+            return ResultInfo.success("获取成功", getList);
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("获取失败：{}", e.getMessage());
+            return ResultInfo.error("错误!");
+        }
+    }
+
+
+
+
+
+
+
     /**
      * 根据姓名和部门查询
      *
@@ -114,143 +134,27 @@ public class XsdController {
     /**
      * 添加
      */
-    @RequestMapping("/add")
-    public ResultInfo add(@RequestBody HashMap map, HttpSession session) {
-        UserInfo userInfo = GsonUtil.toEntity(SessionUtil.getToken(session), UserInfo.class);
-        GsonUtil gsonUtil = new GsonUtil(GsonUtil.toJson(map));
-//        if(!userInfo.getCaozuoquanxian().equals("可修改")){
-//            return ResultInfo.error(401, "无权限,请联系管理员");
-//        }
-
-        try {
-            Xsd xsd = GsonUtil.toEntity(gsonUtil.get("addInfo"), Xsd.class);
-            if (userInfo.getPower().equals("管理员")) {
-                if (xsd.getMc().equals("换铜块")) {
-                    int jzl = Integer.parseInt(xsd.getZl());
-                    int yzl = Integer.parseInt(khzlService.gettkkc(xsd.getShdw()));
-                    int xzl = yzl - jzl;
-                    String tkkc = Integer.toString(xzl);
-                    khzlService.tkkc(tkkc, xsd.getShdw());
-                    if(xsd.getFkfs().equals("签回单")){
-                    qhdService.add1(xsd.getRiqi(),xsd.getShdw(),xsd.getHjje(),xsd.getBz(),xsd.getDh());
-                        xsd = xsdService.add(xsd);
-                    }
-
-                    if (StringUtils.isNotNull(xsd)) {
-                        return ResultInfo.success("添加成功", xsd);
-                    } else {
-                        return ResultInfo.success("添加失败", null);
-                    }
-                } else if (xsd.getMc().equals("换铜渣")) {
-
-                    int jzl = Integer.parseInt(xsd.getZl());
-                    int yzl = Integer.parseInt(khzlService.gettzkc(xsd.getShdw()));
-                    int xzl = yzl - jzl;
-                    String tzkc = Integer.toString(xzl);
-                    khzlService.tzkc(tzkc, xsd.getShdw());
-                    if(xsd.getFkfs().equals("签回单")){
-                        qhdService.add1(xsd.getRiqi(),xsd.getShdw(),xsd.getHjje(),xsd.getBz(),xsd.getDh());
-                        xsd = xsdService.add(xsd);
-                    }
-
-                    if (StringUtils.isNotNull(xsd)) {
-                        return ResultInfo.success("添加成功", xsd);
-                    } else {
-                        return ResultInfo.success("添加失败", null);
-                    }
-
-                } else if (xsd.getDj().equals("")) {
-                    if (xsd.getMc().equals("回收铜块")) {
-                        int jzl = Integer.parseInt(xsd.getZl());
-                        int yzl = Integer.parseInt(khzlService.gettkkc(xsd.getShdw()));
-                        int xzl = yzl + jzl;
-                        String tkkc = Integer.toString(xzl);
-                        khzlService.tkkc(tkkc, xsd.getShdw());
-                        if(xsd.getFkfs().equals("签回单")){
-                            qhdService.add1(xsd.getRiqi(),xsd.getShdw(),xsd.getHjje(),xsd.getBz(),xsd.getDh());
-                            xsd = xsdService.add(xsd);
-                        }
-                        if (StringUtils.isNotNull(xsd)) {
-                            return ResultInfo.success("添加成功", xsd);
-                        } else {
-                            return ResultInfo.success("添加失败", null);
-                        }
-
-                    } else if (xsd.getMc().equals("回收铜渣")) {
-                        int jzl = Integer.parseInt(xsd.getZl());
-                        int yzl = Integer.parseInt(khzlService.gettzkc(xsd.getShdw()));
-                        int xzl = yzl + jzl;
-                        String tzkc = Integer.toString(xzl);
-                        khzlService.tzkc(tzkc, xsd.getShdw());
-                        if(xsd.getFkfs().equals("签回单")){
-                            qhdService.add1(xsd.getRiqi(),xsd.getShdw(),xsd.getHjje(),xsd.getBz(),xsd.getDh());
-                            xsd = xsdService.add(xsd);
-                        }
-
-                        if (StringUtils.isNotNull(xsd)) {
-                            return ResultInfo.success("添加成功", xsd);
-                        } else {
-                            return ResultInfo.success("添加失败", null);
-                        }
-
-                    }
-                } else {
-                    if(xsd.getFkfs().equals("签回单")){
-                        qhdService.add1(xsd.getRiqi(),xsd.getShdw(),xsd.getHjje(),xsd.getBz(),xsd.getDh());
-                        xsd = xsdService.add(xsd);
-                    }
-
-                    if (StringUtils.isNotNull(xsd)) {
-                        return ResultInfo.success("添加成功", xsd);
-                    } else {
-                        return ResultInfo.success("添加失败", null);
-                    }
-
-                }
-            } else {
-                Cgx cgx = GsonUtil.toEntity(gsonUtil.get("addInfo"), Cgx.class);
-                cgx = cgxService.add(cgx);
-                if (StringUtils.isNotNull(cgx)) {
-                    return ResultInfo.success("权限不足，已添加至草稿箱", cgx);
-                } else {
-                    return ResultInfo.success("添加失败", null);
-                }
-            }
-            return ResultInfo.success(xsd);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            log.error("添加失败：{}", e.getMessage());
-            log.error("参数：{}", map);
-            return ResultInfo.error("添加失败");
-        }
-    }
 
     /**
      * 添加
      */
-    @RequestMapping("/add1")
-    public ResultInfo add1(@RequestBody HashMap map, HttpSession session) {
+    @RequestMapping("/add")
+    public ResultInfo add(HttpSession session ,String riqi, String dh, String shdw, String mc, String mh, String gg, String js
+            , String zl, String dj, String je, String bz, String shdz, String kddh, String sfyj, String fkfs, String sfhs, String gd,
+                          String zdr, String shdwjjsr, String jgf, String kdf, String hsdj, String sd, String whsdj, String hjje,
+                          String bzld, String hjzl) {
         UserInfo userInfo = GsonUtil.toEntity(SessionUtil.getToken(session), UserInfo.class);
-        GsonUtil gsonUtil = new GsonUtil(GsonUtil.toJson(map));
         if (!userInfo.getCaozuoquanxian().equals("可修改")) {
             return ResultInfo.error(401, "无权限,请联系管理员");
         }
-
         try {
-            Xsd xsd = GsonUtil.toEntity(gsonUtil.get("addInfo"), Xsd.class);
-            xsd = xsdService.add1(xsd);
-            System.out.println(111);
-            System.out.println(xsd.getDh());
-            if (StringUtils.isNotNull(xsd)) {
-                return ResultInfo.success("添加成功", xsd);
-            } else {
+            xsdService.add(riqi, dh, shdw, mc, mh, gg, js, zl, dj, je, bz, shdz, kddh, sfyj, fkfs, sfhs, gd, zdr, shdwjjsr, jgf, kdf,
+                    hsdj, sd, whsdj, hjje, bzld, hjzl);
                 return ResultInfo.success("添加失败", null);
-            }
+
         } catch (Exception e) {
             e.printStackTrace();
             log.error("添加失败：{}", e.getMessage());
-            log.error("参数：{}", map);
             return ResultInfo.error("添加失败");
         }
     }

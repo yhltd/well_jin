@@ -22,17 +22,37 @@ public interface ShdpMapper extends BaseMapper<Shdp> {
     int count1();
 
     @Insert("insert into shdprint(riqi,dh,shdw,mc,mh,gg,js,zl,dj,je,bz,shdz,kddh,sfyj,fkfs,sfhs,gd,zdr,shdwjjsr,jgf,kdf,hsdj,sd,whsdj,hjje,bzld,hjzl)" +
-            " values(NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)")
-    void add();
+            " values(#{riqi},#{dh},#{shdw},NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,#{kddh},#{sfyj},#{fkfs},#{sfhs},NULL,#{zdr},#{shdwjjsr},NULL,#{kdf},NULL,#{sd},NULL,NULL,#{bzld},NULL)")
+    void add(String riqi,String dh,String kddh,String shdwjjsr,String shdw,String sfyj,String fkfs,String sfhs,String sd,String zdr,String kdf,String bzld);
 
-    @Update("update shdprint set riqi = #{riqi},dh = #{dh},shdw = #{shdw},mc = #{mc},mh = #{mh},gg = #{gg},js = #{js},zl = #{zl},dj = #{dj},je = #{je},bz = #{bz},shdz = #{shdz},kddh = #{kddh},sfyj = #{sfyj},fkfs = #{fkfs},sfhs = #{sfhs},gd = #{gd},zdr = #{zdr},shdwjjsr = #{shdwjjsr},jgf = #{jgf},kdf = #{kdf},hsdj = #{hsdj},sd = #{sd},whsdj = #{whsdj},hjje=#{hjje},bzld=#{bzld},hjzl=#{hjzl} where id=#{id}")
-    boolean update(String riqi, String dh, String shdw, String mc, String mh, String gg, String js
-            , String zl, String dj, String je, String bz, String shdz, String kddh, String sfyj, String fkfs, String sfhs, String gd,
-                   String zdr, String shdwjjsr, String jgf, String kdf, String hsdj, String sd, String whsdj, String hjje, String bzld,
-                   String hjzl, int id);
+    @Update("update shdprint set mc = #{mc},mh = #{mh},gg = #{gg},js = #{js},zl = #{zl},dj = #{dj},je = #{je},bz = #{bz},shdz = #{shdz},gd = #{gd},jgf = #{jgf},hsdj = #{hsdj},whsdj = #{whsdj},hjje=#{hjje},hjzl=#{hjzl} where id=#{id}")
+    boolean update(String mc, String mh, String gg, String js, String zl, String dj, String je, String bz, String shdz, String gd, String jgf, String hsdj, String whsdj, String hjje, String hjzl, int id);
 
     @Delete("delete from shdprint ")
     void delete();
+    @Select("select riqi from shdprint where id=#{id}")
+    String getriqi(int id);
+    @Select("select dh from shdprint where id=#{id}")
+    String getdh(int id);
+    @Select("select shdw from shdprint where id=#{id}")
+    String getshdw(int id);
+    @Select("select fkfs from shdprint where id=#{id}")
+    String getfkfs(int id);
+    @Select("select sfhs from shdprint where id=#{id}")
+    String getsfhs(int id);
+    @Select("select kdf from shdprint where id=#{id}")
+    String getkdf(int id);
+    @Select("select sd from shdprint where id=#{id}")
+    String getsd(int id);
+    @Select("select kddh from shdprint where id=#{id}")
+    String getkddh(int id);
+    @Select("select shdwjjsr from shdprint where id=#{id}")
+    String getshdwjjsr(int id);
+    @Select("select sfyj from shdprint where id=#{id}")
+    String getsfyj(int id);
+
+    @Select("select bzld from shdprint where id=#{id}")
+    String getbzld(int id);
 
 }
 //    #{riqi},#{dh},#{shdw},#{mc},#{mh},#{gg},#{js},#{zl},#{dj},#{je},#{bz},#{shdz},#{kddh},#{sfyj},#{fkfs},#{sfhs}" +

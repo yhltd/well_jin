@@ -175,7 +175,7 @@ public class KdgsdzdController {
             //获取基本信息工作表
             Sheet sheet = wb.getSheet("返款");
             //循环Excel文件的i=1行开始
-            for (int i = 1; i <= sheet.getLastRowNum(); i++) {
+            for (int i = 2; i <= sheet.getLastRowNum(); i++) {
                 Kdgsdzd kdgsdzd = new Kdgsdzd();
                 //获取第i行
                 Row row = sheet.getRow(i);

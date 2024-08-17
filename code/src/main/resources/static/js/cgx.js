@@ -314,7 +314,7 @@ $(function () {
         // var je = js * zl * dj
         // document.getElementById("update-je").value = je
         //
-        // if (parseFloat(document.getElementById('update-sd').value) != 0 ){
+        // if (parseFloat(document.getElementById('update-sd').value) != 0) {
         //     var hsdj = parseFloat(document.getElementById('update-hsdj').value);
         //     var sd = parseFloat(document.getElementById('update-sd').value);
         //     var whsdj = hsdj / sd
@@ -349,10 +349,12 @@ $(function () {
         var zl = parseFloat(document.getElementById('update-zl').value);
         var dj = parseFloat(document.getElementById('update-dj').value);
         var je = js * zl * dj
-        document.getElementById("add-je").value = je
+        var hjzl = zl;
+        document.getElementById("update-je").value = je
         var jgf = js * 0.5
         document.getElementById("update-jgf").value = jgf
-
+        var kdf = document.getElementById("update-kdf").value;
+        var hjje = jgf +je+kdf;
         if (parseFloat(document.getElementById('update-sd').value) != 0 ){
             var hsdj = parseFloat(document.getElementById('update-hsdj').value);
             var sd = parseFloat(document.getElementById('update-sd').value);
@@ -360,17 +362,57 @@ $(function () {
             var aa = whsdj.toFixed(2)
             document.getElementById("update-whsdj").value = aa
         }
+        var riqi = document.getElementById("update-riqi").value;
+        var dh = document.getElementById("update-dh").value;
+        var gg = document.getElementById("update-gg").value;
+        var mh = document.getElementById("update-mh").value;
+        var kddh = document.getElementById("update-kddh").value;
+        var shdwjjsr = document.getElementById("update-shdwjjsr").value;
+        var shdw = document.getElementById("update-shdw").value;
+        var fkfs = document.getElementById("update-fkfs").value;
+        var sfhs = document.getElementById("update-sfhs").value;
+        var sfyj = document.getElementById("update-sfyj").value;
 
-        let params = formToJson("#update-form");
+        // var bzld = document.getElementById("update-bzld").value;
+        var mc = document.getElementById("update-mc").value;
+        var gd = document.getElementById("update-gd").value;
+        var bz = document.getElementById("update-bz").value;
+        var shdz = document.getElementById("update-shdz").value;
+        var zdr = document.getElementById("update-zdr").value;
         if (checkForm('#update-form')) {
             $ajax({
                 type: 'post',
                 url: '/xsd/add',
-                data: JSON.stringify({
-                    addInfo: params
-                }),
-                dataType: 'json',
-                contentType: 'application/json;charset=utf-8'
+                data: {
+                    riqi:riqi,
+                    dh:dh,
+                    shdw:shdw,
+                    mc:mc,
+                    mh:mh,
+                    gg:gg,
+                    js:js,
+                    zl:zl,
+                    dj:dj,
+                    je:je,
+                    bz:bz,
+                    shdz:shdz,
+                    kddh:kddh,
+                    sfyj:sfyj,
+                    fkfs:fkfs,
+                    sfhs:sfhs,
+                    gd:gd,
+                    zdr:zdr,
+                    shdwjjsr:shdwjjsr,
+                    jgf:jgf,
+                    kdf:kdf,
+                    hsdj:hsdj,
+                    sd:sd,
+                    whsdj:aa,
+                    hjje:hjje,
+                    // bzld:bzld,
+                    hjzl:hjzl
+                },
+
             }, false, '', function (res) {
                 if (res.code == 200) {
                     swal("", res.msg, "success");
@@ -380,6 +422,7 @@ $(function () {
                 }
             })
         }
+
         let rows = getTableSelection("#cgxTable");
         if (rows.length == 0) {
             swal('请选择要删除的数据！');

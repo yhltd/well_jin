@@ -54,5 +54,7 @@ public interface KhzlService extends IService<Khzl> {
 
     String gettzkc(String gsm);
 
+    String hqdz(String shdw);
+
 
 }

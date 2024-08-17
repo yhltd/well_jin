@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface FtMapper extends BaseMapper<Ft> {
 
-    @Select("select * from feitong")
+    @Select("select * from feitong order by riqi desc")
     List<Ft> getList();
 
     @Select("select * from feitong where riqi >= convert(date,#{ksrq}) and riqi <= convert(date,#{jsrq}) and khmc like '%'+#{khmc}+'%'")

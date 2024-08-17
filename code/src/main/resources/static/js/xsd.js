@@ -72,6 +72,17 @@ function getList() {
     })
 }
 
+
+
+
+
+
+
+
+
+
+
+
 $(function () {
     getList();
     getGsm();
@@ -290,7 +301,7 @@ $(function () {
         $('#update-modal').modal('show');
         setForm(rows[0].data, '#update-form');
         $('#update-riqi').val(rows[0].data.riqi);
-        $('#update-dh').val(rows[0].data.dh);
+         $('#update-dh').val(rows[0].data.dh);
         $('#update-shdw').val(rows[0].data.shdw);
         $('#update-mc').val(rows[0].data.mc);
         $('#update-mh').val(rows[0].data.mh);
@@ -313,7 +324,27 @@ $(function () {
         $('#update-hsdj').val(rows[0].data.hsdj);
         $('#update-sd').val(rows[0].data.sd);
         $('#update-whsdj').val(rows[0].data.whsdj);
-
+        var dh = document.getElementById("update-dh").value;
+        $ajax({
+            type: 'post',
+            url: '/xsd/getList2',
+            data:{
+                dh:dh
+            }
+        }, false, '', function (res) {
+            if (res.code == 200) {
+                setTable2(res.data);
+                $("#xsdTable2").colResizable({
+                    liveDrag: true,
+                    gripInnerHtml: "<div class='grip'></div>",
+                    draggingClass: "dragging",
+                    resizeMode: 'fit'
+                });
+                for (i=0;i<=res.data.id;i++){
+                    idd=i;
+                }
+            }
+        })
         //未含税锁定
         // document.getElementById('update-sfhs').addEventListener('change', function() {
         //     var selectedOption = this.value;
@@ -511,6 +542,203 @@ function setTable(data) {
         clickToSelect: true,
         locale: 'zh-CN',
         toolbar: '#table-toolbar',
+        toolbarAlign: 'left',
+        theadClasses: "thead-light",//这里设置表头样式
+        style:'table-layout:fixed',
+        columns: [
+            {
+                field: '',
+                title: '序号',
+                align: 'center',
+                width: 50,
+                formatter: function (value, row, index) {
+                    return index + 1;
+                }
+            }, {
+                field: 'riqi',
+                title: '日期',
+                align: 'center',
+                sortable: true,
+                width: 80,
+            }, {
+                field: 'dh',
+                title: '单号',
+                align: 'center',
+                sortable: true,
+                width: 80,
+            }, {
+                field: 'shdw',
+                title: '收货单位',
+                align: 'center',
+                sortable: true,
+                width: 130,
+            }
+            // , {
+            //     field: 'mc',
+            //     title: '名称',
+            //     align: 'center',
+            //     sortable: true,
+            //     width: 80,
+            // }, {
+            //     field: 'mh',
+            //     title: '模号',
+            //     align: 'center',
+            //     sortable: true,
+            //     width: 80,
+            // }, {
+            //     field: 'gg',
+            //     title: '规格',
+            //     align: 'center',
+            //     sortable: true,
+            //     width: 80,
+            // }, {
+            //     field: 'js',
+            //     title: '件数',
+            //     align: 'center',
+            //     sortable: true,
+            //     width: 80,
+            // }, {
+            //     field: 'zl',
+            //     title: '重量',
+            //     align: 'center',
+            //     sortable: true,
+            //     width: 80,
+            // }, {
+            //     field: 'dj',
+            //     title: '单价',
+            //     align: 'center',
+            //     sortable: true,
+            //     width: 80,
+            // }, {
+            //     field: 'je',
+            //     title: '金额',
+            //     align: 'center',
+            //     sortable: true,
+            //     width: 80,
+            //     // formatter: function (value, row, index) {
+            //     //     for(i=0;i<row.index;i++){
+            //     //         document.getElementById('zje').value = row[i].je++;
+            //     //     }
+            //     // }
+            // }, {
+            //     field: 'bz',
+            //     title: '备注',
+            //     align: 'center',
+            //     sortable: true,
+            //     width: 150,
+            // }
+            , {
+                field: 'shdz',
+                title: '收货地址',
+                align: 'center',
+                sortable: true,
+                width: 150,
+            }, {
+                field: 'kddh',
+                title: '快递单号',
+                align: 'center',
+                sortable: true,
+                width: 100,
+            }, {
+                field: 'sfyj',
+                title: '是否月结',
+                align: 'center',
+                sortable: true,
+                width: 100,
+            }, {
+                field: 'fkfs',
+                title: '付款方式',
+                align: 'center',
+                sortable: true,
+                width: 100,
+            }, {
+                field: 'sfhs',
+                title: '是否含税',
+                align: 'center',
+                sortable: true,
+                width: 100,
+            }, {
+                field: 'gd',
+                title: '跟单',
+                align: 'center',
+                sortable: true,
+                width: 80,
+            }, {
+                field: 'zdr',
+                title: '制单人',
+                align: 'center',
+                sortable: true,
+                width: 80,
+            }, {
+                field: 'shdwjjsr',
+                title: '收货单位及经手人',
+                align: 'center',
+                sortable: true,
+                width: 150,
+            }, {
+                field: 'jgf',
+                title: '锯工费',
+                align: 'center',
+                sortable: true,
+                width: 80,
+            }, {
+                field: 'kdf',
+                title: '快递费',
+                align: 'center',
+                sortable: true,
+                width: 80,
+            }, {
+                field: 'hsdj',
+                title: '含税单价',
+                align: 'center',
+                sortable: true,
+                width: 100,
+            }, {
+                field: 'sd',
+                title: '税点',
+                align: 'center',
+                sortable: true,
+                width: 80,
+            }, {
+                field: 'whsdj',
+                title: '未含税单价',
+                align: 'center',
+                sortable: true,
+                width: 130,
+            }, {
+                field: 'bz',
+                title: '备注',
+                align: 'center',
+                sortable: true,
+                width: 150,
+            }
+        ],
+        onClickRow: function (row, el) {
+            let isSelect = $(el).hasClass('selected')
+            if (isSelect) {
+                $(el).removeClass('selected')
+            } else {
+                $(el).addClass('selected')
+            }
+        }
+    })
+}
+
+
+function setTable2(data) {
+    if ($('#xsdTable2').html != '') {
+        $('#xsdTable2').bootstrapTable('load', data);
+    }
+
+    $('#xsdTable2').bootstrapTable({
+        data: data,
+        sortStable: true,
+        classes: 'table table-hover text-nowrap table table-bordered',
+        idField: 'id',
+        pagination: true,
+        pageSize: 15,//单页记录数
+        clickToSelect: true,
+        locale: 'zh-CN',
         toolbarAlign: 'left',
         theadClasses: "thead-light",//这里设置表头样式
         style:'table-layout:fixed',

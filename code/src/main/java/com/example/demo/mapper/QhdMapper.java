@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface QhdMapper extends BaseMapper<Qhd> {
 
-    @Select("select * from qianhuidan")
+    @Select("select * from qianhuidan order by riqi desc")
     List<Qhd> getList();
 
     @Select("select * from qianhuidan where riqi >= convert(date,#{ksrq}) and riqi <= convert(date,#{jsrq}) and gsm = #{gsm}")

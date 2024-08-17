@@ -4,6 +4,7 @@ import com.example.demo.entity.Cgx;
 import com.example.demo.entity.UserInfo;
 import com.example.demo.entity.Xsd;
 import com.example.demo.service.CgxService;
+import com.example.demo.service.KhzlService;
 import com.example.demo.service.XsdService;
 import com.example.demo.util.*;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +27,8 @@ import java.util.List;
 public class CgxController {
     @Autowired
     private CgxService cgxService;
-
+    @Autowired
+    private KhzlService khzlService;
     /**
      * 查询所有
      *
@@ -98,29 +100,67 @@ public class CgxController {
      * 添加
      */
     @RequestMapping("/add")
-    public ResultInfo add(@RequestBody HashMap map, HttpSession session) {
+    public ResultInfo add(HttpSession session ,String riqi, String dh, String shdw, String mc, String mh, String gg, String js
+            , String zl, String dj, String je, String bz, String shdz, String kddh, String sfyj, String fkfs, String sfhs, String gd,
+                          String zdr, String shdwjjsr, String jgf, String kdf, String hsdj, String sd, String whsdj, String hjje,
+                          String bzld, String hjzl) {
         UserInfo userInfo = GsonUtil.toEntity(SessionUtil.getToken(session), UserInfo.class);
-        GsonUtil gsonUtil = new GsonUtil(GsonUtil.toJson(map));
-//        List<Integer> idList = GsonUtil.toList(gsonUtil.get("idList"), Integer.class);
+        System.out.println(sfhs);
+        gd = khzlService.hqgd(shdw);
+        zdr = userInfo.getName();
+        shdz = khzlService.hqdz(shdw);
+
+        if (sfhs.equals("含税") || sfhs.equals("金额含税")) {
+            if (dj.equals("")) {
+                je = "0";
+                hsdj = "0";
+                whsdj = "0";
+                jgf = String.valueOf(Float.parseFloat(js) * 0.5);
+                hjje = String.valueOf((Float.parseFloat(je) + Float.parseFloat(jgf) + Float.parseFloat(kdf)) * Float.parseFloat(sd));
+            } else {
+                System.out.println(hsdj);
+                hsdj = String.valueOf(Float.parseFloat(dj) * Float.parseFloat(sd));
+                System.out.println(whsdj);
+                whsdj = String.valueOf(Float.parseFloat(hsdj) / Float.parseFloat(sd));
+                System.out.println(je);
+                je = String.valueOf(Float.parseFloat(js) * Float.parseFloat(zl) * Float.parseFloat(dj));
+                System.out.println(jgf);
+                jgf = String.valueOf(Float.parseFloat(js) * 0.5);
+                System.out.println(hjje);
+                hjje = String.valueOf((Float.parseFloat(je) + Float.parseFloat(jgf) + Float.parseFloat(kdf)) * Float.parseFloat(sd));
+            }
+        } else {
+            if (dj.equals("")) {
+                je = "0";
+                hsdj = "0";
+                whsdj = "0";
+            } else {
+                hsdj = "0";
+                whsdj = "0";
+                System.out.println(je);
+                je = String.valueOf(Float.parseFloat(js) * Float.parseFloat(zl) * Float.parseFloat(dj));
+                System.out.println(jgf);
+                jgf = String.valueOf(Float.parseFloat(js) * 0.5);
+                System.out.println(hjje);
+                hjje = String.valueOf((Float.parseFloat(je) + Float.parseFloat(jgf) + Float.parseFloat(kdf)) * Float.parseFloat(sd));
+            }
+        }
+
         if(!userInfo.getCaozuoquanxian().equals("可修改")){
             return ResultInfo.error(401, "无权限,请联系管理员");
         }
         try {
-            Cgx cgx = GsonUtil.toEntity(gsonUtil.get("addInfo"), Cgx.class);
-            cgx = cgxService.add(cgx);
-//            for(int i=0; i<idList.size(); i++){
-//                int this_id = idList.get(i);
-//                cgxService.delete(Collections.singletonList(this_id));
-//            }
-            if (StringUtils.isNotNull(cgx)) {
-                return ResultInfo.success("添加成功", cgx);
-            } else {
-                return ResultInfo.success("添加失败", null);
-            }
+
+         cgxService.add(riqi, dh, shdw, mc, mh, gg, js, zl, dj, je, bz, shdz, kddh, sfyj, fkfs, sfhs, gd, zdr, shdwjjsr, jgf, kdf,
+                                hsdj, sd, whsdj, hjje, bzld, hjzl);
+
+
+                return ResultInfo.success("添加成功", null);
+
         } catch (Exception e) {
             e.printStackTrace();
             log.error("添加失败：{}", e.getMessage());
-            log.error("参数：{}", map);
+
             return ResultInfo.error("添加失败");
         }
     }

@@ -61,4 +61,9 @@ public class KhzlImpl extends ServiceImpl<KhzlMapper, Khzl> implements KhzlServi
         return khzlMapper.gettzkc(gsm);
     }
 
+    @Override
+    public String hqdz(String shdw) {
+        return khzlMapper.hqdz(shdw);
+    }
+
 }

@@ -1,4 +1,99 @@
 idd=0;
+
+var aa;
+function getList() {
+
+    $ajax({
+        type: 'post',
+        url: '/shdp/getList',
+    }, false, '', function (res) {
+        if (res.code == 200) {
+            for (i = 0; i <= res.data.id; i++) {
+                idd = i;
+            }
+        }
+    })
+}
+$(function (){
+    $ajax({
+        type: 'post',
+        url: '/shdp/getList',
+        dataType: 'json',
+        contentType: 'application/json;charset=utf-8'
+    }, false, '', function (res) {
+        if (res.code == 200) {
+            $("[name='printData']").remove();
+            var t1 = res.data[0].shdw;
+            var t2 =res.data[0].dh;
+            var t3 =res.data[0].riqi;
+            var t13 =res.data[0].zdr;
+            var t14 =res.data[0].gd;
+            var t15 = res.data[0].shdwjjsr;
+            var jgf2 = 0;
+            var hjzl2 = 0;
+            var hjje2 = 0;
+            for (var i = 0; i<res.data.length; i++) {
+                var e = i+1
+                var t4 = "<tr name='printData'>" +
+                    "<td style='text-align: center'>" + e + "</td>" +
+                    "<td style='text-align: center'>" + res.data[i].mc + "</td>" +
+                    "<td style='text-align: center'>" + res.data[i].mh + "</td>" +
+                    "<td style='text-align: center'>" + res.data[i].gg + "</td>" +
+                    "<td style='text-align: center'>" + res.data[i].js + "</td>" +
+                    "<td style='text-align: center'>" + res.data[i].zl + "</td>" +
+                    "<td style='text-align: center'>" + res.data[i].dj + "</td>" +
+                    "<td style='text-align: center'>" + res.data[i].je + "</td>" +
+                    "<td style='text-align: center'>" + res.data[i].bz + "</td>" +
+                    "</tr>";
+                $("#data").append(t4);
+                var jgf1 = parseFloat(res.data[i].jgf);
+                jgf2 = jgf2 + jgf1;
+                var hjzl1 = parseFloat(res.data[i].hjzl);
+                hjzl2 = hjzl2 + hjzl1;
+                var hjje1 = parseFloat(res.data[i].hjje);
+                hjje2 = hjje2 + hjje1;
+            }
+            var t5 = jgf2.toString();
+            var t6 = res.data[0].kdf;
+            var t7 = res.data[0].kddh;
+            var t8 = res.data[0].sfyj;
+            var t9 = res.data[0].fkfs;
+            var t10 = res.data[0].sfhs;
+            var t11 = hjzl2.toString();
+            var t12 = hjje2.toString();
+            var t16 = res.data[0].bzld;
+            $("#shdw").append(t1);
+            $("#dh").append(t2);
+            $("#riqi").append(t3);
+            $("#jgf").append(t5);
+            $("#kdf").append(t6);
+            $("#kddh").append(t7);
+            $("#sfyj").append(t8);
+            $("#gd").append(t14);
+            $("#zdr").append(t13);
+            $("#shdwjjsr").append(t15);
+            $("#hjzl").append(t11);
+            $("#hjje").append(t12);
+            $("#sfhs").append(t10);
+            $("#fkfs").append(t9);
+            $("#bzld").append(t16);
+            aa = t12;
+            getHjje();
+            getList();
+        }
+    })
+    $("#print-btn").click(function () {
+        document.getElementById("print-btn").hidden=true;
+        window.print();
+    })
+
+})
+
+
+
+
+
+
 function getHjje() {
     $("#zjedx").append(menoyToUppercase(aa));
 }
@@ -143,77 +238,9 @@ function menoyToUppercase(money) {
     return chineseStr;
 
 }
-function getList() {
-
-    $ajax({
-        type: 'post',
-        url: '/shdp/getList',
-    }, false, '', function (res) {
-        if (res.code == 200) {
-            setTable1(res.data);
-            $("#shdptable").colResizable({
-                liveDrag: true,
-                gripInnerHtml: "<div class='grip'></div>",
-                draggingClass: "dragging",
-                resizeMode: 'fit'
-            });
-            for (i = 0; i <= res.data.id; i++) {
-                idd = i;
-            }
-        }
-    })
-}
-$(function(){
-
-    $ajax({
-        type: 'post',
-        url: '/shdp/getList',
-    }, false, '', function (res) {
-        $("[name='printData']").remove();
-
-        // var t1 = res.data[0].shdw;
-        // var t2 =res.data[0].dh;
-        // var t3 =res.data[0].riqi;
-        // var t7 =res.data[0].zdr;
-        // var t8 =res.data[0].gd;
-        // var t9 = res.data[0].shdwjjsr;
-        for (var i = 0; res.data[i].id!=null; i++) {
-        t4 = "<tr name='printData'>" +
-            // "<td style='text-align: center'>" + res.data[i].length + "</td>" +
-            "<td style='text-align: center'>" + res.data[i].dh + "</td>" +
-            "<td style='text-align: center'>" + res.data[i].riqi + "</td>" +
-            "<td style='text-align: center'>" + res.data[i].shdw + "</td>" +
-            "<td style='text-align: center'>" + res.data[i].mc + "</td>" +
-            "<td style='text-align: center'>" + res.data[i].mh + "</td>" +
-            "<td style='text-align: center'>" + res.data[i].gg + "</td>" +
-            "<td style='text-align: center'>" + res.data[i].js + "</td>" +
-            "<td style='text-align: center'>" + res.data[i].zl + "</td>" +
-            "<td style='text-align: center'>" + res.data[i].dj + "</td>" +
-            "<td style='text-align: center'>" + res.data[i].je + "</td>" +
-            "<td style='text-align: center'>" + res.data[i].jgf + "</td>" +
-            "<td style='text-align: center'>" + res.data[i].kdf + "</td>" +
-            "</tr>";
-            $("#data").append(t4);
-            t5 = "<tr name='printData'>" +
-                "<td style='text-align: center'>" + res.data[i].shdz + "</td>" +
-                "<td style='text-align: center'>" + res.data[i].kddh + "</td>" +
-                "<td style='text-align: center'>" + res.data[i].bz + "</td>" +
-                "<td style='text-align: center'>" + res.data[i].sfyj + "</td>" +
-                "<td style='text-align: center'>" + res.data[i].fkfs + "</td>" +
-                "<td style='text-align: center'>" + res.data[i].sfhs + "</td>" +
-                "<td style='text-align: center'>" +"          " +"</td>" +
-                "<td style='text-align: center'>" + res.data[i].zdr + "</td>" +
-                "<td style='text-align: center'>" + res.data[i].gd + "</td>" +
-                "<td style='text-align: center'>" + res.data[i].shdwjjsr + "</td>" +
-                "<td style='text-align: center'>" + res.data[i].hjzl + "</td>" +
-                "<td style='text-align: center'>" + res.data[i].hjje + "</td>" +
-                "</tr>";
-            $("#data1").append(t5);
-        }
-        document.getElementById("#print-btn").click().hidden=true;
-    })
-    $("#print-btn").click(function () {
-        window.print();
-    })
-
-})
+window.onload = function() {
+    setTimeout(function() {
+        // 在这里放置你想在5秒后执行的代码
+        console.log("5秒钟已过");
+    }, 5000); // 5000毫秒等于5秒
+};

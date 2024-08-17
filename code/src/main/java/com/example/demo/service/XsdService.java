@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.example.demo.entity.UserInfo;
 import com.example.demo.entity.Xsd;
 import org.springframework.stereotype.Service;
 
@@ -35,11 +36,11 @@ public interface XsdService extends IService<Xsd> {
     /**
      * 添加
      */
-    Xsd add(Xsd xsd);
-    Xsd add1(Xsd xsd);
-    boolean add2(String riqi,String dh,String shdw,String mc,String mh,String gg,String js,String zl,String dj,String je,String bz,String shdz,String kddh,String sfyj,String fkfs,String sfhs,String gd,
-                 String zdr,String shdwjjsr ,String jgf,String kdf,String hsdj,String sd,String whsdj,String hjje,String bzld,
-                 String hjzl);
+//    Xsd add(Xsd xsd);
+//    Xsd add1(Xsd xsd);
+//    boolean add2(String riqi,String dh,String shdw,String mc,String mh,String gg,String js,String zl,String dj,String je,String bz,String shdz,String kddh,String sfyj,String fkfs,String sfhs,String gd,
+//                 String zdr,String shdwjjsr ,String jgf,String kdf,String hsdj,String sd,String whsdj,String hjje,String bzld,
+//                 String hjzl);
     /**
      * 获取当天销售单单价
      */
@@ -49,4 +50,11 @@ public interface XsdService extends IService<Xsd> {
 
     boolean update2(Xsd xsd);
 
+
+    boolean add(String riqi, String dh, String shdw, String mc, String mh, String gg, String js
+            , String zl, String dj, String je, String bz, String shdz, String kddh, String sfyj, String fkfs, String sfhs, String gd,
+                String zdr, String shdwjjsr, String jgf, String kdf, String hsdj, String sd, String whsdj, String hjje,
+                String bzld, String hjzl);
+
+    List<Xsd> getList2(String dh);
 }

@@ -14,7 +14,7 @@ public interface YsyfMapper extends BaseMapper<Ysyf> {
 
 //    @Select("select * from yingshouyingfu")
 
-    @Select("select id,riqi,gsm,skje,zys,bz,fkriqi,bh,ysje,month(fkriqi)as yf from yingshouyingfu")
+    @Select("select id,riqi,gsm,skje,zys,bz,fkriqi,bh,ysje,month(fkriqi)as yf from yingshouyingfu order by riqi desc")
     List<Ysyf> getList();
 
     @Select("select * from yingshouyingfu where riqi >= convert(date,#{ksrq}) and riqi <= convert(date,#{jsrq}) and gsm =#{gsm}")

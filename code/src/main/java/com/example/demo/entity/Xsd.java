@@ -110,6 +110,7 @@ public class Xsd {
      */
     private String whsdj;
 
+
     private String hjje;
 
     private String bzld;

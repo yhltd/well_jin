@@ -36,7 +36,10 @@ public interface CgxService extends IService<Cgx> {
     /**
      * 添加
      */
-    Cgx add(Cgx cgx);
+    boolean add(String riqi, String dh, String shdw, String mc, String mh, String gg, String js
+            , String zl, String dj, String je, String bz, String shdz, String kddh, String sfyj, String fkfs, String sfhs, String gd,
+                String zdr, String shdwjjsr, String jgf, String kdf, String hsdj, String sd, String whsdj, String hjje,
+                String bzld, String hjzl);
 
     List<Cgx> getListByShdw(String shdw,String dh,String riqi);
 

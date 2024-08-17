@@ -105,284 +105,284 @@
     <table id="xsdTable"></table>
 </div>
 
-<div id="add-modal" class="modal fade" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="modal-title">录入</div>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+<!--<div id="add-modal" class="modal fade" tabindex="-1">-->
+<!--    <div class="modal-dialog modal-lg">-->
+<!--        <div class="modal-content">-->
+<!--            <div class="modal-header">-->
+<!--                <div class="modal-title">录入</div>-->
+<!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                    <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--            </div>-->
 
-            <div class="modal-body">
-                <form id="add-form" class="needs-validation">
-                    <div class="row justify-content-evenly">
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="add-riqi">日期</label>
-                                <input id="add-riqi" name="riqi" type="date" class="form-control" autocomplete="off">
-                                <div class="invalid-feedback">
-                                    请输入日期！
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="add-dh">单号</label>
-                                <input id="add-dh" name="dh" type="text" class="form-control" autocomplete="off" data-required="1">
-                                <div class="invalid-feedback">
-                                    请输入单号！
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="add-shdw">收货单位</label>
-                                <select id="add-shdw" name="shdw" class="form-control">
-                                    <option>--请选择--</option>
-                                </select>
-                                <div class="invalid-feedback">
-                                    请选择收货单位！
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="add-mc">名称</label>
-                                <input id="add-mc" name="mc" type="text" class="form-control" autocomplete="off" data-required="1">
-                                <div class="invalid-feedback">
-                                    请输入名称！
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="add-mh">模号</label>
-                                <input id="add-mh" name="mh" type="text" class="form-control" autocomplete="off" data-required="1">
-                                <div class="invalid-feedback">
-                                    请输入模号！
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="add-gg">规格</label>
-                                <input id="add-gg" name="gg" type="text" class="form-control" autocomplete="off" data-required="1">
-                                <div class="invalid-feedback">
-                                    请输入规格！
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="add-js">件数</label>
-                                <input id="add-js" name="js" type="text" class="form-control" autocomplete="off" data-required="1">
-                                <div class="invalid-feedback">
-                                    请输入件数！
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="add-zl">重量</label>
-                                <input id="add-zl" name="zl" type="text" class="form-control" autocomplete="off" data-required="1">
-                                <div class="invalid-feedback">
-                                    请输入重量！
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="add-dj">单价</label>
-                                <input id="add-dj" name="dj" type="text" class="form-control" autocomplete="off" data-required="1">
-                                <div class="invalid-feedback">
-                                    请输入单价！
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="add-je">金额</label>
-                                <input id="add-je" name="je" type="text" class="form-control" autocomplete="off" readonly>
-                                <div class="invalid-feedback">
-                                    请输入金额！
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="add-bz">备注</label>
-                                <input id="add-bz" name="bz" type="text" class="form-control" autocomplete="off" data-required="1">
-                                <div class="invalid-feedback">
-                                    请输入备注！
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="add-shdz">收货地址</label>
-                                <input id="add-shdz" name="shdz" type="text" class="form-control" autocomplete="off" data-required="1">
-                                <div class="invalid-feedback">
-                                    请输入收货地址！
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="add-kddh">快递单号</label>
-                                <input id="add-kddh" name="kddh" type="text" class="form-control" autocomplete="off" data-required="1">
-                                <div class="invalid-feedback">
-                                    请输入快递单号！
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="add-sfyj">是否月结</label>
-                                <select id="add-sfyj" name="sfyj" class="form-control" autocomplete="off">
-                                    <option value="--请选择--">--请选择--</option>
-                                    <option value="是">是</option>
-                                    <option value="否">否</option>
-                                </select>
-                                <div class="invalid-feedback">
-                                    请输入是否月结！
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="add-fkfs">付款方式</label>
-                                <select id="add-fkfs" name="fkfs" class="form-control" autocomplete="off">
-                                    <option value="--请选择--">--请选择--</option>
-                                    <option value="签回单">签回单</option>
-                                    <option value="现金">现金</option>
-                                    <option value="快递代收">快递代收</option>
-                                </select>
-                                <div class="invalid-feedback">
-                                    请输入付款方式！
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="add-sfhs">是否含税</label>
-                                <select id="add-sfhs" name="sfhs" class="form-control" autocomplete="off">
-                                    <option value="--请选择--">--请选择--</option>
-                                    <option value="含税">含税</option>
-                                    <option value="未含税">未含税</option>
-                                    <option value="金额含税">金额含税</option>
-                                </select>
-                                <div class="invalid-feedback">
-                                    请输入是否含税！
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="add-gd">跟单</label>
-                                <input id="add-gd" name="gd" type="text" class="form-control" autocomplete="off" data-required="1">
-                                <div class="invalid-feedback">
-                                    请输入跟单！
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="add-zdr">制单人</label>
-                                <input id="add-zdr" name="zdr" type="text" class="form-control" autocomplete="off" data-required="1">
-                                <div class="invalid-feedback">
-                                    请输入制单人！
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="add-shdwjjsr">收货单位及经手人</label>
-                                <input id="add-shdwjjsr" name="shdwjjsr" type="text" class="form-control" autocomplete="off" data-required="1">
-                                <div class="invalid-feedback">
-                                    请输入收货单位及经手人！
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="add-jgfdj">锯工费单价</label>
-                                <input id="add-jgfdj" name="jgf" type="text" class="form-control" autocomplete="off" readonly value="0.5">
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="add-jgf">锯工费</label>
-                                <input id="add-jgf" name="jgf" type="text" class="form-control" autocomplete="off" data-required="1" readonly="readonly">
-                                <div class="invalid-feedback">
-                                    请输入锯工费！
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="add-kdf">快递费</label>
-                                <input id="add-kdf" name="kdf" type="text" class="form-control" autocomplete="off" data-required="1">
-                                <div class="invalid-feedback">
-                                    请输入快递费！
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="add-hsdj">含税单价</label>
-                                <input id="add-hsdj" name="hsdj" type="text" value="0" class="form-control" autocomplete="off" data-required="1">
-                                <div class="invalid-feedback">
-                                    请输入含税单价！
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="add-sd">税点</label>
-                                <input id="add-sd" name="sd" type="text" value="0" class="form-control" autocomplete="off" data-required="1">
-                                <div class="invalid-feedback">
-                                    请输入税点！
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="add-whsdj">未含税单价</label>
-                                <input id="add-whsdj" name="whsdj" type="text" value="0" class="form-control" autocomplete="off" data-required="1">
-                                <div class="invalid-feedback">
-                                    请输入未含税单价！
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="add-danhao">备注</label>
-                                <input id="add-danhao" name="danhao" type="hidden" class="form-control" autocomplete="off" data-required="1">
-                            </div>
-                        </div>
-                        <div class="col-6">
-                        <div class="form-group">
-                            <input id="add-ziduan" name="ziduan" type="hidden" value="出库" class="form-control" autocomplete="off" data-required="1">
-                        </div>
-                    </div>
-                    </div>
-                </form>
-            </div>
-            <div class="border-top" style="padding: 15px;">
-                <button id="add-submit-btn" type="button" class="btn" style="background-color: limegreen;color: white">
-                    <i class="bi bi-arrow-bar-up icon"></i>
-                    提交
-                </button>
-                <button id="add-close-btn" type="button" class="btn left-margin" style="background-color: red;color: white">
-                    <i class="bi bi-x-circle icon"></i>
-                    关闭
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
+<!--            <div class="modal-body">-->
+<!--                <form id="add-form" class="needs-validation">-->
+<!--                    <div class="row justify-content-evenly">-->
+<!--                        <div class="col-6">-->
+<!--                            <div class="form-group">-->
+<!--                                <label for="add-riqi">日期</label>-->
+<!--                                <input id="add-riqi" name="riqi" type="date" class="form-control" autocomplete="off">-->
+<!--                                <div class="invalid-feedback">-->
+<!--                                    请输入日期！-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-6">-->
+<!--                            <div class="form-group">-->
+<!--                                <label for="add-dh">单号</label>-->
+<!--                                <input id="add-dh" name="dh" type="text" class="form-control" autocomplete="off" data-required="1">-->
+<!--                                <div class="invalid-feedback">-->
+<!--                                    请输入单号！-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-6">-->
+<!--                            <div class="form-group">-->
+<!--                                <label for="add-shdw">收货单位</label>-->
+<!--                                <select id="add-shdw" name="shdw" class="form-control">-->
+<!--                                    <option>&#45;&#45;请选择&#45;&#45;</option>-->
+<!--                                </select>-->
+<!--                                <div class="invalid-feedback">-->
+<!--                                    请选择收货单位！-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-6">-->
+<!--                            <div class="form-group">-->
+<!--                                <label for="add-mc">名称</label>-->
+<!--                                <input id="add-mc" name="mc" type="text" class="form-control" autocomplete="off" data-required="1">-->
+<!--                                <div class="invalid-feedback">-->
+<!--                                    请输入名称！-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-6">-->
+<!--                            <div class="form-group">-->
+<!--                                <label for="add-mh">模号</label>-->
+<!--                                <input id="add-mh" name="mh" type="text" class="form-control" autocomplete="off" data-required="1">-->
+<!--                                <div class="invalid-feedback">-->
+<!--                                    请输入模号！-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-6">-->
+<!--                            <div class="form-group">-->
+<!--                                <label for="add-gg">规格</label>-->
+<!--                                <input id="add-gg" name="gg" type="text" class="form-control" autocomplete="off" data-required="1">-->
+<!--                                <div class="invalid-feedback">-->
+<!--                                    请输入规格！-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-6">-->
+<!--                            <div class="form-group">-->
+<!--                                <label for="add-js">件数</label>-->
+<!--                                <input id="add-js" name="js" type="text" class="form-control" autocomplete="off" data-required="1">-->
+<!--                                <div class="invalid-feedback">-->
+<!--                                    请输入件数！-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-6">-->
+<!--                            <div class="form-group">-->
+<!--                                <label for="add-zl">重量</label>-->
+<!--                                <input id="add-zl" name="zl" type="text" class="form-control" autocomplete="off" data-required="1">-->
+<!--                                <div class="invalid-feedback">-->
+<!--                                    请输入重量！-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-6">-->
+<!--                            <div class="form-group">-->
+<!--                                <label for="add-dj">单价</label>-->
+<!--                                <input id="add-dj" name="dj" type="text" class="form-control" autocomplete="off" data-required="1">-->
+<!--                                <div class="invalid-feedback">-->
+<!--                                    请输入单价！-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-6">-->
+<!--                            <div class="form-group">-->
+<!--                                <label for="add-je">金额</label>-->
+<!--                                <input id="add-je" name="je" type="text" class="form-control" autocomplete="off" readonly>-->
+<!--                                <div class="invalid-feedback">-->
+<!--                                    请输入金额！-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-6">-->
+<!--                            <div class="form-group">-->
+<!--                                <label for="add-bz">备注</label>-->
+<!--                                <input id="add-bz" name="bz" type="text" class="form-control" autocomplete="off" data-required="1">-->
+<!--                                <div class="invalid-feedback">-->
+<!--                                    请输入备注！-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-6">-->
+<!--                            <div class="form-group">-->
+<!--                                <label for="add-shdz">收货地址</label>-->
+<!--                                <input id="add-shdz" name="shdz" type="text" class="form-control" autocomplete="off" data-required="1">-->
+<!--                                <div class="invalid-feedback">-->
+<!--                                    请输入收货地址！-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-6">-->
+<!--                            <div class="form-group">-->
+<!--                                <label for="add-kddh">快递单号</label>-->
+<!--                                <input id="add-kddh" name="kddh" type="text" class="form-control" autocomplete="off" data-required="1">-->
+<!--                                <div class="invalid-feedback">-->
+<!--                                    请输入快递单号！-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-6">-->
+<!--                            <div class="form-group">-->
+<!--                                <label for="add-sfyj">是否月结</label>-->
+<!--                                <select id="add-sfyj" name="sfyj" class="form-control" autocomplete="off">-->
+<!--                                    <option value="&#45;&#45;请选择&#45;&#45;">&#45;&#45;请选择&#45;&#45;</option>-->
+<!--                                    <option value="是">是</option>-->
+<!--                                    <option value="否">否</option>-->
+<!--                                </select>-->
+<!--                                <div class="invalid-feedback">-->
+<!--                                    请输入是否月结！-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-6">-->
+<!--                            <div class="form-group">-->
+<!--                                <label for="add-fkfs">付款方式</label>-->
+<!--                                <select id="add-fkfs" name="fkfs" class="form-control" autocomplete="off">-->
+<!--                                    <option value="&#45;&#45;请选择&#45;&#45;">&#45;&#45;请选择&#45;&#45;</option>-->
+<!--                                    <option value="签回单">签回单</option>-->
+<!--                                    <option value="现金">现金</option>-->
+<!--                                    <option value="快递代收">快递代收</option>-->
+<!--                                </select>-->
+<!--                                <div class="invalid-feedback">-->
+<!--                                    请输入付款方式！-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-6">-->
+<!--                            <div class="form-group">-->
+<!--                                <label for="add-sfhs">是否含税</label>-->
+<!--                                <select id="add-sfhs" name="sfhs" class="form-control" autocomplete="off">-->
+<!--                                    <option value="&#45;&#45;请选择&#45;&#45;">&#45;&#45;请选择&#45;&#45;</option>-->
+<!--                                    <option value="含税">含税</option>-->
+<!--                                    <option value="未含税">未含税</option>-->
+<!--                                    <option value="金额含税">金额含税</option>-->
+<!--                                </select>-->
+<!--                                <div class="invalid-feedback">-->
+<!--                                    请输入是否含税！-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-6">-->
+<!--                            <div class="form-group">-->
+<!--                                <label for="add-gd">跟单</label>-->
+<!--                                <input id="add-gd" name="gd" type="text" class="form-control" autocomplete="off" data-required="1">-->
+<!--                                <div class="invalid-feedback">-->
+<!--                                    请输入跟单！-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-6">-->
+<!--                            <div class="form-group">-->
+<!--                                <label for="add-zdr">制单人</label>-->
+<!--                                <input id="add-zdr" name="zdr" type="text" class="form-control" autocomplete="off" data-required="1">-->
+<!--                                <div class="invalid-feedback">-->
+<!--                                    请输入制单人！-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-6">-->
+<!--                            <div class="form-group">-->
+<!--                                <label for="add-shdwjjsr">收货单位及经手人</label>-->
+<!--                                <input id="add-shdwjjsr" name="shdwjjsr" type="text" class="form-control" autocomplete="off" data-required="1">-->
+<!--                                <div class="invalid-feedback">-->
+<!--                                    请输入收货单位及经手人！-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-6">-->
+<!--                            <div class="form-group">-->
+<!--                                <label for="add-jgfdj">锯工费单价</label>-->
+<!--                                <input id="add-jgfdj" name="jgf" type="text" class="form-control" autocomplete="off" readonly value="0.5">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-6">-->
+<!--                            <div class="form-group">-->
+<!--                                <label for="add-jgf">锯工费</label>-->
+<!--                                <input id="add-jgf" name="jgf" type="text" class="form-control" autocomplete="off" data-required="1" readonly="readonly">-->
+<!--                                <div class="invalid-feedback">-->
+<!--                                    请输入锯工费！-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-6">-->
+<!--                            <div class="form-group">-->
+<!--                                <label for="add-kdf">快递费</label>-->
+<!--                                <input id="add-kdf" name="kdf" type="text" class="form-control" autocomplete="off" data-required="1">-->
+<!--                                <div class="invalid-feedback">-->
+<!--                                    请输入快递费！-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-6">-->
+<!--                            <div class="form-group">-->
+<!--                                <label for="add-hsdj">含税单价</label>-->
+<!--                                <input id="add-hsdj" name="hsdj" type="text" value="0" class="form-control" autocomplete="off" data-required="1">-->
+<!--                                <div class="invalid-feedback">-->
+<!--                                    请输入含税单价！-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-6">-->
+<!--                            <div class="form-group">-->
+<!--                                <label for="add-sd">税点</label>-->
+<!--                                <input id="add-sd" name="sd" type="text" value="0" class="form-control" autocomplete="off" data-required="1">-->
+<!--                                <div class="invalid-feedback">-->
+<!--                                    请输入税点！-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-6">-->
+<!--                            <div class="form-group">-->
+<!--                                <label for="add-whsdj">未含税单价</label>-->
+<!--                                <input id="add-whsdj" name="whsdj" type="text" value="0" class="form-control" autocomplete="off" data-required="1">-->
+<!--                                <div class="invalid-feedback">-->
+<!--                                    请输入未含税单价！-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-6">-->
+<!--                            <div class="form-group">-->
+<!--                                <label for="add-danhao">备注</label>-->
+<!--                                <input id="add-danhao" name="danhao" type="hidden" class="form-control" autocomplete="off" data-required="1">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-6">-->
+<!--                        <div class="form-group">-->
+<!--                            <input id="add-ziduan" name="ziduan" type="hidden" value="出库" class="form-control" autocomplete="off" data-required="1">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--            <div class="border-top" style="padding: 15px;">-->
+<!--                <button id="add-submit-btn" type="button" class="btn" style="background-color: limegreen;color: white">-->
+<!--                    <i class="bi bi-arrow-bar-up icon"></i>-->
+<!--                    提交-->
+<!--                </button>-->
+<!--                <button id="add-close-btn" type="button" class="btn left-margin" style="background-color: red;color: white">-->
+<!--                    <i class="bi bi-x-circle icon"></i>-->
+<!--                    关闭-->
+<!--                </button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
 <div id="update-modal" class="modal fade" tabindex="-1">
     <div class="modal-dialog modal-lg">
@@ -530,20 +530,23 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6" >
-                            <div class="form-group">
-                                <label for="update-fkfs">付款方式</label>
-                                <select id="update-fkfs" name="fkfs" class="form-control" autocomplete="off">
-                                    <option value="--请选择--">--请选择--</option>
-                                    <option value="签回单">签回单</option>
-                                    <option value="现金">现金</option>
-                                    <option value="快递代收">快递代收</option>
-                                </select>
-                                <div class="invalid-feedback">
-                                    请输入付款方式！
-                                </div>
-                            </div>
-                        </div>
+<!--                        <div class="col-6" >-->
+<!--                            <div class="form-group">-->
+<!--                                <label for="update-fkfs">付款方式</label>-->
+<!--                                <select id="update-fkfs" name="fkfs" class="form-control" autocomplete="off">-->
+<!--                                    <option value="&#45;&#45;请选择&#45;&#45;">&#45;&#45;请选择&#45;&#45;</option>-->
+<!--                                    <option value="签回单">签回单</option>-->
+<!--                                    <option value="现金">现金</option>-->
+<!--                                    <option value="快递代收">快递代收</option>-->
+<!--                                </select>-->
+<!--                                <div class="invalid-feedback">-->
+<!--                                    请输入付款方式！-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                    <div class="table-div border-top">
+                        <table id="xsdTable2"></table>
+                    </div>
                         <div class="col-6">
                             <div class="form-group" hidden>
                                 <label for="update-sfhs">是否含税</label>
@@ -640,10 +643,10 @@
                 </form>
             </div>
             <div class="border-top" style="padding: 15px;">
-                <button id="update-submit-btn" type="button" class="btn" style="background-color: limegreen;color: white">
-                    <i class="bi bi-arrow-bar-up icon"></i>
-                    提交
-                </button>
+<!--                <button id="update-submit-btn" type="button" class="btn" style="background-color: limegreen;color: white">-->
+<!--                    <i class="bi bi-arrow-bar-up icon"></i>-->
+<!--                    提交-->
+<!--                </button>-->
                 <button id="update-close-btn" type="button" class="btn left-margin" style="background-color: red;color: white">
                     <i class="bi bi-x-circle icon"></i>
                     关闭
