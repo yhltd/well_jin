@@ -769,60 +769,62 @@ function setTable2(data) {
                 align: 'center',
                 sortable: true,
                 width: 130,
-            }, {
-                field: 'mc',
-                title: '名称',
-                align: 'center',
-                sortable: true,
-                width: 80,
-            }, {
-                field: 'mh',
-                title: '模号',
-                align: 'center',
-                sortable: true,
-                width: 80,
-            }, {
-                field: 'gg',
-                title: '规格',
-                align: 'center',
-                sortable: true,
-                width: 80,
-            }, {
-                field: 'js',
-                title: '件数',
-                align: 'center',
-                sortable: true,
-                width: 80,
-            }, {
-                field: 'zl',
-                title: '重量',
-                align: 'center',
-                sortable: true,
-                width: 80,
-            }, {
-                field: 'dj',
-                title: '单价',
-                align: 'center',
-                sortable: true,
-                width: 80,
-            }, {
-                field: 'je',
-                title: '金额',
-                align: 'center',
-                sortable: true,
-                width: 80,
-                // formatter: function (value, row, index) {
-                //     for(i=0;i<row.index;i++){
-                //         document.getElementById('zje').value = row[i].je++;
-                //     }
-                // }
-            }, {
-                field: 'bz',
-                title: '备注',
-                align: 'center',
-                sortable: true,
-                width: 150,
-            }, {
+            }
+            // , {
+            //     field: 'mc',
+            //     title: '名称',
+            //     align: 'center',
+            //     sortable: true,
+            //     width: 80,
+            // }, {
+            //     field: 'mh',
+            //     title: '模号',
+            //     align: 'center',
+            //     sortable: true,
+            //     width: 80,
+            // }, {
+            //     field: 'gg',
+            //     title: '规格',
+            //     align: 'center',
+            //     sortable: true,
+            //     width: 80,
+            // }, {
+            //     field: 'js',
+            //     title: '件数',
+            //     align: 'center',
+            //     sortable: true,
+            //     width: 80,
+            // }, {
+            //     field: 'zl',
+            //     title: '重量',
+            //     align: 'center',
+            //     sortable: true,
+            //     width: 80,
+            // }, {
+            //     field: 'dj',
+            //     title: '单价',
+            //     align: 'center',
+            //     sortable: true,
+            //     width: 80,
+            // }, {
+            //     field: 'je',
+            //     title: '金额',
+            //     align: 'center',
+            //     sortable: true,
+            //     width: 80,
+            //     // formatter: function (value, row, index) {
+            //     //     for(i=0;i<row.index;i++){
+            //     //         document.getElementById('zje').value = row[i].je++;
+            //     //     }
+            //     // }
+            // }, {
+            //     field: 'bz',
+            //     title: '备注',
+            //     align: 'center',
+            //     sortable: true,
+            //     width: 150,
+            // }
+            , {
                 field: 'shdz',
                 title: '收货地址',
                 align: 'center',

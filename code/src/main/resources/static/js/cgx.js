@@ -246,6 +246,42 @@ $(function () {
             })
         }
     });
+    // $('#print-btn').click(function (){
+    //     let rows = getTableSelection('#cgxTable');
+    //     if (rows.length > 1 || rows.length == 0) {
+    //         swal('请选择一条数据打印!');
+    //         return;
+    //     }
+    //     $('#update-modal').modal('show');
+    //     setForm(rows[0].data, '#update-form');
+    //     $('#update-riqi').val(rows[0].data.riqi);
+    //     $('#update-dh').val(rows[0].data.dh);
+    //     $('#update-shdw').val(rows[0].data.shdw);
+    //     $('#update-mc').val(rows[0].data.mc);
+    //     $('#update-mh').val(rows[0].data.mh);
+    //     $('#update-gg').val(rows[0].data.gg);
+    //     $('#update-js').val(rows[0].data.js);
+    //     $('#update-zl').val(rows[0].data.zl);
+    //     $('#update-dj').val(rows[0].data.dj);
+    //     $('#update-je').val(rows[0].data.je);
+    //     $('#update-bz').val(rows[0].data.bz);
+    //     $('#update-shdz').val(rows[0].data.shdz);
+    //     $('#update-kddh').val(rows[0].data.kddh);
+    //     $('#update-sfyj').val(rows[0].data.sfyj);
+    //     $('#update-fkfs').val(rows[0].data.fkfs);
+    //     $('#update-shhs').val(rows[0].data.sfhs);
+    //     $('#update-gd').val(rows[0].data.gd);
+    //     $('#update-zdr').val(rows[0].data.zdr);
+    //     $('#update-shdwjjsr').val(rows[0].data.shdwjjsr);
+    //     $('#update-jgf').val(rows[0].data.jgf);
+    //     $('#update-kdf').val(rows[0].data.kdf);
+    //     $('#update-hsdj').val(rows[0].data.hsdj);
+    //     $('#update-sd').val(rows[0].data.sd);
+    //     $('#update-whsdj').val(rows[0].data.whsdj);
+    //     $ajax()
+    // })
+
+
 
     //点击修改按钮显示弹窗
     $('#update-btn').click(function () {
@@ -422,32 +458,32 @@ $(function () {
                 }
             })
         }
-
-        let rows = getTableSelection("#cgxTable");
-        if (rows.length == 0) {
-            swal('请选择要删除的数据！');
-            return;
-        }
-        let idList = [];
-        $.each(rows, function (index, row) {
-            idList.push(row.data.id)
-        });
-        $ajax({
-            type: 'post',
-            url: '/cgx/delete',
-            data: JSON.stringify({
-                idList: idList
-            }),
-            dataType: 'json',
-            contentType: 'application/json;charset=utf-8'
-        }, false, '', function (res) {
-            if (res.code == 200) {
-                swal("", res.msg, "success");
-                getList();
-            } else {
-                swal("", res.msg, "error");
-            }
-        })
+        //
+        // let rows = getTableSelection("#cgxTable");
+        // if (rows.length == 0) {
+        //     swal('请选择要删除的数据！');
+        //     return;
+        // }
+        // let idList = [];
+        // $.each(rows, function (index, row) {
+        //     idList.push(row.data.id)
+        // });
+        // $ajax({
+        //     type: 'post',
+        //     url: '/cgx/delete',
+        //     data: JSON.stringify({
+        //         idList: idList
+        //     }),
+        //     dataType: 'json',
+        //     contentType: 'application/json;charset=utf-8'
+        // }, false, '', function (res) {
+        //     if (res.code == 200) {
+        //         swal("", res.msg, "success");
+        //         getList();
+        //     } else {
+        //         swal("", res.msg, "error");
+        //     }
+        // })
     });
 
     //修改弹窗里点击暂存按钮
