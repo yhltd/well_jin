@@ -50,6 +50,15 @@ public class CgxImpl extends ServiceImpl<CgxMapper, Cgx> implements CgxService {
         return cgxMapper.add(riqi, dh, shdw, mc, mh, gg, js, zl, dj, je, bz, shdz, kddh, sfyj, fkfs, sfhs, gd, zdr, shdwjjsr, jgf, kdf,
                 hsdj, sd, whsdj, hjje, bzld, hjzl);
     }
+    @Override
+    public List<Cgx> getListdh(String dh) {
+        return cgxMapper.getListdh(dh);
+    }
+
+    @Override
+    public boolean delete1(String dh) {
+        return cgxMapper.delete1(dh);
+    }
 
 //    @Override
 //    public List<Cgx> getDj(String dj) {return cgxMapper.getDj(dj);}

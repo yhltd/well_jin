@@ -28,7 +28,7 @@ $(function (){
             var t3 =res.data[0].riqi;
             var t13 =res.data[0].zdr;
             var t14 =res.data[0].gd;
-            var t15 = res.data[0].shdwjjsr;
+            // var t15 = res.data[0].shdwjjsr;
             var jgf2 = 0;
             var hjzl2 = 0;
             var hjje2 = 0;
@@ -71,7 +71,7 @@ $(function (){
             $("#sfyj").append(t8);
             $("#gd").append(t14);
             $("#zdr").append(t13);
-            $("#shdwjjsr").append(t15);
+            // $("#shdwjjsr").append(t15);
             $("#hjzl").append(t11);
             $("#hjje").append(t12);
             $("#sfhs").append(t10);

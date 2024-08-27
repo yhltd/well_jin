@@ -6,6 +6,9 @@ var n = 0;
 var h ="";
 let select=[];
 let select_mc=[];
+var y=0;
+var x=0;
+var z=0;
 function getGsm() {
     $ajax({
         type: 'post',
@@ -26,12 +29,32 @@ function getGsm() {
 function zhdy() {
     window.location.href ="zhdy.html";
 }
-function deleteq1(){
-    $ajax({
-        type: 'post',
-        url: '/shdp/delete',
-    })
+function getQueryParam(paramName) {
+    var queryString = window.location.search.substring(1);
+    var params = queryString.split('&');
+    for (var i = 0; i < params.length; i++) {
+        var pair = params[i].split('=');
+        if (pair[0] === paramName) {
+            return pair[1];
+        }
+    }
+    return null;
 }
+function deleteq1(){
+    var h = getQueryParam('biaoji');
+
+    if(h==null ||h==undefined){
+        $ajax({
+            type: 'post',
+            url: '/shdp/delete',
+        })
+    }
+
+}
+
+
+
+
 // function hqgd() {
 //     var shdw =document.getElementById("add-shdw").value
 //     $ajax({
@@ -75,13 +98,29 @@ function getMc() {
 //
 //     })
 }
+$(document).ready(function() {
+    // 初始化Select2插件
+    $('#shdw').select2({
+        placeholder: '请选择收货单位',
+        ajax: {
+            url: '/khzl/hqxlGsm', // 替换为你的API地址
+            dataType: 'json',
+            delay: 250,
+            processResults: function (data) {
+                return {
+                    results: data.items
+                };
+            },
+            cache: true
+        }
+    });
+});
 
 function getriqi() {
     const now = new Date();
     const year = now.getFullYear();
     const month = (now.getMonth() + 1).toString().padStart(2, '0');
     const day = now.getDate().toString().padStart(2, '0');
-    const hours = now.getHours().toString().padStart(2, '0');
     const minutes = now.getMinutes().toString().padStart(2, '0');
     const seconds = now.getSeconds().toString().padStart(2, '0');
 }
@@ -94,6 +133,49 @@ function getList() {
     }, false, '', function (res) {
         if (res.code == 200) {
             setTable1(res.data);
+            var h = getQueryParam('biaoji');
+            if(h!=null ||h!=undefined) {
+                for (i = 0; i < res.data.length; i++) {
+                    var id1 = res.data[i].id;
+                    document.getElementById("mc" + id1).value = res.data[i].mc;
+                }
+                document.getElementById("select2-shdw-container").remove();
+                document.getElementById("shdw").remove();
+                // $("#select2-shdw-container").remove();
+                // var inp = document.getElementById("shdwdiv");
+                // var inp1 = document.createElement('input');
+                var div = document.getElementById('shdwdiv');
+                var textBox = document.createElement('input');
+                textBox.id = 'shdwinput';
+                textBox.type = 'text';
+                textBox.name = 'shdwinput';
+                // textBox.autocomplete = 'off';
+                div.appendChild(textBox);
+                document.getElementById("dh").value=res.data[0].dh;
+                document.getElementById("kddh").value=res.data[0].kddh;
+                document.getElementById("shdwinput").value=res.data[0].shdw;
+                document.getElementById("kdf").value=res.data[0].kdf;
+                document.getElementById("sd").value=res.data[0].sd;
+                document.getElementById("fkfs").value=res.data[0].fkfs;
+                document.getElementById("sfhs").value=res.data[0].sfhs;
+                document.getElementById("sfyj").value=res.data[0].sfyj;
+                document.getElementById("sd").disabled= true;
+                document.getElementById("riqi").disabled = true;
+                document.getElementById("dh").disabled = true;
+                document.getElementById("shdwinput").disabled = true;
+                document.getElementById("fkfs").disabled = true;
+                document.getElementById("sfhs").disabled = true;
+                document.getElementById("add-btn1").hidden=true;
+                document.getElementById("add-btn3").hidden=true;
+                document.getElementById("add-btn4").hidden=true;
+                document.getElementById("loc-btn").hidden = true;
+                // document.getElementById("kddh").disabled = true;
+                // document.getElementById("shdwjjsr").disabled = true;
+                // document.getElementById("kdf").disabled = true;
+                document.getElementById("sfyj").disabled = true;
+
+                document.getElementById("bzld").disabled = true;
+            }
             $("#shdptable").colResizable({
                 liveDrag: true,
                 gripInnerHtml: "<div class='grip'></div>",
@@ -106,12 +188,13 @@ function getList() {
         }
     })
 }
-
+window.onload=deleteq1();
 $(function () {
     deleteq1();
-    getList();
     getMc();
     getGsm();
+    getList();
+    $('#shdw').select2();
     const date = new Date(); // 获取当前日期
     const year = date.getFullYear(); // 获取年份
     const month = String(date.getMonth() + 1).padStart(2, '0'); // 获取月份并补齐两位
@@ -151,6 +234,25 @@ $(function () {
         document.getElementById("dh").value = dh;
         var sfhs = document.getElementById("sfhs").value;
         var sd = 0;
+    //     if (sfhs == "含税" || sfhs == "金额含税") {
+    //         sd = 1.11;
+    //     } else {
+    //         sd = 0;
+    //     }
+    //     document.getElementById("sd").value = sd;
+    //     document.getElementById("riqi").disabled = true;
+    //     document.getElementById("dh").disabled = true;
+    //     document.getElementById("shdw").disabled = true;
+    //     document.getElementById("fkfs").disabled = true;
+    //     document.getElementById("sfhs").disabled = true;
+    //     document.getElementById("loc-btn").hidden = true;
+    //     document.getElementById("kddh").disabled = true;
+    //     document.getElementById("shdwjjsr").disabled = true;
+    //     document.getElementById("sfyj").disabled = true;
+    //     document.getElementById("kdf").disabled = true;
+    //     document.getElementById("bzld").disabled = true;
+    //
+    // })
         if (sfhs == "含税" || sfhs == "金额含税") {
             sd = 1.11;
         } else {
@@ -163,10 +265,10 @@ $(function () {
         document.getElementById("fkfs").disabled = true;
         document.getElementById("sfhs").disabled = true;
         document.getElementById("loc-btn").hidden = true;
-        document.getElementById("kddh").disabled = true;
-        document.getElementById("shdwjjsr").disabled = true;
+        // document.getElementById("kddh").disabled = true;
+        // document.getElementById("shdwjjsr").disabled = true;
         document.getElementById("sfyj").disabled = true;
-        document.getElementById("kdf").disabled = true;
+        // document.getElementById("kdf").disabled = true;
         document.getElementById("bzld").disabled = true;
 
     })
@@ -265,7 +367,14 @@ $(function () {
         }
     })
     $('#add-btn2').click(function () {
-        for (i = 0; i < n; i = i + 1) {
+        if(n!=0){
+            z=n;
+        }else if(y!=0){
+            z=10;
+        }else if(x!=0){
+            z=20;
+        }
+        for (i = 0; i < z; i = i + 1) {
             let c = parseFloat($('#id1').val()) + i
             var q = c.toString();
             var mc = $('#mc' + q).val();
@@ -306,18 +415,45 @@ $(function () {
 
 
     $('#add-cgx').click(function () {
+        if(n!=0){
+            z=n;
+        }else if(y!=0){
+            z=10;
+        }else if(x!=0){
+            z=20;
+        }
 
-        for (i = 0; i < n; i = i + 1) {
+        for (i = 0; i < z; i = i + 1) {
+            // var riqi = document.getElementById("riqi").value;
+            // var dh = document.getElementById("dh").value;
+            // var kddh = document.getElementById("kddh").value;
+            // var shdwjjsr = document.getElementById("shdwjjsr").value;
+            // var shdw = document.getElementById("shdw").value;
+            // var fkfs = document.getElementById("fkfs").value;
+            // var sfhs = document.getElementById("sfhs").value;
+            // var sd = document.getElementById("sd").value;
+            // var sfyj = document.getElementById("sfyj").value;
+            // var kdf = document.getElementById("kdf").value;
             var riqi = document.getElementById("riqi").value;
             var dh = document.getElementById("dh").value;
-            var kddh = document.getElementById("kddh").value;
-            var shdwjjsr = document.getElementById("shdwjjsr").value;
+            // var kddh = document.getElementById("kddh").value;
+            if (document.getElementById("kddh").value != ""){
+                var kddh = document.getElementById("kddh").value;
+            }else{
+                var kddh = "0"
+            }
+            // var shdwjjsr = document.getElementById("shdwjjsr").value;
+            var shdwjjsr = "1";
             var shdw = document.getElementById("shdw").value;
             var fkfs = document.getElementById("fkfs").value;
             var sfhs = document.getElementById("sfhs").value;
             var sd = document.getElementById("sd").value;
             var sfyj = document.getElementById("sfyj").value;
-            var kdf = document.getElementById("kdf").value;
+            if (document.getElementById("kdf").value != ""){
+                var kdf = document.getElementById("kdf").value;
+            }else{
+                var kdf = "0"
+            }
             var bzld = document.getElementById("bzld").value;
             let c = parseFloat($('#id1').val()) + i
             var q = c.toString();
@@ -367,7 +503,111 @@ $(function () {
 
 
     $('#add-btn1').click(function () {
+
+        if($('#shdw').prop("disabled") == false){
+            alert("未点击固定条件，不可以增行！")
+            return;
+        }
+        document.getElementById("kddh").disabled = true;
+        document.getElementById("kdf").disabled = true;
         n++;
+        // const now = new Date();
+        // const year = now.getFullYear();
+        // const month = (now.getMonth() + 1).toString().padStart(2, '0');
+        // const day = now.getDate().toString().padStart(2, '0');
+        // const hours = now.getHours().toString().padStart(2, '0');
+        // const minutes = now.getMinutes().toString().padStart(2, '0');
+        // const seconds = now.getSeconds().toString().padStart(2, '0');
+        // var aa = `${year}${month}${day}${hours}${minutes}${seconds}`;
+        // document.getElementById('add-dh').value = aa;
+
+
+
+
+        // var riqi = document.getElementById("riqi").value;
+        // var dh = document.getElementById("dh").value;
+        // var kddh = document.getElementById("kddh").value;
+        // var shdwjjsr = document.getElementById("shdwjjsr").value;
+        // var shdw = document.getElementById("shdw").value;
+        // var fkfs = document.getElementById("fkfs").value;
+        // var sfhs = document.getElementById("sfhs").value;
+        // var sd = document.getElementById("sd").value;
+        // var sfyj = document.getElementById("sfyj").value;
+        // var kdf = document.getElementById("kdf").value;
+        // var bzld = document.getElementById("bzld").value;
+        // $ajax({
+        var riqi = document.getElementById("riqi").value;
+        var dh = document.getElementById("dh").value;
+        // var kddh = document.getElementById("kddh").value;
+        if (document.getElementById("kddh").value != ""){
+            var kddh = document.getElementById("kddh").value;
+        }else{
+            var kddh = "0"
+        }
+        // var shdwjjsr = document.getElementById("shdwjjsr").value;
+        var shdwjjsr = "1";
+        var shdw = document.getElementById("shdw").value;
+        var fkfs = document.getElementById("fkfs").value;
+        var sfhs = document.getElementById("sfhs").value;
+        var sd = document.getElementById("sd").value;
+        var sfyj = document.getElementById("sfyj").value;
+        if (document.getElementById("kdf").value != ""){
+            var kdf = document.getElementById("kdf").value;
+        }else{
+            var kdf = "0"
+        }
+        // var kdf = document.getElementById("kdf").value;
+        var bzld = document.getElementById("bzld").value;
+        $ajax({
+
+            type: 'post',
+            url: '/shdp/add',
+            data: {
+                riqi: riqi,
+                dh: dh,
+                kddh: kddh,
+                shdwjjsr: shdwjjsr,
+                shdw: shdw,
+                fkfs: fkfs,
+                sfhs: sfhs,
+                sd: sd,
+                sfyj: sfyj,
+                kdf: kdf,
+                bzld:bzld
+            }
+        }, false, '', function (res) {
+            getList();
+
+        })
+        document.getElementById("add-btn3").hidden=true;
+        document.getElementById("add-btn4").hidden=true;
+        // $ajax({
+        //     type: 'post',
+        //     url: '/khzl/hqxlGsm',
+        // }, false, '', function (res) {
+        //     if (res.code == 200) {
+        //         for (var i = 0; i < res.data.length; i++) {
+        //             for (z = 0; z < n; z = z + 1) {
+        //                 let c = parseFloat($('#id1').val()) + z
+        //                 var q = c.toString();
+        //                 $('#shdw' + q).append("<option>" + res.data[i].gsm + "</option>");
+        //             }
+        //             $("#add-shdw").append("<option>" + res.data[i].gsm + "</option>");
+        //             // $("#update-shdw").append("<option>" + res.data[i].gsm + "</option>");
+        //
+        //         }
+        //     }
+        // })
+    })
+    $('#add-btn3').click(function () {
+        if($('#shdw').prop("disabled") == false){
+            alert("未点击固定条件，不可以增行！")
+            return;
+        }
+        document.getElementById("kddh").disabled = true;
+
+        document.getElementById("kdf").disabled = true;
+
         // const now = new Date();
         // const year = now.getFullYear();
         // const month = (now.getMonth() + 1).toString().padStart(2, '0');
@@ -388,46 +628,124 @@ $(function () {
         var sfyj = document.getElementById("sfyj").value;
         var kdf = document.getElementById("kdf").value;
         var bzld = document.getElementById("bzld").value;
-        $ajax({
-            type: 'post',
-            url: '/shdp/add',
-            data: {
-                riqi: riqi,
-                dh: dh,
-                kddh: kddh,
-                shdwjjsr: shdwjjsr,
-                shdw: shdw,
-                fkfs: fkfs,
-                sfhs: sfhs,
-                sd: sd,
-                sfyj: sfyj,
-                kdf: kdf,
-                bzld:bzld
-            }
-        }, false, '', function (res) {
-            getList();
-
-        })
-        $ajax({
-            type: 'post',
-            url: '/khzl/hqxlGsm',
-        }, false, '', function (res) {
-            if (res.code == 200) {
-                for (var i = 0; i < res.data.length; i++) {
-                    for (z = 0; z < n; z = z + 1) {
-                        let c = parseFloat($('#id1').val()) + z
-                        var q = c.toString();
-                        $('#shdw' + q).append("<option>" + res.data[i].gsm + "</option>");
-                    }
-                    $("#add-shdw").append("<option>" + res.data[i].gsm + "</option>");
-                    // $("#update-shdw").append("<option>" + res.data[i].gsm + "</option>");
-
+        for(i=0;i<10;i++) {
+            $ajax({
+                type: 'post',
+                url: '/shdp/add',
+                data: {
+                    riqi: riqi,
+                    dh: dh,
+                    kddh: kddh,
+                    shdwjjsr: shdwjjsr,
+                    shdw: shdw,
+                    fkfs: fkfs,
+                    sfhs: sfhs,
+                    sd: sd,
+                    sfyj: sfyj,
+                    kdf: kdf,
+                    bzld: bzld
                 }
-            }
-        })
-    })
+            }, false, '', function (res) {
+                getList();
 
+            })
+        }
+        y=1
+        document.getElementById("add-btn1").hidden=true;
+        document.getElementById("add-btn3").hidden=true;
+        document.getElementById("add-btn4").hidden=true;
+        // $ajax({
+        //     type: 'post',
+        //     url: '/khzl/hqxlGsm',
+        // }, false, '', function (res) {
+        //     if (res.code == 200) {
+        //         for (var i = 0; i < res.data.length; i++) {
+        //             for (z = 0; z < n; z = z + 1) {
+        //                 let c = parseFloat($('#id1').val()) + z
+        //                 var q = c.toString();
+        //                 $('#shdw' + q).append("<option>" + res.data[i].gsm + "</option>");
+        //             }
+        //             $("#add-shdw").append("<option>" + res.data[i].gsm + "</option>");
+        //             // $("#update-shdw").append("<option>" + res.data[i].gsm + "</option>");
+        //
+        //         }
+        //     }
+        // })
+    })
+    $('#add-btn4').click(function () {
+        if($('#shdw').prop("disabled") == false){
+            alert("未点击固定条件，不可以增行！")
+            return;
+        }
+        document.getElementById("kddh").disabled = true;
+
+        document.getElementById("kdf").disabled = true;
+        // const now = new Date();
+        // const year = now.getFullYear();
+        // const month = (now.getMonth() + 1).toString().padStart(2, '0');
+        // const day = now.getDate().toString().padStart(2, '0');
+        // const hours = now.getHours().toString().padStart(2, '0');
+        // const minutes = now.getMinutes().toString().padStart(2, '0');
+        // const seconds = now.getSeconds().toString().padStart(2, '0');
+        // var aa = `${year}${month}${day}${hours}${minutes}${seconds}`;
+        // document.getElementById('add-dh').value = aa;
+        for(i=0;i<20;i++) {
+            var riqi = document.getElementById("riqi").value;
+            var dh = document.getElementById("dh").value;
+            var kddh = document.getElementById("kddh").value;
+            var shdwjjsr = document.getElementById("shdwjjsr").value;
+            var shdw = document.getElementById("shdw").value;
+            var fkfs = document.getElementById("fkfs").value;
+            var sfhs = document.getElementById("sfhs").value;
+            var sd = document.getElementById("sd").value;
+            var sfyj = document.getElementById("sfyj").value;
+            var kdf = document.getElementById("kdf").value;
+            var bzld = document.getElementById("bzld").value;
+            $ajax({
+                type: 'post',
+                url: '/shdp/add',
+                data: {
+                    riqi: riqi,
+                    dh: dh,
+                    kddh: kddh,
+                    shdwjjsr: shdwjjsr,
+                    shdw: shdw,
+                    fkfs: fkfs,
+                    sfhs: sfhs,
+                    sd: sd,
+                    sfyj: sfyj,
+                    kdf: kdf,
+                    bzld: bzld
+                }
+            }, false, '', function (res) {
+                getList();
+
+            })
+        }
+        x=1
+        document.getElementById("add-btn1").hidden=true;
+        document.getElementById("add-btn3").hidden=true;
+        document.getElementById("add-btn4").hidden=true;
+        // $ajax({
+        //     type: 'post',
+        //     url: '/khzl/hqxlGsm',
+        // }, false, '', function (res) {
+        //     if (res.code == 200) {
+        //         for (var i = 0; i < res.data.length; i++) {
+        //             for (z = 0; z < n; z = z + 1) {
+        //                 let c = parseFloat($('#id1').val()) + z
+        //                 var q = c.toString();
+        //                 $('#shdw' + q).append("<option>" + res.data[i].gsm + "</option>");
+        //             }
+        //             $("#add-shdw").append("<option>" + res.data[i].gsm + "</option>");
+        //             // $("#update-shdw").append("<option>" + res.data[i].gsm + "</option>");
+        //
+        //         }
+        //     }
+        // })
+    })
 })
+
 
 //点击新增按钮显示弹窗
 
@@ -588,7 +906,7 @@ function setTable(data) {
         sortStable: true,
         classes: 'table table-hover',
         idField: 'id',
-        pagination: true,
+        pagination: false,
         search: true,
         searchAlign: 'left',
         clickToSelect: false,
@@ -814,8 +1132,8 @@ function setTable1(data) {
         sortStable: true,
         classes: 'table table-striped table-hover',
         idField: 'id',
-        pagination: true,
-        pageSize: 15,//单页记录数
+        pagination: false,
+        // pageSize: 15,//单页记录数
         clickToSelect: true,
         locale: 'zh-CN',
         toolbar: '#table-toolbar',
@@ -913,19 +1231,21 @@ function setTable1(data) {
                     }
                     return "<input id='dj" + row.id + "' oninput='javascript:columnUpd(" + row.id + "," + "\"dj\"" + ")' placeholder='单价' type='text' class='form-control' value='" + value + "'>"
                 }
-            }, {
-                field: 'je',
-                title: '金额',
-                align: 'center',
-                sortable: true,
-                width: 80,
-                formatter: function (value, row, index) {
-                    if (value == null) {
-                        value = '';
-                    }
-                    return "<input id='je" + row.id + "' oninput='javascript:columnUpd(" + row.id + "," + "\"je\"" + ")'  placeholder='金额' type='text' class='form-control' value='" + value + "'>"
-                }
-            }, {
+            }
+            // , {
+            //     field: 'je',
+            //     title: '金额',
+            //     align: 'center',
+            //     sortable: true,
+            //     width: 80,
+            //     formatter: function (value, row, index) {
+            //         if (value == null) {
+            //             value = '';
+            //         }
+            //         return "<input id='je" + row.id + "' oninput='javascript:columnUpd(" + row.id + "," + "\"je\"" + ")'  placeholder='金额' type='text' class='form-control' value='" + value + "'>"
+            //     }
+            // }
+            , {
                 field: 'bz',
                 title: '备注',
                 align: 'center',

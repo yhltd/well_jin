@@ -53,5 +53,7 @@ public interface XsdMapper extends BaseMapper<Xsd> {
     @Select("select * from xiaoshoudan where dh=#{dh}")
     List<Xsd> getList2(String dh);
 
+    @Delete("delete from xiaoshoudan where dh=#{dh}")
+    boolean delete1(String dh);
 
 }

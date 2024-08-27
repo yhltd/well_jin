@@ -42,6 +42,9 @@ public interface CgxService extends IService<Cgx> {
                 String bzld, String hjzl);
 
     List<Cgx> getListByShdw(String shdw,String dh,String riqi);
+    List<Cgx> getListdh(String dh);
+    boolean delete1(String dh);
+
 
     /**
      * 获取当天销售单单价

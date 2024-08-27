@@ -115,8 +115,13 @@ public class CgxController {
                 je = "0";
                 hsdj = "0";
                 whsdj = "0";
-                jgf = String.valueOf(Float.parseFloat(js) * 0.5);
-                hjje = String.valueOf((Float.parseFloat(je) + Float.parseFloat(jgf) + Float.parseFloat(kdf)) * Float.parseFloat(sd));
+                if(js==""){
+                    jgf="0";
+                    hjje="0";
+                }else {
+                    jgf = String.valueOf(Float.parseFloat(js) * 0.5);
+                    hjje = String.valueOf((Float.parseFloat(je) + Float.parseFloat(jgf) + Float.parseFloat(kdf)) * Float.parseFloat(sd));
+                }
             } else {
                 System.out.println(hsdj);
                 hsdj = String.valueOf(Float.parseFloat(dj) * Float.parseFloat(sd));
@@ -210,6 +215,37 @@ public class CgxController {
             return ResultInfo.error("失败！");
         }
     }
+    @RequestMapping("/getListdh")
+    public ResultInfo getListdh(HttpSession session,String dh) {
+        UserInfo userInfo = GsonUtil.toEntity(SessionUtil.getToken(session), UserInfo.class);
+        try {
+            List<Cgx> getList = cgxService.getListdh(dh);
+            return ResultInfo.success("获取成功", getList);
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("获取失败：{}", e.getMessage());
+            return ResultInfo.error("错误!");
+        }
+    }
+
+    @RequestMapping("/delete1")
+    public ResultInfo delete1(HttpSession session,String dh) {
+        UserInfo userInfo = GsonUtil.toEntity(SessionUtil.getToken(session), UserInfo.class);
+        if(!userInfo.getCaozuoquanxian().equals("可修改")){
+            return ResultInfo.error(401, "无权限,请联系管理员");
+        }
+        try {
+
+                cgxService.delete1(dh);
+
+            return ResultInfo.success("删除成功",null);
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("删除失败：{}", e.getMessage());
+            return ResultInfo.error("删除失败");
+        }
+    }
+
 
 
     /**

@@ -101,28 +101,29 @@ public class XsdController {
      * 修改
      */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public ResultInfo update(@RequestBody String updateJson, HttpSession session) {
+    public ResultInfo update( HttpSession session ,String riqi,String dh,String shdw,String mc,String mh,String gg,String js,String zl,String dj,String je,String bz,String shdz,String kddh,String sfyj,String fkfs,String sfhs,String gd,String zdr,String shdwjjsr,String jgf,String kdf,String hsdj,String sd,String whsdj,int id) {
         UserInfo userInfo = GsonUtil.toEntity(SessionUtil.getToken(session), UserInfo.class);
         if (!userInfo.getCaozuoquanxian().equals("可修改")) {
             return ResultInfo.error(401, "无权限,请联系管理员");
         }
         Xsd xsd = null;
         try {
-            xsd = DecodeUtil.decodeToJson(updateJson, Xsd.class);
-            if(xsd.getFkfs().equals("签回单")){
-                qhdService.add1(xsd.getRiqi(),xsd.getShdw(),xsd.getHjje(),xsd.getBz(),xsd.getDh());
-                if (xsdService.update(xsd)) {
-                    return ResultInfo.success("修改成功", xsd);
-                } else {
-                    return ResultInfo.success("修改失败", xsd);
-                }
-            }else {
-                if (xsdService.update(xsd)) {
-                    return ResultInfo.success("修改成功", xsd);
-                } else {
-                    return ResultInfo.success("修改失败", xsd);
-                }
-            }
+            xsdService.update( riqi, dh, shdw, mc, mh, gg, js, zl, dj, je, bz, shdz, kddh, sfyj, fkfs, sfhs, gd, zdr, shdwjjsr, jgf, kdf, hsdj, sd, whsdj,id);
+//            if(xsd.getFkfs().equals("签回单")){
+//                qhdService.add1(xsd.getRiqi(),xsd.getShdw(),xsd.getHjje(),xsd.getBz(),xsd.getDh());
+//                if (xsdService.update(xsd)) {
+//                    return ResultInfo.success("修改成功", xsd);
+//                } else {
+//                    return ResultInfo.success("修改失败", xsd);
+//                }
+//            }else {
+//                if (xsdService.update(xsd)) {
+//                    return ResultInfo.success("修改成功", xsd);
+//                } else {
+//                    return ResultInfo.success("修改失败", xsd);
+//                }
+//            }
+            return ResultInfo.success("修改成功", xsd);
         } catch (Exception e) {
             e.printStackTrace();
             log.error("修改失败：{}", e.getMessage());
@@ -147,11 +148,116 @@ public class XsdController {
         if (!userInfo.getCaozuoquanxian().equals("可修改")) {
             return ResultInfo.error(401, "无权限,请联系管理员");
         }
-        try {
-            xsdService.add(riqi, dh, shdw, mc, mh, gg, js, zl, dj, je, bz, shdz, kddh, sfyj, fkfs, sfhs, gd, zdr, shdwjjsr, jgf, kdf,
-                    hsdj, sd, whsdj, hjje, bzld, hjzl);
-                return ResultInfo.success("添加失败", null);
+        if (sfhs.equals("含税") || sfhs.equals("金额含税")) {
+            if (dj.equals("")) {
+                je = "0";
+                hsdj = "0";
+                whsdj = "0";
+                jgf="0";
+//                jgf = String.valueOf(Float.parseFloat(js) * 0.5);
+                hjje = String.valueOf((Float.parseFloat(je) + Float.parseFloat(jgf) + Float.parseFloat(kdf)) * Float.parseFloat(sd));
+            } else { hsdj = String.valueOf(Float.parseFloat(dj) * Float.parseFloat(sd));
+                whsdj = String.valueOf(Float.parseFloat(hsdj) / Float.parseFloat(sd));
+                je = String.valueOf(Float.parseFloat(zl) * Float.parseFloat(dj));
+                jgf = "0";
+//                hjje = String.valueOf(Float.parseFloat(je) + Float.parseFloat(jgf) + Float.parseFloat(kdf));
+            }
+        } else {
+            if (dj.equals("")) {
+                je = "0";
+                hsdj = "0";
+                whsdj = "0";
+            } else {
+                hsdj = "0";
+                whsdj = "0";
+                je = String.valueOf(Float.parseFloat(zl) * Float.parseFloat(dj));
+                jgf = String.valueOf(Float.parseFloat(js) * 0.5);
+                hjje = String.valueOf((Float.parseFloat(je) + Float.parseFloat(jgf) + Float.parseFloat(kdf)) * Float.parseFloat(sd));
+            }
+        }
 
+
+        try {
+
+//            xsdService.add(riqi, dh, shdw, mc, mh, gg, js, zl, dj, je, bz, shdz, kddh, sfyj, fkfs, sfhs, gd, zdr, shdwjjsr, jgf, kdf,
+//                    hsdj, sd, whsdj, hjje, bzld, hjzl);
+//                return ResultInfo.success("添加成功", null);
+
+            if (userInfo.getPower().equals("管理员")) {
+                if (mc.equals("换铜块")) {
+                    int jzl = Integer.parseInt(zl);
+                    int yzl = Integer.parseInt(khzlService.gettkkc(shdw));
+                    int xzl = yzl - jzl;
+                    String tkkc = Integer.toString(xzl);
+                    khzlService.tkkc(tkkc, shdw);
+
+
+                    if (fkfs.equals("签回单")) {
+                        boolean list = qhdService.add1(riqi, shdw, hjje, bz, dh);
+
+//                        return ResultInfo.success("添加成功", null);
+                    }
+                    xsdService.add(riqi, dh, shdw, mc, mh, gg, js, zl, dj, je, bz, shdz, kddh, sfyj, fkfs, sfhs, gd, zdr, shdwjjsr, jgf, kdf,
+                            hsdj, sd, whsdj, hjje, bzld, hjzl);
+                } else if (mc.equals("换铜渣")) {
+
+                    int jzl = Integer.parseInt(zl);
+                    int yzl = Integer.parseInt(khzlService.gettzkc(shdw));
+                    int xzl = yzl - jzl;
+                    String tzkc = Integer.toString(xzl);
+                    khzlService.tzkc(tzkc, shdw);
+
+                    if (fkfs.equals("签回单")) {
+                        qhdService.add1(riqi, shdw, hjje, bz, dh);
+
+                    }
+                    xsdService.add(riqi, dh, shdw, mc, mh, gg, js, zl, dj, je, bz, shdz, kddh, sfyj, fkfs, sfhs, gd, zdr, shdwjjsr, jgf, kdf,
+                            hsdj, sd, whsdj, hjje, bzld, hjzl);
+                    return ResultInfo.success("添加成功", null);
+                } else if (dj.equals("")) {
+                    if (mc.equals("回收铜块")) {
+                        int jzl = Integer.parseInt(zl);
+                        int yzl = Integer.parseInt(khzlService.gettkkc(shdw));
+                        int xzl = yzl + jzl;
+                        String tkkc = Integer.toString(xzl);
+                        khzlService.tkkc(tkkc, shdw);
+                        if (fkfs.equals("签回单")) {
+                            qhdService.add1(riqi, shdw, hjje, bz, dh);
+
+//                            return ResultInfo.success("添加成功", null);
+                        }
+                        xsdService.add(riqi, dh, shdw, mc, mh, gg, js, zl, dj, je, bz, shdz, kddh, sfyj, fkfs, sfhs, gd, zdr, shdwjjsr, jgf, kdf,
+                                hsdj, sd, whsdj, hjje, bzld, hjzl);
+                    } else if (mc.equals("回收铜渣")) {
+                        int jzl = Integer.parseInt(zl);
+                        int yzl = Integer.parseInt(khzlService.gettzkc(shdw));
+                        int xzl = yzl + jzl;
+                        String tzkc = Integer.toString(xzl);
+                        khzlService.tzkc(tzkc, shdw);
+
+                        if (fkfs.equals("签回单")) {
+                            qhdService.add1(riqi, shdw, hjje, bz, dh);
+
+//                            return ResultInfo.success("添加成功", null);
+                        }
+                        xsdService.add(riqi, dh, shdw, mc, mh, gg, js, zl, dj, je, bz, shdz, kddh, sfyj, fkfs, sfhs, gd, zdr, shdwjjsr, jgf, kdf,
+                                hsdj, sd, whsdj, hjje, bzld, hjzl);
+                    }
+                } else {
+                    if (fkfs.equals("签回单")) {
+                        qhdService.add1(riqi, shdw, hjje, bz, dh);
+                        xsdService.add(riqi, dh, shdw, mc, mh, gg, js, zl, dj, je, bz, shdz, kddh, sfyj, fkfs, sfhs, gd, zdr, shdwjjsr, jgf, kdf,
+                                hsdj, sd, whsdj, hjje, bzld, hjzl);
+                        return ResultInfo.success("添加成功", null);
+                    }
+                }
+            }
+            if (xsdService.add(riqi, dh, shdw, mc, mh, gg, js, zl, dj, je, bz, shdz, kddh, sfyj, fkfs, sfhs, gd, zdr, shdwjjsr, jgf, kdf,
+                    hsdj, sd, whsdj, hjje, bzld, hjzl)) {
+                return ResultInfo.success("修改成功", riqi);
+            } else {
+                return ResultInfo.success("修改失败", riqi);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             log.error("添加失败：{}", e.getMessage());
@@ -226,5 +332,23 @@ public class XsdController {
             return ResultInfo.error("失败！");
         }
     }
+
+    @RequestMapping("/delete1")
+    public ResultInfo delete1(HttpSession session,String dh) {
+        UserInfo userInfo = GsonUtil.toEntity(SessionUtil.getToken(session), UserInfo.class);
+        if (!userInfo.getCaozuoquanxian().equals("可修改")) {
+            return ResultInfo.error(401, "无权限,请联系管理员");
+        }
+        try {
+                xsdService.delete1(dh);
+
+            return ResultInfo.success("删除成功", null);
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("删除失败：{}", e.getMessage());
+            return ResultInfo.error("删除失败");
+        }
+    }
+
 
 }

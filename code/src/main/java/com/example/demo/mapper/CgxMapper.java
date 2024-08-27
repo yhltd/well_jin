@@ -33,6 +33,14 @@ public interface CgxMapper extends BaseMapper<Cgx> {
     @Select("select * from caogaoxiang where shdw=#{shdw} and dh=#{dh} and riqi=#{riqi}")
     List<Cgx> getListByShdw(String shdw, String dh, String riqi);
 
+
+
+    @Select("select * from caogaoxiang where dh=#{dh} order by riqi desc")
+    List<Cgx> getListdh(String dh);
+
+    @Delete("delete from caogaoxiang where dh=#{dh}")
+    boolean delete1(String dh);
+
 //    @Select("select DISTINCT dj from xiaoshoudan where riqi = convert(DATE,riqi)")
 //    List<Cgx> getDj(String dj);
 

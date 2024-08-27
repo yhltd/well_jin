@@ -60,6 +60,17 @@ public class ShdpController {
         shdpService.add(riqi, dh, kddh, shdwjjsr, shdw, sfyj, fkfs, sfhs, sd, zdr, kdf,bzld);
 
     }
+    @RequestMapping("/add1")
+    public void add1(HttpSession session,String riqi, String dh, String shdw, String mc, String mh, String gg, String js
+            , String zl, String dj, String je, String bz, String shdz, String kddh, String sfyj, String fkfs, String sfhs, String gd,
+                     String zdr, String shdwjjsr, String jgf, String kdf, String hsdj, String sd, String whsdj, String hjje,
+                     String bzld, String hjzl) {
+        UserInfo userInfo = GsonUtil.toEntity(SessionUtil.getToken(session), UserInfo.class);
+        zdr = userInfo.getName();
+        shdpService.add1(riqi, dh, shdw, mc, mh, gg, js, zl, dj, je, bz, shdz, kddh, sfyj, fkfs, sfhs, gd, zdr, shdwjjsr, jgf, kdf,
+                hsdj, sd, whsdj, hjje, bzld, hjzl);
+
+    }
 
 
     //修改数据
@@ -280,7 +291,6 @@ public class ShdpController {
 
 
         Shdp shdp = new Shdp();
-
         shdp.setWhsdj(whsdj);
         shdp.setHjje(hjje);
         shdp.setJe(je);

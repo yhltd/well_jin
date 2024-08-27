@@ -7,6 +7,11 @@
 
     <script type="text/javascript" src="../js/Jquery.js"></script>
     <script type="text/javascript" src="../js/jquerysession.js"></script>
+    <!-- 引入Select2的CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <!-- 引入Select2的JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 
     <link rel="stylesheet" href="../bootstrap-4.5.0-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../bootstrap-4.5.0-dist/icons/bootstrap-icons.css">
@@ -99,11 +104,11 @@
     <div class="col-md-3 mb-2">
         <input id="kddh" type="text" class="form-control" placeholder="快递单号" autocomplete="off">
     </div>
-    <div class="col-md-3 mb-2">
-        <input id="shdwjjsr" type="text" class="form-control" placeholder="收货单位及经手人" autocomplete="off">
-    </div>
-    <div class="col-md-3 mb-2">
-        <select id="shdw" type="text" class="form-control" placeholder="收货单位" autocomplete="off">
+<!--    <div class="col-md-3 mb-2">-->
+<!--        <input id="shdwjjsr" type="text" class="form-control" placeholder="收货单位及经手人" autocomplete="off">-->
+<!--    </div>-->
+    <div class="col-md-3 mb-2" id="shdwdiv">
+        <select id="shdw" type="text" class="form-control" placeholder="收货单位" autocomplete="off" data-live-search="true">
             <option value="">--请选择收货单位--</option>
         </select>
 
@@ -122,11 +127,50 @@
             <option value="快递代收">快递代收</option>
         </select>
     </div>
+<!--    <div class="col-md-3 mb-2">-->
+<!--        <select id="sfhs" type="text" class="form-control" placeholder="是否含税" autocomplete="off">-->
+<!--            <option value="">&#45;&#45;请选择是否含税&#45;&#45;</option>-->
+<!--            <option value="含税">含税</option>-->
+<!--            <option value="未含税">未含税</option>-->
+<!--            <option value="金额含税">金额含税</option>-->
+<!--        </select>-->
+<!--    </div>-->
+<!--    <div class="col-md-3 mb-2">-->
+<!--        <select id="sfyj" type="text" class="form-control" placeholder="是否月结" autocomplete="off">-->
+<!--            <option value="">&#45;&#45;请选择是否月结&#45;&#45;</option>-->
+<!--            <option value="是">是</option>-->
+<!--            <option value="否">否</option>-->
+<!--        </select>-->
+<!--    </div>-->
+<!--    <div class="col-md-3 mb-2">-->
+<!--        <select id="bzld" type="text" class="form-control" placeholder="备注联单" autocomplete="off">-->
+<!--            <option value="">&#45;&#45;请选择联单&#45;&#45;</option>-->
+<!--            <option value="一白联（存根）">一联</option>-->
+<!--            <option value="一白联（存根）二红联（回单）">二联</option>-->
+<!--            <option value="一白联（存根）二红联（回单）三蓝联（客户）">三联</option>-->
+<!--            <option value="一白联（存根）二红联（回单）三蓝联（客户）四绿联（备用）">四联</option>-->
+<!--            <option value="一白联（存根）二红联（回单）三蓝联（客户）四绿联（备用）五黄联（备用）">五联</option>-->
+<!--        </select>-->
+<!--    </div>-->
+<!--    <div class="col-md-2 mb-2">-->
+<!--        <button id="loc-btn" class="btn" style="background-color: limegreen;color: white">-->
+<!--            固定选项-->
+<!--        </button><br/>-->
+<!--        <span style="font-size: 13px">以上内容是必输入项</span>-->
+<!--    </div>-->
+<!--    <div class="col-md-3 mb-2">-->
+<!--        <input id="gg" type="text" class="form-control" placeholder="规格输入框" autocomplete="off">-->
+<!--    </div>-->
+<!--    <div class="col-md-2 mb-2">-->
+<!--        <button id="gg-btn" class="btn" style="background-color: limegreen;color: white">-->
+<!--            ok-->
+<!--        </button>-->
+<!--    </div>-->
     <div class="col-md-3 mb-2">
         <select id="sfhs" type="text" class="form-control" placeholder="是否含税" autocomplete="off">
             <option value="">--请选择是否含税--</option>
             <option value="含税">含税</option>
-            <option value="未含税">未含税</option>
+            <option value="未含税" selected>未含税</option>
             <option value="金额含税">金额含税</option>
         </select>
     </div>
@@ -134,7 +178,7 @@
         <select id="sfyj" type="text" class="form-control" placeholder="是否月结" autocomplete="off">
             <option value="">--请选择是否月结--</option>
             <option value="是">是</option>
-            <option value="否">否</option>
+            <option value="否" selected>否</option>
         </select>
     </div>
     <div class="col-md-3 mb-2">
@@ -147,20 +191,26 @@
             <option value="一白联（存根）二红联（回单）三蓝联（客户）四绿联（备用）五黄联（备用）">五联</option>
         </select>
     </div>
-    <div class="col-md-2 mb-2">
+    <div class="col-md-3 mb-3">
         <button id="loc-btn" class="btn" style="background-color: limegreen;color: white">
             固定选项
-        </button><br/>
-        <span style="font-size: 13px">以上内容是必输入项</span>
+        </button>
+        <!--        <span style="font-size: 13px">以上内容是必输入项</span>-->
+    </div>
+    <div class="col-md-3 mb-2">
+        <span style="font-size: 10px;color:red">*快递单号、快递费为选填，其它为必填*</span>
     </div>
     <div class="col-md-3 mb-2">
         <input id="gg" type="text" class="form-control" placeholder="规格输入框" autocomplete="off">
     </div>
     <div class="col-md-2 mb-2">
         <button id="gg-btn" class="btn" style="background-color: limegreen;color: white">
-            ok
+           拆分
         </button>
     </div>
+
+
+
 
 
     <div id="table-toolbar" style="background-color: white">
@@ -171,7 +221,16 @@
                 增行
             </button>
             <span style="border-right: 20px solid white"></span>
-
+            <button id="add-btn3" class="btn btn-primary" style="border-radius:5px;">
+                <i class="bi bi-plus-square icon"></i>
+                10行
+            </button>
+            <span style="border-right: 20px solid white"></span>
+            <button id="add-btn4" class="btn btn-primary" style="border-radius:5px;">
+                <i class="bi bi-plus-square icon"></i>
+                20行
+            </button>
+            <span style="border-right: 20px solid white"></span>
                 <button id="add-btn2" class="btn btn-primary" style="border-radius:5px;">
                     <i class="bi bi-plus-square icon"></i>
                     提交
@@ -923,7 +982,7 @@
             </div>
         </div>
     </div>
-
+</div>
     <!--    选择窗体-->
     <!--<div id="shdPrint-modal" class="modal fade" tabindex="-1">-->
     <!--    <div class="modal-dialog modal-lg">-->

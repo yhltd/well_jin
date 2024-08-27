@@ -26,7 +26,8 @@ public class XsdImpl extends ServiceImpl<XsdMapper, Xsd> implements XsdService {
     }
 
     @Override
-    public boolean update(Xsd xsd) { return updateById(xsd); }
+    public boolean update(String riqi,String dh,String shdw,String mc,String mh,String gg,String js,String zl,String dj,String je,String bz,String shdz,String kddh,String sfyj,String fkfs,String sfhs,String gd,String zdr,String shdwjjsr,String jgf,String kdf,String hsdj,String sd,String whsdj,int id)
+    { return xsdMapper.update( riqi, dh, shdw, mc, mh, gg, js, zl, dj, je, bz, shdz, kddh, sfyj, fkfs, sfhs, gd, zdr, shdwjjsr, jgf, kdf, hsdj, sd, whsdj,id); }
 
     @Override
     public boolean delete(List<Integer> idList) {
@@ -72,5 +73,10 @@ public class XsdImpl extends ServiceImpl<XsdMapper, Xsd> implements XsdService {
 
     @Override
     public boolean update2(Xsd xsd) { return updateById(xsd); }
+
+    @Override
+    public boolean delete1(String dh) {
+        return xsdMapper.delete1(dh);
+    }
 
 }
