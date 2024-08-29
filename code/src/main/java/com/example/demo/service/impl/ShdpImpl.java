@@ -28,13 +28,19 @@ public class ShdpImpl extends ServiceImpl<ShdpMapper, Shdp> implements ShdpServi
     public int count1() {
         return shdpMapper.count1();
     }
-    @Override
-    public void add(String riqi,String dh,String kddh,String shdwjjsr,String shdw,String sfyj,String fkfs,String sfhs,String sd,String zdr,String kdf,String bzld) { shdpMapper.add(riqi,dh,kddh,shdwjjsr,shdw,sfyj,fkfs,sfhs,sd,zdr,kdf,bzld); }
+//    @Override
+//    public void add(String riqi,String dh,String kddh,String shdwjjsr,String shdw,String sfyj,String fkfs,String sfhs,String sd,String zdr,String kdf,String bzld) { shdpMapper.add(riqi,dh,kddh,shdwjjsr,shdw,sfyj,fkfs,sfhs,sd,zdr,kdf,bzld); }
 
     @Override
-    public boolean update(String mc, String mh, String gg, String js, String zl, String dj, String je, String bz, String shdz, String gd, String jgf, String hsdj, String whsdj, String hjje, String hjzl, int id) {
-        return shdpMapper.update(mc,mh,gg,js,zl,dj,je,bz,shdz,gd,jgf,hsdj,whsdj,hjje,hjzl,id);
-    }
+    public void add(String riqi,String dh,String kddh,String shdw,String sfyj,String fkfs,String sfhs,String sd,String zdr,String kdf,String bzld) { shdpMapper.add(riqi,dh,kddh,shdw,sfyj,fkfs,sfhs,sd,zdr,kdf,bzld); }
+
+//    @Override
+//    public boolean update(String mc, String mh, String gg, String js, String zl, String dj, String je, String bz, String shdz, String gd, String jgf, String hsdj, String whsdj, String hjje, String hjzl, int id) {
+//        return shdpMapper.update(mc,mh,gg,js,zl,dj,je,bz,shdz,gd,jgf,hsdj,whsdj,hjje,hjzl,id);
+//    }
+@Override
+public boolean update(String mc, String mh, String gg, String zl, String dj, String je, String bz, String shdz, String gd, String jgf, String hsdj, String whsdj, String hjje, String hjzl, int id) {
+    return shdpMapper.update(mc,mh,gg,zl,dj,je,bz,shdz,gd,jgf,hsdj,whsdj,hjje,hjzl,id); }
     @Override
     public void delete() {
         shdpMapper.delete();
@@ -95,11 +101,15 @@ public class ShdpImpl extends ServiceImpl<ShdpMapper, Shdp> implements ShdpServi
     public String getbzld(int id) {
         return shdpMapper.getbzld(id);
     }
+//
+//    @Override
+//    public void add1(String riqi, String dh, String shdw, String mc, String mh, String gg, String js, String zl, String dj, String je, String bz, String shdz, String kddh, String sfyj, String fkfs, String sfhs, String gd, String zdr, String shdwjjsr, String jgf, String kdf, String hsdj, String sd, String whsdj, String hjje, String bzld, String hjzl) {
+//        shdpMapper.add1(riqi, dh, shdw, mc, mh, gg, js, zl, dj, je, bz, shdz, kddh, sfyj, fkfs, sfhs, gd, zdr, shdwjjsr, jgf, kdf,
+//                hsdj, sd, whsdj, hjje, bzld, hjzl);
+//    }
+@Override
+public void add1(String riqi, String dh, String shdw, String mc, String mh, String gg, String zl, String dj, String je, String bz, String shdz, String kddh, String sfyj, String fkfs, String sfhs, String gd, String zdr, String jgf, String kdf, String hsdj, String sd, String whsdj, String hjje, String bzld, String hjzl) {
+    shdpMapper.add1(riqi, dh, shdw, mc, mh, gg, zl, dj, je, bz, shdz, kddh, sfyj, fkfs, sfhs, gd, zdr, jgf, kdf, hsdj, sd, whsdj, hjje, bzld, hjzl); }
 
-    @Override
-    public void add1(String riqi, String dh, String shdw, String mc, String mh, String gg, String js, String zl, String dj, String je, String bz, String shdz, String kddh, String sfyj, String fkfs, String sfhs, String gd, String zdr, String shdwjjsr, String jgf, String kdf, String hsdj, String sd, String whsdj, String hjje, String bzld, String hjzl) {
-        shdpMapper.add1(riqi, dh, shdw, mc, mh, gg, js, zl, dj, je, bz, shdz, kddh, sfyj, fkfs, sfhs, gd, zdr, shdwjjsr, jgf, kdf,
-                hsdj, sd, whsdj, hjje, bzld, hjzl);
-    }
 
 }

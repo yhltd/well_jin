@@ -24,16 +24,25 @@ public interface KhzlMapper extends BaseMapper<Khzl> {
     @Delete("delete from kehuziliao where id=#{id}")
     boolean delete(int id);
 
-    @Insert("insert into kehuziliao(gsm,bh,lxr,lxdh,dz,sfhs,sfyj,qcye,tzkc,tkkc,ysje,kddsje) values(#{gsm},#{bh},#{lxr},#{lxdh},#{dz},#{sfhs},#{sfyj},#{qcye},#{tzkc},#{tkkc},#{ysje},#{kddsje})")
-    boolean add(String gsm,String bh,String lxr,String lxdh,String dz,String sfhs,String sfyj,String qcye,String tzkc,String tkkc,String ysje,String kddsje);
+//    @Insert("insert into kehuziliao(gsm,bh,lxr,lxdh,dz,sfhs,sfyj,qcye,tzkc,tkkc,ysje,kddsje) values(#{gsm},#{bh},#{lxr},#{lxdh},#{dz},#{sfhs},#{sfyj},#{qcye},#{tzkc},#{tkkc},#{ysje},#{kddsje})")
+//    boolean add(String gsm,String bh,String lxr,String lxdh,String dz,String sfhs,String sfyj,String qcye,String tzkc,String tkkc,String ysje,String kddsje);
+@Insert("insert into kehuziliao(gsm,bh,lxr,lxdh,dz,sfhs,sfyj,qcye,tzkc,tkkc,ysje,kddsje,fuzhu) values(#{gsm},#{bh},#{lxr},#{lxdh},#{dz},#{sfhs},#{sfyj},#{qcye},#{tzkc},#{tkkc},#{ysje},#{kddsje},#{fuzhu})")
+boolean add(String gsm,String bh,String lxr,String lxdh,String dz,String sfhs,String sfyj,String qcye,String tzkc,String tkkc,String ysje,String kddsje,String fuzhu);
+
 
 //    List<Khzl> hqxlGsm();
-    @Select("select gsm from kehuziliao")
-    List<Khzl> hqxlGsm();
+//    @Select("select gsm from kehuziliao")
+//    List<Khzl> hqxlGsm();
+@Select("select fuzhu from kehuziliao")
+List<Khzl> hqxlGsm();
 
 
-    @Select("select gd from kehuziliao where gsm=#{gsm}")
-    String hqgd(String shdw);
+
+//
+//    @Select("select gd from kehuziliao where gsm=#{gsm}")
+//    String hqgd(String shdw);
+@Select("select gd from kehuziliao where fuzhu=#{fuzhu}")
+String hqgd(String fuzhu);
 
     @Select("select dz from kehuziliao where gsm=#{gsm}")
     String hqdz(String shdw);

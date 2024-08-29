@@ -40,7 +40,8 @@ public interface KhzlService extends IService<Khzl> {
 
     List<Khzl> hqxlGsm();
 
-    String hqgd(String shdw);
+//    String hqgd(String shdw);
+String hqgd(String fuzhu);
 
 
     List<Khzl> getListByGsm(String gsm);

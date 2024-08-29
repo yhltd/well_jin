@@ -62,7 +62,33 @@ $(function () {
     });
 
     //新增弹窗里点击提交按钮
+    // $("#add-submit-btn").click(function () {
+    //     let params = formToJson("#add-form");
+    //     if (checkForm('#add-form')) {
+    //         $ajax({
+    //             type: 'post',
+    //             url: '/khzl/add',
+    //             data: JSON.stringify({
+    //                 addInfo: params
+    //             }),
+    //             dataType: 'json',
+    //             contentType: 'application/json;charset=utf-8'
+    //         }, false, '', function (res) {
+    //             if (res.code == 200) {
+    //                 swal("", res.msg, "success");
+    //                 $('#add-form')[0].reset();
+    //                 getList();
+    //                 $('#add-close-btn').click();
+    //             }
+    //         })
+    //     }
+    // });
+    //新增弹窗里点击提交按钮
     $("#add-submit-btn").click(function () {
+        var a1 = document.getElementById("add-gsm").value;
+        var a2 = document.getElementById("add-bh").value;
+        var a3 = a1+a2
+        document.getElementById("add-fuzhu").value = a3;
         let params = formToJson("#add-form");
         if (checkForm('#add-form')) {
             $ajax({
@@ -83,6 +109,8 @@ $(function () {
             })
         }
     });
+
+
 
     //点击修改按钮显示弹窗
     $('#update-btn').click(function () {
@@ -141,10 +169,42 @@ $(function () {
     });
 
     //点击删除按钮
+//     $('#delete-btn').click(function () {
+//         var msg = confirm("确认要删除吗？");
+//         if (msg) {
+//             let rows = getTableSelection("#jcxxTable");
+//             if (rows.length == 0) {
+//                 swal('请选择要删除的数据！');
+//                 return;
+//             }
+//             let idList = [];
+//             $.each(rows, function (index, row) {
+//                 idList.push(row.data.id)
+//             });
+//             $ajax({
+//                 type: 'post',
+//                 url: '/khzl/delete',
+//                 data: JSON.stringify({
+//                     idList: idList
+//                 }),
+//                 dataType: 'json',
+//                 contentType: 'application/json;charset=utf-8'
+//             }, false, '', function (res) {
+//                 if (res.code == 200) {
+//                     swal("", res.msg, "success");
+//                     getList();
+//                 } else {
+//                     swal("", res.msg, "error");
+//                 }
+//             })
+//         }
+//     })
+// });
+    //点击删除按钮
     $('#delete-btn').click(function () {
         var msg = confirm("确认要删除吗？");
         if (msg) {
-            let rows = getTableSelection("#jcxxTable");
+            let rows = getTableSelection("#khzlTable");
             if (rows.length == 0) {
                 swal('请选择要删除的数据！');
                 return;

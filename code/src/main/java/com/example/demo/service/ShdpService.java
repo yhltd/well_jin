@@ -18,10 +18,13 @@ public interface ShdpService extends IService<Shdp> {
 
     int count1();
 
-    void add(String riqi,String dh,String kddh,String shdwjjsr,String shdw,String sfyj,String fkfs,String sfhs,String sd,String zdr,String kdf,String bzld);
+//    void add(String riqi,String dh,String kddh,String shdwjjsr,String shdw,String sfyj,String fkfs,String sfhs,String sd,String zdr,String kdf,String bzld);
 
-    boolean update(String mc, String mh, String gg, String js, String zl, String dj, String je, String bz, String shdz, String gd, String jgf, String hsdj, String whsdj, String hjje, String hjzl, int id);
+    void add(String riqi,String dh,String kddh,String shdw,String sfyj,String fkfs,String sfhs,String sd,String zdr,String kdf,String bzld);
 
+//    boolean update(String mc, String mh, String gg, String js, String zl, String dj, String je, String bz, String shdz, String gd, String jgf, String hsdj, String whsdj, String hjje, String hjzl, int id);
+
+    boolean update(String mc, String mh, String gg, String zl, String dj, String je, String bz, String shdz, String gd, String jgf, String hsdj, String whsdj, String hjje, String hjzl, int id);
     void delete();
 
 
@@ -47,8 +50,13 @@ public interface ShdpService extends IService<Shdp> {
 
     String getsfyj(int id);
     String getbzld(int id);
-    void add1(String riqi, String dh, String shdw, String mc, String mh, String gg, String js
-            , String zl, String dj, String je, String bz, String shdz, String kddh, String sfyj, String fkfs, String sfhs, String gd,
-              String zdr, String shdwjjsr, String jgf, String kdf, String hsdj, String sd, String whsdj, String hjje,
-              String bzld, String hjzl);
+//    void add1(String riqi, String dh, String shdw, String mc, String mh, String gg, String js
+//            , String zl, String dj, String je, String bz, String shdz, String kddh, String sfyj, String fkfs, String sfhs, String gd,
+//              String zdr, String shdwjjsr, String jgf, String kdf, String hsdj, String sd, String whsdj, String hjje,
+//              String bzld, String hjzl);
+void add1(String riqi, String dh, String shdw, String mc, String mh, String gg
+        , String zl, String dj, String je, String bz, String shdz, String kddh, String sfyj, String fkfs, String sfhs, String gd,
+          String zdr, String jgf, String kdf, String hsdj, String sd, String whsdj, String hjje,
+          String bzld, String hjzl);
+
 }

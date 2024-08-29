@@ -39,15 +39,15 @@ $(function (){
                     "<td style='text-align: center'>" + res.data[i].mc + "</td>" +
                     "<td style='text-align: center'>" + res.data[i].mh + "</td>" +
                     "<td style='text-align: center'>" + res.data[i].gg + "</td>" +
-                    "<td style='text-align: center'>" + res.data[i].js + "</td>" +
+                    // "<td style='text-align: center'>" + res.data[i].js + "</td>" +
                     "<td style='text-align: center'>" + res.data[i].zl + "</td>" +
                     "<td style='text-align: center'>" + res.data[i].dj + "</td>" +
                     "<td style='text-align: center'>" + res.data[i].je + "</td>" +
                     "<td style='text-align: center'>" + res.data[i].bz + "</td>" +
                     "</tr>";
                 $("#data").append(t4);
-                var jgf1 = parseFloat(res.data[i].jgf);
-                jgf2 = jgf2 + jgf1;
+                // var jgf1 = parseFloat(res.data[i].jgf);
+                // jgf2 = jgf2 + jgf1;
                 var hjzl1 = parseFloat(res.data[i].hjzl);
                 hjzl2 = hjzl2 + hjzl1;
                 var hjje1 = parseFloat(res.data[i].hjje);
@@ -78,6 +78,10 @@ $(function (){
             $("#fkfs").append(t9);
             $("#bzld").append(t16);
             aa = t12;
+            if (t8 == "否") {
+                document.getElementById("sfyjlab").hidden=true;
+                document.getElementById("sfyj").hidden=true;
+            }
             getHjje();
             getList();
         }

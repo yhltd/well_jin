@@ -15,8 +15,12 @@ public interface DskhMapper extends BaseMapper<Dskh> {
     @Select("select * from daishoukehu")
     List<Dskh> getList();
 
-    @Select("select * from daishoukehu where khmc like '%'+#{khmc}+'%' and kddh like '%''+#{kddh}+%'")
+
+    @Select("select * from daishoukehu where khmc like '%'+#{khmc}+'%' and kddh like '%'+#{kddh}+'%'")
     List<Dskh> queryList(String khmc,String kddh);
+
+//    @Select("select * from daishoukehu where khmc like '%'+#{khmc}+'%' and kddh like '%''+#{kddh}+%'")
+//    List<Dskh> queryList(String khmc,String kddh);
 
     @Update("update daishoukehu set riqi = #{riqi},khmc = #{khmc},dsje = #{dsje},kddh = #{kddh} where id = #{id}")
     boolean update(String riqi,String khmc,String dsje,String kddh,int id);

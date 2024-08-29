@@ -23,8 +23,8 @@ public interface XsdService extends IService<Xsd> {
     /**
      * 修改
      */
-    boolean update(String riqi,String dh,String shdw,String mc,String mh,String gg,String js,String zl,String dj,String je,String bz,String shdz,String kddh,String sfyj,String fkfs,String sfhs,String gd,String zdr,String shdwjjsr,String jgf,String kdf,String hsdj,String sd,String whsdj,int id);
-
+//    boolean update(String riqi,String dh,String shdw,String mc,String mh,String gg,String js,String zl,String dj,String je,String bz,String shdz,String kddh,String sfyj,String fkfs,String sfhs,String gd,String zdr,String shdwjjsr,String jgf,String kdf,String hsdj,String sd,String whsdj,int id);
+    boolean update(String riqi,String dh,String shdw,String mc,String mh,String gg,String zl,String dj,String je,String bz,String shdz,String kddh,String sfyj,String fkfs,String sfhs,String gd,String zdr,String jgf,String kdf,String hsdj,String sd,String whsdj,int id);
     /**
      * 删除
      *
@@ -51,10 +51,15 @@ public interface XsdService extends IService<Xsd> {
     boolean update2(Xsd xsd);
 
 
-    boolean add(String riqi, String dh, String shdw, String mc, String mh, String gg, String js
-            , String zl, String dj, String je, String bz, String shdz, String kddh, String sfyj, String fkfs, String sfhs, String gd,
-                String zdr, String shdwjjsr, String jgf, String kdf, String hsdj, String sd, String whsdj, String hjje,
-                String bzld, String hjzl);
+//    boolean add(String riqi, String dh, String shdw, String mc, String mh, String gg, String js
+//            , String zl, String dj, String je, String bz, String shdz, String kddh, String sfyj, String fkfs, String sfhs, String gd,
+//                String zdr, String shdwjjsr, String jgf, String kdf, String hsdj, String sd, String whsdj, String hjje,
+//                String bzld, String hjzl);
+boolean add(String riqi, String dh, String shdw, String mc, String mh, String gg
+        , String zl, String dj, String je, String bz, String shdz, String kddh, String sfyj, String fkfs, String sfhs, String gd,
+            String zdr, String jgf, String kdf, String hsdj, String sd, String whsdj, String hjje,
+            String bzld, String hjzl);
+
 
     List<Xsd> getList2(String dh);
     boolean delete1(String dh);

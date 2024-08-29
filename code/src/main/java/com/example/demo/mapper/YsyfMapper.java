@@ -17,8 +17,10 @@ public interface YsyfMapper extends BaseMapper<Ysyf> {
     @Select("select id,riqi,gsm,skje,zys,bz,fkriqi,bh,ysje,month(fkriqi)as yf from yingshouyingfu order by riqi desc")
     List<Ysyf> getList();
 
-    @Select("select * from yingshouyingfu where riqi >= convert(date,#{ksrq}) and riqi <= convert(date,#{jsrq}) and gsm =#{gsm}")
-    List<Ysyf> queryList(String ksrq,String jsrq,String gsm);
+//    @Select("select * from yingshouyingfu where riqi >= convert(date,#{ksrq}) and riqi <= convert(date,#{jsrq}) and gsm =#{gsm}")
+//    List<Ysyf> queryList(String ksrq,String jsrq,String gsm);
+@Select("select * from yingshouyingfu where riqi >= convert(date,#{ksrq}) and riqi <= convert(date,#{jsrq}) and gsm like '%'+#{gsm}+'%'")
+List<Ysyf> queryList(String ksrq,String jsrq,String gsm);
 
     @Update("update yingshouyingfu set riqi = #{riqi},gsm = #{gsm},skje = #{skje},zys = #{zys},bz = #{bz},fkriqi = #{fkriqi},bh=#{bh},ysje=#{ysje} where id = #{id}")
     boolean update(String riqi,String gsm,String skje,String zys,String bz,String fkriqi,String bh,String ysje,int id);

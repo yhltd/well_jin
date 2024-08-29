@@ -355,13 +355,15 @@ function setTable(data) {
                 align: 'center',
                 sortable: true,
                 width: 80,
-            }, {
-                field: 'js',
-                title: '件数',
-                align: 'center',
-                sortable: true,
-                width: 80,
-            }, {
+            }
+            // , {
+            //     field: 'js',
+            //     title: '件数',
+            //     align: 'center',
+            //     sortable: true,
+            //     width: 80,
+            // }
+            , {
                 field: 'zl',
                 title: '重量',
                 align: 'center',

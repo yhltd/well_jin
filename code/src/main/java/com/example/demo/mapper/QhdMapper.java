@@ -15,8 +15,10 @@ public interface QhdMapper extends BaseMapper<Qhd> {
     @Select("select * from qianhuidan order by riqi desc")
     List<Qhd> getList();
 
-    @Select("select * from qianhuidan where riqi >= convert(date,#{ksrq}) and riqi <= convert(date,#{jsrq}) and gsm = #{gsm}")
-    List<Qhd> queryList(String ksrq,String jsrq,String gsm);
+//    @Select("select * from qianhuidan where riqi >= convert(date,#{ksrq}) and riqi <= convert(date,#{jsrq}) and gsm = #{gsm}")
+//    List<Qhd> queryList(String ksrq,String jsrq,String gsm);
+@Select("select * from qianhuidan where riqi >= convert(date,#{ksrq}) and riqi <= convert(date,#{jsrq}) and gsm like '%'+#{gsm}+'%'")
+List<Qhd> queryList(String ksrq,String jsrq,String gsm);
 
     @Update("update qianhuidan set riqi = #{riqi},gsm = #{gsm},pm = #{pm},zl = #{zl},dj = #{dj},je = #{je} where id = #{id}")
     boolean update(String riqi,String gsm,String pm,String zl,String dj,String je,int id);

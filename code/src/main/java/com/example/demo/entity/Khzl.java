@@ -62,5 +62,13 @@ public class Khzl {
      */
     private String kddsje;
 
+    /**
+     * 跟单
+     */
     private String gd;
+    /**
+     * 公司名和编号辅助
+     */
+    private String fuzhu;
+
 }
