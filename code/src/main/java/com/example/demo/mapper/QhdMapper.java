@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface QhdMapper extends BaseMapper<Qhd> {
 
-    @Select("select * from qianhuidan order by riqi desc")
+    @Select("select * from qianhuidan order by bh desc")
     List<Qhd> getList();
 
 //    @Select("select * from qianhuidan where riqi >= convert(date,#{ksrq}) and riqi <= convert(date,#{jsrq}) and gsm = #{gsm}")
@@ -29,7 +29,7 @@ List<Qhd> queryList(String ksrq,String jsrq,String gsm);
 //    @Insert("insert into qianhuidan(riqi,gsm,pm,zl,dj,je,ysyf) values(#{riqi},#{gsm},#{pm},#{zl},#{dj},#{je})")
 //    boolean add(String riqi,String gsm,String pm,String zl,String dj,String je);
 
-    @Insert("insert into qianhuidan(riqi,gsm,ysje,bz,bh) values(#{riqi},#{gsm},#{ysje},#{bz},#{bh})")
-    boolean add1(String riqi,String gsm,String ysje,String bz,String bh);
+    @Insert("insert into qianhuidan(riqi,gsm,ysje,bz,bh,zys) values(#{riqi},#{gsm},#{ysje},#{bz},#{bh},#{zys})")
+    boolean add1(String riqi,String gsm,String ysje,String bz,String bh,String zys);
 
 }

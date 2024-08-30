@@ -98,7 +98,7 @@ public class MxController {
             Mx mx = GsonUtil.toEntity(gsonUtil.get("addInfo"), Mx.class);
             System.out.println(99);
             System.out.println(mx);
-            mx = mxService.add1(mx);
+            mx = mxService.add2(mx);
             if (StringUtils.isNotNull(mx)) {
                 return ResultInfo.success("添加成功", mx);
             } else {

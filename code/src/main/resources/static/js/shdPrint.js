@@ -18,9 +18,9 @@
 //             var item="";
 //             select = res.data;
 //             for (var i = 0; i < res.data.length; i++) {
-//                 $("#add-shdw").append("<option>" + res.data[i].gsm + "</option>");
-//                 $("#shdw").append("<option>" + res.data[i].gsm + "</option>");
-//                 item="<option value=\"" + res.data[i].gsm + "\">" + res.data[i].gsm + "</option>"
+//                 $("#add-shdw").append("<option>" + res.data[i].fuzhu + "</option>");
+//                 $("#shdw").append("<option>" + res.data[i].fuzhu + "</option>");
+//                 item="<option value=\"" + res.data[i].fuzhu + "\">" + res.data[i].fuzhu + "</option>"
 //                 // $("#update-shdw").append("<option>" + res.data[i].gsm + "</option>");
 //             }
 //         }
@@ -380,7 +380,7 @@
 //             var mc = $('#mc' + q).val();
 //             var mh = $('#mh' + q).val();
 //             var gg = $('#gg' + q).val();
-//             var js = $('#js' + q).val();
+//             // var js = $('#js' + q).val();
 //             var zl = $('#zl' + q).val();
 //             var dj = $('#dj' + q).val();
 //             var je = $('#je' + q).val();
@@ -394,7 +394,7 @@
 //                     mc: mc,
 //                     mh: mh,
 //                     gg: gg,
-//                     js: js,
+//                     // js: js,
 //                     zl: zl,
 //                     dj: dj,
 //                     je: je,
@@ -460,7 +460,7 @@
 //             var mc = $('#mc' + q).val();
 //             var mh = $('#mh' + q).val();
 //             var gg = $('#gg' + q).val();
-//             var js = $('#js' + q).val();
+//             // var js = $('#js' + q).val();
 //             var zl = $('#zl' + q).val();
 //             var dj = $('#dj' + q).val();
 //             var je = $('#je' + q).val();
@@ -473,7 +473,7 @@
 //                         riqi: riqi,
 //                         dh: dh,
 //                         kddh: kddh,
-//                         shdwjjsr: shdwjjsr,
+//                         // shdwjjsr: shdwjjsr,
 //                         shdw: shdw,
 //                         fkfs: fkfs,
 //                         sfhs: sfhs,
@@ -483,7 +483,7 @@
 //                         mc: mc,
 //                         mh: mh,
 //                         gg: gg,
-//                         js: js,
+//                         // js: js,
 //                         zl: zl,
 //                         dj: dj,
 //                         je: je,
@@ -1195,19 +1195,21 @@
 //                     }
 //                     return "<input id='gg" + row.id + "' oninput='javascript:columnUpd(" + row.id + "," + "\"gg\"" + ")' placeholder='规格' type='text' class='form-control'  value='" + value + "'>"
 //                 }
-//             }, {
-//                 field: 'js',
-//                 title: '件数',
-//                 align: 'center',
-//                 sortable: true,
-//                 width: 80,
-//                 formatter: function (value, row, index) {
-//                     if (value == null) {
-//                         value = '';
-//                     }
-//                     return "<input id='js" + row.id + "' oninput='javascript:columnUpd(" + row.id + "," + "\"js\"" + ")' placeholder='件数' type='text' class='form-control' value='" + value + "'>"
-//                 }
-//             }, {
+//             }
+//             // , {
+//             //     field: 'js',
+//             //     title: '件数',
+//             //     align: 'center',
+//             //     sortable: true,
+//             //     width: 80,
+//             //     formatter: function (value, row, index) {
+//             //         if (value == null) {
+//             //             value = '';
+//             //         }
+//             //         return "<input id='js" + row.id + "' oninput='javascript:columnUpd(" + row.id + "," + "\"js\"" + ")' placeholder='件数' type='text' class='form-control' value='" + value + "'>"
+//             //     }
+//             // }
+//             , {
 //                 field: 'zl',
 //                 title: '重量',
 //                 align: 'center',
@@ -1293,6 +1295,10 @@ let select_mc=[];
 var y=0;
 var x=0;
 var z=0;
+var hjysje=0;
+var bz1;
+var request;
+var signBackRequest;
 function getGsm() {
     $ajax({
         type: 'post',
@@ -1350,6 +1356,45 @@ function deleteq1(){
 //     })
 //
 // }
+// function tiaozhuan(){
+//     $ajax({
+//         type: 'post',
+//         async: true,
+//         url: '/qhd/add',
+//         tiaozhuan1()
+//     },false, '', function (res) {
+//
+//     })
+//
+//
+//
+// }
+function tiaozhuan1(){
+
+
+
+    var fkfs = document.getElementById("fkfs").value
+    var riqi = document.getElementById("riqi").value
+    var shdw = document.getElementById("shdw").value
+    var bh =document.getElementById("dh").value
+    var bz = bz1;
+    if (fkfs == "签回单") {
+        $ajax({
+            type: 'post',
+            url: '/qhd/add',
+            data: {
+                ysje: hjysje,
+                riqi: riqi,
+                gsm: shdw,
+                bz: bz,
+                bh: bh
+            },
+        },false, '', function (res) {
+            zhdy();
+        })
+
+    }
+}
 
 
 function getMc() {
@@ -1653,54 +1698,156 @@ $(function () {
             document.getElementById("gg"+q).value=gg;
         }
     })
+    // $('#add-btn2').click(function () {
+    //     var ajaxRequests = []; // 用于存储所有 AJAX 请求的数组
+    //
+    //    $ajax({
+    //         type: 'post',
+    //         url: '/shdp/getList',
+    //     }, false, '', function (res) {
+    //         z = res.data.length
+    //         for (i = 0; i < z; i = i + 1) {
+    //             let c = parseFloat($('#id1').val()) + i
+    //             var q = c.toString();
+    //             var mc = $('#mc' + q).val();
+    //             var mh = $('#mh' + q).val();
+    //             var gg = $('#gg' + q).val();
+    //             // var js = $('#js' + q).val();
+    //             var zl = $('#zl' + q).val();
+    //             var dj = $('#dj' + q).val();
+    //             var je = $('#je' + q).val();
+    //             var bz = $('#bz' + q).val();
+    //             bz1 = bz;
+    //             var sd = document.getElementById("sd").value;
+    //             var hjzl = zl;
+    //             if(dj!="") {
+    //                 var Je = parseFloat(zl) * parseFloat(dj)
+    //                 hjysje = hjysje + Je
+    //             }
+    //             request=  $ajax({
+    //                 type: 'post',
+    //                 url: '/shdp/update',
+    //                 data: {
+    //                     mc: mc,
+    //                     mh: mh,
+    //                     gg: gg,
+    //                     // js: js,
+    //                     zl: zl,
+    //                     dj: dj,
+    //                     je: je,
+    //                     bz: bz,
+    //                     hjzl: hjzl,
+    //                     sd: sd,
+    //                     id: q,
+    //                 },
+    //             })
+    //         }
+    //        ajaxRequests.push(request);
+    //     })
+    //
+    //     if (fkfs == "签回单") {
+    //         var fkfs = document.getElementById("fkfs").value
+    //         var riqi = document.getElementById("riqi").value
+    //         var shdw = document.getElementById("shdw").value
+    //         var bh =document.getElementById("dh").value
+    //         var bz = bz1;
+    //          signBackRequest = $ajax({
+    //             type: 'post',
+    //             url: '/qhd/add',
+    //             data: {
+    //                 ysje: hjysje,
+    //                 riqi: riqi,
+    //                 gsm: shdw,
+    //                 bz: bz,
+    //                 bh: bh
+    //             },
+    //
+    //         })
+    //         ajaxRequests.push(signBackRequest);
+    //     }
+    //
+    //     $.when.apply(request, signBackRequest).then(function () {
+    //         // 所有 AJAX 请求都完成了
+    //         zhdy();
+    //     });
+    //
+    // })
     $('#add-btn2').click(function () {
-        $ajax({
+        var requests = []; // 用于存储所有 AJAX 请求
+
+        // 第一个 AJAX 请求获取列表
+        $.ajax({
             type: 'post',
             url: '/shdp/getList',
-        }, false, '', function (res) {
-            z=res.data.length
-            for (i = 0; i < z; i = i + 1) {
-                let c = parseFloat($('#id1').val()) + i
-                var q = c.toString();
-                var mc = $('#mc' + q).val();
-                var mh = $('#mh' + q).val();
-                var gg = $('#gg' + q).val();
-                // var js = $('#js' + q).val();
-                var zl = $('#zl' + q).val();
-                var dj = $('#dj' + q).val();
-                var je = $('#je' + q).val();
-                var bz = $('#bz' + q).val();
-                var sd = document.getElementById("sd").value;
-                var hjzl = zl;
-                $ajax({
-                    type: 'post',
-                    url: '/shdp/update',
-                    data: {
-                        mc: mc,
-                        mh: mh,
-                        gg: gg,
-                        // js: js,
-                        zl: zl,
-                        dj: dj,
-                        je: je,
-                        bz: bz,
-                        hjzl:hjzl,
-                        sd:sd,
-                        id: q,
-                    },
+            async:false,
+            success: function (res) {
+                var z = res.data.length;
+                for (var i = 0; i < z; i++) {
+                    var q = (parseFloat($('#id1').val()) + i).toString();
+                    var mc = $('#mc' + q).val();
+                    var mh = $('#mh' + q).val();
+                    var gg = $('#gg' + q).val();
+                    var zl = $('#zl' + q).val();
+                    var dj = $('#dj' + q).val();
+                    var je = $('#je' + q).val();
+                    var bz = $('#bz' + q).val();
+                    bz1=bz;
+                    var sd = document.getElementById("sd").value;
 
-                }, false, '', function (res) {
-                    swal("", res.msg, "success");
-                    getList();
-                    zhdy();
-                })
+                    var Je = dj !== "" ? parseFloat(zl) * parseFloat(dj) : 0;
+                    // 假设 hjysje 在外部已经定义
+                    hjysje += Je;
 
+                    // 构造并存储每个更新请求
+                    requests.push($.ajax({
+                        type: 'post',
+                        url: '/shdp/update',
+                        async:false,
+                        data: {
+                            mc: mc,
+                            mh: mh,
+                            gg: gg,
+                            zl: zl,
+                            dj: dj,
+                            je: je,
+                            bz: bz,
+                            hjzl: zl,
+                            sd: sd,
+                            id: q
+                        }
+                    }));
+                }
+
+                // 检查是否应该执行签回单操作
+                var fkfs=$('#fkfs').val()
+
+                    var riqi = document.getElementById("riqi").value;
+                    var shdw = document.getElementById("shdw").value;
+                    var bh = document.getElementById("dh").value;
+                    var bz = bz1; // 确保 bz1 已被正确定义或赋值
+
+                    // 添加签回单请求
+                    requests.push($.ajax({
+                        type: 'post',
+                        url: '/qhd/add',
+                        data: {
+                            ysje: hjysje,
+                            riqi: riqi,
+                            gsm: shdw,
+                            bz: bz,
+                            bh: bh,
+                            fkfs:fkfs
+                        }
+                    }));
+
+
+                // 等待所有请求完成
+                $.when.apply($, requests).then(function () {
+                    zhdy(); // 所有请求完成后执行
+                });
             }
-        })
-
-
-    })
-
+        });
+    });
 
     $('#add-cgx').click(function () {
         $ajax({

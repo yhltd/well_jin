@@ -41,7 +41,7 @@ public interface KhzlService extends IService<Khzl> {
     List<Khzl> hqxlGsm();
 
 //    String hqgd(String shdw);
-String hqgd(String fuzhu);
+String hqgd(String shdw);
 
 
     List<Khzl> getListByGsm(String gsm);
@@ -56,6 +56,8 @@ String hqgd(String fuzhu);
     String gettzkc(String gsm);
 
     String hqdz(String shdw);
+    String getysje(String fuzhu);
+    boolean upysje(String ysje,String fuzhu);
 
 
 }

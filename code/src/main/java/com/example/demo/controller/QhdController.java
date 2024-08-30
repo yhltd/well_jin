@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.entity.Qhd;
 import com.example.demo.entity.UserInfo;
 import com.example.demo.entity.Ysyf;
+import com.example.demo.service.KhzlService;
 import com.example.demo.service.QhdService;
 import com.example.demo.service.YsyfService;
 import com.example.demo.util.*;
@@ -24,7 +25,8 @@ import java.util.List;
 public class QhdController {
     @Autowired
     private QhdService qhdService;
-
+    @Autowired
+    private KhzlService khzlService;
     /**
      * 查询所有
      *
@@ -170,6 +172,38 @@ public class QhdController {
             log.error("删除失败：{}", e.getMessage());
             log.error("参数：{}", idList);
             return ResultInfo.error("删除失败");
+        }
+    }
+    @RequestMapping("/add")
+    public ResultInfo add(HttpSession session,String riqi,String bh,String ysje,String zys,String bz,String gsm,String Zys,String fkfs) {
+        UserInfo userInfo = GsonUtil.toEntity(SessionUtil.getToken(session), UserInfo.class);
+        try {
+            if(fkfs.equals("签回单")) {
+                float zys1 = 0;
+                Zys = khzlService.getysje(gsm);
+                if (Zys == "") {
+                    zys1 = 0;
+
+                } else {
+                    zys1 = Float.parseFloat(Zys);
+                }
+                float Ysje = Float.parseFloat(ysje);
+                float Zys2 = zys1 + Ysje;
+                zys = Float.toString(Zys2);
+                System.out.println(zys);
+                khzlService.upysje(zys, gsm);
+                boolean list = qhdService.add1(riqi, gsm, ysje, bz, bh, zys);
+                System.out.println(list);
+                return ResultInfo.success("添加成功", list);
+            }
+            else{
+                return ResultInfo.success("添加成功", null);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("添加失败：{}", e.getMessage());
+
+            return ResultInfo.error("添加失败");
         }
     }
 

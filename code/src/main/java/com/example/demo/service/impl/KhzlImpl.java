@@ -42,7 +42,7 @@ public class KhzlImpl extends ServiceImpl<KhzlMapper, Khzl> implements KhzlServi
 //    @Override
 //    public String hqgd(String shdw) {return khzlMapper.hqgd(shdw);}
 @Override
-public String hqgd(String fuzhu) {return khzlMapper.hqgd(fuzhu); }
+public String hqgd(String shdw) {return khzlMapper.hqgd(shdw); }
 
     @Override
     public List<Khzl> getListByGsm(String gsm) {return khzlMapper.getListByGsm(gsm);}
@@ -68,4 +68,13 @@ public String hqgd(String fuzhu) {return khzlMapper.hqgd(fuzhu); }
         return khzlMapper.hqdz(shdw);
     }
 
+    @Override
+    public String getysje(String fuzhu) {
+        return khzlMapper.getysje(fuzhu);
+    }
+
+    @Override
+    public boolean upysje(String ysje,String fuzhu) {
+        return khzlMapper.upysje(ysje,fuzhu);
+    }
 }

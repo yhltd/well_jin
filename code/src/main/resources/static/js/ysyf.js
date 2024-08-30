@@ -364,13 +364,15 @@ function setTable(data) {
                 formatter: function (value, row, index) {
                     return index + 1;
                 }
-            }, {
-                field: 'bh',
-                title: '编号',
-                align: 'center',
-                sortable: true,
-                width: 80,
-            }, {
+            }
+            // , {
+            //     field: 'bh',
+            //     title: '编号',
+            //     align: 'center',
+            //     sortable: true,
+            //     width: 80,
+            // }
+            , {
                 field: 'fkriqi',
                 title: '付款日期',
                 align: 'center',
@@ -411,7 +413,7 @@ function setTable(data) {
                 title: 'id',
                 align: 'center',
                 sortable: true,
-                width: 0,
+                width: 1,
             }
         ],
         onClickRow: function (row, el) {
@@ -486,13 +488,14 @@ function setTable1(data) {
                 align: 'center',
                 sortable: true,
                 width: 80,
-            }, {
-                field: 'bh',
-                title: '编号',
-                align: 'center',
-                sortable: true,
-                width: 0,
             }
+            // , {
+            //     field: 'bh',
+            //     title: '编号',
+            //     align: 'center',
+            //     sortable: true,
+            //     width: 0,
+            // }
             // }, {
             //     field: 'bh',
             //     title: '编号',

@@ -17,30 +17,7 @@ public interface YszkmxbMapper extends BaseMapper<Yszkmxb> {
     List<Yszkmxb> getList();
 
 
-    @Select("SELECT\n" +
-            "\tqhd.gsm,\n" +
-            "\tkhzl.sfyj,\n" +
-            "\tkhzl.sfhs,\n" +
-            "\tSUM ( CONVERT ( FLOAT, qhd.ysje ) )AS ysje,\n" +
-            "\tMONTH ( qhd.riqi ) AS yf,\n" +
-            "\tSUM ( CONVERT ( FLOAT, ysyf.skje ) )AS skje,\n" +
-            "\tkhzl.qcye AS qcye \n" +
-            "FROM\n" +
-            "\tqianhuidan AS qhd,\n" +
-            "\tyingshouyingfu AS ysyf,\n" +
-            "\tkehuziliao AS khzl \n" +
-            "WHERE\n" +
-            "\t\tqhd.riqi= ysyf.riqi \n" +
-            "\t AND qhd.gsm= ysyf.gsm \n" +
-            "\tAND khzl.gsm = qhd.gsm \n" +
-            "\tAND khzl.gsm = ysyf.gsm\n" +
-            "\tAND qhd.bh = ysyf.bh\n" +
-            "group by \n" +
-            "qhd.gsm,\n" +
-            "khzl.sfyj,\n" +
-            "khzl.sfhs,\n" +
-            "khzl.qcye,\n" +
-            "qhd.riqi")
+    @Select("SELECT qhd.gsm, khzl.sfyj, khzl.sfhs, SUM ( CONVERT ( FLOAT, qhd.ysje ) )AS ysje, MONTH ( qhd.riqi ) AS yf, SUM ( CONVERT ( FLOAT, ysyf.skje ) )AS skje, khzl.qcye AS qcye FROM qianhuidan AS qhd, yingshouyingfu AS ysyf, kehuziliao AS khzl WHERE qhd.riqi= ysyf.riqi AND qhd.gsm= ysyf.gsm AND khzl.fuzhu = qhd.gsm AND khzl.fuzhu = ysyf.gsm AND qhd.bh = ysyf.bh group by qhd.gsm, khzl.sfyj, khzl.sfhs, khzl.qcye, qhd.riqi")
     List<Yszkmxb> getList1();
 
 

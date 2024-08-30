@@ -39,6 +39,6 @@ public interface QhdService extends IService<Qhd> {
 //    Qhd add(Qhd qhd);
 
 
-    boolean add1(String riqi,String gsm,String ysj,String bz,String bh);
+    boolean add1(String riqi,String gsm,String ysj,String bz,String bh,String zys);
 
 }

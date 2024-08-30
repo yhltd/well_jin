@@ -24,8 +24,8 @@ function getGsm() {
     }, false, '', function (res) {
         if (res.code == 200) {
             for (var i = 0; i < res.data.length; i++) {
-                $("#add-gsm").append("<option>" + res.data[i].gsm + "</option>");
-                $("#update-gsm").append("<option>" + res.data[i].gsm + "</option>");
+                $("#add-gsm").append("<option>" + res.data[i].fuzhu + "</option>");
+                $("#update-gsm").append("<option>" + res.data[i].fuzhu + "</option>");
             }
         }
     })
@@ -159,10 +159,10 @@ $(function () {
     //新增弹窗里点击提交按钮
     $("#add-submit-btn").click(function () {
 
-        var rksl = parseFloat(document.getElementById('add-rksl').value);
+        // var rksl = parseFloat(document.getElementById('add-rksl').value);
         var rkdj = parseFloat(document.getElementById('add-rkdj').value);
         var rkzl = parseFloat(document.getElementById('add-rkzl').value);
-        var zje = rksl * rkdj * rkzl
+        var zje = rkdj * rkzl
 
         document.getElementById("add-zje").value = zje
 
@@ -631,13 +631,15 @@ function setTable(data) {
                 align: 'center',
                 sortable: true,
                 width: 150,
-            }, {
-                field: 'rksl',
-                title: '数量',
-                align: 'center',
-                sortable: true,
-                width: 150,
-            }, {
+            }
+            // , {
+            //     field: 'rksl',
+            //     title: '数量',
+            //     align: 'center',
+            //     sortable: true,
+            //     width: 150,
+            // }
+            , {
                 field: 'rkdj',
                 title: '单价',
                 align: 'center',

@@ -20,7 +20,8 @@ public interface MxService extends IService<Mx> {
     //增加
     Mx add(Mx mx);
 
-    Mx add1(Mx mx);
+    boolean add1(String mc,String js,String zl,String je,String ziduan,String danhao);
+    Mx add2(Mx mx);
     /**
      * 修改
      */

@@ -1,4 +1,5 @@
 var idd;
+
 function getList() {
     // $('#ksrq').val("");
     // $('#jsrq').val("");
@@ -21,6 +22,9 @@ function getList() {
         url: '/qhd/getList',
     }, false, '', function (res) {
         if (res.code == 200) {
+            var arr={
+
+            }
             setTable(res.data);
             $("#qhdTable").colResizable({
                 liveDrag: true,
@@ -233,13 +237,22 @@ function setTable(data) {
                 formatter: function (value, row, index) {
                     return index + 1;
                 }
-            }, {
-                field: 'bh',
-                title: '编号',
+            }
+            // , {
+            //     field: 'bh',
+            //     title: '编号',
+            //     align: 'center',
+            //     sortable: true,
+            //     width: 80,
+            // }
+            , {
+                field: 'riqi',
+                title: '日期',
                 align: 'center',
                 sortable: true,
                 width: 80,
-            }, {
+            }
+            , {
                 field: 'ysje',
                 title: '应收金额',
                 align: 'center',

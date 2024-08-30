@@ -34,6 +34,13 @@ $(function (){
             var hjje2 = 0;
             for (var i = 0; i<res.data.length; i++) {
                 var e = i+1
+                var je = res.data[i].je;
+                var sd= res.data[i].sd;
+                if(res.data[i].sfhs=="金额含税"){
+                    var Je = (parseFloat(je)*parseFloat(sd)).toFixed(2);
+                }else{
+                    var Je = parseFloat(je).toFixed(2);
+                }
                 var t4 = "<tr name='printData'>" +
                     "<td style='text-align: center'>" + e + "</td>" +
                     "<td style='text-align: center'>" + res.data[i].mc + "</td>" +
@@ -42,7 +49,7 @@ $(function (){
                     // "<td style='text-align: center'>" + res.data[i].js + "</td>" +
                     "<td style='text-align: center'>" + res.data[i].zl + "</td>" +
                     "<td style='text-align: center'>" + res.data[i].dj + "</td>" +
-                    "<td style='text-align: center'>" + res.data[i].je + "</td>" +
+                    "<td style='text-align: center'>" + Je + "</td>" +
                     "<td style='text-align: center'>" + res.data[i].bz + "</td>" +
                     "</tr>";
                 $("#data").append(t4);
@@ -60,7 +67,7 @@ $(function (){
             var t9 = res.data[0].fkfs;
             var t10 = res.data[0].sfhs;
             var t11 = hjzl2.toString();
-            var t12 = hjje2.toString();
+            var t12 = (hjje2.toFixed(2)).toString();
             var t16 = res.data[0].bzld;
             $("#shdw").append(t1);
             $("#dh").append(t2);

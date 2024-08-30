@@ -36,35 +36,36 @@ boolean add(String gsm,String bh,String lxr,String lxdh,String dz,String sfhs,St
 @Select("select fuzhu from kehuziliao")
 List<Khzl> hqxlGsm();
 
-
-
 //
 //    @Select("select gd from kehuziliao where gsm=#{gsm}")
 //    String hqgd(String shdw);
-@Select("select gd from kehuziliao where fuzhu=#{fuzhu}")
-String hqgd(String fuzhu);
+@Select("select gd from kehuziliao where fuzhu=#{shdw}")
+String hqgd(String shdw);
 
-    @Select("select dz from kehuziliao where gsm=#{gsm}")
+    @Select("select dz from kehuziliao where fuzhu=#{gsm}")
     String hqdz(String shdw);
 
-    @Select("select * from kehuziliao where gsm=#{gsm}")
+    @Select("select * from kehuziliao where fuzhu=#{gsm}")
     List<Khzl> getListByGsm(String gsm);
 
-    @Update("update kehuziliao set tkkc = #{tkkc} where gsm=#{gsm}")
+    @Update("update kehuziliao set tkkc = #{tkkc} where fuzhu=#{gsm}")
     boolean tkkc(String tkkc,String gsm);
 
-    @Update("update kehuziliao set tzkc = #{tzkc} where gsm=#{gsm}")
+    @Update("update kehuziliao set tzkc = #{tzkc} where fuzhu=#{gsm}")
     boolean tzkc(String tzkc,String gsm);
 
 
-    @Select("select tkkc from kehuziliao where gsm=#{gsm}")
+    @Select("select tkkc from kehuziliao where fuzhu=#{gsm}")
     String gettkkc(String gsm);
 
 
-    @Select("select tzkc from kehuziliao where gsm=#{gsm}")
+    @Select("select tzkc from kehuziliao where fuzhu=#{gsm}")
     String gettzkc(String gsm);
 
-
+    @Select("select ysje from kehuziliao where fuzhu =#{fuzhu}")
+    String getysje(String fuzhu);
+    @Update("update kehuziliao set ysje = #{ysje}  where fuzhu =#{fuzhu}")
+    boolean upysje(String ysje,String fuzhu);
 
 
 }

@@ -203,7 +203,7 @@ function setTable(data) {
                 field: '',
                 title: '序号',
                 align: 'center',
-                width: 50,
+                width: 80,
                 formatter: function (value, row, index) {
                     return index + 1;
                 }
@@ -231,92 +231,92 @@ function setTable(data) {
                 title: '期初余额',
                 align: 'center',
                 sortable: true,
-                width: 70,
+                width: 160,
             }
             , {
                 field: 'yyys',
                 title: '一月应收',
                 align: 'center',
                 sortable: true,
-                width: 70,
+                width: 160,
             }
             , {
                 field: 'yyyf',
                 title: '一月应付',
                 align: 'center',
                 sortable: true,
-                width: 70,
+                width: 160,
             }, {
                 field: 'eyys',
                 title: '二月应收',
                 align: 'center',
                 sortable: true,
-                width: 70,
+                width: 160,
             }
             , {
                 field: 'eyyf',
                 title: '二月应付',
                 align: 'center',
                 sortable: true,
-                width: 70,
+                width: 160,
             }, {
                 field: 'syys',
                 title: '三月应收',
                 align: 'center',
                 sortable: true,
-                width: 70,
+                width: 160,
             }
             , {
                 field: 'syyf',
                 title: '三月应付',
                 align: 'center',
                 sortable: true,
-                width: 70,
+                width: 160,
             }, {
                 field: 'siyys',
                 title: '四月应收',
                 align: 'center',
                 sortable: true,
-                width: 70,
+                width: 160,
             }
             , {
                 field: 'siyyf',
                 title: '四月应付',
                 align: 'center',
                 sortable: true,
-                width: 70,
+                width: 160,
             }, {
                 field: 'wyys',
                 title: '五月应收',
                 align: 'center',
                 sortable: true,
-                width: 70,
+                width: 160,
             }
             , {
                 field: 'wyyf',
                 title: '五月应付',
                 align: 'center',
                 sortable: true,
-                width: 70,
+                width: 160,
             }, {
                 field: 'lyys',
                 title: '六月应收',
                 align: 'center',
                 sortable: true,
-                width: 70,
+                width: 160,
             }
             , {
                 field: 'lyyf',
                 title: '六月应付',
                 align: 'center',
                 sortable: true,
-                width: 70,
+                width: 160,
             }, {
                 field: 'qyys',
                 title: '七月应收',
                 align: 'center',
                 sortable: true,
-                width: 70,
+                width: 160,
                 style:"id='byys'"
 
             }
@@ -325,7 +325,7 @@ function setTable(data) {
                 title: '七月应付',
                 align: 'center',
                 sortable: true,
-                width: 70,
+                width: 160,
                 style:"id='byyf'"
 
             }, {
@@ -333,7 +333,7 @@ function setTable(data) {
                 title: '八月应收',
                 align: 'center',
                 sortable: true,
-                width: 70,
+                width: 160,
                style:"id='byys'"
             }
             , {
@@ -341,66 +341,66 @@ function setTable(data) {
                 title: '八月应付',
                 align: 'center',
                 sortable: true,
-                width: 70,
+                width: 160,
                 style:"id='byyf'"
             }, {
                 field: 'jyys',
                 title: '九月应收',
                 align: 'center',
                 sortable: true,
-                width: 70,
+                width: 160,
             }
             , {
                 field: 'jyyf',
                 title: '九月应付',
                 align: 'center',
                 sortable: true,
-                width: 70,
+                width: 160,
             }, {
                 field: 'shiyys',
                 title: '十月应收',
                 align: 'center',
                 sortable: true,
-                width: 70,
+                width: 160,
             }
             , {
                 field: 'shiyyf',
                 title: '十月应付',
                 align: 'center',
                 sortable: true,
-                width: 70,
+                width: 160,
             }, {
                 field: 'syyys',
                 title: '十一月应收',
                 align: 'center',
                 sortable: true,
-                width: 70,
+                width: 160,
             }
             , {
                 field: 'syyyf',
                 title: '十一月应付',
                 align: 'center',
                 sortable: true,
-                width: 70,
+                width: 160,
             }, {
                 field: 'seyys',
                 title: '十二月应收',
                 align: 'center',
                 sortable: true,
-                width: 70,
+                width: 160,
             }
             , {
                 field: 'seyyf',
                 title: '十二月应付',
                 align: 'center',
                 sortable: true,
-                width: 70,
+                width: 160,
             }, {
                 field: 'ljysje',
                 title: '累计应收金额',
                 align: 'center',
                 sortable: true,
-                width: 70,
+                width: 160,
 
             }
             , {
@@ -408,14 +408,14 @@ function setTable(data) {
                 title: '本年已收金额',
                 align: 'center',
                 sortable: true,
-                width: 70,
+                width: 160,
 
             }, {
                 field: 'ysyehj',
                 title: '应收余额合计',
                 align: 'center',
                 sortable: true,
-                width: 70,
+                width: 160,
 
             }, {
                 field: 'yf',

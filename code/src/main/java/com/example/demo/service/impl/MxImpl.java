@@ -30,7 +30,11 @@ public class MxImpl extends ServiceImpl<MxMapper, Mx> implements MxService {
     }
 
     @Override
-    public Mx add1(Mx mx) {
+    public boolean add1(String mc,String js,String zl,String je,String ziduan,String danhao) {
+        return mxMapper.add1(mc,js,zl,je,ziduan,danhao);
+    }
+    @Override
+    public Mx add2(Mx mx) {
         return save(mx) ? mx : null;
     }
 

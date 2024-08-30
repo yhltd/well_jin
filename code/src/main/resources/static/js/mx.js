@@ -141,13 +141,15 @@ function setTable(data) {
                 align: 'center',
                 sortable: true,
                 width: 150,
-            },{
-                field: 'rksl',
-                title: '入库数量',
-                align: 'center',
-                sortable: true,
-                width: 150,
-            }, {
+            }
+            // ,{
+            //     field: 'rksl',
+            //     title: '入库数量',
+            //     align: 'center',
+            //     sortable: true,
+            //     width: 150,
+            // }
+            , {
                 field: 'rkzl',
                 title: '入库重量',
                 align: 'center',

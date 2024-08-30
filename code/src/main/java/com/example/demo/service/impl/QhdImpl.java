@@ -37,5 +37,5 @@ public class QhdImpl extends ServiceImpl<QhdMapper, Qhd> implements QhdService {
 //    public Qhd add(Qhd qhd) { return save(qhd) ? qhd : null; }
 
     @Override
-    public boolean add1(String riqi,String gsm,String ysje,String bz,String bh) { return qhdMapper.add1(riqi,gsm,ysje,bz,bh); }
+    public boolean add1(String riqi,String gsm,String ysje,String bz,String bh,String zys) { return qhdMapper.add1(riqi,gsm,ysje,bz,bh,zys); }
 }
