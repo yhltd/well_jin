@@ -1852,7 +1852,12 @@ function getList() {
 }
 
 
-
+function clearTable() {
+    var inputs = document.querySelectorAll('#tbupd input');
+    for (var i = 0; i < inputs.length; i++) {
+        inputs[i].value = '';
+    }
+}
 
 
 
@@ -2254,9 +2259,10 @@ $(function () {
                 }
                 document.getElementById("update-hjzl").value = HJZL.toString();
                 // document.getElementById("update-hsdj").value =toString(HSDJ);
-                document.getElementById("update-hjje").value = HJJE.toString();
+                document.getElementById("update-hjje").value = (HJJE.toFixed(2)).toString();
 
             }
+
         })
         //未含税锁定
         // document.getElementById('update-sfhs').addEventListener('change', function() {
@@ -2274,7 +2280,12 @@ $(function () {
         //     }
         // });
     });
+$('#close1').click(function (){
+    HJJE=0;
+    HJZL=0;
+  clearTable();
 
+})
 
     //修改弹窗点击关闭按钮
     // $('#update-close-btn').click(function () {
@@ -2285,6 +2296,7 @@ $(function () {
     $('#update-close-btn').click(function () {
         // $('#update-form')[0].reset();
         $('#update-modal').modal('hide');
+
     });
 
     //修改弹窗里点击提交按钮

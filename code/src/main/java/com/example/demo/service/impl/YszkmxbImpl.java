@@ -30,9 +30,18 @@ public class YszkmxbImpl extends ServiceImpl<YszkmxbMapper, Yszkmxb> implements 
     }
 
     @Override
+    public List<Yszkmxb> getList2() {
+        return yszkmxbMapper.getList2();
+    }
+
+    @Override
     public Yszkmxb add(Yszkmxb yszkmxb) { return save(yszkmxb) ? yszkmxb : null; }
     @Override
     public void delete() {
         yszkmxbMapper.delete();
+    }
+    @Override
+    public void update(String yf1,String yf2,String yf3,String yf4,String yf5,String yf6,String yf7,String yf8,String yf9,String yf10,String yf11,String yf12,String bnysje,String gsm,String nian) {
+        yszkmxbMapper.update(yf1,yf2,yf3,yf4,yf5,yf6,yf7,yf8,yf9,yf10,yf11,yf12,bnysje,gsm,nian);
     }
 }

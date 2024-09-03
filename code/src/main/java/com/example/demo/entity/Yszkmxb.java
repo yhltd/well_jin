@@ -19,34 +19,31 @@ public class Yszkmxb {
      */
     private String gsm;
 
-    private String sfyj;
+    private String ys1;
 
-    private String sfhs;
-    private String qcye;
-    private String yyys;
-    private String yyyf;
-    private String eyys;
-    private String eyyf;
-    private String syys;
-    private String syyf;
-    private String siyys;
-    private String siyyf;
-    private String wyys;
-    private String wyyf;
-    private String lyys;
-    private String lyyf;
-    private String qyys;
-    private String qyyf;
-    private String byys;
-    private String byyf;
-    private String jyys;
-    private String jyyf;
-    private String shiyys;
-    private String shiyyf;
-    private String syyys;
-    private String syyyf;
-    private String seyys;
-    private String seyyf;
+    private String yf1;
+    private String ys2;
+    private String yf2;
+    private String ys3;
+    private String yf3;
+    private String ys4;
+    private String yf4;
+    private String ys5;
+    private String yf5;
+    private String ys6;
+    private String yf6;
+    private String ys7;
+    private String yf7;
+    private String ys8;
+    private String yf8;
+    private String ys9;
+    private String yf9;
+    private String ys10;
+    private String yf10;
+    private String ys11;
+    private String yf11;
+    private String ys12;
+    private String yf12;
 
     private String ljysje;
 
@@ -54,7 +51,11 @@ public class Yszkmxb {
 
     private String ysyehj;
     private String yf;
+    private String sfyj;
+    private String sfhs;
+    private String qcye;
     private String skje;
     private String ysje;
+    private String nian;
 
 }
